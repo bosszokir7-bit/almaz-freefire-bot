@@ -32,14 +32,18 @@ body{background:#0A0A0A;color:#fff;padding:15px;padding-bottom:80px}
 .bottom-menu{position:fixed;bottom:0;left:0;right:0;background:#1A1A1A;display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid #333}
 .menu-item{text-align:center;font-size:11px;color:#888;cursor:pointer}
 .menu-item.active{color:#FF8C00}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#FF8C00;color:#000;padding:10px 20px;border-radius:10px;font-weight:bold;display:none;z-index:999}
 </style>
 </head>
 <body>
+<div class="toast" id="toast"></div>
+
 <div class="header">
 <div class="avatar" id="avatar">Z</div>
 <div><div class="greet">Шом ба хайр!</div><div class="name" id="username">Муштарӣ</div></div>
 <div class="bell">🔔</div>
 </div>
+
 <div class="balance-box">
 <div class="balance-title">БАЛАНС 👁</div>
 <div class="balance-amount">0.00 <span>см</span></div>
@@ -48,21 +52,36 @@ body{background:#0A0A0A;color:#fff;padding:15px;padding-bottom:80px}
 <button class="btn-outline" onclick="withdraw()">↗ Бароврдан</button>
 </div>
 </div>
+
 <div class="tags"><span>⚡ То 1 дакика</span><span>🛡️ Бехатар</span><span>🕒 24/7</span></div>
 <div class="category-title">КАТЕГОРИЯХО</div>
-<div class="card card-purple" onclick="buy('ffcis')"><div class="card-subtitle">FREE FIRE</div><div class="card-title">СНГ</div><button class="btn-buy">Харидан →</button></div>
-<div class="card card-orange" onclick="buy('ffid')"><div class="card-subtitle">FREE FIRE</div><div class="card-title">ИНДОНЕЗИЯ</div><button class="btn-buy">Харидан →</button></div>
+
+<div class="card card-purple" onclick="buy('ffcis')">
+<div class="card-subtitle">FREE FIRE</div><div class="card-title">СНГ</div><button class="btn-buy">Харидан →</button>
+</div>
+
+<div class="card card-orange" onclick="buy('ffid')">
+<div class="card-subtitle">FREE FIRE</div><div class="card-title">ИНДОНЕЗИЯ</div><button class="btn-buy">Харидан →</button>
+</div>
+
 <div class="bottom-menu">
 <div class="menu-item active">🏠<br>Асосӣ</div>
 <div class="menu-item" onclick="send('orders')">🛍️<br>Харидҳо</div>
 <div class="menu-item" onclick="send('support')">🎧<br>Дастгирӣ</div>
 <div class="menu-item" onclick="send('profile')">👤<br>Профил</div>
 </div>
+
 <script>
 let tg=window.Telegram.WebApp;tg.expand();
 let user=tg.initDataUnsafe.user;if(user){document.getElementById('username').innerText=user.first_name;document.getElementById('avatar').innerText=user.first_name[0]}
-function send(a){tg.sendData(JSON.stringify({action:a}));tg.close()}
-function topup(){send('topup')}function withdraw(){send('withdraw')}function buy(g){send('buy_'+g)}
+
+function showToast(text){let t=document.getElementById('toast');t.innerText=text;t.style.display='block';setTimeout(()=>{t.style.display='none'},2000)}
+
+function send(a){tg.sendData(JSON.stringify({action:a}));showToast('Интизор шавед...')}
+
+function topup(){send('topup')}
+function withdraw(){send('withdraw')}
+function buy(g){send('buy_'+g)}
 </script>
 </body>
 </html>
