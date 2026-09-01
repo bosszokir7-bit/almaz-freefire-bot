@@ -1,79 +1,63 @@
 <!DOCTYPE html>
 <html lang="tg">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TAJ.DONAT.TJ</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, Roboto, sans-serif; }
-    body { background: #0D1117; color: #FFFFFF; padding: 15px; }
-    
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .user { font-size: 18px; font-weight: bold; }
-    .user span { color: #8B949E; font-size: 14px; }
-
-    .balance-box { background: #161B22; padding: 20px; border-radius: 16px; margin-bottom: 15px; }
-    .balance-title { color: #8B949E; font-size: 14px; margin-bottom: 5px; }
-    .balance { font-size: 32px; font-weight: bold; }
-    .balance span { font-size: 16px; color: #8B949E; }
-
-    .btns { display: flex; gap: 10px; margin-bottom: 20px; }
-    .btn { flex: 1; padding: 14px; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; }
-    .btn-orange { background: #FF9500; color: #000; }
-    .btn-dark { background: #21262D; color: #FF9500; }
-
-    .tags { display: flex; gap: 8px; margin-bottom: 20px; }
-    .tag { background: #21262D; padding: 8px 12px; border-radius: 20px; font-size: 13px; color: #8B949E; }
-
-    .category-title { color: #8B949E; margin-bottom: 10px; }
-    .game-card { background: linear-gradient(135deg, #5B21B6 0%, #1E1B4B 100%); border-radius: 16px; padding: 20px; margin-bottom: 12px; position: relative; overflow: hidden; }
-    .game-card h2 { font-size: 24px; margin-bottom: 5px; }
-    .game-card p { color: #C4B5FD; margin-bottom: 15px; }
-    .btn-buy { background: rgba(255,255,255,0.1); border: 1px solid #A78BFA; color: #FFF; padding: 10px 20px; border-radius: 10px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAJ.DONAT.TJ</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="header">
-    <div class="user">Салом, <span id="username">Mehmon</span>!</div>
+<div class="header">
+  <div class="avatar">ZO</div>
+  <div>
+    <div class="greet">Шом ба хайр!</div>
+    <div class="name">zokirjon</div>
   </div>
+  <div class="bell">🔔<span>75</span></div>
+</div>
 
-  <div class="balance-box">
-    <div class="balance-title">БАЛАНС</div>
-    <div class="balance">0.00 <span>СМ</span></div>
+<div class="balance-box">
+  <div class="balance-title">БАЛАНС 👁</div>
+  <div class="balance-amount">0.00 <span>см</span></div>
+  <div class="btn-row">
+    <button class="btn-orange">+ Пур кардан</button>
+    <button class="btn-outline">↗ Бароврдан</button>
   </div>
+</div>
 
-  <div class="btns">
-    <button class="btn btn-orange">+ Пур кардан</button>
-    <button class="btn btn-dark">Бароврдан ↗</button>
-  </div>
+<div class="tags">
+  <span>⚡ То 1 дакика</span>
+  <span>🛡️ Бехатар</span>
+  <span>🕒 24/7</span>
+</div>
 
-  <div class="tags">
-    <div class="tag">⚡ То 1 дақиқа</div>
-    <div class="tag">🛡️ Бехатар</div>
-    <div class="tag">🕐 24/7</div>
-  </div>
+<div class="category-title">КАТЕГОРИЯХО</div>
 
-  <div class="category-title">КАТЕГОРИЯҲО</div>
-
-  <div class="game-card">
-    <h2>FREE FIRE СНГ</h2>
-    <p>Сервери СНГ</p>
+<div class="card card-purple">
+  <img src="https://i.ibb.co/xyz/freefire-cis.png" class="card-img">
+  <div class="card-content">
+    <div class="card-subtitle">FREE FIRE</div>
+    <div class="card-title">СНГ</div>
     <button class="btn-buy">Харидан →</button>
   </div>
+</div>
 
-  <div class="game-card" style="background: linear-gradient(135deg, #F59E0B 0%, #78350F 100%);">
-    <h2>FREE FIRE ИНДОНЕЗИЯ</h2>
-    <p>Сервери Индонезия</p>
+<div class="card card-orange">
+  <img src="https://i.ibb.co/xyz/freefire-id.png" class="card-img">
+  <div class="card-content">
+    <div class="card-subtitle">FREE FIRE</div>
+    <div class="card-title">ИНДОНЕЗИЯ</div>
     <button class="btn-buy">Харидан →</button>
   </div>
+</div>
 
-<script>
-  let tg = window.Telegram.WebApp;
-  tg.expand();
-  document.getElementById('username').innerText = tg.initDataUnsafe.user?.first_name || "Mehmon";
-</script>
+<div class="bottom-menu">
+  <div class="menu-item active">🏠<br>Асосӣ</div>
+  <div class="menu-item">🛍️<br>Харидҳо</div>
+  <div class="menu-item">🎧<br>Дастгирӣ</div>
+  <div class="menu-item">👤<br>Профил</div>
+</div>
 
 </body>
 </html>
