@@ -1,70 +1,79 @@
 <!DOCTYPE html>
 <html lang="tg">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAJ.DONAT.TJ - Алмаз бо эътимод</title>
-<style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:Arial,sans-serif;background:linear-gradient(135deg, #0a1a2e 0%, #1e3a8a 100%);color:#fff;min-height:100vh}
-    .container{max-width:600px;margin:0 auto;padding:20px}
-    .header{text-align:center;padding:30px 0}
-    .logo{font-size:32px;font-weight:bold;color:#0088cc;margin-bottom:5px}
-    .subtitle{color:#60a5fa;font-size:14px}
-    .card{background:#1e293b;border:2px solid #0088cc;border-radius:15px;padding:20px;margin:15px 0;box-shadow:0 4px 15px rgba(0,136,204,0.3)}
-    .card h3{color:#0088cc;margin-bottom:10px;font-size:18px}
-    .price{display:flex;justify-content:space-between;padding:12px;background:#0f172a;margin:8px 0;border-radius:10px;border-left:4px solid #0088cc}
-    .price-name{font-weight:bold}
-    .price-value{color:#4ade80;font-weight:bold}
-    .btn{display:block;width:100%;padding:16px;background:#0088cc;color:#fff;text-align:center;border-radius:12px;text-decoration:none;font-weight:bold;font-size:18px;margin:10px 0;border:none;cursor:pointer}
-    .btn:hover{background:#006699}
-    .btn-green{background:#22c55e}
-    .btn-green:hover{background:#16a34a}
-    .footer{text-align:center;padding:30px 0;color:#60a5fa;font-size:12px}
-    .contact{background:#1e293b;padding:15px;border-radius:10px;margin:15px 0;text-align:center;border:1px solid #0088cc}
-    .badge{display:inline-block;background:#0088cc;color:#fff;padding:5px 12px;border-radius:20px;font-size:12px;margin:5px;font-weight:bold}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAJ.DONAT.TJ</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, Roboto, sans-serif; }
+    body { background: #0D1117; color: #FFFFFF; padding: 15px; }
+    
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .user { font-size: 18px; font-weight: bold; }
+    .user span { color: #8B949E; font-size: 14px; }
+
+    .balance-box { background: #161B22; padding: 20px; border-radius: 16px; margin-bottom: 15px; }
+    .balance-title { color: #8B949E; font-size: 14px; margin-bottom: 5px; }
+    .balance { font-size: 32px; font-weight: bold; }
+    .balance span { font-size: 16px; color: #8B949E; }
+
+    .btns { display: flex; gap: 10px; margin-bottom: 20px; }
+    .btn { flex: 1; padding: 14px; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; }
+    .btn-orange { background: #FF9500; color: #000; }
+    .btn-dark { background: #21262D; color: #FF9500; }
+
+    .tags { display: flex; gap: 8px; margin-bottom: 20px; }
+    .tag { background: #21262D; padding: 8px 12px; border-radius: 20px; font-size: 13px; color: #8B949E; }
+
+    .category-title { color: #8B949E; margin-bottom: 10px; }
+    .game-card { background: linear-gradient(135deg, #5B21B6 0%, #1E1B4B 100%); border-radius: 16px; padding: 20px; margin-bottom: 12px; position: relative; overflow: hidden; }
+    .game-card h2 { font-size: 24px; margin-bottom: 5px; }
+    .game-card p { color: #C4B5FD; margin-bottom: 15px; }
+    .btn-buy { background: rgba(255,255,255,0.1); border: 1px solid #A78BFA; color: #FFF; padding: 10px 20px; border-radius: 10px; }
+  </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <div class="logo">TAJ.DONAT.TJ</div>
-        <div class="subtitle">АЛМАЗ БО ЭЪТИМОД 💎</div>
-        <div style="margin-top:10px">
-            <span class="badge">⚡ То 1 дақиқа</span>
-            <span class="badge">🔒 Бехатар</span>
-            <span class="badge">24/7</span>
-        </div>
-    </div>
 
-    <div class="card">
-        <h3>🔥 FREE FIRE СНГ - Алмазҳо</h3>
-        <div class="price"><span class="price-name">100 Алмаз</span><span class="price-value">10 сомонӣ</span></div>
-        <div class="price"><span class="price-name">310 Алмаз</span><span class="price-value">29 сомонӣ</span></div>
-        <div class="price"><span class="price-name">520 Алмаз</span><span class="price-value">48 сомонӣ</span></div>
-        <div class="price"><span class="price-name">1060 Алмаз</span><span class="price-value">95 сомонӣ</span></div>
-        <div class="price"><span class="price-name">2180 Алмаз</span><span class="price-value">190 сомонӣ</span></div>
-        <div class="price"><span class="price-name">5600 Алмаз</span><span class="price-value">550 сомонӣ</span></div>
-    </div>
+  <div class="header">
+    <div class="user">Салом, <span id="username">Mehmon</span>!</div>
+  </div>
 
-    <div class="card">
-        <h3>💎 ВОУЧЕРҲО</h3>
-        <div class="price"><span class="price-name">Ваучери Лайт</span><span class="price-value">12 сомонӣ</span></div>
-        <div class="price"><span class="price-name">Ваучери Ҳафтаина</span><span class="price-value">45 сомонӣ</span></div>
-        <div class="price"><span class="price-name">Ваучери Моҳона</span><span class="price-value">160 сомонӣ</span></div>
-    </div>
+  <div class="balance-box">
+    <div class="balance-title">БАЛАНС</div>
+    <div class="balance">0.00 <span>СМ</span></div>
+  </div>
 
-    <a href="https://t.me/Tajdonattj_bot" class="btn">🏪 Магоза - Харид дар Бот</a>
-    <a href="https://wa.me/992935710406" class="btn btn-green">💬 WhatsApp: +992 93 571 04 06</a>
+  <div class="btns">
+    <button class="btn btn-orange">+ Пур кардан</button>
+    <button class="btn btn-dark">Бароврдан ↗</button>
+  </div>
 
-    <div class="contact">
-        <b>Админ:</b> @Zokirjon0555<br>
-        <b>Канал:</b> https://t.me/tajdonattj
-    </div>
+  <div class="tags">
+    <div class="tag">⚡ То 1 дақиқа</div>
+    <div class="tag">🛡️ Бехатар</div>
+    <div class="tag">🕐 24/7</div>
+  </div>
 
-    <div class="footer">
-        © 2026 TAJ.DONAT.TJ | Tajdonattj_bot
-    </div>
-</div>
+  <div class="category-title">КАТЕГОРИЯҲО</div>
+
+  <div class="game-card">
+    <h2>FREE FIRE СНГ</h2>
+    <p>Сервери СНГ</p>
+    <button class="btn-buy">Харидан →</button>
+  </div>
+
+  <div class="game-card" style="background: linear-gradient(135deg, #F59E0B 0%, #78350F 100%);">
+    <h2>FREE FIRE ИНДОНЕЗИЯ</h2>
+    <p>Сервери Индонезия</p>
+    <button class="btn-buy">Харидан →</button>
+  </div>
+
+<script>
+  let tg = window.Telegram.WebApp;
+  tg.expand();
+  document.getElementById('username').innerText = tg.initDataUnsafe.user?.first_name || "Mehmon";
+</script>
+
 </body>
 </html>
