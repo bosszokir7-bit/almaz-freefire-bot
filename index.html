@@ -3,148 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TAJ.DONAT.TJ</title>
 
 <style>
+
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
 }
 
 body{
-    background:#0b0f1a;
-    color:#fff;
+    margin:0;
+    background:#0b1020;
+    color:white;
+    font-family:Arial,sans-serif;
 }
 
 .container{
-    max-width:900px;
+    max-width:760px;
     margin:auto;
-    padding:18px;
+    padding:15px;
 }
 
 header{
     text-align:center;
-    padding:20px 10px;
+    padding:20px 0;
 }
 
 .logo{
-    font-size:28px;
+    font-size:27px;
     font-weight:bold;
 }
 
 .logo span{
-    color:#00eaff;
+    color:#18d9ff;
 }
 
 .subtitle{
-    color:#aeb6c8;
-    margin-top:7px;
-    font-size:14px;
+    color:#9da8bd;
+    margin-top:6px;
 }
 
 .card{
-    background:#131a2a;
-    border:1px solid #26324a;
-    border-radius:16px;
-    padding:18px;
-    margin-bottom:16px;
+    background:#141c31;
+    border:1px solid #293753;
+    border-radius:15px;
+    padding:17px;
+    margin:13px 0;
 }
 
 h2{
-    font-size:20px;
-    margin-bottom:14px;
+    font-size:19px;
+    margin-top:0;
 }
 
-.prices{
+.grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:10px;
+    gap:9px;
 }
 
 .price{
-    background:#1a2336;
-    border-radius:12px;
-    padding:13px;
+    background:#1b2740;
+    padding:12px;
+    border-radius:11px;
     display:flex;
     justify-content:space-between;
-    align-items:center;
 }
 
 .price b{
-    color:#00eaff;
+    color:#18d9ff;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    margin:5px 0;
+    border-radius:10px;
+    border:1px solid #35435f;
+    background:#0d1528;
+    color:white;
+    font-size:15px;
 }
 
 button{
     width:100%;
-    border:0;
-    border-radius:11px;
     padding:13px;
-    margin-top:10px;
-    background:#00c8ff;
+    margin-top:8px;
+    border:0;
+    border-radius:10px;
+    background:#18d9ff;
     color:#001018;
     font-size:15px;
     font-weight:bold;
-    cursor:pointer;
 }
 
-button:hover{
-    opacity:.9;
-}
-
-input,select{
-    width:100%;
-    padding:13px;
-    margin-bottom:10px;
-    border-radius:10px;
-    border:1px solid #33415d;
-    background:#0d1422;
-    color:#fff;
-    outline:none;
+.message{
+    margin-top:10px;
+    color:#55e6a5;
 }
 
 .payment{
-    background:#1a2336;
-    padding:13px;
-    border-radius:11px;
-    margin-bottom:10px;
+    background:#1b2740;
+    padding:12px;
+    border-radius:10px;
+    margin:8px 0;
 }
 
 .payment b{
-    color:#00eaff;
+    color:#18d9ff;
 }
 
-.contact{
-    text-align:center;
-    line-height:1.8;
-}
-
-.contact a{
-    color:#00eaff;
+a{
+    color:#18d9ff;
     text-decoration:none;
 }
 
 footer{
     text-align:center;
-    color:#7f899d;
-    padding:20px;
+    color:#77839a;
     font-size:13px;
+    padding:20px;
 }
 
-@media(max-width:500px){
-    .container{
-        padding:12px;
-    }
+@media(max-width:520px){
 
-    .prices{
+    .grid{
         grid-template-columns:1fr;
     }
 
     .logo{
         font-size:24px;
     }
+
 }
+
 </style>
 </head>
 
@@ -153,153 +147,388 @@ footer{
 <div class="container">
 
 <header>
-    <div class="logo">💎 TAJ.<span>DONAT</span>.TJ</div>
-    <div class="subtitle">Тез • Осон • Боэътимод 💯</div>
+
+<div class="logo">
+💎 TAJ.<span>DONAT</span>.TJ
+</div>
+
+<div class="subtitle">
+Тез • Осон • Боэътимод 💯
+</div>
+
 </header>
 
-<div class="card">
-    <h2>💎 Нархномаи алмаз</h2>
 
-    <div class="prices">
-        <div class="price"><span>💎 100</span><b>10с</b></div>
-        <div class="price"><span>💎 310</span><b>29с</b></div>
-        <div class="price"><span>💎 520</span><b>50с</b></div>
-        <div class="price"><span>💎 1060</span><b>100с</b></div>
-        <div class="price"><span>💎 2180</span><b>200с</b></div>
-        <div class="price"><span>💎 5600</span><b>550с</b></div>
-    </div>
-</div>
+<!-- НАРХҲО -->
 
 <div class="card">
-    <h2>🎟️ Ваучерҳо</h2>
 
-    <div class="prices">
-        <div class="price"><span>Лайт 90</span><b>7с</b></div>
-        <div class="price"><span>Ҳафта 450</span><b>18с</b></div>
-        <div class="price"><span>Моҳона 2600</span><b>95с</b></div>
-        <div class="price"><span>🔥 VIP</span><b>15с</b></div>
-    </div>
+<h2>💎 Нархҳо</h2>
+
+<div class="grid">
+
+<div class="price">
+<span>100 💎</span>
+<b>10с</b>
 </div>
+
+<div class="price">
+<span>310 💎</span>
+<b>29с</b>
+</div>
+
+<div class="price">
+<span>520 💎</span>
+<b>50с</b>
+</div>
+
+<div class="price">
+<span>1060 💎</span>
+<b>100с</b>
+</div>
+
+<div class="price">
+<span>2180 💎</span>
+<b>200с</b>
+</div>
+
+<div class="price">
+<span>5600 💎</span>
+<b>550с</b>
+</div>
+
+<div class="price">
+<span>Лайт 90</span>
+<b>7с</b>
+</div>
+
+<div class="price">
+<span>Ҳафта 450</span>
+<b>18с</b>
+</div>
+
+<div class="price">
+<span>Моҳона 2600</span>
+<b>95с</b>
+</div>
+
+<div class="price">
+<span>VIP</span>
+<b>15с</b>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ФАРМОИШ -->
 
 <div class="card">
-    <h2>💰 Пур кардани баланс</h2>
 
-    <input type="text" id="name" placeholder="Номи шумо">
+<h2>🛒 Харид / Фармоиш</h2>
 
-    <input type="number" id="amount" placeholder="Маблағ (сомонӣ)">
+<input
+id="uid"
+type="text"
+placeholder="🎮 ID-и Free Fire"
+>
 
-    <select id="method">
-        <option value="">Корти пардохтро интихоб кунед</option>
-        <option>ICB Mobile</option>
-        <option>Эсхата</option>
-    </select>
+<select id="product">
 
-    <button onclick="balance()">💰 Пур кардани баланс</button>
+<option value="">
+💎 Маҳсулотро интихоб кунед
+</option>
 
-    <p id="balanceMsg" style="margin-top:12px;color:#00eaff;"></p>
+<option>100 💎 — 10с</option>
+<option>310 💎 — 29с</option>
+<option>520 💎 — 50с</option>
+<option>1060 💎 — 100с</option>
+<option>2180 💎 — 200с</option>
+<option>5600 💎 — 550с</option>
+
+<option>Лайт 90 — 7с</option>
+<option>Ҳафта 450 — 18с</option>
+<option>Моҳона 2600 — 95с</option>
+
+<option>Настройка VIP — 15с</option>
+
+</select>
+
+<input
+id="phone"
+type="tel"
+placeholder="📱 Рақами телефон"
+>
+
+<button onclick="sendOrder()">
+📦 Фармоиш додан
+</button>
+
+<div id="orderMessage" class="message"></div>
+
 </div>
+
+
+<!-- БАЛАНС -->
 
 <div class="card">
-    <h2>🛒 Харид / Фармоиш</h2>
 
-    <input type="text" id="player" placeholder="ID-и Free Fire">
+<h2>💰 Пур кардани баланс</h2>
 
-    <select id="product">
-        <option value="">Маҳсулотро интихоб кунед</option>
-        <option>100 💎 — 10с</option>
-        <option>310 💎 — 29с</option>
-        <option>520 💎 — 50с</option>
-        <option>1060 💎 — 100с</option>
-        <option>2180 💎 — 200с</option>
-        <option>5600 💎 — 550с</option>
-        <option>Лайт 90 — 7с</option>
-        <option>Ҳафта 450 — 18с</option>
-        <option>Моҳона 2600 — 95с</option>
-        <option>Настройка VIP — 15с</option>
-    </select>
+<input
+id="amount"
+type="number"
+placeholder="💰 Маблағ (сомонӣ)"
+>
 
-    <input type="text" id="phone" placeholder="Рақами телефон">
+<select id="method">
 
-    <button onclick="order()">🛒 Фармоиш додан</button>
+<option value="">
+💳 Усули пардохт
+</option>
 
-    <p id="orderMsg" style="margin-top:12px;color:#00eaff;"></p>
+<option>
+ICB Mobile
+</option>
+
+<option>
+Эсхата
+</option>
+
+</select>
+
+<button onclick="sendBalance()">
+💳 Пур кардани баланс
+</button>
+
+<div id="balanceMessage" class="message"></div>
+
 </div>
+
+
+<!-- КОРТҲО -->
 
 <div class="card">
-    <h2>💳 Пардохт</h2>
 
-    <div class="payment">
-        <b>ICB Mobile</b><br>
-        Барои гирифтани реквизит ба админ нависед.
-    </div>
+<h2>💳 Пардохт</h2>
 
-    <div class="payment">
-        <b>Эсхата</b><br>
-        Барои гирифтани реквизит ба админ нависед.
-    </div>
+<div class="payment">
 
-    <button onclick="contactAdmin()">👨‍💻 Ба админ навиштан</button>
+<b>ICB Mobile</b>
+
+<br>
+
+Барои гирифтани реквизит ба админ нависед.
+
 </div>
 
-<div class="card contact">
-    <h2>📞 Тамос</h2>
 
-    <p>👨‍💻 Админ: 
-        <a href="https://t.me/Zokirjon0555" target="_blank">
-            @Zokirjon0555
-        </a>
-    </p>
+<div class="payment">
 
-    <p>📱 Телефон:
-        <a href="tel:+992935710406">
-            +992935710406
-        </a>
-    </p>
+<b>Эсхата</b>
+
+<br>
+
+Барои гирифтани реквизит ба админ нависед.
+
 </div>
+
+</div>
+
+
+<!-- АДМИН -->
+
+<div class="card">
+
+<h2>👨‍💻 Админ</h2>
+
+<p>
+Telegram:
+<a
+href="https://t.me/Zokirjon0555"
+target="_blank"
+>
+@Zokirjon0555
+</a>
+</p>
+
+<p>
+📱
+<a href="tel:+992935710406">
++992935710406
+</a>
+</p>
+
+</div>
+
 
 <footer>
-    💎 TAJ.DONAT.TJ — АЛМАЗ БО ЭЪТИМОД 💯
+
+💎 TAJ.DONAT.TJ — АЛМАЗ БО ЭЪТИМОД 💯
+
 </footer>
 
 </div>
 
+
 <script>
 
-function balance(){
-    let name=document.getElementById("name").value;
-    let amount=document.getElementById("amount").value;
-    let method=document.getElementById("method").value;
+async function sendOrder(){
 
-    if(!name || !amount || !method){
-        document.getElementById("balanceMsg").innerText=
-        "⚠️ Ҳама маълумотро пур кунед!";
-        return;
-    }
+const uid =
+document.getElementById("uid").value.trim();
 
-    document.getElementById("balanceMsg").innerText=
-    "✅ Дархост қабул шуд. Барои тасдиқи пардохт ба админ нависед.";
+const product =
+document.getElementById("product").value;
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const message =
+document.getElementById("orderMessage");
+
+
+if(!uid || !product || !phone){
+
+message.innerText =
+"⚠️ ID, маҳсулот ва рақамро пур кунед.";
+
+return;
+
 }
 
-function order(){
-    let player=document.getElementById("player").value;
-    let product=document.getElementById("product").value;
-    let phone=document.getElementById("phone").value;
 
-    if(!player || !product || !phone){
-        document.getElementById("orderMsg").innerText=
-        "⚠️ Ҳама маълумотро пур кунед!";
-        return;
-    }
+message.innerText =
+"⏳ Фармоиш фиристода шуда истодааст...";
 
-    document.getElementById("orderMsg").innerText=
-    "✅ Фармоиш қабул шуд! Барои идомаи фармоиш ба админ нависед.";
+
+try{
+
+const response = await fetch("/api/order",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+uid:uid,
+product:product,
+phone:phone
+
+})
+
+});
+
+
+const result =
+await response.json();
+
+
+if(result.ok){
+
+message.innerText =
+"✅ Фармоиш ба админ фиристода шуд!";
+
+document.getElementById("uid").value="";
+document.getElementById("product").value="";
+document.getElementById("phone").value="";
+
+}else{
+
+message.innerText =
+"❌ Хатогӣ: "+result.message;
+
 }
 
-function contactAdmin(){
-    window.open("https://t.me/Zokirjon0555","_blank");
+}catch(error){
+
+message.innerText =
+"❌ Сервер дастнорас аст.";
+
+}
+
+}
+
+
+async function sendBalance(){
+
+const amount =
+document.getElementById("amount").value;
+
+const method =
+document.getElementById("method").value;
+
+const message =
+document.getElementById("balanceMessage");
+
+
+if(!amount || !method){
+
+message.innerText =
+"⚠️ Маблағ ва усули пардохтро интихоб кунед.";
+
+return;
+
+}
+
+
+message.innerText =
+"⏳ Дархост фиристода шуда истодааст...";
+
+
+try{
+
+const response = await fetch("/api/balance",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+amount:amount,
+method:method
+
+})
+
+});
+
+
+const result =
+await response.json();
+
+
+if(result.ok){
+
+message.innerText =
+"✅ Дархости баланс ба админ фиристода шуд!";
+
+document.getElementById("amount").value="";
+document.getElementById("method").value="";
+
+}else{
+
+message.innerText =
+"❌ Хатогӣ: "+result.message;
+
+}
+
+}catch(error){
+
+message.innerText =
+"❌ Сервер дастнорас аст.";
+
+}
+
 }
 
 </script>
 
 </body>
-            </html>
+    </html>
