@@ -1,187 +1,538 @@
 <!DOCTYPE html>
 <html lang="tg">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TAJ.DONAT.TJ</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-    body { background: #0A0A0A; color: #FFFFFF; padding-bottom: 80px; }
-    .page { display: none; padding: 16px; }
-    .page.active { display: block; }
-    .header { text-align: center; font-size: 20px; font-weight: 700; margin: 10px 0 20px; }
-    :root { --orange: #FF9500; --dark: #1C1C1E; --gray: #2C2C2E; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TAJ DONAT TJ BOT</title>
 
-    .card { background: var(--dark); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
-    .btn-orange { background: var(--orange); color: #000; border: none; width: 100%; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; }
-    .btn-outline { background: transparent; border: 2px solid var(--orange); color: var(--orange); width: 100%; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; }
-    .tabs { display: flex; gap: 8px; margin-bottom: 16px; background: var(--dark); padding: 4px; border-radius: 12px; }
-    .tab { background: transparent; color: #888; border: none; padding: 10px 15px; border-radius: 10px; flex: 1; font-weight: 600; }
-    .tab.active { background: var(--orange); color: #000; }
-    
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .item { background: var(--dark); border-radius: 14px; padding: 12px; text-align: center; }
-    .item img { width: 45px; height: 45px; margin-bottom: 6px; }
-    .item h4 { font-size: 13px; font-weight: 600; }
-    .item p { color: var(--orange); font-weight: 700; margin-top: 4px; font-size: 15px; }
-
-    .navbar { position: fixed; bottom: 0; left: 0; right: 0; background: #000; display: flex; justify-content: space-around; padding: 8px 0 20px; border-top: 1px solid #222; }
-    .nav-btn { background: none; border: none; color: #888; text-align: center; font-size: 11px; font-weight: 600; }
-    .nav-btn.active { color: var(--orange); }
-    .nav-btn svg { width: 24px; height: 24px; margin-bottom: 4px; fill: currentColor; }
-    
-    input { width: 100%; padding: 14px; background: var(--dark); border: none; border-radius: 12px; color: white; margin-bottom: 16px; font-size: 15px; }
-    .select { background: var(--dark); padding: 14px; border-radius: 12px; display: flex; align-items: center; gap: 10px; }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#090a0d;
+ color:#fff;
+ font-family:Arial,sans-serif;
+}
+.header{
+ padding:22px 18px;
+ font-size:25px;
+ font-weight:800;
+ border-bottom:1px solid #222;
+}
+.container{padding:18px;max-width:700px;margin:auto}
+.card{
+ background:#14161b;
+ border:1px solid #292c34;
+ border-radius:22px;
+ padding:18px;
+ margin-bottom:15px;
+}
+.balance{
+ font-size:42px;
+ font-weight:900;
+ color:#ff9200;
+}
+button{
+ width:100%;
+ border:0;
+ border-radius:16px;
+ padding:16px;
+ margin-top:10px;
+ font-size:17px;
+ font-weight:800;
+ background:#ff9200;
+ color:#111;
+}
+button:active{transform:scale(.98)}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+.product{
+ background:#17191f;
+ border:1px solid #292c34;
+ border-radius:18px;
+ padding:14px;
+}
+.product h3{margin:5px 0}
+.price{
+ color:#ff9200;
+ font-size:24px;
+ font-weight:900;
+}
+input,select{
+ width:100%;
+ padding:16px;
+ border-radius:14px;
+ border:1px solid #30333b;
+ background:#1a1c22;
+ color:white;
+ font-size:16px;
+ margin-top:8px;
+}
+.nav{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:#111318;
+ border-top:1px solid #292c34;
+ display:flex;
+ justify-content:space-around;
+ padding:10px 5px;
+}
+.nav button{
+ background:transparent;
+ color:#888;
+ margin:0;
+ padding:10px 4px;
+}
+.nav button.active{color:#ff9200}
+.page{display:none;padding-bottom:90px}
+.page.active{display:block}
+.success{color:#35e06f;font-weight:bold}
+.small{color:#858991}
+a{
+ color:#ff9200;
+ text-decoration:none;
+ font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- 1. АСОСИ -->
-  <div id="home" class="page active">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-      <div>
-        <p style="color: #888;">Рӯз ба хайр!</p>
-        <h2>zokirjon</h2>
-      </div>
-      <div style="background: var(--dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">84</div>
-    </div>
-    <p style="color: #888; font-size: 13px;">БАЛАНС</p>
-    <h1 style="font-size: 32px; margin: 5px 0 15px;">45.46 <span style="font-size: 18px;">см</span></h1>
-    <div style="display: flex; gap: 10px;">
-      <button class="btn-orange">+ Пур кардан</button>
-      <button class="btn-outline">Бароврдан</button>
-    </div>
-    <div style="display: flex; gap: 8px; margin: 15px 0;">
-      <div class="card" style="flex:1; padding: 10px; font-size: 12px;">⚡ То 1 дакика</div>
-      <div class="card" style="flex:1; padding: 10px; font-size: 12px;">🛡️ Бехатар</div>
-      <div class="card" style="flex:1; padding: 10px; font-size: 12px;">🕒 24/7</div>
-    </div>
-    <p style="color: #888; margin: 20px 0 10px;">КАТЕГОРИЯХО</p>
-    <div class="card" style="background: linear-gradient(135deg, #8A2BE2, #4B0082);">
-      <p style="color: #ccc;">FREE FIRE</p>
-      <h2 style="font-size: 28px;">СНГ</h2>
-      <button class="btn-orange" style="margin-top: 10px;" onclick="showPage('shop')">Харидан →</button>
-    </div>
-    <div class="card" style="background: linear-gradient(135deg, #FF8C00, #FF4500);">
-      <p style="color: #ccc;">FREE FIRE</p>
-      <h2 style="font-size: 28px;">ИНДОНЕЗИЯ</h2>
-      <button class="btn-orange" style="margin-top: 10px;">Харидан →</button>
-    </div>
-  </div>
+<div class="header">🟠 TAJ DONAT TJ BOT</div>
 
-  <!-- 2. МАГАЗА БО ВАУЧЕР -->
-  <div id="shop" class="page">
-    <div class="header">Free Fire СНГ</div>
-    <div class="tabs">
-      <button class="tab active" onclick="showTab('diamonds')">💎 Алмазхо</button>
-      <button class="tab" onclick="showTab('voucher')">🏆 Level Up</button>
-    </div>
-    <input placeholder="# Мисол: 123456789">
-    
-    <div id="diamonds" class="tab-content">
-      <div class="grid">
-        <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png"><h4>110 Алмазхо</h4><p>8.50 см</p></div>
-        <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png"><h4>341 Алмазхо</h4><p>26.50 см</p></div>
-        <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png"><h4>572 Алмазхо</h4><p>45.90 см</p></div>
-        <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png"><h4>1166 Алмазхо</h4><p>88.00 см</p></div>
-        <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png"><h4>2398 Алмазхо</h4><p>178.00 см</p></div>
-        <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png"><h4>6160 Алмазхо</h4><p>450.00 см</p></div>
-      </div>
-    </div>
+<!-- HOME -->
+<div id="home" class="page active">
+<div class="container">
 
-    <div id="voucher" class="tab-content" style="display: none;">
-      <div class="grid">
-        <div class="item"><img src="https://i.imgur.com/8Km8l3M.png"><h4>Ваучер Lite 90</h4><p>5.90 см</p></div>
-        <div class="item"><img src="https://i.imgur.com/8Km8l3M.png"><h4>Ваучер хафта 450</h4><p>15.80 см</p></div>
-        <div class="item"><img src="https://i.imgur.com/8Km8l3M.png"><h4>Ваучер мохона 2600</h4><p>65.00 см</p></div>
-      </div>
-    </div>
-    
-    <div class="card" style="margin-top: 20px;">
-      <p style="color: #888; margin-bottom: 10px;">ТАРЗИ ПАРДОХТ</p>
-      <div class="select"><span>🏦</span> ICB Mobile</div>
-      <div class="select" style="margin-top: 10px;"><span>🅰️</span> Алиф</div>
-      <div class="select" style="margin-top: 10px;"><span>🏙️</span> Душанбе Сити</div>
-      <div class="select" style="margin-top: 10px;"><span>💳</span> Корти Миллӣ</div>
-    </div>
-    <button class="btn-orange" style="margin-top: 15px;">Пардохт кардан</button>
-  </div>
+<div class="card">
+<div class="small">РӮЗ БА ХАЙР!</div>
+<h1>Салом 👋</h1>
+<div class="small">Баланс</div>
+<div class="balance">0.00 сом</div>
+<button onclick="showPage('buy')">💎 Харидан</button>
+</div>
 
-  <!-- 3. ХАРИДХО -->
-  <div id="orders" class="page">
-    <div class="header">Таърих</div>
-    <div class="tabs">
-      <button class="tab active">Фармоишхо</button>
-      <button class="tab">Молия</button>
-    </div>
-    <div style="display: flex; gap: 10px;">
-      <div class="card" style="flex:1;"><p>ХАМАГИ фармоиш</p><h2>50</h2></div>
-      <div class="card" style="flex:1;"><p>ХАРОЧОТ</p><h2>1039.90 см</h2></div>
-    </div>
-    <div class="card">
-      <h4>Ваучер Lite 90</h4>
-      <p style="color: #888; font-size: 13px;">09:58 • Аз кошелек</p>
-      <p style="color: green; float: right;">Ичро шуд • 5.90 см</p>
-    </div>
-  </div>
+<h3>КАТЕГОРИЯҲО</h3>
 
-  <!-- 4. ДАСТГИРИ -->
-  <div id="support" class="page">
-    <div class="header">Дастгири</div>
-    <div class="card" style="background: #0F3D0F; color: #4CAF50;">
-      <p>• Дастгири онлайн • 9:00 — 23:00</p>
-    </div>
-    <div class="card">БА МО НАВИСЕД<br><b>@Zokirjon0555</b></div>
-    <div class="card">КАНАЛИ РАСМИ<br><b>@TajDonatTJ</b></div>
-    <div class="card">ПРОФИЛИ INSTAGRAM<br><b>@tajdonat.tj</b></div>
-  </div>
+<div class="card">
+<h2>🔥 FREE FIRE СНГ</h2>
+<p class="small">Алмазҳоро зуд ва осон харед</p>
+<button onclick="showPage('buy')">Харидан →</button>
+</div>
 
-  <!-- 5. ПРОФИЛ -->
-  <div id="profile" class="page">
-    <div class="header">Профил</div>
-    <div class="card">
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <div style="background: var(--orange); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #000;">ZO</div>
-        <div>
-          <h3>zokirjon</h3>
-          <p style="color: #888;">@Zokirjon0555 • ID 6439367152</p>
-        </div>
-      </div>
-      <p style="color: green; margin-top: 10px;">🟢 Тасдикшуда • 🟢 Бехатар</p>
-    </div>
-    <p style="color: #888;">МАЪЛУМОТИ ШУМО</p>
-    <div class="grid" style="grid-template-columns: repeat(2, 1fr);">
-      <div class="card"><p>БАЛАНС</p><h2>45.46 см</h2></div>
-      <div class="card"><p>ХАРИДХО</p><h2>84</h2></div>
-      <div class="card"><p>ХАМКОРОН</p><h2>2</h2></div>
-      <div class="card"><p>ДАРОМАД</p><h2>0.40 см</h2></div>
-    </div>
-  </div>
+<div class="card">
+<h2>🌴 FREE FIRE ИНДОНЕЗИЯ</h2>
+<p class="small">Донати Free Fire</p>
+<button onclick="showPage('buy')">Харидан →</button>
+</div>
 
-  <!-- NAVBAR -->
-  <div class="navbar">
-    <button class="nav-btn active" onclick="showPage('home')">🏠<br>Асоси</button>
-    <button class="nav-btn" onclick="showPage('orders')">🛍<br>Харидхо</button>
-    <button class="nav-btn" onclick="showPage('support')">🎧<br>Дастгири</button>
-    <button class="nav-btn" onclick="showPage('profile')">👤<br>Профил</button>
-  </div>
+</div>
+</div>
+
+<!-- BUY -->
+<div id="buy" class="page">
+<div class="container">
+
+<h2>Free Fire СНГ</h2>
+
+<div class="card">
+
+<label>ID-и бозӣ</label>
+<input id="gameId" placeholder="Мисол: 123456789">
+
+<label>Тарзи пардохт</label>
+<select id="payment">
+
+<option>Алиф</option>
+<option>Эсхата Online</option>
+<option>ICB Mobile</option>
+<option>Душанбе Сити</option>
+<option>Корти Миллӣ</option>
+
+</select>
+
+</div>
+
+<div class="grid">
+
+<div class="product">
+<h3>💎 110 Алмазҳо</h3>
+<div class="price">8.50 сом</div>
+<button onclick="order('110 Алмазҳо',8.50)">
+Харидан
+</button>
+</div>
+
+<div class="product">
+<h3>💎 341 Алмазҳо</h3>
+<div class="price">26.50 сом</div>
+<button onclick="order('341 Алмазҳо',26.50)">
+Харидан
+</button>
+</div>
+
+<div class="product">
+<h3>💎 572 Алмазҳо</h3>
+<div class="price">45.90 сом</div>
+<button onclick="order('572 Алмазҳо',45.90)">
+Харидан
+</button>
+</div>
+
+<div class="product">
+<h3>💎 1166 Алмазҳо</h3>
+<div class="price">88.00 сом</div>
+<button onclick="order('1166 Алмазҳо',88)">
+Харидан
+</button>
+</div>
+
+<div class="product">
+<h3>💎 2398 Алмазҳо</h3>
+<div class="price">178.00 сом</div>
+<button onclick="order('2398 Алмазҳо',178)">
+Харидан
+</button>
+</div>
+
+<div class="product">
+<h3>💎 6160 Алмазҳо</h3>
+<div class="price">450.00 сом</div>
+<button onclick="order('6160 Алмазҳо',450)">
+Харидан
+</button>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- HISTORY -->
+<div id="history" class="page">
+<div class="container">
+
+<h2>📦 Таърихи харид</h2>
+
+<div id="orders">
+
+<div class="card small">
+Ҳоло ягон харид нест.
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- SUPPORT -->
+<div id="support" class="page">
+
+<div class="container">
+
+<h2>🎧 Дастгирӣ</h2>
+
+<div class="card">
+
+<h3>🟢 Дастгирӣ онлайн</h3>
+
+<p>9:00 — 23:00</p>
+
+<button onclick="contact()">
+📲 Ба мо нависед
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>❓ Чанд вақт мунтазир шавам?</h3>
+
+<p class="small">
+Одатан фармоиш баъд аз тасдиқи пардохт зуд иҷро мешавад.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🆔 Оё ID-и ман бехатар аст?</h3>
+
+<p class="small">
+ID танҳо барои иҷрои фармоиш истифода мешавад.
+</p>
+
+</div>
+
+</div>
+</div>
+
+<!-- PROFILE -->
+<div id="profile" class="page">
+
+<div class="container">
+
+<h2>👤 Профил</h2>
+
+<div class="card">
+
+<h2>🟠 TAJ DONAT TJ BOT</h2>
+
+<h1>zokirjon</h1>
+
+<p class="small">
+@Tajdonattj_bot
+</p>
+
+<hr>
+
+<p>🟢 Тасдиқшуда</p>
+<p>🟢 Бехатар</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="small">
+ХАРИДҲО
+</div>
+
+<h2 id="count">0</h2>
+
+</div>
+
+<div class="card">
+
+<div class="small">
+БАЛАНС
+</div>
+
+<h2>0.00 сом</h2>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+
+<button id="n1"
+class="active"
+onclick="showPage('home')">
+⌂<br>Асосӣ
+</button>
+
+<button id="n2"
+onclick="showPage('buy')">
+🛍<br>Харид
+</button>
+
+<button id="n3"
+onclick="showPage('support')">
+♧<br>Дастгирӣ
+</button>
+
+<button id="n4"
+onclick="showPage('profile')">
+♙<br>Профил
+</button>
+
+</div>
 
 <script>
-  let tg = window.Telegram.WebApp;
-  tg.expand();
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    event.currentTarget.classList.add('active');
-  }
-  function showTab(id) {
-    document.querySelectorAll('.tab-content').forEach(p => p.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-    event.currentTarget.classList.add('active');
-  }
+
+let orders =
+JSON.parse(localStorage.getItem("orders") || "[]");
+
+
+function showPage(page){
+
+document.querySelectorAll(".page")
+.forEach(x =>
+x.classList.remove("active")
+);
+
+document.getElementById(page)
+.classList.add("active");
+
+
+document.querySelectorAll(".nav button")
+.forEach(x =>
+x.classList.remove("active")
+);
+
+
+if(page==="home")
+n1.classList.add("active");
+
+if(page==="buy")
+n2.classList.add("active");
+
+if(page==="support")
+n3.classList.add("active");
+
+if(page==="profile")
+n4.classList.add("active");
+
+
+renderOrders();
+
+}
+
+
+function order(product,price){
+
+let id =
+document.getElementById("gameId")
+.value.trim();
+
+let payment =
+document.getElementById("payment")
+.value;
+
+
+if(!id){
+
+alert("❗ Аввал ID-и бозиро нависед!");
+
+return;
+
+}
+
+
+let order={
+
+product:product,
+
+price:price,
+
+id:id,
+
+payment:payment,
+
+time:new Date()
+.toLocaleString()
+
+};
+
+
+orders.unshift(order);
+
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+
+let text =
+
+"🛒 ФАРМОИШИ НАВ%0A%0A"+
+
+"💎 "+product+"%0A"+
+
+"💰 "+price+" сом%0A"+
+
+"🆔 ID: "+id+"%0A"+
+
+"💳 Пардохт: "+payment+"%0A%0A"+
+
+"🤖 Бот: @Tajdonattj_bot";
+
+
+window.open(
+
+"https://t.me/Tajdonattj_bot?text="+
+text,
+
+"_blank"
+
+);
+
+
+alert("✅ Фармоиш қабул шуд!");
+
+
+showPage("history");
+
+}
+
+
+function renderOrders(){
+
+let box =
+document.getElementById("orders");
+
+if(!box)return;
+
+
+if(orders.length===0){
+
+box.innerHTML=
+
+'<div class="card small">'+
+'Ҳоло ягон харид нест.'+
+'</div>';
+
+return;
+
+}
+
+
+box.innerHTML = orders.map(o=>`
+
+<div class="card">
+
+<h3>💎 ${o.product}</h3>
+
+<p>💰 ${o.price} сом</p>
+
+<p>🆔 ID: ${o.id}</p>
+
+<p>💳 ${o.payment}</p>
+
+<p class="small">
+${o.time}
+</p>
+
+<p class="success">
+● Фармоиш қабул шуд
+</p>
+
+</div>
+
+`).join("");
+
+
+document.getElementById("count")
+.innerText=orders.length;
+
+}
+
+
+function contact(){
+
+window.open(
+"https://t.me/Tajdonattj_bot",
+"_blank"
+);
+
+}
+
+
+renderOrders();
+
 </script>
+
 </body>
-</html>
+  </html>
