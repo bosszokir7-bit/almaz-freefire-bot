@@ -1,289 +1,305 @@
-# ==============================================================================
-# ҚИСМИ 1: ФАЙЛИ HTML (Mini App WebApp)
-# Ин кодро дар файли index.html сабт карда, дар Vercel ё GitHub Pages гузоред.
-# ==============================================================================
-HTML_CODE = """
 <!DOCTYPE html>
 <html lang="tg">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tajdonattj Bot Mini App</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --accent-color: #ff8c00;
-            --text-color: #ffffff;
-            --secondary-text: #aaa;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAJ.DONAT.TJ</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 15px;
-            padding-bottom: 70px;
-        }
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
 
-        .header {
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
+body{
+    background:#0b0f1a;
+    color:#fff;
+}
 
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:18px;
+}
 
-        .tab-btn {
-            flex: 1;
-            padding: 10px;
-            background: var(--card-bg);
-            border: 1px solid #333;
-            color: var(--text-color);
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+header{
+    text-align:center;
+    padding:20px 10px;
+}
 
-        .tab-btn.active {
-            background: var(--accent-color);
-            border-color: var(--accent-color);
-        }
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
+.logo span{
+    color:#00eaff;
+}
 
-        .item-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #2a2a2a;
-            cursor: pointer;
-        }
+.subtitle{
+    color:#aeb6c8;
+    margin-top:7px;
+    font-size:14px;
+}
 
-        .item-card:hover {
-            border-color: var(--accent-color);
-        }
+.card{
+    background:#131a2a;
+    border:1px solid #26324a;
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:16px;
+}
 
-        .item-title {
-            font-size: 12px;
-            margin: 5px 0;
-        }
+h2{
+    font-size:20px;
+    margin-bottom:14px;
+}
 
-        .item-price {
-            color: var(--accent-color);
-            font-weight: bold;
-            font-size: 13px;
-        }
+.prices{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
 
-        .form-group {
-            margin-top: 15px;
-        }
+.price{
+    background:#1a2336;
+    border-radius:12px;
+    padding:13px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-        label {
-            display: block;
-            font-size: 12px;
-            color: var(--secondary-text);
-            margin-bottom: 5px;
-        }
+.price b{
+    color:#00eaff;
+}
 
-        input, select {
-            width: 100%;
-            padding: 10px;
-            background: var(--card-bg);
-            border: 1px solid #333;
-            color: #fff;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
+button{
+    width:100%;
+    border:0;
+    border-radius:11px;
+    padding:13px;
+    margin-top:10px;
+    background:#00c8ff;
+    color:#001018;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-        .btn-pay {
-            width: 100%;
-            padding: 12px;
-            background: var(--accent-color);
-            border: none;
-            color: #fff;
-            font-weight: bold;
-            border-radius: 8px;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-    </style>
+button:hover{
+    opacity:.9;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    margin-bottom:10px;
+    border-radius:10px;
+    border:1px solid #33415d;
+    background:#0d1422;
+    color:#fff;
+    outline:none;
+}
+
+.payment{
+    background:#1a2336;
+    padding:13px;
+    border-radius:11px;
+    margin-bottom:10px;
+}
+
+.payment b{
+    color:#00eaff;
+}
+
+.contact{
+    text-align:center;
+    line-height:1.8;
+}
+
+.contact a{
+    color:#00eaff;
+    text-decoration:none;
+}
+
+footer{
+    text-align:center;
+    color:#7f899d;
+    padding:20px;
+    font-size:13px;
+}
+
+@media(max-width:500px){
+    .container{
+        padding:12px;
+    }
+
+    .prices{
+        grid-template-columns:1fr;
+    }
+
+    .logo{
+        font-size:24px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="header">Free Fire СНГ (@Tajdonattj_bot)</div>
+<div class="container">
 
-    <div class="tabs">
-        <button class="tab-btn active">💎 Алмазҳо</button>
-        <button class="tab-btn">🎗 Level Up</button>
+<header>
+    <div class="logo">💎 TAJ.<span>DONAT</span>.TJ</div>
+    <div class="subtitle">Тез • Осон • Боэътимод 💯</div>
+</header>
+
+<div class="card">
+    <h2>💎 Нархномаи алмаз</h2>
+
+    <div class="prices">
+        <div class="price"><span>💎 100</span><b>10с</b></div>
+        <div class="price"><span>💎 310</span><b>29с</b></div>
+        <div class="price"><span>💎 520</span><b>50с</b></div>
+        <div class="price"><span>💎 1060</span><b>100с</b></div>
+        <div class="price"><span>💎 2180</span><b>200с</b></div>
+        <div class="price"><span>💎 5600</span><b>550с</b></div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>🎟️ Ваучерҳо</h2>
+
+    <div class="prices">
+        <div class="price"><span>Лайт 90</span><b>7с</b></div>
+        <div class="price"><span>Ҳафта 450</span><b>18с</b></div>
+        <div class="price"><span>Моҳона 2600</span><b>95с</b></div>
+        <div class="price"><span>🔥 VIP</span><b>15с</b></div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>💰 Пур кардани баланс</h2>
+
+    <input type="text" id="name" placeholder="Номи шумо">
+
+    <input type="number" id="amount" placeholder="Маблағ (сомонӣ)">
+
+    <select id="method">
+        <option value="">Корти пардохтро интихоб кунед</option>
+        <option>ICB Mobile</option>
+        <option>Эсхата</option>
+    </select>
+
+    <button onclick="balance()">💰 Пур кардани баланс</button>
+
+    <p id="balanceMsg" style="margin-top:12px;color:#00eaff;"></p>
+</div>
+
+<div class="card">
+    <h2>🛒 Харид / Фармоиш</h2>
+
+    <input type="text" id="player" placeholder="ID-и Free Fire">
+
+    <select id="product">
+        <option value="">Маҳсулотро интихоб кунед</option>
+        <option>100 💎 — 10с</option>
+        <option>310 💎 — 29с</option>
+        <option>520 💎 — 50с</option>
+        <option>1060 💎 — 100с</option>
+        <option>2180 💎 — 200с</option>
+        <option>5600 💎 — 550с</option>
+        <option>Лайт 90 — 7с</option>
+        <option>Ҳафта 450 — 18с</option>
+        <option>Моҳона 2600 — 95с</option>
+        <option>Настройка VIP — 15с</option>
+    </select>
+
+    <input type="text" id="phone" placeholder="Рақами телефон">
+
+    <button onclick="order()">🛒 Фармоиш додан</button>
+
+    <p id="orderMsg" style="margin-top:12px;color:#00eaff;"></p>
+</div>
+
+<div class="card">
+    <h2>💳 Пардохт</h2>
+
+    <div class="payment">
+        <b>ICB Mobile</b><br>
+        Барои гирифтани реквизит ба админ нависед.
     </div>
 
-    <div class="grid">
-        <div class="item-card" onclick="selectItem('110 Алмазҳо', '8.50')">
-            <div>💎</div>
-            <div class="item-title">110 Алмазҳо</div>
-            <div class="item-price">8.50 см</div>
-        </div>
-        <div class="item-card" onclick="selectItem('341 Алмазҳо', '26.50')">
-            <div>💎</div>
-            <div class="item-title">341 Алмазҳо</div>
-            <div class="item-price">26.50 см</div>
-        </div>
-        <div class="item-card" onclick="selectItem('572 Алмазҳо', '45.90')">
-            <div>💎</div>
-            <div class="item-title">572 Алмазҳо</div>
-            <div class="item-price">45.90 см</div>
-        </div>
+    <div class="payment">
+        <b>Эсхата</b><br>
+        Барои гирифтани реквизит ба админ нависед.
     </div>
 
-    <div class="form-group">
-        <label>ID-И БОЗӢ</label>
-        <input type="number" id="player_id" placeholder="Мисол: 123456789">
-    </div>
+    <button onclick="contactAdmin()">👨‍💻 Ба админ навиштан</button>
+</div>
 
-    <div class="form-group">
-        <label>ТАРЗИ ПАРДОХТ</label>
-        <select id="bank_select">
-            <option value="Эсхата / ICB">Эсхата / ICB Mobile (+992935710406)</option>
-            <option value="Алиф">Алиф Моби</option>
-            <option value="Душанбе Сити">Душанбе Сити</option>
-        </select>
-    </div>
+<div class="card contact">
+    <h2>📞 Тамос</h2>
 
-    <button class="btn-pay" onclick="submitOrder()">💳 Пардохт кардан</button>
+    <p>👨‍💻 Админ: 
+        <a href="https://t.me/Zokirjon0555" target="_blank">
+            @Zokirjon0555
+        </a>
+    </p>
 
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
+    <p>📱 Телефон:
+        <a href="tel:+992935710406">
+            +992935710406
+        </a>
+    </p>
+</div>
 
-        let selectedItem = "110 Алмазҳо";
-        let selectedPrice = "8.50";
+<footer>
+    💎 TAJ.DONAT.TJ — АЛМАЗ БО ЭЪТИМОД 💯
+</footer>
 
-        function selectItem(title, price) {
-            selectedItem = title;
-            selectedPrice = price;
-            alert("Интихоб шуд: " + title);
-        }
+</div>
 
-        function submitOrder() {
-            let playerId = document.getElementById('player_id').value;
-            let bank = document.getElementById('bank_select').value;
+<script>
 
-            if(!playerId) {
-                alert("Лутфан ID-и бозиро ворид кунед!");
-                return;
-            }
+function balance(){
+    let name=document.getElementById("name").value;
+    let amount=document.getElementById("amount").value;
+    let method=document.getElementById("method").value;
 
-            let orderData = {
-                item: selectedItem,
-                price: selectedPrice,
-                player_id: playerId,
-                bank: bank
-            };
+    if(!name || !amount || !method){
+        document.getElementById("balanceMsg").innerText=
+        "⚠️ Ҳама маълумотро пур кунед!";
+        return;
+    }
 
-            tg.sendData(JSON.stringify(orderData));
-        }
-    </script>
+    document.getElementById("balanceMsg").innerText=
+    "✅ Дархост қабул шуд. Барои тасдиқи пардохт ба админ нависед.";
+}
+
+function order(){
+    let player=document.getElementById("player").value;
+    let product=document.getElementById("product").value;
+    let phone=document.getElementById("phone").value;
+
+    if(!player || !product || !phone){
+        document.getElementById("orderMsg").innerText=
+        "⚠️ Ҳама маълумотро пур кунед!";
+        return;
+    }
+
+    document.getElementById("orderMsg").innerText=
+    "✅ Фармоиш қабул шуд! Барои идомаи фармоиш ба админ нависед.";
+}
+
+function contactAdmin(){
+    window.open("https://t.me/Zokirjon0555","_blank");
+}
+
+</script>
+
 </body>
-</html>
-"""
-
-
-# ==============================================================================
-# ҚИСМИ 2: КОДИ PYTHON (aiogram 3.x)
-# Ин кодро дар файли bot.py сабт ва иҷро кунед.
-# ==============================================================================
-import logging
-import json
-import asyncio
-from aiogram import Bot, Dispatcher, F, types
-from aiogram.filters import Command
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
-
-BOT_TOKEN = "ТОКЕНИ_БОТИ_ХУДРО_ИНҶО_БИНЕВАЗЕД"
-ADMIN_USERNAME = "@Zokirjon0555"
-ADMIN_ID = 12345678  # Telegram ID-и аслии худро ҷойгир кунед
-CARD_NUMBER = "+992935710406"  # Эсхата / ICB Mobile
-WEBAPP_URL = "https://YOUR-WEBAPP-URL.vercel.app"  # Ссылкаи Vercel/GitHub Pages
-
-bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher()
-
-@dp.message(Command("start"))
-async def cmd_start(message: types.Message):
-    kb = types.ReplyKeyboardMarkup(
-        keyboard=[
-            [types.KeyboardButton(
-                text="🛒 Мағоза (Mini App)", 
-                web_app=WebAppInfo(url=WEBAPP_URL)
-            )]
-        ],
-        resize_keyboard=True
-    )
-    await message.answer("Салом! Ба боти @Tajdonattj_bot хуш омадед!", reply_markup=kb)
-
-@dp.message(F.web_app_data)
-async def handle_webapp_data(message: types.Message):
-    data = json.loads(message.web_app_data.data)
-    
-    order_id = f"#TJ{message.message_id}"
-    item = data['item']
-    price = data['price']
-    player_id = data['player_id']
-    bank = data['bank']
-
-    text = (
-        f"🛒 **Фармоиши шумо аз мини-апп қабул шуд!**\n\n"
-        f"🆔 **Фармоиш:** @Tajdonattj_bot {order_id}\n"
-        f"💎 **Маҳсулот:** {item}\n"
-        f"🎮 **UID:** `{player_id}`\n"
-        f"💰 **Маблағи дақиқ:** {price} см\n\n"
-        f"1️⃣ Тугмаи 💰 **Пардохт кардан**-ро пахш кунед\n"
-        f"2️⃣ Маблағи дақиқ **{price} см**-ро пардохт кунед\n"
-        f"3️⃣ Расми чекро ба ин чат фиристед\n"
-        f"-----------------------------------\n"
-        f"📱 **{bank}** — маблағро ба ин рақам равон кунед:\n\n"
-        f"`{CARD_NUMBER}`\n"
-        f"👆 Пахш кунед — нусхабардорӣ мешавад\n"
-        f"-----------------------------------\n"
-        f"⌛ Шумо 10 дақиқа вақт доред!\n"
-        f"⚠️ Маблағ бояд дақиқ бошад!"
-    )
-
-    pay_keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="💰 Пардохт кардан", callback_data="pay_info")],
-        [InlineKeyboardButton(text="👨‍💻 Админ", url=f"https://t.me/{ADMIN_USERNAME.replace('@','')}")]
-    ])
-
-    await message.answer(text, parse_mode="Markdown", reply_markup=pay_keyboard)
-
-@dp.message(F.photo)
-async def handle_receipt(message: types.Message):
-    user_info = f"👤 Корбар: @{message.from_user.username} (ID: {message.from_user.id})"
-    
-    await bot.send_photo(
-        chat_id=ADMIN_ID,
-        photo=message.photo[-1].file_id,
-        caption=f"📥 **Чеки нав барои фармоиш!**\n\n{user_info}\nАдмин: {ADMIN_USERNAME}",
-        parse_mode="Markdown"
-    )
-    
-    await message.answer("✅ Чек қабул шуд! Админ ба зудӣ фармоиши шуморо месанҷад.")
-
-async def main():
-    await dp.start_polling(bot)
-
-if __name__ == "__main__":
-    asyncio.run(main())
+            </html>
