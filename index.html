@@ -6,48 +6,67 @@
   <title>TAJ.DONAT.TJ</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
-    body { background: #0D0D0D; color: white; padding-bottom: 80px; }
-    .page { display: none; padding: 15px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    body { background: #0A0A0A; color: #FFFFFF; padding-bottom: 80px; }
+    .page { display: none; padding: 16px; }
     .page.active { display: block; }
-    .header { text-align: center; font-size: 18px; font-weight: bold; margin: 10px 0 20px; }
+    .header { text-align: center; font-size: 20px; font-weight: 700; margin: 10px 0 20px; }
     :root { --orange: #FF9500; --dark: #1C1C1E; --gray: #2C2C2E; }
-    .card { background: var(--dark); border-radius: 16px; padding: 15px; margin-bottom: 12px; }
-    .btn-orange { background: var(--orange); color: black; border: none; width: 100%; padding: 14px; border-radius: 12px; font-weight: bold; font-size: 16px; }
-    .btn-outline { background: transparent; border: 2px solid var(--orange); color: var(--orange); width: 100%; padding: 14px; border-radius: 12px; font-weight: bold; font-size: 16px; }
-    .tabs { display: flex; gap: 10px; margin-bottom: 15px; }
-    .tab { background: var(--dark); color: white; border: none; padding: 10px 15px; border-radius: 10px; flex: 1; }
-    .tab.active { background: var(--orange); color: black; }
+
+    .card { background: var(--dark); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+    .btn-orange { background: var(--orange); color: #000; border: none; width: 100%; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; }
+    .btn-outline { background: transparent; border: 2px solid var(--orange); color: var(--orange); width: 100%; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 16px; background: var(--dark); padding: 4px; border-radius: 12px; }
+    .tab { background: transparent; color: #888; border: none; padding: 10px 15px; border-radius: 10px; flex: 1; font-weight: 600; }
+    .tab.active { background: var(--orange); color: #000; }
+    
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .item { background: var(--dark); border-radius: 12px; padding: 10px; text-align: center; }
-    .item img { width: 40px; height: 40px; margin-bottom: 5px; }
-    .item h4 { font-size: 13px; }
-    .item p { color: var(--orange); font-weight: bold; margin-top: 3px; }
-    .navbar { position: fixed; bottom: 0; left: 0; right: 0; background: #000; display: flex; justify-content: space-around; padding: 8px 0; border-top: 1px solid #222; }
-    .nav-btn { background: none; border: none; color: #888; text-align: center; font-size: 11px; }
+    .item { background: var(--dark); border-radius: 14px; padding: 12px; text-align: center; }
+    .item img { width: 45px; height: 45px; margin-bottom: 6px; }
+    .item h4 { font-size: 13px; font-weight: 600; }
+    .item p { color: var(--orange); font-weight: 700; margin-top: 4px; font-size: 15px; }
+
+    .navbar { position: fixed; bottom: 0; left: 0; right: 0; background: #000; display: flex; justify-content: space-around; padding: 8px 0 20px; border-top: 1px solid #222; }
+    .nav-btn { background: none; border: none; color: #888; text-align: center; font-size: 11px; font-weight: 600; }
     .nav-btn.active { color: var(--orange); }
+    .nav-btn svg { width: 24px; height: 24px; margin-bottom: 4px; fill: currentColor; }
+    
+    input { width: 100%; padding: 14px; background: var(--dark); border: none; border-radius: 12px; color: white; margin-bottom: 16px; font-size: 15px; }
+    .select { background: var(--dark); padding: 14px; border-radius: 12px; display: flex; align-items: center; gap: 10px; }
   </style>
 </head>
 <body>
 
   <!-- 1. АСОСИ -->
   <div id="home" class="page active">
-    <div class="header">TAJ.DONAT.TJ</div>
-    <div class="card">
-      <p>БАЛАНС</p>
-      <h2 style="font-size: 28px; margin: 10px 0;">0.00 см</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div>
+        <p style="color: #888;">Рӯз ба хайр!</p>
+        <h2>zokirjon</h2>
+      </div>
+      <div style="background: var(--dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">84</div>
+    </div>
+    <p style="color: #888; font-size: 13px;">БАЛАНС</p>
+    <h1 style="font-size: 32px; margin: 5px 0 15px;">45.46 <span style="font-size: 18px;">см</span></h1>
+    <div style="display: flex; gap: 10px;">
       <button class="btn-orange">+ Пур кардан</button>
-      <button class="btn-outline" style="margin-top: 10px;">Бароврдан</button>
+      <button class="btn-outline">Бароврдан</button>
     </div>
-    <div class="card" style="background: linear-gradient(90deg, #8A2BE2, #4B0082);">
-      <p>FREE FIRE</p>
-      <h2>СНГ</h2>
-      <button class="btn-orange" onclick="showPage('shop')">Харидан →</button>
+    <div style="display: flex; gap: 8px; margin: 15px 0;">
+      <div class="card" style="flex:1; padding: 10px; font-size: 12px;">⚡ То 1 дакика</div>
+      <div class="card" style="flex:1; padding: 10px; font-size: 12px;">🛡️ Бехатар</div>
+      <div class="card" style="flex:1; padding: 10px; font-size: 12px;">🕒 24/7</div>
     </div>
-    <div class="card" style="background: linear-gradient(90deg, #FF8C00, #FF4500);">
-      <p>FREE FIRE</p>
-      <h2>ИНДОНЕЗИЯ</h2>
-      <button class="btn-orange">Харидан →</button>
+    <p style="color: #888; margin: 20px 0 10px;">КАТЕГОРИЯХО</p>
+    <div class="card" style="background: linear-gradient(135deg, #8A2BE2, #4B0082);">
+      <p style="color: #ccc;">FREE FIRE</p>
+      <h2 style="font-size: 28px;">СНГ</h2>
+      <button class="btn-orange" style="margin-top: 10px;" onclick="showPage('shop')">Харидан →</button>
+    </div>
+    <div class="card" style="background: linear-gradient(135deg, #FF8C00, #FF4500);">
+      <p style="color: #ccc;">FREE FIRE</p>
+      <h2 style="font-size: 28px;">ИНДОНЕЗИЯ</h2>
+      <button class="btn-orange" style="margin-top: 10px;">Харидан →</button>
     </div>
   </div>
 
@@ -58,9 +77,9 @@
       <button class="tab active" onclick="showTab('diamonds')">💎 Алмазхо</button>
       <button class="tab" onclick="showTab('voucher')">🏆 Level Up</button>
     </div>
+    <input placeholder="# Мисол: 123456789">
     
     <div id="diamonds" class="tab-content">
-      <input placeholder="UID-и худро ворид кунед" style="width: 100%; padding: 12px; background: var(--dark); border: none; border-radius: 10px; color: white; margin-bottom: 15px;">
       <div class="grid">
         <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png"><h4>110 Алмазхо</h4><p>8.50 см</p></div>
         <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png"><h4>341 Алмазхо</h4><p>26.50 см</p></div>
@@ -72,14 +91,21 @@
     </div>
 
     <div id="voucher" class="tab-content" style="display: none;">
-      <input placeholder="UID-и худро ворид кунед" style="width: 100%; padding: 12px; background: var(--dark); border: none; border-radius: 10px; color: white; margin-bottom: 15px;">
       <div class="grid">
         <div class="item"><img src="https://i.imgur.com/8Km8l3M.png"><h4>Ваучер Lite 90</h4><p>5.90 см</p></div>
-        <div class="item"><img src="https://i.imgur.com/8Km8l3M.png"><h4>Ваучер Lite 270</h4><p>15.00 см</p></div>
-        <div class="item"><img src="https://i.imgur.com/8Km8l3M.png"><h4>Ваучер Ҳафта 450</h4><p>15.80 см</p></div>
-        <div class="item"><img src="https://i.imgur.com/8Km8l3M.png"><h4>Ваучер Моҳ 1450</h4><p>65.00 см</p></div>
+        <div class="item"><img src="https://i.imgur.com/8Km8l3M.png"><h4>Ваучер хафта 450</h4><p>15.80 см</p></div>
+        <div class="item"><img src="https://i.imgur.com/8Km8l3M.png"><h4>Ваучер мохона 2600</h4><p>65.00 см</p></div>
       </div>
     </div>
+    
+    <div class="card" style="margin-top: 20px;">
+      <p style="color: #888; margin-bottom: 10px;">ТАРЗИ ПАРДОХТ</p>
+      <div class="select"><span>🏦</span> ICB Mobile</div>
+      <div class="select" style="margin-top: 10px;"><span>🅰️</span> Алиф</div>
+      <div class="select" style="margin-top: 10px;"><span>🏙️</span> Душанбе Сити</div>
+      <div class="select" style="margin-top: 10px;"><span>💳</span> Корти Миллӣ</div>
+    </div>
+    <button class="btn-orange" style="margin-top: 15px;">Пардохт кардан</button>
   </div>
 
   <!-- 3. ХАРИДХО -->
@@ -89,44 +115,54 @@
       <button class="tab active">Фармоишхо</button>
       <button class="tab">Молия</button>
     </div>
-    <div class="card">
-      <p>ХАМАГИ фармоиш: <b>0</b></p>
-      <p>ХАРОЧОТ: <b>0.00 см</b></p>
+    <div style="display: flex; gap: 10px;">
+      <div class="card" style="flex:1;"><p>ХАМАГИ фармоиш</p><h2>50</h2></div>
+      <div class="card" style="flex:1;"><p>ХАРОЧОТ</p><h2>1039.90 см</h2></div>
     </div>
-    <p style="text-align: center; color: #888; margin-top: 20px;">Ҳанӯз фармоиш надоред</p>
+    <div class="card">
+      <h4>Ваучер Lite 90</h4>
+      <p style="color: #888; font-size: 13px;">09:58 • Аз кошелек</p>
+      <p style="color: green; float: right;">Ичро шуд • 5.90 см</p>
+    </div>
   </div>
 
-  <!-- 4. ДАСТГИРИ БО НОМИ ТУ -->
+  <!-- 4. ДАСТГИРИ -->
   <div id="support" class="page">
     <div class="header">Дастгири</div>
-    <div class="card" style="background: #0F3D0F;">
-      <p>🟢 Дастгири онлайн • 9:00 — 23:00</p>
+    <div class="card" style="background: #0F3D0F; color: #4CAF50;">
+      <p>• Дастгири онлайн • 9:00 — 23:00</p>
     </div>
-    <div class="card">БА МО НАВИСЕД<br><b>@TajDonat_Admin</b></div>  <!-- НОМИ ТУРО ГУЗОР -->
-    <div class="card">КАНАЛИ РАСМИ<br><b>@TajDonatTJ</b></div>        <!-- НОМИ КАНАЛАТРО ГУЗОР -->
+    <div class="card">БА МО НАВИСЕД<br><b>@Zokirjon0555</b></div>
+    <div class="card">КАНАЛИ РАСМИ<br><b>@TajDonatTJ</b></div>
     <div class="card">ПРОФИЛИ INSTAGRAM<br><b>@tajdonat.tj</b></div>
   </div>
 
-  <!-- 5. ПРОФИЛ БО НОМИ БОТ -->
+  <!-- 5. ПРОФИЛ -->
   <div id="profile" class="page">
     <div class="header">Профил</div>
     <div class="card">
-      <h3>TAJ.DONAT.TJ</h3>  <!-- НОМИ БОТИ ТУ -->
-      <p style="color: #888;">@Taj.donat.tj_bot • ID 8979023069</p>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--orange); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #000;">ZO</div>
+        <div>
+          <h3>zokirjon</h3>
+          <p style="color: #888;">@Zokirjon0555 • ID 6439367152</p>
+        </div>
+      </div>
       <p style="color: green; margin-top: 10px;">🟢 Тасдикшуда • 🟢 Бехатар</p>
     </div>
+    <p style="color: #888;">МАЪЛУМОТИ ШУМО</p>
     <div class="grid" style="grid-template-columns: repeat(2, 1fr);">
-      <div class="card"><p>БАЛАНС</p><h2>0.00 см</h2></div>
-      <div class="card"><p>ХАРИДХО</p><h2>0</h2></div>
-      <div class="card"><p>ХАМКОРОН</p><h2>0</h2></div>
-      <div class="card"><p>ДАРОМАД</p><h2>0.00 см</h2></div>
+      <div class="card"><p>БАЛАНС</p><h2>45.46 см</h2></div>
+      <div class="card"><p>ХАРИДХО</p><h2>84</h2></div>
+      <div class="card"><p>ХАМКОРОН</p><h2>2</h2></div>
+      <div class="card"><p>ДАРОМАД</p><h2>0.40 см</h2></div>
     </div>
   </div>
 
   <!-- NAVBAR -->
   <div class="navbar">
     <button class="nav-btn active" onclick="showPage('home')">🏠<br>Асоси</button>
-    <button class="nav-btn" onclick="showPage('shop')">🛍<br>Харидхо</button>
+    <button class="nav-btn" onclick="showPage('orders')">🛍<br>Харидхо</button>
     <button class="nav-btn" onclick="showPage('support')">🎧<br>Дастгири</button>
     <button class="nav-btn" onclick="showPage('profile')">👤<br>Профил</button>
   </div>
@@ -148,4 +184,4 @@
   }
 </script>
 </body>
-      </html>
+</html>
