@@ -1,42 +1,67 @@
 <!DOCTYPE html>
 <html lang="tg">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAJ.DONAT.TJ</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#0A0A0A;color:#fff;padding:16px;padding-bottom:85px}
-.header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.avatar{width:48px;height:48px;background:linear-gradient(135deg,#FF8C00,#FF6A00);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:17px}
-.greet{background:#1A1A1A;padding:5px 12px;border-radius:20px;font-size:12px;display:inline-block;color:#FF8C00;font-weight:600}
-.name{font-weight:800;font-size:19px;margin-top:3px}
-.balance-box{background:#1A1A1A;padding:22px;border-radius:18px;margin-bottom:16px}
-.balance-amount{font-size:34px;font-weight:800;margin:10px 0}
-.btn-row{display:flex;gap:10px}
-.btn-orange{flex:1;background:linear-gradient(135deg,#FF8C00,#FF6A00);color:#000;border:none;padding:15px;border-radius:14px;font-weight:800;cursor:pointer}
-.btn-outline{flex:1;background:transparent;color:#FF8C00;border:2px solid #FF8C00;padding:15px;border-radius:14px;font-weight:800;cursor:pointer}
-.card{border-radius:22px;padding:22px;height:170px;margin-bottom:16px;cursor:pointer}
-.card-purple{background:linear-gradient(135deg,#8B5CF6 0%,#7C3AED 100%)}
-.card-orange{background:linear-gradient(135deg,#F97316 0%,#EA580C 100%)}
-.card-title{font-size:30px;font-weight:900;margin:6px 0 16px}
-.btn-buy{background:rgba(0,0,0,0.35);border:1.5px solid rgba(255,255,255,0.25);color:#fff;padding:11px 20px;border-radius:12px;font-weight:800;cursor:pointer}
-.toast{position:fixed;top:25px;left:50%;transform:translateX(-50%);background:#FF8C00;color:#000;padding:12px 22px;border-radius:14px;font-weight:800;display:none;z-index:999}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAJ.DONAT.TJ - Магоза</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body { background: #0a0a0a; color: white; font-family: sans-serif; padding: 15px; }
+    .header { text-align: center; margin-bottom: 20px; }
+    .header h1 { color: #ff9500; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .card { background: #1a1a1a; border-radius: 12px; padding: 10px; text-align: center; border: 1px solid #333; }
+    .card img { width: 50px; height: 50px; }
+    .card h3 { font-size: 14px; margin: 5px 0; }
+    .card p { color: #ff9500; font-weight: bold; font-size: 16px; }
+    .btn { background: #ff9500; color: black; border: none; padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; margin-top: 20px; }
+  </style>
 </head>
 <body>
-<div class="toast" id="toast"></div>
-<div class="header"><div class="avatar" id="avatar">A</div><div><div class="greet">Шом ба хайр!</div><div class="name" id="username">AMERCA</div></div></div>
-<div class="balance-box"><div>БАЛАНС</div><div class="balance-amount">0.00 <span>см</span></div><div class="btn-row"><button class="btn-orange" onclick="topup()">+ Пур кардан</button><button class="btn-outline" onclick="withdraw()">↗ Бароврдан</button></div></div>
-<div class="card card-purple" onclick="buy('ffcis')"><div>FREE FIRE</div><div class="card-title">СНГ</div><button class="btn-buy">Харидан →</button></div>
-<div class="card card-orange" onclick="buy('ffid')"><div>FREE FIRE</div><div class="card-title">ИНДОНЕЗИЯ</div><button class="btn-buy">Харидан →</button></div>
-<script>
-let tg=window.Telegram.WebApp;tg.expand();
-let user=tg.initDataUnsafe.user;if(user){document.getElementById('username').innerText=user.first_name;document.getElementById('avatar').innerText=user.first_name[0]}
-function showToast(text){let t=document.getElementById('toast');t.innerText=text;t.style.display='block';setTimeout(()=>{t.style.display='none'},1800)}
-function send(a){tg.sendData(JSON.stringify({action:a}));showToast('✅ Фиристода шуд')}
-function topup(){send('topup')}function withdraw(){send('withdraw')}function buy(g){send('buy_'+g)}
-</script>
+  <div class="header">
+    <h1>💎 FREE FIRE СНГ</h1>
+    <p>UID-и худро ворид кунед</p>
+    <input type="text" placeholder="UID" style="width: 90%; padding: 10px; border-radius: 8px; border: none; background: #222; color: white;">
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png">
+      <h3>110 Алмазхо</h3>
+      <p>8.50 см</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png">
+      <h3>341 Алмазхо</h3>
+      <p>26.50 см</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png">
+      <h3>572 Алмазхо</h3>
+      <p>45.90 см</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png">
+      <h3>1166 Алмазхо</h3>
+      <p>88.00 см</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png">
+      <h3>2398 Алмазхо</h3>
+      <p>178.00 см</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2179/2179799.png">
+      <h3>6160 Алмазхо</h3>
+      <p>450.00 см</p>
+    </div>
+  </div>
+
+  <button class="btn" onclick="tg.sendData('order')">Харидан</button>
+
+  <script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+  </script>
 </body>
 </html>
