@@ -2,157 +2,739 @@
 <html lang="tg">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Taj.donat.tj_bot</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TAJ.DONAT.TJ</title>
+
 <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-    body{background:#000;color:#fff}
-    .header{padding:15px;display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:600}
-    .balance-box{background:#ff6a00;padding:15px;border-radius:15px;margin:10px;display:flex;justify-content:space-between;align-items:center}
-    .balance-left div:first-child{color:#000;font-size:12px}
-    .balance-left div:last-child{color:#000;font-size:22px;font-weight:bold}
-    .btn-topup{color:#000;font-weight:bold;background:none;border:none}
-    .btn-withdraw{background:#111;color:#fff;border:none;padding:10px 15px;border-radius:10px}
-    .tags{display:flex;gap:8px;margin:10px;padding:0 10px}
-    .tag{background:#1a1a1a;padding:6px 12px;border-radius:20px;font-size:12px;display:flex;align-items:center;gap:5px}
-    .title{padding:15px 10px;font-size:14px;color:#888}
-    .card{margin:10px;border-radius:20px;padding:20px;position:relative;min-height:120px}
-    .card-purple{background:linear-gradient(135deg,#6a1b9a,#8e24aa)}
-    .card-orange{background:linear-gradient(135deg,#ff6f00,#ff8f00)}
-    .card-blue{background:linear-gradient(135deg,#1565c0,#1976d2)}
-    .card .game{font-size:12px;margin-bottom:5px}
-    .card .title-big{font-size:28px;font-weight:bold}
-    .btn-buy{position:absolute;right:15px;bottom:15px;background:#ff6a00;color:#000;border:none;padding:8px 16px;border-radius:20px;font-weight:bold}
-    .nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#0a0a0a;padding:10px 0;border-top:1px solid #222}
-    .nav-item{text-align:center;color:#666;font-size:11px}
-    .nav-item.active{color:#ff6a00}
-    .page{display:none;padding-bottom:70px}
-    .page.active{display:block}
-    .order-box{background:#111;margin:10px;padding:15px;border-radius:15px;display:flex;align-items:center;gap:10px}
-    .order-price{color:#ff6a00;font-size:18px;font-weight:bold}
-    input{background:#1a1a1a;border:none;color:#fff;padding:14px;border-radius:12px;width:100%;margin:10px 0}
-    .payment{background:#111;padding:15px;border-radius:12px;margin:10px 0;display:flex;align-items:center;gap:12px}
-    .popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#222;padding:20px;border-radius:15px;z-index:999;display:none}
-    .popup button{background:#ff6a00;border:none;padding:8px 20px;border-radius:10px;color:#000;margin-top:10px;float:right}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#050b18;
+ color:#fff;
+ font-family:Arial,sans-serif
+}
+.wrap{
+ max-width:1100px;
+ margin:auto;
+ padding:16px
+}
+header{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ padding:10px 0
+}
+.logo{
+ font-size:28px;
+ font-weight:900
+}
+.logo span{color:#00aaff}
+.sub{
+ color:#9db3d5;
+ font-size:12px
+}
+.balance{
+ background:#101b35;
+ border:1px solid #244b85;
+ border-radius:16px;
+ padding:10px 14px;
+ color:#8fc8ff
+}
+.hero{
+ margin:10px 0 20px;
+ padding:25px;
+ border-radius:22px;
+ background:linear-gradient(135deg,#0b1734,#071c3b);
+ border:1px solid #1769c8
+}
+.hero h1{
+ margin:0 0 8px;
+ font-size:30px
+}
+.hero p{
+ margin:0;
+ color:#b9c9e8
+}
+h2{
+ font-size:20px;
+ color:#46b9ff;
+ margin:22px 0 12px
+}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+ gap:12px
+}
+.card{
+ background:#0c1830;
+ border:1px solid #24477d;
+ border-radius:18px;
+ padding:15px;
+ text-align:center;
+ box-shadow:0 8px 25px #0005
+}
+.icon{font-size:48px}
+.card h3{margin:8px 0}
+.price{
+ color:#71e2a5;
+ font-weight:800;
+ margin:7px
+}
+.btn{
+ border:0;
+ border-radius:12px;
+ padding:11px 14px;
+ background:#087ff5;
+ color:white;
+ font-weight:800;
+ cursor:pointer;
+ width:100%
+}
+.btn:hover{filter:brightness(1.15)}
+.purple{background:#7628e8}
+.green{background:#08a65a}
+.orange{background:#ee8300}
+
+.panel{
+ display:none;
+ background:#0b1730;
+ border:1px solid #24528d;
+ border-radius:20px;
+ padding:18px;
+ margin-top:15px
+}
+.panel.active{display:block}
+
+.row{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px
+}
+input,select{
+ width:100%;
+ padding:12px;
+ border-radius:11px;
+ border:1px solid #31557f;
+ background:#071126;
+ color:white;
+ margin:6px 0 12px
+}
+.order{
+ padding:12px;
+ border-radius:12px;
+ background:#101f3d;
+ margin:8px 0
+}
+.bottom{
+ position:sticky;
+ bottom:0;
+ margin-top:25px;
+ padding:10px;
+ background:#071126dd;
+ backdrop-filter:blur(10px);
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ gap:7px;
+ border-radius:18px
+}
+.bottom button{
+ background:#10203d;
+ color:#b9d1f5;
+ border:1px solid #23456e;
+ border-radius:12px;
+ padding:10px 5px
+}
+small{color:#8ca4c8}
+
+@media(max-width:600px){
+ .logo{font-size:21px}
+ .hero h1{font-size:24px}
+ .row{grid-template-columns:1fr}
+ .bottom{font-size:11px}
+}
 </style>
 </head>
+
 <body>
 
-<!-- АСОСИ -->
-<div id="home" class="page active">
-    <div class="header">
-        <div>Шом ба хайр!</div>
-        <div>🔔</div>
-    </div>
+<div class="wrap">
 
-    <div class="balance-box">
-        <div class="balance-left">
-            <div>БАЛАНС</div>
-            <div id="balance">0.00 см</div>
-        </div>
-        <div>
-            <button class="btn-topup" onclick="showPage('topup')">+ Пур кардан</button>
-            <button class="btn-withdraw">Боровардан</button>
-        </div>
-    </div>
+<header>
 
-    <div class="tags">
-        <div class="tag">⚡ То 1 дақиқа</div>
-        <div class="tag">🔒 Бехатар</div>
-        <div class="tag">⏰ 24/7</div>
-    </div>
-
-    <div class="title">КАТЕГОРИЯҲО</div>
-
-    <div class="card card-purple">
-        <div class="game" style="color:#d500f9">FREE FIRE</div>
-        <div class="title-big">СНГ</div>
-        <button class="btn-buy" onclick="showPage('buy')">Харидан →</button>
-    </div>
-
-    <div class="card card-orange">
-        <div class="game" style="color:#ffea00">FREE FIRE</div>
-        <div class="title-big">ИНДОНЕЗИЯ</div>
-        <button class="btn-buy" onclick="showPage('buy')">Харидан →</button>
-    </div>
-
-    <div class="card card-blue">
-        <div class="game" style="color:#ffea00">PUBG MOBILE</div>
-        <div class="title-big">UC</div>
-        <button class="btn-buy" onclick="showPage('buy')">Харидан →</button>
-    </div>
+<div>
+<div class="logo">
+💎 TAJ.<span>DONAT.TJ</span>
 </div>
 
-<!-- ХАРИД -->
-<div id="buy" class="page">
-    <div class="header"><div>Расмиётсозии фармоиш</div></div>
-    <div class="order-box">
-        <div>💎</div>
-        <div>
-            <div>2398 Алмазхо</div>
-            <div class="order-price">178.00 см</div>
-        </div>
-    </div>
-    <div style="padding:0 10px">ID-и бозӣ</div>
-    <input type="text" placeholder="123456789" id="gameid" style="margin:10px">
-    
-    <div style="padding:0 10px;margin-top:10px">ТАРЗИ ПАРДОХТ</div>
-    <div class="payment" onclick="pay('ICB Mobile')">
-        <div>🏦</div>
-        <div><b>ICB Mobile</b><br><small style="color:#888">Аз замимаи ICB</small></div>
-    </div>
-    <div class="payment" onclick="pay('Eskhata')">
-        <div style="background:#0057b8;border-radius:50%;width:30px;height:30px;text-align:center;line-height:30px">E</div>
-        <div><b>Корти Эсхата</b><br><small style="color:#888">+992 93 571 04 06</small></div>
-    </div>
-    <div class="payment" onclick="showPopup()">🎧 Дастгирӣ</div>
+<div class="sub">
+АЛМАЗ БО ЭЪТИМОД • БЕ ФИРЕБ • ГАРАНТИЯ 100%
+</div>
 </div>
 
-<!-- ПУР КАРДАН -->
-<div id="topup" class="page">
-    <div class="header"><div>Пур кардани баланс</div></div>
-    <div style="padding:10px">МАБЛАҒ</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
-        <div class="payment" style="justify-content:center">50 см</div>
-        <div class="payment" style="justify-content:center">100 см</div>
-        <div class="payment" style="justify-content:center">300 см</div>
-        <div class="payment" style="justify-content:center">500 см</div>
-        <div class="payment" style="justify-content:center">700 см</div>
-        <div class="payment" style="justify-content:center">1000 см</div>
-    </div>
+<div class="balance">
+💎 Баланс:
+<b id="balance">0</b> с
 </div>
 
-<!-- MENU -->
-<div class="nav">
-    <div class="nav-item active" onclick="showPage('home')">🏠<br>Асосӣ</div>
-    <div class="nav-item">🛍<br>Харидҳо</div>
-    <div class="nav-item" onclick="showPopup()">🎧<br>Дастгирӣ</div>
-    <div class="nav-item">👤<br>Профил</div>
+</header>
+
+
+<section class="hero">
+
+<h1>💎 Алмаз ва донати бозиҳо</h1>
+
+<p>
+Тез • Осон • Боэътимод 🔥
+Пардохт бо корт ва пуркунии баланс.
+</p>
+
+</section>
+
+
+<h2>🎮 Бозиҳо</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">💎</div>
+<h3>Free Fire</h3>
+<p>Алмаз</p>
+<button class="btn"
+onclick="openGame('Free Fire')">
+Харидан
+</button>
 </div>
 
-<!-- POPUP ДАСТГИРИ -->
-<div class="popup" id="popup">
-    <b>Taj.donat.tj_bot</b><br><br>
-    Дастгирӣ:<br>
-    @Zokirjon05556439367152
-    <button onclick="hidePopup()">OK</button>
+
+<div class="card">
+<div class="icon">🔫</div>
+<h3>Free Fire MAX</h3>
+<p>Алмаз</p>
+<button class="btn"
+onclick="openGame('Free Fire MAX')">
+Харидан
+</button>
 </div>
+
+
+<div class="card">
+<div class="icon">🎯</div>
+<h3>PUBG Mobile</h3>
+<p>UC</p>
+<button class="btn"
+onclick="openGame('PUBG Mobile')">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">⚔️</div>
+<h3>Mobile Legends</h3>
+<p>Diamonds</p>
+<button class="btn"
+onclick="openGame('Mobile Legends')">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">🪙</div>
+<h3>Дигар бозиҳо</h3>
+<p>Ба зудӣ</p>
+<button class="btn purple"
+onclick="alert('Бозиҳои нав ба наздикӣ илова мешаванд!')">
+Дидан
+</button>
+</div>
+
+</div>
+
+
+<h2>💎 Free Fire — нархҳо</h2>
+
+<div class="grid">
+
+
+<div class="card">
+<div class="icon">💎</div>
+<h3>100 алмаз</h3>
+<div class="price">10 с</div>
+<button class="btn"
+onclick="buy('100 алмаз',10)">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">💎</div>
+<h3>310 алмаз</h3>
+<div class="price">29 с 🔥</div>
+<button class="btn"
+onclick="buy('310 алмаз',29)">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">💎</div>
+<h3>520 алмаз</h3>
+<div class="price">50 с</div>
+<button class="btn"
+onclick="buy('520 алмаз',50)">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">💎</div>
+<h3>1060 алмаз</h3>
+<div class="price">100 с</div>
+<button class="btn"
+onclick="buy('1060 алмаз',100)">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">💎</div>
+<h3>2180 алмаз</h3>
+<div class="price">200 с</div>
+<button class="btn"
+onclick="buy('2180 алмаз',200)">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">💎</div>
+<h3>5600 алмаз</h3>
+<div class="price">550 с</div>
+<button class="btn"
+onclick="buy('5600 алмаз',550)">
+Харидан
+</button>
+</div>
+
+</div>
+
+
+<h2>🎟️ Ваучерҳо ва хизматрасонӣ</h2>
+
+<div class="grid">
+
+
+<div class="card">
+<div class="icon">🎟️</div>
+<h3>Лайт 90</h3>
+<div class="price">7 с</div>
+<button class="btn orange"
+onclick="buy('Лайт 90',7)">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">🎟️</div>
+<h3>Ҳафта 450</h3>
+<div class="price">18 с</div>
+<button class="btn orange"
+onclick="buy('Ҳафта 450',18)">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">🎟️</div>
+<h3>Моҳона 2600</h3>
+<div class="price">95 с</div>
+<button class="btn orange"
+onclick="buy('Моҳона 2600',95)">
+Харидан
+</button>
+</div>
+
+
+<div class="card">
+<div class="icon">👑</div>
+<h3>Настройка VIP</h3>
+<div class="price">15 с</div>
+<button class="btn purple"
+onclick="buy('Настройка VIP',15)">
+Фармоиш
+</button>
+</div>
+
+</div>
+
+
+<div id="shop" class="panel">
+
+<h2>🛒 Фармоиш</h2>
+
+<div id="selected"></div>
+
+<label>🎮 ID-и бозӣ</label>
+
+<input
+id="gameid"
+placeholder="ID-и худро нависед"
+>
+
+
+<label>🌍 Регион</label>
+
+<select id="region">
+
+<option>
+Таджикистан
+</option>
+
+<option>
+Россия
+</option>
+
+<option>
+Узбекистон
+</option>
+
+</select>
+
+
+<button
+class="btn green"
+onclick="checkout()">
+
+💳 Пардохт бо корт
+
+</button>
+
+<p>
+<small>
+Пардохти воқеӣ бояд ба API-и провайдери пардохти шумо пайваст карда шавад.
+</small>
+</p>
+
+</div>
+
+
+<div id="balancePanel" class="panel">
+
+<h2>💰 Пур кардани баланс</h2>
+
+<label>
+Сумма (с)
+</label>
+
+<input
+id="topup"
+type="number"
+min="1"
+placeholder="Масалан: 50"
+>
+
+<button
+class="btn green"
+onclick="topup()">
+
+💳 Пур кардан бо корт
+
+</button>
+
+</div>
+
+
+<div id="ordersPanel" class="panel">
+
+<h2>📦 Фармоишҳои ман</h2>
+
+<div id="orders">
+Ҳоло фармоиш нест.
+</div>
+
+</div>
+
+
+<div id="profilePanel" class="panel">
+
+<h2>👤 Профил</h2>
+
+<p>
+🆔 ID:
+<span id="uid">—</span>
+</p>
+
+<p>
+💎 Баланс:
+<b id="profileBalance">0</b> с
+</p>
+
+<button
+class="btn"
+onclick="show('ordersPanel')">
+
+📦 Таърихи харид
+
+</button>
+
+</div>
+
+
+<div class="bottom">
+
+<button onclick="scrollTo(0,0)">
+🏠<br>Асосӣ
+</button>
+
+<button onclick="show('shop')">
+🛒<br>Магазин
+</button>
+
+<button onclick="show('ordersPanel')">
+📦<br>Фармоиш
+</button>
+
+<button onclick="show('balancePanel')">
+💰<br>Баланс
+</button>
+
+<button onclick="show('profilePanel')">
+👤<br>Профил
+</button>
+
+</div>
+
+</div>
+
 
 <script>
-function showPage(id){
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+
+let selected={
+ name:'',
+ price:0
+};
+
+
+let orders=
+JSON.parse(
+localStorage.getItem('orders')||'[]'
+);
+
+
+let bal=
+Number(
+localStorage.getItem('balance')||0
+);
+
+
+document.getElementById('balance')
+.textContent=bal;
+
+
+document.getElementById('profileBalance')
+.textContent=bal;
+
+
+document.getElementById('orders')
+.innerHTML=
+orders.length
+?
+orders.map(x=>`
+<div class="order">
+
+📦 ${x.name}
+—
+<b>${x.price} с</b>
+
+<br>
+
+<small>
+${x.id}
+</small>
+
+</div>
+`).join('')
+:
+'Ҳоло фармоиш нест.';
+
+
+document.getElementById('uid')
+.textContent=
+new URLSearchParams(location.search)
+.get('uid')||'—';
+
+
+function show(id){
+
+document
+.querySelectorAll('.panel')
+.forEach(x=>
+x.classList.remove('active')
+);
+
+document
+.getElementById(id)
+.classList.add('active');
+
+document
+.getElementById(id)
+.scrollIntoView({
+behavior:'smooth'
+});
+
 }
-function showPopup(){document.getElementById('popup').style.display='block'}
-function hidePopup(){document.getElementById('popup').style.display='none'}
-function pay(method){
-    let id = document.getElementById('gameid').value;
-    if(id == ''){alert('Авал ID-ро нависта'); return;}
-    let text = `ФАРМОИШИ НАВ%0AID: ${id}%0A2398 Алмаз - 178см%0AПардохт: ${method}`;
-    window.open(`https://t.me/Zokirjon05556439367152?text=${text}`);
-    alert('Фармоиш ба Админ фиристода шуд!');
+
+
+function openGame(game){
+
+alert(
+game+
+' интихоб шуд. Барои ин бозӣ маҳсулотро аз рӯйхат интихоб кунед.'
+);
+
 }
+
+
+function buy(name,price){
+
+selected={
+name:name,
+price:price
+};
+
+document.getElementById('selected')
+.innerHTML=`
+
+<div class="order">
+
+💎 <b>${name}</b>
+—
+<b>${price} с</b>
+
+</div>
+
+`;
+
+show('shop');
+
+}
+
+
+function checkout(){
+
+let gid=
+document
+.getElementById('gameid')
+.value
+.trim();
+
+
+if(!gid){
+
+alert(
+'Аввал ID-и бозиро ворид кунед.'
+);
+
+return;
+
+}
+
+
+let oid=
+'TAJ-'+
+Date.now()
+.toString()
+.slice(-8);
+
+
+orders.unshift({
+
+name:selected.name,
+
+price:selected.price,
+
+id:oid
+
+});
+
+
+localStorage.setItem(
+'orders',
+JSON.stringify(orders)
+);
+
+
+document.getElementById('orders')
+.innerHTML=
+orders.map(x=>`
+
+<div class="order">
+
+📦 ${x.name}
+—
+<b>${x.price} с</b>
+
+<br>
+
+<small>
+${x.id}
+</small>
+
+</div>
+
+`).join('');
+
+
+alert(
+'Фармоиш '+
+oid+
+' сохта шуд.'
+);
+
+
+show('ordersPanel');
+
+}
+
+
+function topup(){
+
+let n=
+Number(
+document.getElementById('topup')
+.value
+);
+
+
+if(!n||n<1){
+
+alert(
+'Суммаро дуруст ворид кунед.'
+);
+
+return;
+
+}
+
+
+alert(
+'Фармоиши пуркунии баланс барои '+
+n+
+' с сохта шуд.'
+);
+
+}
+
 </script>
 
 </body>
-</html>
+   </html>
