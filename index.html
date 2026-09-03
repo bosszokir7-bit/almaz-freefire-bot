@@ -3,68 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garenashop.tj 🇹🇯 PRO MAX</title>
+<title>Garenashop.tj 🇹🇯 ЧЕК</title>
 <style>
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Arial',sans-serif}
     body{background:#0B1120;color:#fff}
-    .header{background:#0B1120;padding:15px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #FFC107;position:sticky;top:0;z-index:10}
+    .header{background:#0B1120;padding:15px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #FFC107}
     .logo{color:#FFC107;font-weight:bold;font-size:18px;display:flex;align-items:center;gap:8px}
     .balance-box{background:linear-gradient(135deg,#1E3A8A,#3B82F6);padding:15px;border-radius:12px;margin:10px;border:1px solid #FFC107}
-    .balance-top{display:flex;justify-content:space-between;color:#FFC107;font-size:12px}
     .balance-num{font-size:24px;font-weight:bold;margin-top:5px}
-    .btns{display:flex;gap:10px;margin-top:10px}
-    .btn-yellow{background:#FFC107;color:#000;border:none;padding:10px;border-radius:8px;font-weight:bold;flex:1}
-    .btn-blue{background:#1E3A8A;color:#fff;border:1px solid #FFC107;padding:10px;border-radius:8px;flex:1}
+    .btn-yellow{background:#FFC107;color:#000;border:none;padding:10px;border-radius:8px;font-weight:bold;width:100%;margin:5px 0}
     .btn-green{background:#16a34a;color:#fff;border:none;padding:10px;border-radius:8px;font-weight:bold;width:100%;margin:5px 0}
+    .btn-red{background:#dc2626;color:#fff;border:none;padding:10px;border-radius:8px;font-weight:bold;width:48%}
     .tags{display:flex;gap:8px;margin:10px;overflow-x:auto}
-    .tag{background:#1E3A8A;padding:6px 12px;border-radius:20px;font-size:12px;white-space:nowrap;border:1px solid #3B82F6}
-    .tag.flag-tag{background:linear-gradient(90deg,#E60026 33%,#FFFFFF 33% 66%,#009B4D 66%);color:#000;font-weight:bold}
+    .tag{background:#1E3A8A;padding:6px 12px;border-radius:20px;font-size:12px;border:1px solid #3B82F6}
     .title{padding:15px 10px;font-size:14px;color:#FFC107;font-weight:bold}
-    .card{background:#111827;margin:10px;border-radius:15px;padding:20px;border:1px solid #1E3A8A;position:relative}
-    .btn-buy{position:absolute;right:15px;bottom:15px;background:#FFC107;color:#000;border:none;padding:8px 18px;border-radius:8px;font-weight:bold}
-    .nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#0B1120;padding:10px 0;border-top:2px solid #FFC107}
-    .nav-item{text-align:center;color:#888;font-size:11px}
-    .nav-item.active{color:#FFC107}
-    .page{display:none;padding-bottom:70px}
-    .page.active{display:block}
+    .card{background:#111827;margin:10px;border-radius:15px;padding:20px;border:1px solid #1E3A8A}
     .diamond-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
     .diamond-item{background:#111827;border:1px solid #1E3A8A;padding:15px;border-radius:12px;text-align:center}
     .diamond-amount{color:#FFC107;font-size:18px;font-weight:bold}
     input{background:#1E3A8A;border:1px solid #3B82F6;color:#fff;padding:14px;border-radius:10px;width:calc(100% - 20px);margin:10px}
-    .payment{background:#111827;padding:15px;border-radius:10px;margin:10px;border:1px solid #1E3A8A;display:flex;gap:12px;align-items:center}
+    .payment{background:#111827;padding:15px;border-radius:10px;margin:10px;border:1px solid #1E3A8A}
     .order-box{background:#111827;margin:10px;padding:15px;border-radius:12px;border:1px solid #1E3A8A}
     .price{color:#FFC107;font-size:20px;font-weight:bold}
-    .history-item{background:#111827;margin:10px;padding:12px;border-radius:10px;border-left:3px solid #FFC107}
-    .bonus-box{background:linear-gradient(135deg,#FFC107,#FFA000);color:#000;padding:15px;border-radius:12px;margin:10px;text-align:center}
-    .ref-box{background:#111827;padding:15px;border-radius:12px;margin:10px;border:1px dashed #FFC107}
-    .admin-panel{background:#220000;border:2px solid red;padding:10px;margin:10px;border-radius:10px}
-    .order-admin{background:#111827;padding:10px;margin:5px 0;border-radius:8px;border-left:3px solid #FFC107}
+    .page{display:none;padding-bottom:70px}
+    .page.active{display:block}
+    .nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#0B1120;padding:10px 0;border-top:2px solid #FFC107}
+    .nav-item{text-align:center;color:#888;font-size:11px}
+    .nav-item.active{color:#FFC107}
+    .alert{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#16a34a;padding:15px;border-radius:10px;z-index:999;display:none}
+    .status-wait{color:#fbbf24}
+    .status-done{color:#16a34a}
 </style>
 </head>
 <body>
 
 <!-- АСОСИ -->
 <div id="home" class="page active">
-    <div class="header"><div class="logo">🇹🇯 GARENASHOP.TJ</div><div onclick="showPage('admin')">⚙️</div></div>
+    <div class="header"><div class="logo">🇹🇯 GARENASHOP.TJ</div></div>
     <div class="balance-box">
-        <div class="balance-top"><span>БАЛАНСИ ШУМО</span><span>💎</span></div>
+        <div>БАЛАНСИ ШУМО</div>
         <div class="balance-num" id="balance">0.00 см</div>
-        <div class="btns">
-            <button class="btn-yellow" onclick="showPage('topup')">+ Пур кардан</button>
-            <button class="btn-blue" onclick="showPage('withdraw')">Боровардан</button>
-        </div>
+        <button class="btn-yellow" onclick="showPage('topup')">+ Пур кардан бо ЧЕК</button>
     </div>
     <div class="tags">
-        <div class="tag flag-tag">🇹🇯 ТОҶИКИСТОН</div>
+        <div class="tag">🇹🇯 ТОҶИКИСТОН</div>
         <div class="tag">⚡ То 1 дақиқа</div>
-        <div class="tag">🎁 Бонус 5%</div>
-        <div class="tag">👥 Реферал 10%</div>
+        <div class="tag">🧾 Бо Чек</div>
     </div>
     <div class="title">ИНТИХОБИ СЕРВЕР</div>
     <div class="card">
         <div style="color:#FFC107;font-size:12px">FREE FIRE</div>
-        <div style="font-size:22px;font-weight:bold;margin:5px 0">🇹🇯 СЕРВЕРИ ТОҶИКИСТОН</div>
-        <button class="btn-buy" onclick="showPage('diamonds')">Харидан →</button>
+        <div style="font-size:22px;font-weight:bold">🇹🇯 СЕРВЕРИ ТОҶИКИСТОН</div>
+        <button class="btn-yellow" onclick="showPage('diamonds')">Харидан →</button>
     </div>
 </div>
 
@@ -74,156 +64,175 @@
     <input type="text" placeholder="ID-и бозӣ 123456789" id="gameid">
     <div class="title">МАҲСУЛОТҲО</div>
     <div class="diamond-grid">
-        <div class="diamond-item"><div class="diamond-amount">💎 100</div><div>9.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(100, 9.90)">Харидан</button></div>
-        <div class="diamond-item"><div class="diamond-amount">💎 310</div><div>28.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(310, 28.90)">Харидан</button></div>
-        <div class="diamond-item"><div class="diamond-amount">💎 520</div><div>47.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(520, 47.90)">Харидан</button></div>
-        <div class="diamond-item"><div class="diamond-amount">💎 1060</div><div>94.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(1060, 94.90)">Харидан</button></div>
-        <div class="diamond-item"><div class="diamond-amount">💎 2180</div><div>189.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(2180, 189.90)">Харидан</button></div>
-        <div class="diamond-item"><div class="diamond-amount">💎 5600</div><div>469.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(5600, 469.90)">Харидан</button></div>
+        <div class="diamond-item"><div class="diamond-amount">💎 100</div><div>9.90 см</div><button class="btn-yellow" style="width:100%;margin-top:8px" onclick="buy(100, 9.90)">Харидан</button></div>
+        <div class="diamond-item"><div class="diamond-amount">💎 310</div><div>28.90 см</div><button class="btn-yellow" style="width:100%;margin-top:8px" onclick="buy(310, 28.90)">Харидан</button></div>
+        <div class="diamond-item"><div class="diamond-amount">💎 520</div><div>47.90 см</div><button class="btn-yellow" style="width:100%;margin-top:8px" onclick="buy(520, 47.90)">Харидан</button></div>
+        <div class="diamond-item"><div class="diamond-amount">💎 1060</div><div>94.90 см</div><button class="btn-yellow" style="width:100%;margin-top:8px" onclick="buy(1060, 94.90)">Харидан</button></div>
     </div>
 </div>
 
-<!-- ПАРДОХТ -->
+<!-- ПАРДОХТ БО ЧЕК -->
 <div id="pay" class="page">
-    <div class="header"><div class="logo">ПАРДОХТ</div></div>
+    <div class="header"><div class="logo">ПАРДОХТ БО ЧЕК 🧾</div></div>
     <div class="order-box" id="orderInfo"></div>
-    <div style="padding:0 10px;color:#FFC107">ТАРЗИ ПАРДОХТ</div>
-    <div class="payment" onclick="pay('ICB')"><div>🏦</div><div><b>ICB Mobile</b></div></div>
-    <div class="payment" onclick="pay('Eskhata')"><div style="background:#FFC107;color:#000;border-radius:50%;width:30px;height:30px;text-align:center;line-height:30px;font-weight:bold">E</div><div><b>Корти Эсхата</b><br><small>+992 93 571 04 06</small></div></div>
-</div>
-
-<!-- ПУР КАРДАН -->
-<div id="topup" class="page">
-    <div class="header"><div class="logo">ПУР КАРДАНИ БАЛАНС</div></div>
-    <div class="bonus-box"><b>🎁 БОНУС 5%!</b><br>Барои ҳар пуркунӣ 5% бонус мегиред</div>
-    <div class="title">МАБЛАҒРО ИНТИХОБ КН</div>
-    <div class="diamond-grid">
-        <div class="diamond-item" onclick="topup(50)"><div class="diamond-amount">50 см</div><small>+2.5 бонус</small></div>
-        <div class="diamond-item" onclick="topup(100)"><div class="diamond-amount">100 см</div><small>+5 бонус</small></div>
-        <div class="diamond-item" onclick="topup(300)"><div class="diamond-amount">300 см</div><small>+15 бонус</small></div>
-        <div class="diamond-item" onclick="topup(500)"><div class="diamond-amount">500 см</div><small>+25 бонус</small></div>
-        <div class="diamond-item" onclick="topup(700)"><div class="diamond-amount">700 см</div><small>+35 бонус</small></div>
-        <div class="diamond-item" onclick="topup(1000)"><div class="diamond-amount">1000 см</div><small>+50 бонус</small></div>
-    </div>
-</div>
-
-<!-- ПРОФИЛ + РЕФЕРАЛ -->
-<div id="profile" class="page">
-    <div class="header"><div class="logo">ПРОФИЛИ МАН</div></div>
-    <div class="balance-box">
-        <div>Сатҳ: <b style="color:#FFC107">Харидори Фаъол</b></div>
-        <div>Ҳамаи харид: <b id="totalSpent">0 см</b></div>
-        <div>Бонуси реферал: <b id="refBonus">0 см</b></div>
+    
+    <div class="payment">
+        <b>1. ПУЛ ПАРТО</b><br><br>
+        <b>ICB:</b> 5100 1234 5678 9012<br>
+        <b>Эсхата:</b> +992 93 571 04 06<br>
+        <small style="color:#888">Маблағи дақиқро парто</small>
     </div>
     
-    <div class="ref-box">
-        <b>👥 СИСТЕМАИ РЕФЕРАЛ</b><br>
-        Дӯстро даъват кн ва 10% аз пуркунии ӯро гир!<br><br>
-        <b>Линки ту:</b><br>
-        <input type="text" value="https://garenashop.tj/?ref=12345" id="reflink" readonly>
-        <button class="btn-green" onclick="copyRef()">📋 Нусха кардан</button>
+    <div class="payment">
+        <b>2. СКРИН/ЧЕК ФИРИСТ</b><br><br>
+        Скриншоти пардохтро ба Админ фирист<br>
+        <button class="btn-green" onclick="sendCheck()">📤 Фиристодани Чек ба Админ</button>
     </div>
-
-    <div class="title">ТАЪРИХИ ХАРИД</div>
-    <div id="history"><div class="history-item">Ҳанӯз харид надоред</div></div>
+    
+    <div class="payment">
+        <b>3. ИНТИЗОР ШАВ</b><br>
+        <span class="status-wait">⏳ Админ чекро тасдиқ мекунад</span><br>
+        Пас аз тасдиқ алмаз 1 дақиқа меояд
+    </div>
 </div>
 
-<!-- АДМИНКА -->
+<!-- ПУР КАРДАНИ БАЛАНС БО ЧЕК -->
+<div id="topup" class="page">
+    <div class="header"><div class="logo">ПУР КАРДАН БО ЧЕК</div></div>
+    <div class="payment">
+        <b>МАБЛАҒРО ИНТИХОБ КН</b><br><br>
+        <button class="btn-yellow" onclick="topupReq(50)">50 см + 2.5 бонус</button>
+        <button class="btn-yellow" onclick="topupReq(100)">100 см + 5 бонус</button>
+        <button class="btn-yellow" onclick="topupReq(300)">300 см + 15 бонус</button>
+        <button class="btn-yellow" onclick="topupReq(500)">500 см + 25 бонус</button>
+    </div>
+    <div class="payment">
+        Ба рақами: <b>+992 93 571 04 06</b> пул парто<br>
+        Ва скринро ба Админ фирист
+    </div>
+</div>
+
+<!-- АДМИН ПАНЕЛ -->
 <div id="admin" class="page">
-    <div class="header"><div class="logo" style="color:red">⚙️ АДМИН ПАНЕЛ</div></div>
-    <div class="admin-panel">
-        <b>ФАРМОИШҲОИ НАВ</b>
-        <div id="adminOrders">
-            <div class="order-admin">Ҳанӯз фармоиш нест</div>
-        </div>
-        <button class="btn-green" onclick="alert('Ҳама фармоишҳо ба Телеграм меоянд')">🔄 Нав кардан</button>
-    </div>
-    <div class="admin-panel">
-        <b>ОМОР</b><br>
-        Фоидаи имрӯз: <span id="todayProfit">0 см</span><br>
-        Шумораи мизоҷон: <span id="users">1</span>
-    </div>
+    <div class="header"><div class="logo" style="color:red">⚙️ АДМИН: ТАСДИҚИ ЧЕК</div></div>
+    <div class="title">ФАРМОИШҲОИ НАВ</div>
+    <div id="adminOrders"></div>
 </div>
 
 <!-- MENU -->
 <div class="nav">
     <div class="nav-item active" onclick="showPage('home')">🏠<br>Асосӣ</div>
     <div class="nav-item" onclick="showPage('diamonds')">🛍<br>Харидҳо</div>
-    <div class="nav-item" onclick="alert('Дастгирӣ: @Zokirjon05556439367152')">🎧<br>Дастгирӣ</div>
-    <div class="nav-item" onclick="showPage('profile')">👤<br>Профил</div>
+    <div class="nav-item" onclick="showPage('admin')">⚙️<br>Админ</div>
+    <div class="nav-item">👤<br>Профил</div>
 </div>
+
+<div class="alert" id="alert"></div>
 
 <script>
 let balance = 0;
-let totalSpent = 0;
-let refBonus = 0;
-let history = [];
 let adminOrders = [];
 let currentBuy = {};
 
 function showPage(id){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-    if(event && event.target.closest('.nav-item')) event.target.closest('.nav-item').classList.add('active');
-    if(id=='profile') updateHistory();
-    if(id=='admin') updateAdmin();
 }
 
 function buy(amount, price){
     let id = document.getElementById('gameid').value;
     if(id == ''){alert('Авал ID-и бозиро нависта'); return;}
-    if(balance < price){alert('Баланс кам. Аввал пур кн'); showPage('topup'); return;}
-    currentBuy = {id, amount, price, time: new Date().toLocaleTimeString()};
+    currentBuy = {id, amount, price, type: 'алмаз'};
     document.getElementById('orderInfo').innerHTML = `
-        <div style="display:flex;gap:10px;align-items:center">
-            <div style="font-size:30px">💎</div>
-            <div><div>${amount} Алмаз</div><div>ID: ${id}</div><div class="price">${price} см</div></div>
-        </div>`;
+        <div><b>${amount} Алмаз</b></div>
+        <div>ID: ${id}</div>
+        <div class="price">Ба пардохт: ${price} см</div>`;
     showPage('pay');
 }
 
-function pay(method){
-    balance -= currentBuy.price;
-    totalSpent += currentBuy.price;
-    history.unshift(`${currentBuy.amount} Алмаз - ${currentBuy.price}см - ID:${currentBuy.id}`);
-    adminOrders.unshift(`💎 ${currentBuy.amount} | ${currentBuy.price}см | ID:${currentBuy.id} | ${currentBuy.time}`);
-    document.getElementById('balance').innerText = balance.toFixed(2) + ' см';
-    let text = `ФАРМОИШИ НАВ 🇹🇯%0AID: ${currentBuy.id}%0A${currentBuy.amount} Алмаз - ${currentBuy.price}см%0AПардохт: ${method}`;
-    window.open(`https://t.me/Zokirjon05556439367152?text=${text}`);
-    alert('Фармоиш қабул шуд! 1 дақиқа мефиристем');
-    showPage('home');
+function topupReq(amount){
+    currentBuy = {amount, bonus: amount*0.05, type: 'баланс'};
+    let total = amount + amount*0.05;
+    document.getElementById('orderInfo').innerHTML = `
+        <div><b>Пуркунии Баланс</b></div>
+        <div>${amount}см + ${amount*0.05}см бонус</div>
+        <div class="price">Ба пардохт: ${amount} см</div>`;
+    showPage('pay');
 }
 
-function topup(amount){
-    let bonus = amount * 0.05;
-    balance += amount + bonus;
-    document.getElementById('balance').innerText = balance.toFixed(2) + ' см';
-    alert(`Баланс пур шуд! ${amount}см + ${bonus}см бонус = ${amount+bonus}см`);
-    showPage('home');
-}
-
-function updateHistory(){
-    document.getElementById('totalSpent').innerText = totalSpent.toFixed(2) + ' см';
-    document.getElementById('refBonus').innerText = refBonus.toFixed(2) + ' см';
-    if(history.length > 0){
-        document.getElementById('history').innerHTML = history.map(h=>`<div class="history-item">${h}</div>`).join('');
+function sendCheck(){
+    let text = `ЧЕКИ НАВ 🧾%0A`;
+    if(currentBuy.type == 'алмаз'){
+        text += `Навъ: Алмаз%0AID: ${currentBuy.id}%0A${currentBuy.amount} Алмаз - ${currentBuy.price}см`;
+    } else {
+        text += `Навъ: Пуркунии Баланс%0A${currentBuy.amount}см + ${currentBuy.bonus}см бонус`;
     }
+    text += `%0AИнтизори тасдиқ...`;
+    
+    adminOrders.push(currentBuy);
+    updateAdmin();
+    
+    window.open(`https://t.me/Zokirjon05556439367152?text=${text}`);
+    showAlert('Чек ба Админ фиристода шуд! Интизор шавед');
+    showPage('home');
 }
 
 function updateAdmin(){
-    document.getElementById('todayProfit').innerText = totalSpent.toFixed(2) + ' см';
-    if(adminOrders.length > 0){
-        document.getElementById('adminOrders').innerHTML = adminOrders.map(o=>`<div class="order-admin">${o}</div>`).join('');
-    }
+    let html = '';
+    adminOrders.forEach((o, i)=>{
+        if(o.type == 'алмаз'){
+            html += `<div class="order-box">
+                <b>💎 ${o.amount} Алмаз</b><br>
+                ID: ${o.id}<br>
+                Нарх: ${o.price}см<br>
+                <div style="display:flex;gap:5px;margin-top:8px">
+                    <button class="btn-green" style="width:48%" onclick="approve(${i})">✅ Тасдиқ</button>
+                    <button class="btn-red" onclick="reject(${i})">❌ Рад</button>
+                </div>
+            </div>`;
+        } else {
+            html += `<div class="order-box">
+                <b>💰 Пуркунии Баланс</b><br>
+                ${o.amount}см + ${o.bonus}см бонус<br>
+                <div style="display:flex;gap:5px;margin-top:8px">
+                    <button class="btn-green" style="width:48%" onclick="approveTopup(${i})">✅ Тасдиқ</button>
+                    <button class="btn-red" onclick="reject(${i})">❌ Рад</button>
+                </div>
+            </div>`;
+        }
+    });
+    document.getElementById('adminOrders').innerHTML = html || '<div class="order-box">Фармоиш нест</div>';
 }
 
-function copyRef(){
-    document.getElementById('reflink').select();
-    document.execCommand('copy');
-    alert('Линки реферал нусха шуд!');
+function approve(i){
+    let o = adminOrders[i];
+    alert(`✅ Алмазҳои ${o.amount} дона ба ID ${o.id} фиристода шуд!`);
+    adminOrders.splice(i,1);
+    updateAdmin();
+}
+
+function approveTopup(i){
+    let o = adminOrders[i];
+    balance += o.amount + o.bonus;
+    document.getElementById('balance').innerText = balance.toFixed(2) + ' см';
+    alert(`✅ Баланс пур шуд: ${o.amount + o.bonus}см`);
+    adminOrders.splice(i,1);
+    updateAdmin();
+}
+
+function reject(i){
+    alert('❌ Фармоиш рад шуд');
+    adminOrders.splice(i,1);
+    updateAdmin();
+}
+
+function showAlert(msg){
+    let a = document.getElementById('alert');
+    a.innerText = msg;
+    a.style.display = 'block';
+    setTimeout(()=>a.style.display='none', 3000);
 }
 </script>
 
 </body>
- </html>
+</html>
