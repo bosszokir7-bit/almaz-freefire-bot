@@ -2,449 +2,368 @@
 <html lang="tg">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>TAJ.DONAT.TJ</title>
 <style>
-:root{--bg:#08090b;--card:#14161a;--line:#2b2e35;--orange:#ff8a00;--text:#f5f5f5;--muted:#858994;--green:#20d86a;--red:#ff4f5e}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;padding-bottom:85px}
-button,input,select{font:inherit}button{cursor:pointer}.top{height:64px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;background:#08090b;border-bottom:1px solid #202228;position:sticky;top:0;z-index:10}
-.logo{font-weight:900;font-size:20px}.logo b{color:var(--orange)}main{max-width:1050px;margin:auto;padding:16px}.page{display:none}.page.active{display:block}
-h1{font-size:28px}.balance,.box,.order,.product,.support{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:14px}
-.balance{background:linear-gradient(135deg,#241f18,#14161a)}.greet{display:inline-block;background:#3a3938;padding:8px 16px;border-radius:20px}.num{font-size:44px;font-weight:900;margin:20px 0}
-.row{display:flex;gap:10px}.row>*{flex:1}.btn{border:0;background:var(--orange);color:#111;font-weight:900;padding:14px 16px;border-radius:14px}.dark{background:#292016;color:var(--orange);border:1px solid #60420f}.red{background:#42181d;color:#ff7881}
-.chips{display:flex;gap:9px;overflow:auto;margin:14px 0}.chip{white-space:nowrap;padding:10px 15px;border:1px solid #30333a;border-radius:20px;color:#aaa;background:#171a20}
-.categories,.products{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.category{padding:20px;background:#13151a;border:1px solid var(--line);border-radius:20px;cursor:pointer}.category .icon{font-size:40px}.category h2{font-size:18px}
-.pic{height:110px;border-radius:14px;background:#1c1f26;display:flex;align-items:center;justify-content:center;font-size:55px}.product h3{margin:12px 0 5px}.price{font-size:23px;font-weight:900}.price small{color:#999;font-size:13px}.product .btn{width:100%;margin-top:10px;padding:11px}
-label{display:block;color:#bbb;margin:12px 0 6px;font-weight:bold}input,select{width:100%;padding:13px;border-radius:11px;border:1px solid #353942;background:#0e1014;color:#fff;outline:0}input:focus,select:focus{border-color:var(--orange)}
-.payment{background:#181b20;border:1px solid #30343b;border-radius:14px;padding:14px;margin:10px 0}.copy{float:right;background:#292d34;color:#fff;border:1px solid #444;padding:7px 10px;border-radius:8px}
-.status{display:inline-block;padding:6px 10px;border-radius:8px;background:#3b2d13;color:#ffbf4d;font-size:12px;font-weight:bold}.ok{background:#153c27;color:#45ed83}.no{background:#40171c;color:#ff7780}
-.bottom{position:fixed;bottom:0;left:0;right:0;height:76px;background:#0b0c0f;border-top:1px solid #282b31;display:grid;grid-template-columns:repeat(4,1fr);z-index:20}.nav{border:0;background:none;color:#777;font-weight:bold}.nav.active{color:var(--orange)}.nav div{font-size:25px}
-.notice{padding:12px;border:1px solid #765116;background:#241b0d;border-radius:12px;color:#ffbf4d}.empty{text-align:center;color:#777;padding:35px}
-.toast{display:none;position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#292c32;padding:12px 17px;border-radius:12px;z-index:30}
-.admin{background:#211a10;border:1px solid #69470e;padding:15px;border-radius:16px;margin-bottom:15px}
-@media(max-width:650px){main{padding:12px}.products{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:1fr}.row{flex-direction:column}.pic{height:100px}.product{padding:10px}}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(135deg,#080b18,#111a35);
+ color:white
+}
+.wrap{max-width:520px;margin:auto;padding:18px}
+.hero{text-align:center;padding:25px 10px}
+.logo{font-size:32px;font-weight:900}
+.logo span{color:#65e6ff}
+.sub{color:#b9c5df;margin-top:8px}
+.card{
+ background:rgba(255,255,255,.07);
+ border:1px solid rgba(255,255,255,.12);
+ border-radius:22px;
+ padding:18px;
+ margin:14px 0
+}
+h2{margin-top:0}
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px
+}
+button{
+ width:100%;
+ border:0;
+ border-radius:15px;
+ padding:15px 8px;
+ background:#172544;
+ color:white;
+ font-size:15px;
+ font-weight:800
+}
+.price{
+ display:block;
+ color:#65e6ff;
+ margin-top:6px
+}
+.wide{
+ margin-top:15px;
+ background:linear-gradient(90deg,#11b8ff,#7b5cff)
+}
+input,select{
+ width:100%;
+ padding:15px;
+ border-radius:14px;
+ border:1px solid #344467;
+ background:#0d1428;
+ color:white;
+ font-size:15px;
+ margin:7px 0 12px
+}
+label{
+ display:block;
+ color:#c9d4ed;
+ margin-top:8px
+}
+.total{
+ font-size:20px;
+ font-weight:900;
+ color:#65e6ff;
+ margin-top:10px
+}
+.pay{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px
+}
+.pay button.active{
+ outline:2px solid #65e6ff;
+ background:#20365c
+}
+.notice{
+ font-size:13px;
+ color:#aebbd5;
+ line-height:1.5
+}
+.success{
+ display:none;
+ text-align:center;
+ padding:20px
+}
+.footer{
+ text-align:center;
+ color:#8290ad;
+ font-size:12px;
+ padding:20px
+}
 </style>
 </head>
+
 <body>
 
-<header class="top">
-<div class="logo">💎 TAJ.<b>DONAT.TJ</b></div>
-<div style="color:#20d86a;font-size:12px">● Онлайн</div>
-</header>
+<div class="wrap">
 
-<main>
-
-<section id="home" class="page active">
-<div class="balance">
-<span class="greet">Рӯз ба хайр! 👋</span>
-<h2 id="hello">Муштарӣ</h2>
-<div style="color:#858994">БАЛАНС</div>
-<div class="num"><span id="balance">0.00</span> <small style="font-size:14px;color:#858994">СМ</small></div>
-<div class="row">
-<button class="btn" onclick="go('balancePage')">＋ Пур кардан</button>
-<button class="btn dark" onclick="go('ordersPage')">📦 Фармоишҳо</button>
+<div class="hero">
+<div class="logo">💎 <span>TAJ.DONAT.TJ</span></div>
+<div class="sub">
+АЛМАЗ БО ЭЪТИМОД • ТЕЗ • ОСОН • БОЭЪТИМОД
 </div>
 </div>
 
-<div class="chips">
-<span class="chip">⚡ То 1 дақиқа</span><span class="chip">🛡 Бехатар</span><span class="chip">◷ 24/7</span>
+<div class="card">
+<h2>💎 Хариди алмаз</h2>
+
+<div class="grid">
+
+<button onclick="selectProduct('100',10,this)">
+💎 100
+<span class="price">10с</span>
+</button>
+
+<button onclick="selectProduct('310',29,this)">
+💎 310
+<span class="price">29с 🔥</span>
+</button>
+
+<button onclick="selectProduct('520',50,this)">
+💎 520
+<span class="price">50с</span>
+</button>
+
+<button onclick="selectProduct('1060',100,this)">
+💎 1060
+<span class="price">100с</span>
+</button>
+
+<button onclick="selectProduct('2180',200,this)">
+💎 2180
+<span class="price">200с</span>
+</button>
+
+<button onclick="selectProduct('5600',550,this)">
+💎 5600
+<span class="price">550с</span>
+</button>
+
+</div>
 </div>
 
-<h2>КАТЕГОРИЯҲО</h2>
-<div class="categories">
-<div class="category" onclick="go('shopPage')"><div class="icon">💎</div><h2>FREE FIRE СНГ</h2><button class="btn">Харидан →</button></div>
-<div class="category" onclick="go('shopPage')"><div class="icon">🎮</div><h2>FREE FIRE ИНДОНЕЗИЯ</h2><button class="btn">Харидан →</button></div>
-</div>
-</section>
+<div class="card">
 
-<section id="shopPage" class="page">
-<h1>💎 Хариди Free Fire</h1>
-<div class="chips"><span class="chip">💎 Алмазҳо</span><span class="chip">🏅 Level Up</span></div>
-<div class="products" id="products"></div>
 <h2>🎟️ Ваучерҳо</h2>
-<div class="products" id="vouchers"></div>
-</section>
 
-<section id="buyPage" class="page">
-<h1>📦 Фармоиш додан</h1>
-<div class="box">
-<div id="selectedProduct" class="payment"></div>
+<div class="grid">
 
-<label>🎮 ID / UID Free Fire</label>
-<input id="uid" inputmode="numeric" placeholder="UID-и худро ворид кунед">
+<button onclick="selectProduct('Лайт 90',7,this)">
+🎟️ Лайт 90
+<span class="price">7с</span>
+</button>
 
-<label>👤 Номи бозигар</label>
-<input id="player" placeholder="Номи бозигар">
+<button onclick="selectProduct('Ҳафта 450',18,this)">
+🎟️ Ҳафта 450
+<span class="price">18с</span>
+</button>
 
-<label>💳 Пардохт</label>
-<select id="method">
-<option>Эсхата</option>
-<option>ICB Mobile</option>
-<option>Баланс</option>
+<button onclick="selectProduct('Моҳона 2600',95,this)">
+🎟️ Моҳона 2600
+<span class="price">95с</span>
+</button>
+
+<button onclick="selectProduct('Настройка VIP',15,this)">
+🔥 VIP
+<span class="price">15с</span>
+</button>
+
+</div>
+</div>
+
+<div class="card">
+
+<h2>🛒 Маълумоти фармоиш</h2>
+
+<label>🌍 Регион</label>
+
+<select id="region">
+<option value="TJ">🇹🇯 Тоҷикистон</option>
+<option value="RU">🇷🇺 Россия</option>
+<option value="UZ">🇺🇿 Ӯзбекистон</option>
+<option value="KZ">🇰🇿 Қазоқистон</option>
+<option value="OTHER">🌍 Дигар</option>
 </select>
 
-<div class="payment"><b>ЭСХАТА</b><br>+992 935 710 406 <button class="copy" onclick="copyText('+992935710406')">Копия</button></div>
-<div class="payment"><b>ICB MOBILE</b><br>+992 935 710 406 <button class="copy" onclick="copyText('+992935710406')">Копия</button></div>
+<label>🆔 UID-и Free Fire</label>
 
-<label>🧾 Рақами чек</label>
-<input id="receipt" inputmode="numeric" placeholder="Танҳо рақами чек">
+<input
+id="uid"
+inputmode="numeric"
+placeholder="UID-и худро ворид кунед">
 
-<div class="notice" style="margin-top:12px">⚠️ Рақами чекро дуруст ворид кунед. Фармоиш ба админ фиристода мешавад.</div>
-
-<button class="btn" style="width:100%;margin-top:15px" onclick="submitOrder()">📦 Фармоиш додан</button>
-</div>
-</section>
-
-<section id="balancePage" class="page">
-<h1>💰 Пур кардани баланс</h1>
-<div class="box">
-<label>Маблағ</label>
-<input id="topup" type="number" min="1" placeholder="Масалан: 50">
-
-<div class="payment"><b>ЭСХАТА</b><br>+992 935 710 406 <button class="copy" onclick="copyText('+992935710406')">Копия</button></div>
-<div class="payment"><b>ICB MOBILE</b><br>+992 935 710 406 <button class="copy" onclick="copyText('+992935710406')">Копия</button></div>
-
-<label>🧾 Рақами чек</label>
-<input id="topReceipt" inputmode="numeric" placeholder="Танҳо рақами чек">
-
-<button class="btn" style="width:100%;margin-top:15px" onclick="submitTopup()">💰 Пур кардани баланс</button>
-</div>
-</section>
-
-<section id="ordersPage" class="page">
-<h1>📦 Фармоишҳои ман</h1>
-
-<div class="box">
-<label>🔎 Ҷустуҷӯ</label>
-<input id="searchInput" placeholder="#37821 ё рақами чек" oninput="renderOrders()">
+<div class="total">
+💰 Суммаи дақиқ:
+<span id="total">—</span>
 </div>
 
-<div id="orders"></div>
-</section>
-
-<section id="profilePage" class="page">
-<h1>👤 Профил</h1>
-<div class="box">
-<label>Ном</label>
-<input id="profileName" placeholder="Номи шумо">
-<button class="btn" style="width:100%;margin-top:15px" onclick="saveProfile()">💾 Захира кардан</button>
-<div class="payment">💰 Баланс: <b><span id="profileBalance">0.00</span> СМ</b></div>
 </div>
-</section>
 
-<section id="supportPage" class="page">
-<h1>🎧 Дастгирӣ</h1>
-<div class="support"><h2>✈️ Ба мо нависед</h2><p>@Zokirjon0555</p><button class="btn" onclick="openTelegram('Zokirjon0555')">Нависед →</button></div>
-<div class="support"><h2>📢 Канали расмӣ</h2><p>@taj_donat_tj</p><button class="btn" onclick="openTelegram('taj_donat_tj')">Кушодан →</button></div>
-<h2>САВОЛҲО</h2>
-<details><summary>Чанд вақт мунтазир шавам?</summary><p>Одатан баъди тасдиқи пардохт фармоиш иҷро мешавад.</p></details>
-<details><summary>Оё ID-и ман бехатар аст?</summary><p>ID танҳо барои иҷрои фармоиш истифода мешавад.</p></details>
-</section>
+<div class="card">
 
-<section id="adminPage" class="page">
-<h1>👨‍💻 Панели админ</h1>
-<div class="admin"><b>Admin ID:</b> 6439367152<br><b>Username:</b> @Zokirjon0555</div>
-<div id="adminOrders"></div>
-</section>
+<h2>💳 Пардохт</h2>
 
-</main>
+<div class="pay">
 
-<nav class="bottom">
-<button class="nav active" data-page="home" onclick="go('home')"><div>⌂</div>Асосӣ</button>
-<button class="nav" data-page="shopPage" onclick="go('shopPage')"><div>🛍</div>Харидҳо</button>
-<button class="nav" data-page="supportPage" onclick="go('supportPage')"><div>♧</div>Дастгирӣ</button>
-<button class="nav" data-page="profilePage" onclick="go('profilePage')"><div>♙</div>Профил</button>
-</nav>
+<button onclick="payment('Эсхата',this)">
+🏦 Эсхата
+</button>
 
-<div id="toast" class="toast"></div>
+<button onclick="payment('ICB Mobile',this)">
+🏦 ICB Mobile
+</button>
+
+</div>
+
+<p class="notice">
+Пас аз интихоб кардани банк, рақами пардохт нишон дода мешавад.
+Баъд аз пардохт 🧾 чеки равшанро фиристед.
+</p>
+
+<button class="wide" onclick="submitOrder()">
+🚀 ФИРИСТОДАНИ ФАРМОИШ
+</button>
+
+</div>
+
+<div class="card success" id="success">
+
+<div style="font-size:48px">🧾</div>
+
+<h2>Фармоиш қабул шуд!</h2>
+
+<div id="orderText"></div>
+
+<p class="notice">
+Чек ва маълумоти фармоиш барои санҷиш ба администратор фиристода мешавад.
+</p>
+
+</div>
+
+<div class="footer">
+💎 TAJ.DONAT.TJ
+<br>
+Ташаккур барои интихоби шумо ❤️
+</div>
+
+</div>
 
 <script>
-const ADMIN_ID="6439367152";
-const ADMIN_USERNAME="Zokirjon0555";
 
-const products=[
-{name:"100 Алмазҳо",price:10,emoji:"💎"},
-{name:"310 Алмазҳо",price:29,emoji:"💎"},
-{name:"520 Алмазҳо",price:50,emoji:"💎"},
-{name:"1060 Алмазҳо",price:100,emoji:"💎"},
-{name:"2180 Алмазҳо",price:200,emoji:"💎"},
-{name:"5600 Алмазҳо",price:550,emoji:"💎"}
-];
+let selected={
+product:null,
+price:null,
+payment:null
+};
 
-const vouchers=[
-{name:"Ваучер Lite 90",price:7,emoji:"🎟️"},
-{name:"Ваучер ҳафта 450",price:18,emoji:"🎟️"},
-{name:"Ваучер моҳона 2600",price:95,emoji:"🎟️"}
-];
+function selectProduct(product,price,btn){
 
-let state=JSON.parse(localStorage.getItem("tajStoreV2")||'{"balance":0,"orders":[],"name":""}');
-let selected=null;
+selected.product=product;
+selected.price=price;
 
-function save(){
- localStorage.setItem("tajStoreV2",JSON.stringify(state));
- updateUI();
+document.getElementById("total").textContent=price+"с";
+
+document.querySelectorAll(".grid button")
+.forEach(b=>b.style.outline="");
+
+btn.style.outline="2px solid #65e6ff";
 }
 
-function toast(t){
- const x=document.getElementById("toast");
- x.textContent=t;x.style.display="block";
- clearTimeout(window.tt);
- window.tt=setTimeout(()=>x.style.display="none",2300);
-}
+function payment(name,btn){
 
-function go(id){
- document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
- document.getElementById(id).classList.add("active");
- document.querySelectorAll(".nav").forEach(x=>x.classList.toggle("active",x.dataset.page===id));
- updateUI();window.scrollTo(0,0);
-}
+selected.payment=name;
 
-function renderProducts(){
- document.getElementById("products").innerHTML=products.map((p,i)=>`
- <div class="product">
- <div class="pic">${p.emoji}</div>
- <h3>${p.name}</h3>
- <div class="price">${p.price}.00 <small>СМ</small></div>
- <button class="btn" onclick="choose(${i},false)">Харидан</button>
- </div>`).join("");
+document.querySelectorAll(".pay button")
+.forEach(b=>b.classList.remove("active"));
 
- document.getElementById("vouchers").innerHTML=vouchers.map((p,i)=>`
- <div class="product">
- <div class="pic">${p.emoji}</div>
- <h3>${p.name}</h3>
- <div class="price">${p.price}.00 <small>СМ</small></div>
- <button class="btn" onclick="choose(${i},true)">Харидан</button>
- </div>`).join("");
-}
+btn.classList.add("active");
 
-function choose(i,voucher){
- selected={...(voucher?vouchers[i]:products[i]),voucher};
- document.getElementById("selectedProduct").innerHTML=
- `<b>${selected.emoji} ${selected.name}</b><br><span class="price">${selected.price}.00 СМ</span>`;
- go("buyPage");
-}
-
-function makeId(){
- let id;
- do{id="#"+Math.floor(10000+Math.random()*90000)}
- while(state.orders.some(o=>o.id===id));
- return id;
-}
-
-/* НУҚТАИ МУҲИМ:
-   receipt танҳо ҳамчун receipt ҷустуҷӯ мешавад.
-   id танҳо ҳамчун id ҷустуҷӯ мешавад. */
-function cleanDigits(v){return String(v||"").replace(/\D/g,"")}
-
-function sendToTelegram(order){
- try{
-   if(window.Telegram && Telegram.WebApp && Telegram.WebApp.initData){
-     Telegram.WebApp.sendData(JSON.stringify({
-       action:"new_order",
-       order:order
-     }));
-     Telegram.WebApp.close();
-   }
- }catch(e){}
+alert(
+name+
+" интихоб шуд.\n\n" +
+"Рақами пардохтро баъд аз пайваст кардани бот нишон медиҳем."
+);
 }
 
 function submitOrder(){
- if(!selected)return toast("Маҳсулот интихоб нашудааст");
 
- const uid=document.getElementById("uid").value.trim();
- const player=document.getElementById("player").value.trim();
- const method=document.getElementById("method").value;
- const receipt=cleanDigits(document.getElementById("receipt").value);
+const uid=document
+.getElementById("uid")
+.value.trim();
 
- if(!selected.voucher && !uid)return toast("UID-ро ворид кунед");
+const region=document
+.getElementById("region")
+.value;
 
- if(!receipt && method!=="Баланс")
-   return toast("Рақами чекро ворид кунед");
+if(!selected.product){
 
- if(method==="Баланс"){
-   if(state.balance<selected.price)return toast("Баланс кофӣ нест");
-   state.balance-=selected.price;
- }
+alert("❌ Аввал маҳсулотро интихоб кунед.");
 
- const order={
-   id:makeId(),
-   type:selected.name,
-   price:Number(selected.price),
-   uid:uid,
-   player:player,
-   method:method,
-   receipt:receipt,
-   status:"Дар интизорӣ",
-   date:new Date().toLocaleString("tg-TJ")
- };
-
- state.orders.unshift(order);
- save();
- sendToTelegram(order);
-
- document.getElementById("uid").value="";
- document.getElementById("player").value="";
- document.getElementById("receipt").value="";
-
- toast("Фармоиш "+order.id+" қабул шуд ✅");
- go("ordersPage");
+return;
 }
 
-function submitTopup(){
- const amount=Number(document.getElementById("topup").value);
- const receipt=cleanDigits(document.getElementById("topReceipt").value);
+if(!uid || !/^[0-9]+$/.test(uid)){
 
- if(!amount||amount<1)return toast("Маблағро ворид кунед");
- if(!receipt)return toast("Рақами чекро ворид кунед");
+alert("❌ UID-и дурустро ворид кунед.");
 
- const order={
-   id:makeId(),
-   type:"Пур кардани баланс",
-   price:amount,
-   receipt:receipt,
-   method:"Пардохт",
-   status:"Дар интизорӣ",
-   date:new Date().toLocaleString("tg-TJ")
- };
-
- state.orders.unshift(order);
- save();
- sendToTelegram(order);
-
- document.getElementById("topup").value="";
- document.getElementById("topReceipt").value="";
-
- toast("Дархост "+order.id+" фиристода шуд ✅");
- go("ordersPage");
+return;
 }
 
-/* Ҷустуҷӯи дуруст:
-   #37821 -> ID
-   89 -> рақами чек
-   Дигар рақами фармоишро ҳам дуруст меёбад */
-function renderOrders(){
- const q=document.getElementById("searchInput")?.value.trim()||"";
- const digits=cleanDigits(q);
+if(!selected.payment){
 
- let list=state.orders;
+alert("❌ Аввал усули пардохтро интихоб кунед.");
 
- if(q){
-   list=list.filter(o=>{
-     const idDigits=cleanDigits(o.id);
-     const receipt=cleanDigits(o.receipt);
-     return idDigits===digits || receipt===digits;
-   });
- }
-
- const el=document.getElementById("orders");
-
- if(!list.length){
-   el.innerHTML='<div class="empty">Фармоиш ёфт нашуд 📦</div>';
-   return;
- }
-
- el.innerHTML=list.map(o=>`
- <div class="order">
-   <h2>${o.id}</h2>
-   <h3>${o.type}</h3>
-   💰 ${Number(o.price).toFixed(2)} СМ
-   ${o.uid?`<br>🎮 UID: ${o.uid}`:""}
-   ${o.player?`<br>👤 Ном: ${o.player}`:""}
-   ${o.receipt?`<br>🧾 Чек: ${o.receipt}`:""}
-   <br><span style="color:#777">${o.date}</span>
-   <br><br>
-   <span class="status ${o.status==="Қабул шуд"?"ok":o.status==="Рад шуд"?"no":""}">
-   ${o.status}
-   </span>
- </div>`).join("");
+return;
 }
 
-function renderAdmin(){
- const el=document.getElementById("adminOrders");
+const order=
+"TJ-"+Math.floor(
+100000+
+Math.random()*900000
+);
 
- if(!state.orders.length){
-   el.innerHTML='<div class="empty">Ҳоло фармоиш нест</div>';
-   return;
- }
+document.getElementById("orderText").innerHTML=
 
- el.innerHTML=state.orders.map((o,i)=>`
- <div class="order">
-   <h2>${o.id}</h2>
-   <h3>${o.type}</h3>
-   💰 ${Number(o.price).toFixed(2)} СМ
-   ${o.uid?`<br>🎮 UID: ${o.uid}`:""}
-   ${o.player?`<br>👤 ${o.player}`:""}
-   ${o.receipt?`<br>🧾 Чек: ${o.receipt}`:""}
-   ${o.method?`<br>💳 ${o.method}`:""}
-   <br><small>${o.date}</small><br><br>
-   <span class="status ${o.status==="Қабул шуд"?"ok":o.status==="Рад шуд"?"no":""}">
-   ${o.status}
-   </span>
+"📦 Рақами фармоиш: <b>#"+
+order+
+"</b><br><br>"+
 
-   ${o.status==="Дар интизорӣ"?`
-   <div class="row" style="margin-top:12px">
-   <button class="btn" onclick="approve(${i})">✅ Қабул шуд</button>
-   <button class="btn red" onclick="reject(${i})">❌ Рад шуд</button>
-   </div>`:""}
- </div>`).join("");
-}
+"💎 Маҳсулот: <b>"+
+selected.product+
+"</b><br>"+
 
-function approve(i){
- const o=state.orders[i];
- if(!o)return;
- o.status="Қабул шуд";
- if(o.type==="Пур кардани баланс")state.balance+=Number(o.price);
- save();
- toast(o.id+" қабул шуд ✅");
-}
+"💰 Сумма: <b>"+
+selected.price+
+"с</b><br>"+
 
-function reject(i){
- const o=state.orders[i];
- if(!o)return;
- o.status="Рад шуд";
- save();
- toast(o.id+" рад шуд ❌");
-}
+"🆔 UID: <b>"+
+uid+
+"</b><br>"+
 
-function saveProfile(){
- state.name=document.getElementById("profileName").value.trim()||"Муштарӣ";
- save();toast("Профил захира шуд ✅");
-}
+"🌍 Регион: <b>"+
+region+
+"</b><br>"+
 
-function copyText(t){
- if(navigator.clipboard)navigator.clipboard.writeText(t);
- toast("Рақам нусха шуд ✅");
-}
+"💳 Пардохт: <b>"+
+selected.payment+
+"</b>";
 
-function openTelegram(u){
- window.open("https://t.me/"+u,"_blank");
-}
+document.getElementById("success")
+.style.display="block";
 
-function updateUI(){
- document.getElementById("balance").textContent=Number(state.balance).toFixed(2);
- document.getElementById("profileBalance").textContent=Number(state.balance).toFixed(2);
- document.getElementById("hello").textContent=state.name||"Муштарӣ";
- document.getElementById("profileName").value=state.name||"";
- renderOrders();
- renderAdmin();
-}
-
-/* Барои админ-панел: 5 маротиба ба логотип зер кун */
-let taps=0,timer;
-document.querySelector(".logo").addEventListener("click",()=>{
- taps++;clearTimeout(timer);
- timer=setTimeout(()=>taps=0,1800);
- if(taps>=5){
-   taps=0;
-   const id=prompt("Admin ID:");
-   if(id===ADMIN_ID)go("adminPage");
-   else toast("Дастрасӣ рад шуд ❌");
- }
+document.getElementById("success")
+.scrollIntoView({
+behavior:"smooth"
 });
 
-renderProducts();
-updateUI();
+}
+
 </script>
 
 </body>
- </html>
+</html>
