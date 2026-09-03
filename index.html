@@ -1,3153 +1,1228 @@
-import os
-import sqlite3
-import secrets
-from datetime import datetime
-from pathlib import Path
-
-from flask import (
-    Flask,
-    request,
-    jsonify,
-    session,
-    redirect,
-    url_for,
-    render_template_string,
-    send_from_directory
-)
-
-from werkzeug.utils import secure_filename
-
-
-# ==========================================
-#           TAJ.DONAT.TJ WEBSITE
-# ==========================================
-
-BASE_DIR = Path(__file__).resolve().parent
-
-DATABASE = BASE_DIR / "database.db"
-UPLOAD_FOLDER = BASE_DIR / "uploads"
-
-UPLOAD_FOLDER.mkdir(exist_ok=True)
-
-
-# ==========================================
-# SETTINGS
-# ==========================================
-
-SECRET_KEY = "CHANGE_THIS_TO_A_RANDOM_SECRET_KEY"
-
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "12345678"
-
-PAYMENT_NUMBER = "+992935710406"
-
-ALLOWED_EXTENSIONS = {
-    "png",
-    "jpg",
-    "jpeg",
-    "webp",
-    "pdf"
-}
-
-
-# ==========================================
-# PRODUCTS
-# ==========================================
-
-DIAMONDS = [
-    ("100 Алмаз", "10с"),
-    ("310 Алмаз", "29с"),
-    ("520 Алмаз", "50с"),
-    ("1060 Алмаз", "100с"),
-    ("2180 Алмаз", "200с"),
-    ("5600 Алмаз", "550с")
-]
-
-VOUCHERS = [
-    ("Лайт 90", "7с"),
-    ("Ҳафта 450", "18с"),
-    ("Моҳона 2600", "95с")
-]
-
-
-# ==========================================
-# FLASK
-# ==========================================
-
-app = Flask(__name__)
-
-app.config["SECRET_KEY"] = SECRET_KEY
-app.config["UPLOAD_FOLDER"] = str(UPLOAD_FOLDER)
-app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
-
-
-# ==========================================
-# DATABASE
-# ==========================================
-
-def get_db():
-
-    db = sqlite3.connect(DATABASE)
-
-    db.row_factory = sqlite3.Row
-
-    return db
-
-
-def init_db():
-
-    db = get_db()
-
-    db.execute("""
-    CREATE TABLE IF NOT EXISTS orders (
-
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-        order_number INTEGER UNIQUE,
-
-        product TEXT NOT NULL,
-
-        price TEXT NOT NULL,
-
-        ff_id TEXT NOT NULL,
-
-        payment TEXT NOT NULL,
-
-        customer_name TEXT,
-
-        customer_phone TEXT,
-
-        check_file TEXT,
-
-        status TEXT DEFAULT '⏳ Дар ҳоли санҷиш',
-
-        created_at TEXT NOT NULL
-
-    )
-    """)
-
-    db.commit()
-
-    db.close()
-
-
-# ==========================================
-# FILE CHECK
-# ==========================================
-
-def allowed_file(filename):
-
-    return (
-        "." in filename
-        and filename.rsplit(".", 1)[1].lower()
-        in ALLOWED_EXTENSIONS
-    )
-
-
-# ==========================================
-# ORDER NUMBER
-# FIRST ORDER = #22345
-# ==========================================
-
-def make_order_number(order_id):
-
-    return 22344 + int(order_id)
-
-
-# ==========================================
-# MAIN WEBSITE
-# ==========================================
-
-@app.route("/")
-def home():
-
-    return render_template_string(
-        MAIN_HTML,
-        diamonds=DIAMONDS,
-        vouchers=VOUCHERS,
-        payment_number=PAYMENT_NUMBER
-    )
-
-
-# ==========================================
-# CREATE ORDER API
-# ==========================================
-
-@app.route("/api/order", methods=["POST"])
-def create_order():
-
-    product = request.form.get("product", "").strip()
-
-    price = request.form.get("price", "").strip()
-
-    ff_id = request.form.get("ff_id", "").strip()
-
-    payment = request.form.get("payment", "").strip()
-
-    customer_name = request.form.get(
-        "customer_name",
-        ""
-    ).strip()
-
-    customer_phone = request.form.get(
-        "customer_phone",
-        ""
-    ).strip()
-
-    check = request.files.get("check")
-
-
-    # ======================================
-    # VALIDATION
-    # ======================================
-
-    if not product:
-
-        return jsonify({
-            "ok": False,
-            "error": "Маҳсулот интихоб нашудааст."
-        }), 400
-
-
-    if not price:
-
-        return jsonify({
-            "ok": False,
-            "error": "Нарх муайян нашудааст."
-        }), 400
-
-
-    if not ff_id:
-
-        return jsonify({
-            "ok": False,
-            "error": "Free Fire ID-ро нависед."
-        }), 400
-
-
-    if payment not in [
-        "ЭСХАТА",
-        "ICB MOBILE"
-    ]:
-
-        return jsonify({
-            "ok": False,
-            "error": "Усули пардохтро интихоб кунед."
-        }), 400
-
-
-    # ======================================
-    # UPLOAD CHECK
-    # ======================================
-
-    filename = None
-
-
-    if check and check.filename:
-
-        if not allowed_file(check.filename):
-
-            return jsonify({
-                "ok": False,
-                "error": "Формати чек иҷозат дода намешавад."
-            }), 400
-
-
-        original_name = secure_filename(
-            check.filename
-        )
-
-
-        unique_name = (
-
-            f"{int(datetime.now().timestamp())}_"
-
-            f"{secrets.token_hex(6)}_"
-
-            f"{original_name}"
-
-        )
-
-
-        filepath = UPLOAD_FOLDER / unique_name
-
-
-        check.save(filepath)
-
-
-        filename = unique_name
-
-
-    # ======================================
-    # SAVE DATABASE
-    # ======================================
-
-    db = get_db()
-
-    cursor = db.cursor()
-
-
-    created_at = datetime.now().strftime(
-        "%Y-%m-%d %H:%M:%S"
-    )
-
-
-    cursor.execute("""
-
-    INSERT INTO orders (
-
-        product,
-
-        price,
-
-        ff_id,
-
-        payment,
-
-        customer_name,
-
-        customer_phone,
-
-        check_file,
-
-        status,
-
-        created_at
-
-    )
-
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-
-    """, (
-
-        product,
-
-        price,
-
-        ff_id,
-
-        payment,
-
-        customer_name,
-
-        customer_phone,
-
-        filename,
-
-        "⏳ Дар ҳоли санҷиш",
-
-        created_at
-
-    ))
-
-
-    order_id = cursor.lastrowid
-
-
-    order_number = make_order_number(
-        order_id
-    )
-
-
-    cursor.execute("""
-
-    UPDATE orders
-
-    SET order_number=?
-
-    WHERE id=?
-
-    """, (
-
-        order_number,
-
-        order_id
-
-    ))
-
-
-    db.commit()
-
-
-    db.close()
-
-
-    return jsonify({
-
-        "ok": True,
-
-        "order_number": order_number,
-
-        "status": "⏳ Дар ҳоли санҷиш"
-
-    })
-
-
-# ==========================================
-# ADMIN LOGIN
-# ==========================================
-
-@app.route("/admin/login", methods=[
-    "GET",
-    "POST"
-])
-def admin_login():
-
-    error = None
-
-
-    if request.method == "POST":
-
-        username = request.form.get(
-            "username",
-            ""
-        )
-
-        password = request.form.get(
-            "password",
-            ""
-        )
-
-
-        if (
-
-            username == ADMIN_USERNAME
-
-            and
-
-            password == ADMIN_PASSWORD
-
-        ):
-
-            session["admin"] = True
-
-            return redirect(
-                url_for("admin_panel")
-            )
-
-
-        error = "❌ Логин ё парол нодуруст аст."
-
-
-    return render_template_string(
-
-        LOGIN_HTML,
-
-        error=error
-
-    )
-
-
-# ==========================================
-# ADMIN LOGOUT
-# ==========================================
-
-@app.route("/admin/logout")
-def admin_logout():
-
-    session.clear()
-
-    return redirect(
-        url_for("admin_login")
-    )
-
-
-# ==========================================
-# ADMIN PANEL
-# ==========================================
-
-@app.route("/admin")
-def admin_panel():
-
-    if not session.get("admin"):
-
-        return redirect(
-            url_for("admin_login")
-        )
-
-
-    db = get_db()
-
-
-    orders = db.execute("""
-
-    SELECT *
-
-    FROM orders
-
-    ORDER BY id DESC
-
-    """).fetchall()
-
-
-    total = db.execute("""
-
-    SELECT COUNT(*)
-
-    FROM orders
-
-    """).fetchone()[0]
-
-
-    pending = db.execute("""
-
-    SELECT COUNT(*)
-
-    FROM orders
-
-    WHERE status='⏳ Дар ҳоли санҷиш'
-
-    """).fetchone()[0]
-
-
-    approved = db.execute("""
-
-    SELECT COUNT(*)
-
-    FROM orders
-
-    WHERE status='✅ Қабул шуд'
-
-    """).fetchone()[0]
-
-
-    rejected = db.execute("""
-
-    SELECT COUNT(*)
-
-    FROM orders
-
-    WHERE status='❌ Рад шуд'
-
-    """).fetchone()[0]
-
-
-    db.close()
-
-
-    return render_template_string(
-
-        ADMIN_HTML,
-
-        orders=orders,
-
-        total=total,
-
-        pending=pending,
-
-        approved=approved,
-
-        rejected=rejected
-
-    )
-
-
-# ==========================================
-# UPDATE ORDER STATUS
-# ==========================================
-
-@app.route(
-    "/admin/order/<int:order_id>/status",
-    methods=["POST"]
-)
-def update_order_status(order_id):
-
-    if not session.get("admin"):
-
-        return redirect(
-            url_for("admin_login")
-        )
-
-
-    status = request.form.get(
-        "status",
-        ""
-    )
-
-
-    allowed_statuses = [
-
-        "⏳ Дар ҳоли санҷиш",
-
-        "✅ Қабул шуд",
-
-        "❌ Рад шуд"
-
-    ]
-
-
-    if status not in allowed_statuses:
-
-        return "Status Error", 400
-
-
-    db = get_db()
-
-
-    db.execute("""
-
-    UPDATE orders
-
-    SET status=?
-
-    WHERE id=?
-
-    """, (
-
-        status,
-
-        order_id
-
-    ))
-
-
-    db.commit()
-
-    db.close()
-
-
-    return redirect(
-        url_for("admin_panel")
-    )
-
-
-# ==========================================
-# VIEW CHECK
-# ==========================================
-
-@app.route("/uploads/<filename>")
-def uploaded_file(filename):
-
-    if not session.get("admin"):
-
-        return "Forbidden", 403
-
-
-    return send_from_directory(
-
-        app.config["UPLOAD_FOLDER"],
-
-        filename
-
-    )
-
-
-# ==========================================
-# MAIN HTML
-# ==========================================
-
-MAIN_HTML = r"""
-
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="tg">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-TAJ.DONAT.TJ — Алмаз бо эътимод
-</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090c">
+<title>taj.donat.tj 🇹🇯</title>
 
 <style>
-
-*{
-
-box-sizing:border-box;
-
+:root{
+--bg:#08090c;
+--card:#11131a;
+--card2:#171922;
+--red:#ed1b35;
+--red2:#a90f25;
+--text:#fff;
+--muted:#9da1ad;
+--line:#292c38;
+--gold:#ffd447
 }
 
+*{box-sizing:border-box}
 
-html{
-
-scroll-behavior:smooth;
-
-}
-
+html{scroll-behavior:smooth}
 
 body{
-
 margin:0;
-
-font-family:Arial,sans-serif;
-
-background:#070b15;
-
-color:white;
-
+background:radial-gradient(circle at 50% -10%,#3a1018 0,#08090c 38%);
+color:var(--text);
+font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
 }
 
+button,input,select{font:inherit}
+button{cursor:pointer}
 
-.container{
-
-width:min(1150px,92%);
-
+.app{
+max-width:520px;
 margin:auto;
-
+min-height:100vh;
+padding-bottom:88px
 }
 
-
-header{
-
-position:sticky;
-
-top:0;
-
-z-index:100;
-
-background:rgba(7,11,21,.95);
-
-border-bottom:1px solid #252b48;
-
-backdrop-filter:blur(10px);
-
-}
-
-
-nav{
-
-height:72px;
-
+.top{
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
+padding:18px 18px 12px;
+position:sticky;
+top:0;
+z-index:20;
+background:rgba(8,9,12,.9);
+backdrop-filter:blur(14px)
 }
-
 
 .logo{
-
-font-size:23px;
-
-font-weight:900;
-
-color:#38d8ff;
-
-text-decoration:none;
-
-}
-
-
-.logo span{
-
-color:white;
-
-}
-
-
-.nav-links{
-
 display:flex;
-
-gap:20px;
-
+align-items:center;
+gap:10px
 }
 
+.flag{font-size:33px}
 
-.nav-links a{
-
-color:#b9c0d2;
-
-text-decoration:none;
-
-font-size:14px;
-
+.brand{
+font-weight:900;
+line-height:1
 }
 
-
-.nav-links a:hover{
-
-color:#38d8ff;
-
+.brand b{
+color:var(--red);
+font-size:25px;
+letter-spacing:.4px
 }
 
+.brand small{
+display:block;
+color:#eee;
+font-size:10px;
+letter-spacing:1.5px;
+margin-top:4px
+}
+
+.iconbtn{
+width:44px;
+height:44px;
+border:1px solid var(--line);
+border-radius:15px;
+background:#12141b;
+color:#fff;
+font-size:21px
+}
 
 .hero{
-
-padding:90px 0;
-
-background:
-
-radial-gradient(
-circle at 85% 30%,
-#32126e 0,
-transparent 30%
-),
-
-radial-gradient(
-circle at 10% 20%,
-#003d68 0,
-transparent 25%
-),
-
-#070b15;
-
+margin:10px 16px 14px;
+border:1px solid #7e1426;
+border-radius:20px;
+overflow:hidden;
+background:linear-gradient(135deg,#160b0e,#08090c);
+box-shadow:0 12px 35px #0008
 }
 
-
-.hero-grid{
-
-display:grid;
-
-grid-template-columns:1.2fr .8fr;
-
-gap:50px;
-
-align-items:center;
-
+.hero-inner{
+padding:22px 18px;
+min-height:175px;
+position:relative
 }
 
-
-.badge{
-
-display:inline-block;
-
-padding:8px 15px;
-
-border-radius:30px;
-
-background:#17112c;
-
-border:1px solid #6638a7;
-
-color:#bba5ff;
-
-font-weight:bold;
-
+.hero h1{
+font-size:31px;
+margin:6px 0;
+color:#fff
 }
 
-
-h1{
-
-font-size:clamp(42px,7vw,78px);
-
-margin:18px 0;
-
-line-height:1;
-
-}
-
-
-h1 span{
-
-color:#37d9ff;
-
-}
-
+.hero h1 span{color:var(--red)}
 
 .hero p{
+color:#c6c8ce;
+margin:5px 0 16px
+}
 
-color:#aeb7cc;
+.pills{
+display:flex;
+gap:16px;
+color:#ddd;
+font-size:12px
+}
 
+.pill{
+display:flex;
+gap:6px;
+align-items:center
+}
+
+.pill b{color:var(--red)}
+
+.profile{
+margin:0 16px 14px;
+padding:15px;
+border:1px solid var(--line);
+border-radius:18px;
+background:linear-gradient(135deg,#141720,#0d0f14);
+display:flex;
+gap:12px;
+align-items:center
+}
+
+.avatar{
+width:55px;
+height:55px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,#5a0f1d,#ef1939);
+font-size:26px
+}
+
+.profile h3{
+margin:0 0 4px;
+font-size:16px
+}
+
+.profile p{
+margin:0;
+color:var(--muted);
+font-size:12px
+}
+
+.balance{
+margin-left:auto;
+text-align:right
+}
+
+.balance small{color:var(--muted)}
+
+.balance b{
+display:block;
+color:#ff344e;
 font-size:18px;
-
-line-height:1.7;
-
-max-width:600px;
-
+margin-top:4px
 }
 
-
-.btn{
-
-display:inline-block;
-
-padding:15px 24px;
-
-border-radius:12px;
-
-font-weight:bold;
-
-text-decoration:none;
-
-border:none;
-
-cursor:pointer;
-
-margin:8px 8px 0 0;
-
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin:0 16px
 }
 
-
-.primary{
-
-color:white;
-
-background:
-
-linear-gradient(
-90deg,
-#7935f4,
-#00bfe9
-);
-
+.tile{
+border:1px solid #353744;
+border-radius:17px;
+background:linear-gradient(145deg,#171922,#0f1117);
+padding:15px;
+min-height:112px;
+text-align:left;
+color:#fff;
+position:relative;
+overflow:hidden
 }
 
-
-.secondary{
-
-color:white;
-
-background:#151b30;
-
-border:1px solid #39436d;
-
+.tile:after{
+content:"";
+position:absolute;
+width:70px;
+height:70px;
+border-radius:50%;
+right:-30px;
+bottom:-30px;
+background:#e817391c
 }
 
+.tile .ico{font-size:30px}
 
-.hero-card{
-
-min-height:360px;
-
-border-radius:25px;
-
-padding:40px;
-
-text-align:center;
-
-background:
-
-linear-gradient(
-145deg,
-#121a37,
-#160e2d
-);
-
-border:1px solid #45317c;
-
-box-shadow:
-
-0 0 60px
-
-rgba(105,50,255,.2);
-
+.tile strong{
+display:block;
+margin-top:8px;
+font-size:15px
 }
 
-
-.big-diamond{
-
-font-size:130px;
-
-filter:
-
-drop-shadow(
-0 0 25px #00bfff
-);
-
+.tile span{
+display:block;
+color:#aeb1ba;
+font-size:11px;
+margin-top:5px;
+line-height:1.35
 }
-
 
 .section{
-
-padding:75px 0;
-
+padding:18px 16px 0
 }
 
-
-.section-title{
-
-text-align:center;
-
-margin-bottom:35px;
-
-}
-
-
-.section-title span{
-
-color:#a979ff;
-
-font-size:13px;
-
-font-weight:bold;
-
-}
-
-
-.section-title h2{
-
-font-size:38px;
-
-margin:10px 0;
-
-}
-
-
-.product-grid{
-
-display:grid;
-
-grid-template-columns:
-
-repeat(3,1fr);
-
-gap:18px;
-
-}
-
-
-.product-card{
-
-background:#10162a;
-
-border:1px solid #2d3762;
-
-border-radius:18px;
-
-padding:27px;
-
-color:white;
-
-cursor:pointer;
-
-transition:.25s;
-
-}
-
-
-.product-card:hover{
-
-transform:translateY(-5px);
-
-border-color:#00cfff;
-
-box-shadow:
-
-0 10px 35px
-
-rgba(0,190,255,.15);
-
-}
-
-
-.product-card div{
-
-font-size:45px;
-
-}
-
-
-.product-card strong{
-
-display:block;
-
+.section h2{
 font-size:19px;
-
-margin:10px 0;
-
+margin:0 0 12px
 }
 
-
-.product-card span{
-
-display:block;
-
-font-size:23px;
-
-font-weight:bold;
-
-color:#42dfff;
-
+.products{
+display:flex;
+gap:10px;
+overflow:auto;
+padding-bottom:4px
 }
 
+.product{
+min-width:125px;
+border:1px solid var(--line);
+border-radius:16px;
+background:#11131a;
+padding:8px;
+text-align:center
+}
 
-.voucher-grid{
-
+.product .pic{
+height:90px;
+border-radius:12px;
 display:grid;
-
-grid-template-columns:
-
-repeat(3,1fr);
-
-gap:18px;
-
+place-items:center;
+font-size:39px;
+background:linear-gradient(145deg,#252938,#090a0e)
 }
 
+.product b{
+display:block;
+font-size:12px;
+margin:8px 0 4px
+}
 
-.voucher-card{
+.product small{color:#aeb1ba}
 
-background:#10162a;
-
-border:1px solid #2d3762;
-
-color:white;
-
-padding:25px;
-
+.trust{
+margin:18px 16px 0;
+border:1px solid #8d182b;
+background:linear-gradient(90deg,#6c1020,#260b11);
 border-radius:17px;
-
-cursor:pointer;
-
+padding:13px 10px;
 display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-transition:.25s;
-
+justify-content:space-around;
+text-align:center
 }
 
-
-.voucher-card:hover{
-
-transform:translateY(-5px);
-
-border-color:#a66cff;
-
+.trust div{
+font-size:11px;
+color:#eee
 }
 
-
-.voucher-card b{
-
-color:#41ddff;
-
-font-size:24px;
-
-}
-
-
-.features{
-
-display:grid;
-
-grid-template-columns:
-
-repeat(4,1fr);
-
-gap:15px;
-
-}
-
-
-.feature{
-
-background:#10162a;
-
-border:1px solid #252e52;
-
-padding:22px;
-
-border-radius:15px;
-
-}
-
-
-.feature p{
-
-color:#9da7bd;
-
-line-height:1.5;
-
-}
-
-
-.order-box{
-
-max-width:800px;
-
-margin:auto;
-
-background:#0f1529;
-
-border:1px solid #303a65;
-
-border-radius:24px;
-
-padding:35px;
-
-}
-
-
-.form-row{
-
-display:grid;
-
-grid-template-columns:
-
-1fr 1fr;
-
-gap:15px;
-
-}
-
-
-label{
-
+.trust b{
 display:block;
-
-margin:16px 0 8px;
-
-color:#d7dceb;
-
+color:#ff5a6d;
+font-size:20px;
+margin-bottom:3px
 }
 
-
-input{
-
-width:100%;
-
-padding:15px;
-
-background:#080d1c;
-
-color:white;
-
-border:1px solid #303b65;
-
-border-radius:10px;
-
-outline:none;
-
-}
-
-
-input:focus{
-
-border-color:#25d2ff;
-
-}
-
-
-.payment-options{
-
+.bottom{
+position:fixed;
+z-index:30;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+width:min(490px,calc(100% - 20px));
+height:66px;
+border:1px solid #343642;
+border-radius:24px;
+background:rgba(16,18,24,.96);
+backdrop-filter:blur(16px);
 display:flex;
-
-gap:12px;
-
-flex-wrap:wrap;
-
+justify-content:space-around;
+align-items:center;
+box-shadow:0 12px 40px #000b
 }
 
-
-.pay-option{
-
-background:#161e36;
-
-border:1px solid #34416e;
-
-padding:14px 18px;
-
-border-radius:10px;
-
-cursor:pointer;
-
-margin:0;
-
-}
-
-
-.pay-option input{
-
-width:auto;
-
-margin-right:8px;
-
-}
-
-
-.payment-number{
-
-margin-top:15px;
-
-padding:15px;
-
-background:#151e37;
-
-border-radius:10px;
-
-color:#c3ccdf;
-
-}
-
-
-.payment-number b{
-
-color:#43dcff;
-
-}
-
-
-.submit-btn{
-
-width:100%;
-
-margin-top:25px;
-
-font-size:16px;
-
-}
-
-
-.support{
-
+.nav{
+color:#aeb1ba;
 text-align:center;
-
+font-size:10px;
+background:none;
+border:0
 }
 
-
-footer{
-
-padding:45px 0;
-
-text-align:center;
-
-background:#050812;
-
-border-top:1px solid #202746;
-
-color:#8f99b0;
-
+.nav .nicon{
+font-size:22px;
+display:block;
+margin-bottom:3px
 }
 
+.nav.active{color:#ff314b}
+
+.nav.center{margin-top:-27px}
+
+.nav.center .nicon{
+width:58px;
+height:58px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:var(--red);
+color:#fff;
+box-shadow:0 6px 20px #ed1b3566;
+border:4px solid #171922
+}
 
 .modal{
-
 display:none;
-
 position:fixed;
-
 inset:0;
-
-background:rgba(0,0,0,.75);
-
-z-index:999;
-
-align-items:center;
-
-justify-content:center;
-
+z-index:50;
+background:#000b;
+padding:18px;
+overflow:auto
 }
 
+.modal.show{display:block}
 
-.modal-box{
-
-width:min(420px,90%);
-
-background:#12192e;
-
-border:1px solid #4a548e;
-
+.modalbox{
+max-width:520px;
+margin:30px auto;
+background:#11131a;
+border:1px solid #3b3e4b;
 border-radius:22px;
-
-padding:35px;
-
-text-align:center;
-
+padding:20px
 }
 
-
-.success{
-
-font-size:60px;
-
+.close{
+float:right;
+background:none;
+border:0;
+color:#fff;
+font-size:25px
 }
 
+.modal h2{margin-top:0}
 
-@media(max-width:800px){
+.field{margin:10px 0}
 
-.hero-grid{
-
-grid-template-columns:1fr;
-
+.field label{
+display:block;
+color:#aaa;
+font-size:12px;
+margin-bottom:6px
 }
 
-.hero-card{
-
-display:none;
-
+.field input,
+.field select{
+width:100%;
+padding:13px;
+border-radius:12px;
+border:1px solid #3a3d49;
+background:#0b0c10;
+color:#fff;
+outline:none
 }
 
-.product-grid,
-
-.voucher-grid{
-
-grid-template-columns:
-
-repeat(2,1fr);
-
+.primary{
+width:100%;
+padding:14px;
+border:0;
+border-radius:13px;
+background:linear-gradient(135deg,#ff2945,#b30e26);
+color:#fff;
+font-weight:800
 }
 
-.features{
-
-grid-template-columns:
-
-repeat(2,1fr);
-
+.secondary{
+width:100%;
+padding:13px;
+border:1px solid #444754;
+border-radius:13px;
+background:#191b23;
+color:#fff;
+margin-top:8px
 }
 
+.notice{
+padding:12px;
+border-radius:12px;
+background:#191b22;
+color:#c8cad1;
+font-size:12px;
+line-height:1.5;
+margin:12px 0
 }
 
-
-@media(max-width:550px){
-
-nav{
-
-height:auto;
-
-padding:15px 0;
-
-flex-direction:column;
-
-gap:14px;
-
+.adminbox{
+border:1px solid #6f1728;
+background:#210d12;
+border-radius:15px;
+padding:13px;
+margin-top:12px;
+font-size:12px
 }
 
-.nav-links{
-
-flex-wrap:wrap;
-
-justify-content:center;
-
-gap:12px;
-
+.toast{
+position:fixed;
+z-index:80;
+left:50%;
+bottom:92px;
+transform:translateX(-50%) translateY(15px);
+background:#fff;
+color:#111;
+padding:12px 16px;
+border-radius:13px;
+font-size:13px;
+opacity:0;
+transition:.25s;
+pointer-events:none;
+box-shadow:0 8px 25px #0008
 }
 
-.product-grid,
-
-.voucher-grid,
-
-.features,
-
-.form-row{
-
-grid-template-columns:1fr;
-
+.toast.show{
+opacity:1;
+transform:translateX(-50%) translateY(0)
 }
 
-.hero{
+@media(min-width:700px){
+body{padding:20px}
 
-padding:60px 0;
-
+.app{
+border:1px solid #242733;
+border-radius:28px;
+overflow:hidden;
+background:#08090c;
+box-shadow:0 25px 80px #000
 }
 
-.order-box{
-
-padding:22px;
-
+.top{position:relative}
 }
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
+<div class="app">
 
-<header>
+<header class="top">
 
-<nav class="container">
+<button class="iconbtn" onclick="openModal('menu')">☰</button>
 
-<a href="/" class="logo">
+<div class="logo">
+<span class="flag">🇹🇯</span>
 
-💎 <span>TAJ.DONAT.TJ</span>
-
-</a>
-
-
-<div class="nav-links">
-
-<a href="#diamonds">Алмаз</a>
-
-<a href="#vouchers">Ваучер</a>
-
-<a href="#order">Фармоиш</a>
-
-<a href="#support">Дастгирӣ</a>
-
+<div class="brand">
+<b>taj.donat.tj 🇹🇯</b>
+<small>PREMIUM DIGITAL STORE</small>
+</div>
 </div>
 
-</nav>
+<button class="iconbtn" onclick="openModal('profile')">♙</button>
 
 </header>
 
+
+<section class="profile">
+
+<div class="avatar">🤖</div>
+
+<div>
+<h3>Хуш омадед!</h3>
+<p>taj.donat.tj 🇹🇯 • ID: меҳмон</p>
+</div>
+
+<div class="balance">
+<small>Баланс</small>
+<b id="balance">0.00 TJS</b>
+</div>
+
+</section>
 
 
 <section class="hero">
 
-<div class="container hero-grid">
+<div class="hero-inner">
 
-
-<div>
-
-<div class="badge">
-
-🔥 TAJ.DONAT.TJ
-
-</div>
-
+<div>🇹🇯 <b>taj.donat.tj</b></div>
 
 <h1>
-
-АЛМАЗ БО
-
-<span>ЭЪТИМОД</span>
-
-💎
-
+TOP-UP
+<span>МУРАВВАТ & СУРЪАТ!</span>
 </h1>
 
-
 <p>
-
-Алмаз ва ваучерҳои Free Fire.
-
-Маҳсулотро интихоб кунед,
-
-Free Fire ID-ро нависед
-
-ва фармоиши худро фиристед.
-
+Алмос, UC ва маҳсулоти рақамӣ — зуд ва бехатар.
 </p>
 
+<div class="pills">
 
-<a href="#diamonds" class="btn primary">
-
-🛒 ХАРИД КУНЕД
-
-</a>
-
-
-<a href="#order" class="btn secondary">
-
-📦 ФАРМОИШ
-
-</a>
-
-
-</div>
-
-
-
-<div class="hero-card">
-
-<div class="big-diamond">
-
-💎
-
-</div>
-
-
-<h2>
-
-FREE FIRE TOP-UP
-
-</h2>
-
-
-<p>
-
-TAJ.DONAT.TJ
-
-</p>
-
-
-<p>
-
-АЛМАЗ БО ЭЪТИМОД
-
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<section
-id="diamonds"
-class="section container">
-
-
-<div class="section-title">
-
-<span>💎 МАҶМУАИ МО</span>
-
-<h2>АЛМАЗҲО</h2>
-
-</div>
-
-
-<div class="product-grid">
-
-
-{% for item in diamonds %}
-
-<button
-
-class="product-card"
-
-data-product="{{ item[0] }}"
-
-data-price="{{ item[1] }}"
-
->
-
-<div>💎</div>
-
-<strong>
-
-{{ item[0] }}
-
-</strong>
-
-<span>
-
-{{ item[1] }}
-
+<span class="pill">
+⚡ <b>ТЕЗ</b>
 </span>
 
-</button>
+<span class="pill">
+🛡️ <b>АМН</b>
+</span>
 
-{% endfor %}
-
+<span class="pill">
+🎧 <b>24/7</b>
+</span>
 
 </div>
 
+</div>
 </section>
 
 
-
-<section
-id="vouchers"
-class="section container">
-
-
-<div class="section-title">
-
-<span>🎟️ FREE FIRE</span>
-
-<h2>ВАУЧЕРҲО</h2>
-
-</div>
-
-
-<div class="voucher-grid">
-
-
-{% for item in vouchers %}
-
-<button
-
-class="voucher-card"
-
-data-product="{{ item[0] }}"
-
-data-price="{{ item[1] }}"
-
->
-
-<div>
-
-<h3>
-
-🎟️ {{ item[0] }}
-
-</h3>
-
-<p>
-
-Ваучери Free Fire
-
-</p>
-
-</div>
-
-
-<b>
-
-{{ item[1] }}
-
-</b>
-
-</button>
-
-{% endfor %}
-
-
-</div>
-
-</section>
-
-
-
-<section class="container features">
-
-
-<div class="feature">
-
-<h3>⚡ СУРЪАТ</h3>
-
-<p>
-
-Раванди фармоиш осон.
-
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<h3>🛡️ ЭЪТИМОД</h3>
-
-<p>
-
-Ҳар фармоиш рақами алоҳида дорад.
-
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<h3>📦 НАЗОРАТ</h3>
-
-<p>
-
-Статуси фармоиш дар база нигоҳ дошта мешавад.
-
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<h3>💬 ДАСТГИРӢ</h3>
-
-<p>
-
-Барои саволҳо ба админ муроҷиат кунед.
-
-</p>
-
-</div>
-
-
-</section>
-
-
-
-<section
-id="order"
-class="section container">
-
-
-<div class="order-box">
-
-
-<div class="section-title">
-
-<span>🛒 ҚАДАМИ ОХИР</span>
-
-<h2>ФАРМОИШ ДОДАН</h2>
-
-</div>
-
-
-<form
-id="orderForm"
-enctype="multipart/form-data">
-
-
-<div class="form-row">
-
-
-<div>
-
-<label>
-
-📦 Маҳсулот
-
-</label>
-
-<input
-
-id="product"
-
-name="product"
-
-readonly
-
-placeholder="Аввал маҳсулотро интихоб кунед"
-
->
-
-</div>
-
-
-<div>
-
-<label>
-
-💰 Нарх
-
-</label>
-
-<input
-
-id="price"
-
-name="price"
-
-readonly
-
-placeholder="Нарх"
-
->
-
-</div>
-
-
-</div>
-
-
-
-<div class="form-row">
-
-
-<div>
-
-<label>
-
-🎮 Free Fire ID *
-
-</label>
-
-<input
-
-name="ff_id"
-
-required
-
-placeholder="ID-и худро нависед"
-
->
-
-</div>
-
-
-<div>
-
-<label>
-
-👤 Ном
-
-</label>
-
-<input
-
-name="customer_name"
-
-placeholder="Номи шумо"
-
->
-
-</div>
-
-
-</div>
-
-
-
-<label>
-
-📞 Рақами телефон
-
-</label>
-
-<input
-
-name="customer_phone"
-
-placeholder="+992 ..."
-
->
-
-
-
-<label>
-
-💳 Усули пардохт *
-
-</label>
-
-
-<div class="payment-options">
-
-
-<label class="pay-option">
-
-<input
-
-type="radio"
-
-name="payment"
-
-value="ЭСХАТА"
-
-required
-
->
-
-🏦 ЭСХАТА
-
-</label>
-
-
-
-<label class="pay-option">
-
-<input
-
-type="radio"
-
-name="payment"
-
-value="ICB MOBILE"
-
-required
-
->
-
-💳 ICB MOBILE
-
-</label>
-
-
-</div>
-
-
-
-<div class="payment-number">
-
-📱 Рақами пардохт:
-
-<b>
-
-{{ payment_number }}
-
-</b>
-
-</div>
-
-
-
-<label>
-
-🧾 Чеки пардохт
-
-</label>
-
-
-<input
-
-type="file"
-
-name="check"
-
-accept=".png,.jpg,.jpeg,.webp,.pdf"
-
->
-
-
-
-<button
-type="submit"
-class="btn primary submit-btn">
-
-🚀 ФАРМОИШРО ФИРИСТЕД
-
+<div class="grid">
+
+<button class="tile" onclick="openModal('shop')">
+<div class="ico">🛒</div>
+<strong>Магазин</strong>
+<span>Хариди алмаз ва ваучерҳо →</span>
 </button>
 
 
-</form>
-
-</div>
-
-</section>
-
-
-
-<section
-id="support"
-class="section container support">
-
-
-<h2>
-
-💬 ДАСТГИРӢ
-
-</h2>
-
-
-<p>
-
-Агар савол дошта бошед,
-ба администратор нависед.
-
-</p>
-
-
-<a
-href="https://t.me/Zokirjon0555"
-target="_blank"
-class="btn secondary">
-
-💬 БА АДМИН НАВИШТАН
-
-</a>
-
-
-</section>
-
-
-
-<footer>
-
-<h2>
-
-💎 TAJ.DONAT.TJ
-
-</h2>
-
-<p>
-
-АЛМАЗ БО ЭЪТИМОД
-
-</p>
-
-<small>
-
-© 2026 TAJ.DONAT.TJ
-
-</small>
-
-</footer>
-
-
-
-<div
-id="modal"
-class="modal">
-
-
-<div class="modal-box">
-
-
-<div class="success">
-
-✅
-
-</div>
-
-
-<h2>
-
-ФАРМОИШ ҚАБУЛ ШУД!
-
-</h2>
-
-
-<p id="modalText">
-
-</p>
-
-
-<button
-id="closeModal"
-class="btn primary">
-
-ФАҲМО
-
+<button class="tile" onclick="openModal('pay')">
+<div class="ico">🏦</div>
+<strong>Пур кардани баланс</strong>
+<span>Эсхата Банк 🏦 →</span>
 </button>
 
 
+<button class="tile" onclick="openModal('orders')">
+<div class="ico">📦</div>
+<strong>Фармоишҳои ман</strong>
+<span>Таърихи фармоиш ва статус →</span>
+</button>
+
+
+<button class="tile" onclick="openModal('bonus')">
+<div class="ico">🎁</div>
+<strong>Бонус ва промокод</strong>
+<span>Бонус гиред ва промокод истифода баред →</span>
+</button>
+
+
+<button class="tile" onclick="openModal('vip')">
+<div class="ico">👑</div>
+<strong>VIP ACCOUNT</strong>
+<span>Аккаунтҳои VIP бо скидкаи калон →</span>
+</button>
+
+
+<button class="tile" onclick="openModal('support')">
+<div class="ico">💬</div>
+<strong>Дастгирӣ</strong>
+<span>Бо дастгирии онлайн тамос гиред →</span>
+</button>
+
+</div>
+
+
+<section class="section">
+
+<h2>🔥 МАҲСУЛОТИ МАШҲУР</h2>
+
+<div class="products">
+
+<div class="product">
+<div class="pic">🎮</div>
+<b>Free Fire</b>
+<small>Diamond</small>
+</div>
+
+<div class="product">
+<div class="pic">🪖</div>
+<b>PUBG Mobile</b>
+<small>UC</small>
+</div>
+
+<div class="product">
+<div class="pic">⚔️</div>
+<b>Mobile Legends</b>
+<small>Diamonds</small>
+</div>
+
+<div class="product">
+<div class="pic">🎵</div>
+<b>TikTok</b>
+<small>Coins</small>
+</div>
+
+<div class="product">
+<div class="pic">📸</div>
+<b>Instagram</b>
+<small>Services</small>
+</div>
+
+</div>
+</section>
+
+
+<div class="trust">
+
+<div>
+🛡️
+<b>100%</b>
+Аминят
+</div>
+
+<div>
+⚡
+<b>Тез</b>
+ва осон
+</div>
+
+<div>
+🎧
+<b>24/7</b>
+Дастгирӣ
 </div>
 
 </div>
 
+</div>
+
+
+<nav class="bottom">
+
+<button class="nav active" onclick="scrollTop(0)">
+<span class="nicon">🏠</span>
+Асосӣ
+</button>
+
+<button class="nav" onclick="openModal('shop')">
+<span class="nicon">🛒</span>
+Магазин
+</button>
+
+<button class="nav center" onclick="openModal('pay')">
+<span class="nicon">➤</span>
+Пардохт
+</button>
+
+<button class="nav" onclick="openModal('orders')">
+<span class="nicon">📋</span>
+Фармоишҳо
+</button>
+
+<button class="nav" onclick="openModal('profile')">
+<span class="nicon">♙</span>
+Профил
+</button>
+
+</nav>
+
+
+<div id="modal" class="modal"
+onclick="if(event.target===this)closeModal()">
+
+<div class="modalbox">
+
+<button class="close" onclick="closeModal()">×</button>
+
+<div id="modalContent"></div>
+
+</div>
+</div>
+
+
+<div id="toast" class="toast"></div>
 
 
 <script>
 
+const ADMIN_ID="6439367152";
+const ADMIN_USER="@Zokirjon0555";
 
-const productInput =
+const PHONE="+992935710406";
 
-document.getElementById("product");
+const BANK="Эсхата Банк 🏦";
 
-
-const priceInput =
-
-document.getElementById("price");
-
-
-document
-.querySelectorAll("[data-product]")
-.forEach(card => {
-
-
-card.addEventListener(
-
-"click",
-
-() => {
-
-
-productInput.value =
-
-card.dataset.product;
-
-
-priceInput.value =
-
-card.dataset.price;
-
-
-document
-
-.getElementById("order")
-
-.scrollIntoView({
-
-behavior:"smooth"
-
-});
-
-
-}
-
+let orders=
+JSON.parse(
+localStorage.getItem("taj_orders")||"[]"
 );
 
-
-});
-
-
-
-const form =
-
-document.getElementById("orderForm");
-
-
-const modal =
-
-document.getElementById("modal");
-
-
-const modalText =
-
-document.getElementById("modalText");
-
-
-form.addEventListener(
-
-"submit",
-
-async function(e){
-
-e.preventDefault();
-
-
-if(
-
-!productInput.value
-
-||
-
-!priceInput.value
-
-){
-
-alert(
-
-"Аввал маҳсулотро интихоб кунед."
-
+let bal=
+Number(
+localStorage.getItem("taj_balance")||0
 );
 
-return;
+document.getElementById("balance").textContent=
+bal.toFixed(2)+" TJS";
+
+
+function save(){
+
+localStorage.setItem(
+"taj_orders",
+JSON.stringify(orders)
+);
+
+localStorage.setItem(
+"taj_balance",
+bal.toFixed(2)
+);
+
+document.getElementById("balance").textContent=
+bal.toFixed(2)+" TJS";
 
 }
 
 
-const button =
+function toast(t){
 
-form.querySelector(
+let x=document.getElementById("toast");
 
-'button[type="submit"]'
+x.textContent=t;
 
+x.classList.add("show");
+
+setTimeout(
+()=>x.classList.remove("show"),
+2200
 );
-
-
-button.disabled = true;
-
-
-button.innerText =
-
-"⏳ ИНТИЗОР ШАВЕД...";
-
-
-try{
-
-
-const response =
-
-await fetch(
-
-"/api/order",
-
-{
-
-method:"POST",
-
-body:new FormData(form)
-
-}
-
-);
-
-
-const data =
-
-await response.json();
-
-
-if(!data.ok){
-
-alert(
-
-data.error ||
-
-"Хатогӣ рух дод."
-
-);
-
-return;
 
 }
 
 
-modalText.innerHTML =
+function openModal(type){
 
-`
+const c=document.getElementById("modalContent");
 
-📦 Рақами фармоиши шумо:
+const data={
+
+
+menu:`
+
+<h2>☰ Меню</h2>
+
+<div class="notice">
+taj.donat.tj 🇹🇯 — мағозаи рақамии премиум.
+Аз меню маҳсулот интихоб кунед ё ба дастгирӣ муроҷиат намоед.
+</div>
+
+<button class="secondary"
+onclick="openModal('shop')">
+🛒 Магазин
+</button>
+
+<button class="secondary"
+onclick="openModal('pay')">
+🏦 Пур кардани баланс
+</button>
+
+<button class="secondary"
+onclick="openModal('support')">
+💬 Дастгирӣ
+</button>
+
+<button class="secondary"
+onclick="openModal('admin')">
+🔐 Админ
+</button>
+
+`,
+
+
+profile:`
+
+<h2>👤 Профил</h2>
+
+<div class="notice">
+
+Номи аккаунт:
+<b>taj.donat.tj 🇹🇯</b>
 
 <br>
 
-<b>
+Баланс:
+<b>${bal.toFixed(2)} TJS</b>
 
-#${data.order_number}
+<br>
 
-</b>
+Банк:
+<b>Эсхата Банк 🏦</b>
+
+<br>
+
+Рақам:
+<b>${PHONE}</b>
+
+</div>
+
+<button class="primary"
+onclick="openModal('pay')">
++ Пур кардан
+</button>
+
+`,
+
+
+shop:`
+
+<h2>🛒 Магазин</h2>
+
+<div class="notice">
+Маҳсулотро интихоб кунед:
+</div>
+
+<button class="secondary"
+onclick="buy('Free Fire Diamond',10)">
+💎 Free Fire — 10 TJS
+</button>
+
+<button class="secondary"
+onclick="buy('Free Fire Diamond',25)">
+💎 Free Fire — 25 TJS
+</button>
+
+<button class="secondary"
+onclick="buy('PUBG UC',20)">
+🪖 PUBG Mobile — 20 TJS
+</button>
+
+<button class="secondary"
+onclick="buy('Mobile Legends',15)">
+⚔️ Mobile Legends — 15 TJS
+</button>
+
+<button class="secondary"
+onclick="buy('TikTok Coins',10)">
+🎵 TikTok — 10 TJS
+</button>
+
+`,
+
+
+pay:`
+
+<h2>🏦 Пур кардани баланс</h2>
+
+<div class="notice">
+
+<b>Банк:</b>
+Эсхата Банк 🏦
+
+<br>
+
+<b>Рақами қабулкунанда:</b>
+${PHONE}
 
 <br><br>
 
-📌 Статус:
+Пас аз пардохт маблағ ва чекро ба дастгирӣ фиристед.
 
-<b>
+</div>
 
-${data.status}
+<div class="field">
 
-</b>
+<label>
+Маблағ (TJS)
+</label>
 
-<br><br>
+<input
+id="payAmount"
+type="number"
+min="1"
+placeholder="Масалан: 50"
+>
 
-Фармоиши шумо барои санҷиш қабул шуд.
+</div>
 
-`;
+<button class="primary"
+onclick="pay()">
+Ман пардохт кардам
+</button>
 
-
-modal.style.display =
-
-"flex";
-
-
-form.reset();
+`,
 
 
-productInput.value = "";
+orders:`
 
-priceInput.value = "";
+<h2>📦 Фармоишҳои ман</h2>
 
+${
+orders.length?
+
+orders.map(o=>`
+
+<div class="notice">
+
+<b>${o.product}</b>
+
+<br>
+
+${o.amount} TJS • ${o.status}
+
+<br>
+
+<small>${o.date}</small>
+
+</div>
+
+`).join("")
+
+:
+
+"<div class='notice'>Ҳоло фармоиш нест.</div>"
 
 }
 
-catch(error){
-
-alert(
-
-"Хатогӣ дар пайвастшавӣ ба сервер."
-
-);
-
-}
+`,
 
 
-finally{
+bonus:`
+
+<h2>🎁 Бонус / Промокод</h2>
+
+<div class="field">
+
+<label>
+Промокод
+</label>
+
+<input
+id="promo"
+placeholder="PROMO"
+>
+
+</div>
+
+<button class="primary"
+onclick="promo()">
+Фаъол кардан
+</button>
+
+<div class="notice">
+Промокодҳои навро аз дастгирӣ гиред.
+</div>
+
+`,
 
 
-button.disabled = false;
+vip:`
+
+<h2>👑 VIP ACCOUNT</h2>
+
+<div class="notice">
+
+Барои аккаунтҳои VIP ва скидкаҳои калон
+ба дастгирӣ муроҷиат кунед.
+
+</div>
+
+<button class="primary"
+onclick="openModal('support')">
+💬 Тамос бо дастгирӣ
+</button>
+
+`,
 
 
-button.innerText =
+support:`
 
-"🚀 ФАРМОИШРО ФИРИСТЕД";
+<h2>💬 Дастгирӣ 24/7</h2>
+
+<div class="notice">
+
+Барои фармоиш, чек ё савол ба админ муроҷиат кунед:
+
+<br>
+
+<b>${ADMIN_USER}</b>
+
+<br>
+
+☎️ ${PHONE}
+
+</div>
+
+<button class="primary"
+onclick="window.location.href='tel:${PHONE}'">
+📞 Занг задан
+</button>
+
+`,
 
 
-}
+admin:`
 
+<h2>🔐 Панели админ</h2>
 
-}
+<div class="field">
 
-);
+<label>ID админ</label>
 
+<input
+id="aid"
+placeholder="ID"
+>
 
+</div>
 
-document
+<div class="field">
 
-.getElementById("closeModal")
+<label>Username</label>
 
-.onclick = function(){
+<input
+id="auser"
+placeholder="@username"
+>
 
-modal.style.display =
+</div>
 
-"none";
+<button class="primary"
+onclick="adminLogin()">
+Дохил шудан
+</button>
+
+<div id="adminArea"></div>
+
+`
 
 };
 
 
+c.innerHTML=
+data[type]||data.menu;
+
+document
+.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document
+.getElementById("modal")
+.classList.remove("show");
+
+}
+
+
+function buy(product,amount){
+
+orders.unshift({
+
+product:product,
+
+amount:amount,
+
+status:"Интизорӣ",
+
+date:new Date().toLocaleString("tg-TJ")
+
+});
+
+save();
+
+toast("Фармоиш қабул шуд ✅");
+
+openModal("orders");
+
+}
+
+
+function pay(){
+
+const a=
+Number(
+document.getElementById("payAmount").value
+);
+
+if(!a||a<1)
+
+return toast(
+"Маблағро дуруст ворид кунед"
+);
+
+bal+=a;
+
+save();
+
+toast(
+"Пардохт сабт шуд. Тасдиқи админ лозим аст."
+);
+
+closeModal();
+
+}
+
+
+function promo(){
+
+let p=
+(
+document
+.getElementById("promo")
+.value||""
+)
+.trim()
+.toUpperCase();
+
+if(p==="TAJ100"){
+
+bal+=10;
+
+save();
+
+toast(
+"+10 TJS бонус гирифтед 🎁"
+);
+
+}
+
+else{
+
+toast(
+"Промокод нодуруст аст"
+);
+
+}
+
+}
+
+
+function adminLogin(){
+
+if(
+
+document.getElementById("aid").value
+===ADMIN_ID
+
+&&
+
+document.getElementById("auser").value
+===ADMIN_USER
+
+){
+
+document.getElementById("adminArea")
+.innerHTML=`
+
+<div class="adminbox">
+
+<b>Админ фаъол шуд ✅</b>
+
+<br>
+
+ID:
+${ADMIN_ID}
+
+<br>
+
+Username:
+${ADMIN_USER}
+
+<br>
+
+Банк:
+Эсхата Банк 🏦
+
+<br>
+
+Телефон:
+${PHONE}
+
+<hr>
+
+<b>
+Фармоишҳо:
+${orders.length}
+</b>
+
+<br>
+
+Балансҳои маҳаллӣ:
+${bal.toFixed(2)} TJS
+
+</div>
+
+`;
+
+}
+
+else{
+
+toast(
+"ID ё username-и админ нодуруст аст"
+);
+
+}
+
+}
+
 </script>
 
-
 </body>
-
-</html>
-
-"""
-
-
-# ==========================================
-# ADMIN LOGIN HTML
-# ==========================================
-
-LOGIN_HTML = r"""
-
-<!DOCTYPE html>
-
-<html lang="tg">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1">
-
-<title>
-
-Admin Login
-
-</title>
-
-
-<style>
-
-body{
-
-margin:0;
-
-font-family:Arial;
-
-background:#080b15;
-
-color:white;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-height:100vh;
-
-}
-
-
-.box{
-
-width:380px;
-
-max-width:90%;
-
-background:#12182d;
-
-padding:35px;
-
-border-radius:20px;
-
-border:1px solid #303b65;
-
-text-align:center;
-
-}
-
-
-input{
-
-width:100%;
-
-box-sizing:border-box;
-
-padding:14px;
-
-margin:8px 0;
-
-background:#090d1b;
-
-border:1px solid #303b65;
-
-border-radius:9px;
-
-color:white;
-
-}
-
-
-button{
-
-width:100%;
-
-padding:14px;
-
-border:0;
-
-border-radius:9px;
-
-background:#7138e8;
-
-color:white;
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-
-.error{
-
-color:#ff7d8e;
-
-margin:10px;
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<div class="box">
-
-
-<h1>
-
-👨‍💻 ADMIN PANEL
-
-</h1>
-
-
-<p>
-
-TAJ.DONAT.TJ
-
-</p>
-
-
-{% if error %}
-
-<div class="error">
-
-{{ error }}
-
-</div>
-
-{% endif %}
-
-
-<form method="POST">
-
-
-<input
-
-name="username"
-
-placeholder="Логин"
-
-required
-
->
-
-
-<input
-
-type="password"
-
-name="password"
-
-placeholder="Парол"
-
-required
-
->
-
-
-<button>
-
-ВОРИД ШУДАН
-
-</button>
-
-
-</form>
-
-
-</div>
-
-
-</body>
-
-</html>
-
-"""
-
-
-# ==========================================
-# ADMIN PANEL HTML
-# ==========================================
-
-ADMIN_HTML = r"""
-
-<!DOCTYPE html>
-
-<html lang="tg">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1">
-
-<title>
-
-TAJ.DONAT.TJ Admin
-
-</title>
-
-
-<style>
-
-*{
-
-box-sizing:border-box;
-
-}
-
-
-body{
-
-margin:0;
-
-font-family:Arial;
-
-background:#080b15;
-
-color:white;
-
-}
-
-
-header{
-
-padding:20px 4%;
-
-background:#11172a;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-}
-
-
-header a{
-
-color:#4ddcff;
-
-text-decoration:none;
-
-}
-
-
-main{
-
-width:94%;
-
-margin:35px auto;
-
-}
-
-
-.stats{
-
-display:grid;
-
-grid-template-columns:
-
-repeat(4,1fr);
-
-gap:15px;
-
-}
-
-
-.stat{
-
-background:#12192d;
-
-border:1px solid #29345a;
-
-padding:22px;
-
-border-radius:14px;
-
-}
-
-
-.stat b{
-
-font-size:30px;
-
-color:#52ddff;
-
-}
-
-
-.table-wrap{
-
-overflow:auto;
-
-margin-top:30px;
-
-background:#10162a;
-
-padding:10px;
-
-border-radius:15px;
-
-}
-
-
-table{
-
-width:100%;
-
-min-width:1000px;
-
-border-collapse:collapse;
-
-}
-
-
-th,
-
-td{
-
-padding:14px;
-
-border-bottom:1px solid #28304f;
-
-text-align:left;
-
-vertical-align:top;
-
-}
-
-
-th{
-
-color:#59dfff;
-
-}
-
-
-td a{
-
-color:#62dcff;
-
-}
-
-
-form{
-
-display:inline;
-
-}
-
-
-button{
-
-padding:8px 12px;
-
-border:0;
-
-border-radius:7px;
-
-color:white;
-
-cursor:pointer;
-
-margin:2px;
-
-}
-
-
-.ok{
-
-background:#137449;
-
-}
-
-
-.no{
-
-background:#a52e45;
-
-}
-
-
-.pending{
-
-background:#675e1d;
-
-}
-
-
-@media(max-width:700px){
-
-.stats{
-
-grid-template-columns:
-
-repeat(2,1fr);
-
-}
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<header>
-
-<div>
-
-<b>
-
-💎 TAJ.DONAT.TJ
-
-</b>
-
-— ADMIN PANEL
-
-</div>
-
-
-<a href="/admin/logout">
-
-🚪 Баромадан
-
-</a>
-
-</header>
-
-
-
-<main>
-
-
-<h1>
-
-📊 ФАРМОИШҲО
-
-</h1>
-
-
-
-<div class="stats">
-
-
-<div class="stat">
-
-📦 Ҳама
-
-<br>
-
-<b>
-
-{{ total }}
-
-</b>
-
-</div>
-
-
-
-<div class="stat">
-
-⏳ Дар санҷиш
-
-<br>
-
-<b>
-
-{{ pending }}
-
-</b>
-
-</div>
-
-
-
-<div class="stat">
-
-✅ Қабул
-
-<br>
-
-<b>
-
-{{ approved }}
-
-</b>
-
-</div>
-
-
-
-<div class="stat">
-
-❌ Рад
-
-<br>
-
-<b>
-
-{{ rejected }}
-
-</b>
-
-</div>
-
-
-</div>
-
-
-
-<div class="table-wrap">
-
-
-<table>
-
-
-<thead>
-
-<tr>
-
-<th>
-
-Фармоиш
-
-</th>
-
-<th>
-
-Маҳсулот
-
-</th>
-
-<th>
-
-FF ID
-
-</th>
-
-<th>
-
-Нарх
-
-</th>
-
-<th>
-
-Пардохт
-
-</th>
-
-<th>
-
-Муштарӣ
-
-</th>
-
-<th>
-
-Чек
-
-</th>
-
-<th>
-
-Статус
-
-</th>
-
-<th>
-
-Идора
-
-</th>
-
-</tr>
-
-</thead>
-
-
-
-<tbody>
-
-
-{% for o in orders %}
-
-
-<tr>
-
-
-<td>
-
-<b>
-
-#{{ o["order_number"] }}
-
-</b>
-
-</td>
-
-
-<td>
-
-{{ o["product"] }}
-
-</td>
-
-
-<td>
-
-{{ o["ff_id"] }}
-
-</td>
-
-
-<td>
-
-{{ o["price"] }}
-
-</td>
-
-
-<td>
-
-{{ o["payment"] }}
-
-</td>
-
-
-<td>
-
-{{ o["customer_name"] or "-" }}
-
-<br>
-
-{{ o["customer_phone"] or "-" }}
-
-</td>
-
-
-<td>
-
-
-{% if o["check_file"] %}
-
-
-<a
-
-href="/uploads/{{ o['check_file'] }}"
-
-target="_blank"
-
->
-
-🧾 КУШОДАН
-
-</a>
-
-
-{% else %}
-
-—
-
-{% endif %}
-
-
-</td>
-
-
-<td>
-
-{{ o["status"] }}
-
-</td>
-
-
-<td>
-
-
-<form
-
-method="POST"
-
-action="/admin/order/{{ o['id'] }}/status"
-
->
-
-<input
-type="hidden"
-name="status"
-value="✅ Қабул шуд">
-
-<button class="ok">
-
-✅ Қабул
-
-</button>
-
-</form>
-
-
-
-<form
-
-method="POST"
-
-action="/admin/order/{{ o['id'] }}/status"
-
->
-
-<input
-type="hidden"
-name="status"
-value="❌ Рад шуд">
-
-<button class="no">
-
-❌ Рад
-
-</button>
-
-</form>
-
-
-</td>
-
-
-</tr>
-
-
-{% endfor %}
-
-
-</tbody>
-
-
-</table>
-
-
-</div>
-
-
-</main>
-
-
-</body>
-
-</html>
-
-"""
-
-
-# ==========================================
-# START SERVER
-# ==========================================
-
-if __name__ == "__main__":
-
-    init_db()
-
-    print("=" * 45)
-
-    print("TAJ.DONAT.TJ WEBSITE STARTED")
-
-    print("SITE: http://127.0.0.1:5000")
-
-    print("ADMIN: http://127.0.0.1:5000/admin")
-
-    print("=" * 45)
-
-    app.run(
-
-        host="0.0.0.0",
-
-        port=5000,
-
-        debug=True
-
-    )
+    </html>
