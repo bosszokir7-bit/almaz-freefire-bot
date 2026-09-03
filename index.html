@@ -2,1558 +2,449 @@
 <html lang="tg">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1">
-<title>TAJ.DONAT.TJ — Free Fire Store</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>TAJ.DONAT.TJ</title>
 <style>
-:root{
- --bg:#08090b;
- --card:#14161a;
- --card2:#191c22;
- --line:#2b2e35;
- --orange:#ff8a00;
- --orange2:#ffad22;
- --text:#f4f4f5;
- --muted:#858994;
- --green:#20d86a;
- --red:#ff4f5e
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
- margin:0;
- background:var(--bg);
- color:var(--text);
- font-family:Arial,sans-serif;
- padding-bottom:88px
-}
-button,input,select{font:inherit}
-button{cursor:pointer}
-
-.top{
- height:64px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding:0 18px;
- border-bottom:1px solid #1d1f24;
- position:sticky;
- top:0;
- background:#08090b;
- z-index:20
-}
-
-.logo{
- font-size:20px;
- font-weight:800
-}
-.logo b{color:var(--orange)}
-
-.admin{
- font-size:12px;
- color:var(--orange);
- border:1px solid #5b390c;
- padding:8px 10px;
- border-radius:10px
-}
-
-main{
- max-width:1100px;
- margin:auto;
- padding:18px
-}
-
-.page{display:none}
-.page.active{display:block}
-
-h1{
- font-size:27px;
- margin:10px 0 20px
-}
-
-.title{
- font-size:23px;
- font-weight:800;
- margin:18px 5px
-}
-
-.balance{
- background:linear-gradient(135deg,#201c17,#15171c);
- border:1px solid #3d3529;
- border-radius:28px;
- padding:24px;
- margin-bottom:18px
-}
-
-.greet{
- display:inline-block;
- background:#3a3938;
- padding:9px 18px;
- border-radius:22px;
- font-weight:700
-}
-
-.balance-num{
- font-size:45px;
- font-weight:800;
- margin:22px 0 12px
-}
-
-.muted{color:var(--muted)}
-
-.row{
- display:flex;
- gap:12px
-}
-
-.row>*{flex:1}
-
-.btn{
- border:0;
- border-radius:17px;
- padding:15px 18px;
- background:var(--orange);
- color:#111;
- font-weight:800
-}
-
-.btn.dark{
- background:#272019;
- color:var(--orange);
- border:1px solid #654214
-}
-
-.btn.red{
- background:#3b1519;
- color:#ff7881
-}
-
-.chips{
- display:flex;
- gap:10px;
- overflow:auto;
- margin:18px 0
-}
-
-.chip{
- white-space:nowrap;
- padding:11px 17px;
- background:#171a20;
- border:1px solid #2d3037;
- border-radius:25px;
- color:#aeb2ba
-}
-
-.banner{
- border:1px solid #30333a;
- border-radius:20px;
- min-height:150px;
- padding:25px;
- margin:16px 0;
- background:linear-gradient(135deg,#101217,#20232a)
-}
-
-.banner h2{
- font-size:30px;
- margin:0 0 12px
-}
-
-.banner p{color:#aaa}
-
-.categories{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:14px
-}
-
-.category{
- min-height:130px;
- border:1px solid #2d3037;
- border-radius:20px;
- padding:20px;
- background:#121419
-}
-
-.category h2{margin:0 0 10px}
-.category .icon{font-size:38px}
-
-.products{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:14px
-}
-
-.product{
- background:var(--card);
- border:1px solid var(--line);
- border-radius:19px;
- padding:12px;
- overflow:hidden
-}
-
-.pic{
- height:125px;
- border-radius:15px;
- background:#1b1e26;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:58px
-}
-
-.product h3{
- margin:13px 2px 7px
-}
-
-.price{
- font-size:25px;
- font-weight:800
-}
-
-.price span{
- font-size:14px;
- color:#9a9da5;
- font-weight:500
-}
-
-.product .btn{
- width:100%;
- margin-top:12px;
- padding:12px;
- border-radius:12px
-}
-
-.form{
- background:var(--card);
- border:1px solid var(--line);
- padding:18px;
- border-radius:20px
-}
-
-label{
- display:block;
- margin:12px 0 6px;
- color:#b8bbc3;
- font-weight:700
-}
-
-input,select{
- width:100%;
- background:#0e1014;
- border:1px solid #343740;
- color:#fff;
- padding:14px;
- border-radius:12px;
- outline:none
-}
-
-input:focus,select:focus{
- border-color:var(--orange)
-}
-
-.payment{
- background:#171a20;
- border:1px solid #30343c;
- padding:15px;
- border-radius:16px;
- margin:10px 0
-}
-
-.payment b{font-size:18px}
-
-.copy{
- float:right;
- background:#252930;
- color:#ddd;
- border:1px solid #3b3f48;
- padding:7px 10px;
- border-radius:8px
-}
-
-.order{
- background:var(--card);
- border:1px solid var(--line);
- border-radius:18px;
- padding:16px;
- margin:12px 0
-}
-
-.status{
- display:inline-block;
- padding:6px 9px;
- border-radius:8px;
- background:#163c28;
- color:#42eb82;
- font-size:12px;
- font-weight:800
-}
-
-.status.wait{
- background:#3d2e13;
- color:#ffbd4a
-}
-
-.status.no{
- background:#40181c;
- color:#ff7780
-}
-
-.empty{
- text-align:center;
- padding:40px;
- color:#777
-}
-
-.support-grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:14px
-}
-
-.support-card{
- padding:22px;
- background:var(--card);
- border:1px solid var(--line);
- border-radius:20px
-}
-
-details{
- background:var(--card);
- border:1px solid var(--line);
- border-radius:16px;
- padding:16px;
- margin:10px 0
-}
-
-summary{
- font-weight:800;
- cursor:pointer
-}
-
-.adminbox{
- border:1px solid #61400f;
- background:#211a10;
- padding:18px;
- border-radius:20px
-}
-
-.bottom{
- position:fixed;
- bottom:0;
- left:0;
- right:0;
- height:76px;
- background:#0a0b0e;
- border-top:1px solid #292c32;
- display:grid;
- grid-template-columns:repeat(4,1fr);
- z-index:30
-}
-
-.navbtn{
- border:0;
- background:none;
- color:#777;
- font-weight:700
-}
-
-.navbtn.active{color:var(--orange)}
-
-.navbtn div{
- font-size:25px;
- margin-bottom:3px
-}
-
-.toast{
- position:fixed;
- left:50%;
- bottom:92px;
- transform:translateX(-50%);
- background:#25282e;
- color:#fff;
- padding:13px 18px;
- border-radius:12px;
- display:none;
- z-index:50;
- box-shadow:0 5px 30px #000
-}
-
-@media(max-width:650px){
- main{padding:12px}
- .products{grid-template-columns:repeat(2,1fr)}
- .categories,.support-grid{grid-template-columns:1fr}
- .pic{height:105px}
- .product h3{font-size:15px}
- .price{font-size:21px}
- .admin{display:none}
- .balance{border-radius:22px}
-}
+:root{--bg:#08090b;--card:#14161a;--line:#2b2e35;--orange:#ff8a00;--text:#f5f5f5;--muted:#858994;--green:#20d86a;--red:#ff4f5e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;padding-bottom:85px}
+button,input,select{font:inherit}button{cursor:pointer}.top{height:64px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;background:#08090b;border-bottom:1px solid #202228;position:sticky;top:0;z-index:10}
+.logo{font-weight:900;font-size:20px}.logo b{color:var(--orange)}main{max-width:1050px;margin:auto;padding:16px}.page{display:none}.page.active{display:block}
+h1{font-size:28px}.balance,.box,.order,.product,.support{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:14px}
+.balance{background:linear-gradient(135deg,#241f18,#14161a)}.greet{display:inline-block;background:#3a3938;padding:8px 16px;border-radius:20px}.num{font-size:44px;font-weight:900;margin:20px 0}
+.row{display:flex;gap:10px}.row>*{flex:1}.btn{border:0;background:var(--orange);color:#111;font-weight:900;padding:14px 16px;border-radius:14px}.dark{background:#292016;color:var(--orange);border:1px solid #60420f}.red{background:#42181d;color:#ff7881}
+.chips{display:flex;gap:9px;overflow:auto;margin:14px 0}.chip{white-space:nowrap;padding:10px 15px;border:1px solid #30333a;border-radius:20px;color:#aaa;background:#171a20}
+.categories,.products{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.category{padding:20px;background:#13151a;border:1px solid var(--line);border-radius:20px;cursor:pointer}.category .icon{font-size:40px}.category h2{font-size:18px}
+.pic{height:110px;border-radius:14px;background:#1c1f26;display:flex;align-items:center;justify-content:center;font-size:55px}.product h3{margin:12px 0 5px}.price{font-size:23px;font-weight:900}.price small{color:#999;font-size:13px}.product .btn{width:100%;margin-top:10px;padding:11px}
+label{display:block;color:#bbb;margin:12px 0 6px;font-weight:bold}input,select{width:100%;padding:13px;border-radius:11px;border:1px solid #353942;background:#0e1014;color:#fff;outline:0}input:focus,select:focus{border-color:var(--orange)}
+.payment{background:#181b20;border:1px solid #30343b;border-radius:14px;padding:14px;margin:10px 0}.copy{float:right;background:#292d34;color:#fff;border:1px solid #444;padding:7px 10px;border-radius:8px}
+.status{display:inline-block;padding:6px 10px;border-radius:8px;background:#3b2d13;color:#ffbf4d;font-size:12px;font-weight:bold}.ok{background:#153c27;color:#45ed83}.no{background:#40171c;color:#ff7780}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:76px;background:#0b0c0f;border-top:1px solid #282b31;display:grid;grid-template-columns:repeat(4,1fr);z-index:20}.nav{border:0;background:none;color:#777;font-weight:bold}.nav.active{color:var(--orange)}.nav div{font-size:25px}
+.notice{padding:12px;border:1px solid #765116;background:#241b0d;border-radius:12px;color:#ffbf4d}.empty{text-align:center;color:#777;padding:35px}
+.toast{display:none;position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#292c32;padding:12px 17px;border-radius:12px;z-index:30}
+.admin{background:#211a10;border:1px solid #69470e;padding:15px;border-radius:16px;margin-bottom:15px}
+@media(max-width:650px){main{padding:12px}.products{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:1fr}.row{flex-direction:column}.pic{height:100px}.product{padding:10px}}
 </style>
 </head>
-
 <body>
 
 <header class="top">
 <div class="logo">💎 TAJ.<b>DONAT.TJ</b></div>
-<div class="admin">👨‍💻 Админ</div>
+<div style="color:#20d86a;font-size:12px">● Онлайн</div>
 </header>
 
 <main>
 
-<!-- АСОСӢ -->
 <section id="home" class="page active">
-
 <div class="balance">
-
 <span class="greet">Рӯз ба хайр! 👋</span>
-
 <h2 id="hello">Муштарӣ</h2>
-
-<div class="muted">БАЛАНС 👁</div>
-
-<div class="balance-num">
-<span id="balance">0.00</span>
-<small class="muted">СМ</small>
-</div>
-
+<div style="color:#858994">БАЛАНС</div>
+<div class="num"><span id="balance">0.00</span> <small style="font-size:14px;color:#858994">СМ</small></div>
 <div class="row">
-
-<button class="btn" onclick="go('balancePage')">
-＋ Пур кардан
-</button>
-
-<button class="btn dark" onclick="go('ordersPage')">
-↗ Фармоишҳо
-</button>
-
+<button class="btn" onclick="go('balancePage')">＋ Пур кардан</button>
+<button class="btn dark" onclick="go('ordersPage')">📦 Фармоишҳо</button>
 </div>
 </div>
 
 <div class="chips">
-<span class="chip">⚡ То 1 дақиқа</span>
-<span class="chip">🛡 Бехатар</span>
-<span class="chip">◷ 24/7</span>
+<span class="chip">⚡ То 1 дақиқа</span><span class="chip">🛡 Бехатар</span><span class="chip">◷ 24/7</span>
 </div>
 
-<div class="title">
-КАТЕГОРИЯҲО
-<span class="muted" style="float:right;font-size:13px">
-Бозиро интихоб кунед
-</span>
-</div>
-
+<h2>КАТЕГОРИЯҲО</h2>
 <div class="categories">
-
-<div class="category" onclick="go('shopPage')">
-<div class="icon">💎</div>
-<h2>FREE FIRE СНГ</h2>
-<button class="btn">Харидан →</button>
+<div class="category" onclick="go('shopPage')"><div class="icon">💎</div><h2>FREE FIRE СНГ</h2><button class="btn">Харидан →</button></div>
+<div class="category" onclick="go('shopPage')"><div class="icon">🎮</div><h2>FREE FIRE ИНДОНЕЗИЯ</h2><button class="btn">Харидан →</button></div>
 </div>
-
-<div class="category" onclick="go('shopPage')">
-<div class="icon">🎮</div>
-<h2>FREE FIRE ИНДОНЕЗИЯ</h2>
-<button class="btn">Харидан →</button>
-</div>
-
-</div>
-
-<div class="banner">
-<h2>🔥 TAJ.DONAT.TJ</h2>
-<p>Тез • Осон • Босифат • Бе фиреб</p>
-<button class="btn" onclick="go('shopPage')">
-Хариди алмаз 💎
-</button>
-</div>
-
 </section>
 
-
-<!-- МАГАЗИН -->
 <section id="shopPage" class="page">
-
-<h1>Free Fire CHN</h1>
-
-<div class="chips">
-<span class="chip" style="background:var(--orange);color:#111">
-💎 Алмазҳо
-</span>
-<span class="chip">🏅 Level Up</span>
-</div>
-
+<h1>💎 Хариди Free Fire</h1>
+<div class="chips"><span class="chip">💎 Алмазҳо</span><span class="chip">🏅 Level Up</span></div>
 <div class="products" id="products"></div>
-
-<div class="title">🎟️ ВАУЧЕРҲО</div>
-
+<h2>🎟️ Ваучерҳо</h2>
 <div class="products" id="vouchers"></div>
-
 </section>
 
-
-<!-- ХАРИД -->
 <section id="buyPage" class="page">
-
-<h1>🛒 Оформить фармоиш</h1>
-
-<div class="form">
-
+<h1>📦 Фармоиш додан</h1>
+<div class="box">
 <div id="selectedProduct" class="payment"></div>
 
 <label>🎮 ID / UID Free Fire</label>
-
-<input
-id="uid"
-inputmode="numeric"
-placeholder="UID-и худро ворид кунед"
->
+<input id="uid" inputmode="numeric" placeholder="UID-и худро ворид кунед">
 
 <label>👤 Номи бозигар</label>
+<input id="player" placeholder="Номи бозигар">
 
-<input
-id="player"
-placeholder="Номи бозигар"
->
-
-<label>💳 Усули пардохт</label>
-
+<label>💳 Пардохт</label>
 <select id="method">
-<option>Баланс</option>
 <option>Эсхата</option>
 <option>ICB Mobile</option>
+<option>Баланс</option>
 </select>
 
-<div class="payment">
-
-<b>ЭСХАТА</b>
-
-<br>
-
-+992 935 710 406
-
-<button
-class="copy"
-onclick="copyText('+992935710406')">
-Копия
-</button>
-
-</div>
-
-<div class="payment">
-
-<b>ICB MOBILE</b>
-
-<br>
-
-+992 935 710 406
-
-<button
-class="copy"
-onclick="copyText('+992935710406')">
-Копия
-</button>
-
-</div>
+<div class="payment"><b>ЭСХАТА</b><br>+992 935 710 406 <button class="copy" onclick="copyText('+992935710406')">Копия</button></div>
+<div class="payment"><b>ICB MOBILE</b><br>+992 935 710 406 <button class="copy" onclick="copyText('+992935710406')">Копия</button></div>
 
 <label>🧾 Рақами чек</label>
+<input id="receipt" inputmode="numeric" placeholder="Танҳо рақами чек">
 
-<input
-id="receipt"
-placeholder="Рақами чекро ворид кунед"
->
+<div class="notice" style="margin-top:12px">⚠️ Рақами чекро дуруст ворид кунед. Фармоиш ба админ фиристода мешавад.</div>
 
-<button
-class="btn"
-style="width:100%;margin-top:15px"
-onclick="submitOrder()">
-
-📦 Фармоиш додан
-
-</button>
-
+<button class="btn" style="width:100%;margin-top:15px" onclick="submitOrder()">📦 Фармоиш додан</button>
 </div>
-
 </section>
 
-
-<!-- БАЛАНС -->
 <section id="balancePage" class="page">
-
 <h1>💰 Пур кардани баланс</h1>
+<div class="box">
+<label>Маблағ</label>
+<input id="topup" type="number" min="1" placeholder="Масалан: 50">
 
-<div class="form">
+<div class="payment"><b>ЭСХАТА</b><br>+992 935 710 406 <button class="copy" onclick="copyText('+992935710406')">Копия</button></div>
+<div class="payment"><b>ICB MOBILE</b><br>+992 935 710 406 <button class="copy" onclick="copyText('+992935710406')">Копия</button></div>
 
-<label>Маблағ (сомонӣ)</label>
+<label>🧾 Рақами чек</label>
+<input id="topReceipt" inputmode="numeric" placeholder="Танҳо рақами чек">
 
-<input
-id="topup"
-type="number"
-min="1"
-placeholder="Масалан: 50"
->
-
-<div class="payment">
-
-<b>ЭСХАТА</b>
-
-<br>
-
-+992 935 710 406
-
-<button
-class="copy"
-onclick="copyText('+992935710406')">
-Копия
-</button>
-
+<button class="btn" style="width:100%;margin-top:15px" onclick="submitTopup()">💰 Пур кардани баланс</button>
 </div>
-
-<div class="payment">
-
-<b>ICB MOBILE</b>
-
-<br>
-
-+992 935 710 406
-
-<button
-class="copy"
-onclick="copyText('+992935710406')">
-Копия
-</button>
-
-</div>
-
-<label>Рақами чек</label>
-
-<input
-id="topReceipt"
-placeholder="Рақами чекро ворид кунед"
->
-
-<p class="muted">
-Пас аз пардохт фармоиш барои тасдиқи админ фиристода мешавад.
-</p>
-
-<button
-class="btn"
-style="width:100%"
-onclick="submitTopup()">
-
-💰 Пур кардани баланс
-
-</button>
-
-</div>
-
 </section>
 
-
-<!-- ФАРМОИШҲО -->
 <section id="ordersPage" class="page">
-
 <h1>📦 Фармоишҳои ман</h1>
 
+<div class="box">
+<label>🔎 Ҷустуҷӯ</label>
+<input id="searchInput" placeholder="#37821 ё рақами чек" oninput="renderOrders()">
+</div>
+
 <div id="orders"></div>
-
 </section>
 
-
-<!-- ПРОФИЛ -->
 <section id="profilePage" class="page">
-
 <h1>👤 Профил</h1>
-
-<div class="form">
-
+<div class="box">
 <label>Ном</label>
-
-<input
-id="profileName"
-placeholder="Номи шумо"
->
-
-<button
-class="btn"
-style="width:100%;margin-top:15px"
-onclick="saveProfile()">
-
-💾 Захира кардан
-
-</button>
-
-<div class="payment" style="margin-top:20px">
-
-💰 Баланс:
-
-<b>
-<span id="profileBalance">0.00</span>
-СМ
-</b>
-
+<input id="profileName" placeholder="Номи шумо">
+<button class="btn" style="width:100%;margin-top:15px" onclick="saveProfile()">💾 Захира кардан</button>
+<div class="payment">💰 Баланс: <b><span id="profileBalance">0.00</span> СМ</b></div>
 </div>
-
-<button
-class="btn dark"
-style="width:100%"
-onclick="clearData()">
-
-🗑 Тоза кардани маълумоти ман
-
-</button>
-
-</div>
-
 </section>
 
-
-<!-- ДАСТГИРӢ -->
 <section id="supportPage" class="page">
-
 <h1>🎧 Дастгирӣ</h1>
-
-<div class="support-grid">
-
-<div class="support-card">
-
-✈️
-
-<h2>Ба мо нависед</h2>
-
-<p class="muted">@Zokirjon0555</p>
-
-<button
-class="btn"
-onclick="openTelegram('Zokirjon0555')">
-
-Нависед →
-
-</button>
-
-</div>
-
-
-<div class="support-card">
-
-📢
-
-<h2>Канали расмӣ</h2>
-
-<p class="muted">@taj_donat_tj</p>
-
-<button
-class="btn"
-onclick="openTelegram('taj_donat_tj')">
-
-Кушодан →
-
-</button>
-
-</div>
-
-</div>
-
-<h2 class="title">
-САВОЛҲОИ МАЪМУЛ
-</h2>
-
-<details>
-
-<summary>
-Чанд вақт мунтазир шавам?
-</summary>
-
-<p class="muted">
-Одатан фармоиш баъди тасдиқи пардохт зуд иҷро мешавад.
-</p>
-
-</details>
-
-<details>
-
-<summary>
-Оё ID-и ман бехатар аст?
-</summary>
-
-<p class="muted">
-ID танҳо барои иҷрои фармоиши Free Fire истифода мешавад.
-</p>
-
-</details>
-
-<details>
-
-<summary>
-Фармоишам иҷро нашуд, чӣ кор кунам?
-</summary>
-
-<p class="muted">
-Рақами фармоишро нигоҳ доред ва ба дастгирӣ нависед.
-</p>
-
-</details>
-
+<div class="support"><h2>✈️ Ба мо нависед</h2><p>@Zokirjon0555</p><button class="btn" onclick="openTelegram('Zokirjon0555')">Нависед →</button></div>
+<div class="support"><h2>📢 Канали расмӣ</h2><p>@taj_donat_tj</p><button class="btn" onclick="openTelegram('taj_donat_tj')">Кушодан →</button></div>
+<h2>САВОЛҲО</h2>
+<details><summary>Чанд вақт мунтазир шавам?</summary><p>Одатан баъди тасдиқи пардохт фармоиш иҷро мешавад.</p></details>
+<details><summary>Оё ID-и ман бехатар аст?</summary><p>ID танҳо барои иҷрои фармоиш истифода мешавад.</p></details>
 </section>
 
-
-<!-- АДМИН -->
 <section id="adminPage" class="page">
-
 <h1>👨‍💻 Панели админ</h1>
-
-<div class="adminbox">
-
-<b>Admin ID:</b> 6439367152
-
-<br><br>
-
-<b>Username:</b> @Zokirjon0555
-
-</div>
-
+<div class="admin"><b>Admin ID:</b> 6439367152<br><b>Username:</b> @Zokirjon0555</div>
 <div id="adminOrders"></div>
-
 </section>
 
 </main>
 
-
-<!-- МЕНЮ -->
 <nav class="bottom">
-
-<button
-class="navbtn active"
-data-page="home"
-onclick="go('home')">
-
-<div>⌂</div>
-Асосӣ
-
-</button>
-
-
-<button
-class="navbtn"
-data-page="shopPage"
-onclick="go('shopPage')">
-
-<div>🛍</div>
-Харидҳо
-
-</button>
-
-
-<button
-class="navbtn"
-data-page="supportPage"
-onclick="go('supportPage')">
-
-<div>♧</div>
-Дастгирӣ
-
-</button>
-
-
-<button
-class="navbtn"
-data-page="profilePage"
-onclick="go('profilePage')">
-
-<div>♙</div>
-Профил
-
-</button>
-
+<button class="nav active" data-page="home" onclick="go('home')"><div>⌂</div>Асосӣ</button>
+<button class="nav" data-page="shopPage" onclick="go('shopPage')"><div>🛍</div>Харидҳо</button>
+<button class="nav" data-page="supportPage" onclick="go('supportPage')"><div>♧</div>Дастгирӣ</button>
+<button class="nav" data-page="profilePage" onclick="go('profilePage')"><div>♙</div>Профил</button>
 </nav>
-
 
 <div id="toast" class="toast"></div>
 
-
 <script>
-
 const ADMIN_ID="6439367152";
-
 const ADMIN_USERNAME="Zokirjon0555";
 
-
 const products=[
-
 {name:"100 Алмазҳо",price:10,emoji:"💎"},
-
 {name:"310 Алмазҳо",price:29,emoji:"💎"},
-
 {name:"520 Алмазҳо",price:50,emoji:"💎"},
-
 {name:"1060 Алмазҳо",price:100,emoji:"💎"},
-
 {name:"2180 Алмазҳо",price:200,emoji:"💎"},
-
 {name:"5600 Алмазҳо",price:550,emoji:"💎"}
-
 ];
-
 
 const vouchers=[
-
 {name:"Ваучер Lite 90",price:7,emoji:"🎟️"},
-
 {name:"Ваучер ҳафта 450",price:18,emoji:"🎟️"},
-
 {name:"Ваучер моҳона 2600",price:95,emoji:"🎟️"}
-
 ];
 
-
-let state=JSON.parse(
-localStorage.getItem("tajStore")
-||
-'{"balance":0,"orders":[],"name":""}'
-);
-
+let state=JSON.parse(localStorage.getItem("tajStoreV2")||'{"balance":0,"orders":[],"name":""}');
 let selected=null;
 
-
 function save(){
-
-localStorage.setItem(
-"tajStore",
-JSON.stringify(state)
-);
-
-updateUI();
-
+ localStorage.setItem("tajStoreV2",JSON.stringify(state));
+ updateUI();
 }
 
-
-function toast(text){
-
-let x=document.getElementById("toast");
-
-x.textContent=text;
-
-x.style.display="block";
-
-setTimeout(
-()=>x.style.display="none",
-2200
-);
-
+function toast(t){
+ const x=document.getElementById("toast");
+ x.textContent=t;x.style.display="block";
+ clearTimeout(window.tt);
+ window.tt=setTimeout(()=>x.style.display="none",2300);
 }
-
 
 function go(id){
-
-document
-.querySelectorAll(".page")
-.forEach(x=>x.classList.remove("active"));
-
-document
-.getElementById(id)
-.classList.add("active");
-
-
-document
-.querySelectorAll(".navbtn")
-.forEach(x=>
-x.classList.toggle(
-"active",
-x.dataset.page===id
-)
-);
-
-updateUI();
-
-window.scrollTo(0,0);
-
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav").forEach(x=>x.classList.toggle("active",x.dataset.page===id));
+ updateUI();window.scrollTo(0,0);
 }
-
 
 function renderProducts(){
+ document.getElementById("products").innerHTML=products.map((p,i)=>`
+ <div class="product">
+ <div class="pic">${p.emoji}</div>
+ <h3>${p.name}</h3>
+ <div class="price">${p.price}.00 <small>СМ</small></div>
+ <button class="btn" onclick="choose(${i},false)">Харидан</button>
+ </div>`).join("");
 
-document.getElementById("products").innerHTML=
-
-products.map((p,i)=>`
-
-<div class="product">
-
-<div class="pic">
-${p.emoji}
-</div>
-
-<h3>${p.name}</h3>
-
-<div class="price">
-${p.price}.00
-<span>СМ</span>
-</div>
-
-<button
-class="btn"
-onclick="choose(${i},false)">
-
-Харидан
-
-</button>
-
-</div>
-
-`).join("");
-
-
-document.getElementById("vouchers").innerHTML=
-
-vouchers.map((p,i)=>`
-
-<div class="product">
-
-<div class="pic">
-${p.emoji}
-</div>
-
-<h3>${p.name}</h3>
-
-<div class="price">
-${p.price}.00
-<span>СМ</span>
-</div>
-
-<button
-class="btn"
-onclick="choose(${i},true)">
-
-Харидан
-
-</button>
-
-</div>
-
-`).join("");
-
+ document.getElementById("vouchers").innerHTML=vouchers.map((p,i)=>`
+ <div class="product">
+ <div class="pic">${p.emoji}</div>
+ <h3>${p.name}</h3>
+ <div class="price">${p.price}.00 <small>СМ</small></div>
+ <button class="btn" onclick="choose(${i},true)">Харидан</button>
+ </div>`).join("");
 }
-
 
 function choose(i,voucher){
-
-selected={
-...(voucher?vouchers[i]:products[i]),
-voucher
-};
-
-document.getElementById(
-"selectedProduct"
-).innerHTML=`
-
-<b>
-${selected.emoji}
-${selected.name}
-</b>
-
-<br>
-
-<span class="price">
-${selected.price}.00 СМ
-</span>
-
-`;
-
-go("buyPage");
-
+ selected={...(voucher?vouchers[i]:products[i]),voucher};
+ document.getElementById("selectedProduct").innerHTML=
+ `<b>${selected.emoji} ${selected.name}</b><br><span class="price">${selected.price}.00 СМ</span>`;
+ go("buyPage");
 }
-
 
 function makeId(){
-
-return "#"+
-Math.floor(
-10000+
-Math.random()*90000
-);
-
+ let id;
+ do{id="#"+Math.floor(10000+Math.random()*90000)}
+ while(state.orders.some(o=>o.id===id));
+ return id;
 }
 
+/* НУҚТАИ МУҲИМ:
+   receipt танҳо ҳамчун receipt ҷустуҷӯ мешавад.
+   id танҳо ҳамчун id ҷустуҷӯ мешавад. */
+function cleanDigits(v){return String(v||"").replace(/\D/g,"")}
+
+function sendToTelegram(order){
+ try{
+   if(window.Telegram && Telegram.WebApp && Telegram.WebApp.initData){
+     Telegram.WebApp.sendData(JSON.stringify({
+       action:"new_order",
+       order:order
+     }));
+     Telegram.WebApp.close();
+   }
+ }catch(e){}
+}
 
 function submitOrder(){
+ if(!selected)return toast("Маҳсулот интихоб нашудааст");
 
-let uid=
-document.getElementById("uid")
-.value.trim();
+ const uid=document.getElementById("uid").value.trim();
+ const player=document.getElementById("player").value.trim();
+ const method=document.getElementById("method").value;
+ const receipt=cleanDigits(document.getElementById("receipt").value);
 
-let player=
-document.getElementById("player")
-.value.trim();
+ if(!selected.voucher && !uid)return toast("UID-ро ворид кунед");
 
-if(!selected){
+ if(!receipt && method!=="Баланс")
+   return toast("Рақами чекро ворид кунед");
 
-return toast(
-"Маҳсулот интихоб нашудааст"
-);
+ if(method==="Баланс"){
+   if(state.balance<selected.price)return toast("Баланс кофӣ нест");
+   state.balance-=selected.price;
+ }
 
+ const order={
+   id:makeId(),
+   type:selected.name,
+   price:Number(selected.price),
+   uid:uid,
+   player:player,
+   method:method,
+   receipt:receipt,
+   status:"Дар интизорӣ",
+   date:new Date().toLocaleString("tg-TJ")
+ };
+
+ state.orders.unshift(order);
+ save();
+ sendToTelegram(order);
+
+ document.getElementById("uid").value="";
+ document.getElementById("player").value="";
+ document.getElementById("receipt").value="";
+
+ toast("Фармоиш "+order.id+" қабул шуд ✅");
+ go("ordersPage");
 }
-
-
-if(!selected.voucher&&!uid){
-
-return toast(
-"UID-ро ворид кунед"
-);
-
-}
-
-
-let method=
-document.getElementById("method")
-.value;
-
-let receipt=
-document.getElementById("receipt")
-.value.trim();
-
-
-if(
-method!=="Баланс"
-&&
-!receipt
-){
-
-return toast(
-"Рақами чекро ворид кунед"
-);
-
-}
-
-
-if(
-method==="Баланс"
-&&
-state.balance<selected.price
-){
-
-return toast(
-"Баланс кофӣ нест"
-);
-
-}
-
-
-if(method==="Баланс"){
-
-state.balance-=selected.price;
-
-}
-
-
-state.orders.unshift({
-
-id:makeId(),
-
-type:selected.name,
-
-price:selected.price,
-
-uid:uid,
-
-player:player,
-
-method:method,
-
-receipt:receipt,
-
-status:"Дар интизорӣ",
-
-date:new Date()
-.toLocaleString("tg-TJ")
-
-});
-
-
-save();
-
-toast(
-"Фармоиш қабул шуд ✅"
-);
-
-go("ordersPage");
-
-
-document.getElementById("uid").value="";
-
-document.getElementById("player").value="";
-
-document.getElementById("receipt").value="";
-
-}
-
 
 function submitTopup(){
+ const amount=Number(document.getElementById("topup").value);
+ const receipt=cleanDigits(document.getElementById("topReceipt").value);
 
-let amount=
-Number(
-document.getElementById("topup").value
-);
+ if(!amount||amount<1)return toast("Маблағро ворид кунед");
+ if(!receipt)return toast("Рақами чекро ворид кунед");
 
-let receipt=
-document.getElementById("topReceipt")
-.value.trim();
+ const order={
+   id:makeId(),
+   type:"Пур кардани баланс",
+   price:amount,
+   receipt:receipt,
+   method:"Пардохт",
+   status:"Дар интизорӣ",
+   date:new Date().toLocaleString("tg-TJ")
+ };
 
+ state.orders.unshift(order);
+ save();
+ sendToTelegram(order);
 
-if(!amount||amount<1){
+ document.getElementById("topup").value="";
+ document.getElementById("topReceipt").value="";
 
-return toast(
-"Маблағро ворид кунед"
-);
-
+ toast("Дархост "+order.id+" фиристода шуд ✅");
+ go("ordersPage");
 }
 
-
-if(!receipt){
-
-return toast(
-"Рақами чекро ворид кунед"
-);
-
-}
-
-
-state.orders.unshift({
-
-id:makeId(),
-
-type:"Пур кардани баланс",
-
-price:amount,
-
-receipt:receipt,
-
-method:"Пардохт",
-
-status:"Дар интизорӣ",
-
-date:new Date()
-.toLocaleString("tg-TJ")
-
-});
-
-
-save();
-
-toast(
-"Дархост фиристода шуд ✅"
-);
-
-go("ordersPage");
-
-
-document.getElementById("topup").value="";
-
-document.getElementById("topReceipt").value="";
-
-}
-
-
+/* Ҷустуҷӯи дуруст:
+   #37821 -> ID
+   89 -> рақами чек
+   Дигар рақами фармоишро ҳам дуруст меёбад */
 function renderOrders(){
+ const q=document.getElementById("searchInput")?.value.trim()||"";
+ const digits=cleanDigits(q);
 
-let el=
-document.getElementById("orders");
+ let list=state.orders;
 
+ if(q){
+   list=list.filter(o=>{
+     const idDigits=cleanDigits(o.id);
+     const receipt=cleanDigits(o.receipt);
+     return idDigits===digits || receipt===digits;
+   });
+ }
 
-if(!state.orders.length){
+ const el=document.getElementById("orders");
 
-el.innerHTML=
-'<div class="empty">Ҳоло фармоиш нест 📦</div>';
+ if(!list.length){
+   el.innerHTML='<div class="empty">Фармоиш ёфт нашуд 📦</div>';
+   return;
+ }
 
-return;
-
+ el.innerHTML=list.map(o=>`
+ <div class="order">
+   <h2>${o.id}</h2>
+   <h3>${o.type}</h3>
+   💰 ${Number(o.price).toFixed(2)} СМ
+   ${o.uid?`<br>🎮 UID: ${o.uid}`:""}
+   ${o.player?`<br>👤 Ном: ${o.player}`:""}
+   ${o.receipt?`<br>🧾 Чек: ${o.receipt}`:""}
+   <br><span style="color:#777">${o.date}</span>
+   <br><br>
+   <span class="status ${o.status==="Қабул шуд"?"ok":o.status==="Рад шуд"?"no":""}">
+   ${o.status}
+   </span>
+ </div>`).join("");
 }
-
-
-el.innerHTML=
-
-state.orders.map(o=>`
-
-<div class="order">
-
-<b>${o.id}</b>
-
-<br><br>
-
-<b>${o.type}</b>
-
-<br>
-
-💰 ${o.price}.00 СМ
-
-${o.uid?
-`<br>🎮 UID: ${o.uid}`:""}
-
-${o.player?
-`<br>👤 Ном: ${o.player}`:""}
-
-${o.receipt?
-`<br>🧾 Чек: ${o.receipt}`:""}
-
-<br>
-
-<span class="muted">
-${o.date}
-</span>
-
-<br><br>
-
-<span class="status
-${o.status==="Рад шуд"?"no":
-o.status==="Дар интизорӣ"?"wait":""}">
-
-${o.status}
-
-</span>
-
-</div>
-
-`).join("");
-
-}
-
 
 function renderAdmin(){
+ const el=document.getElementById("adminOrders");
 
-let el=
-document.getElementById("adminOrders");
+ if(!state.orders.length){
+   el.innerHTML='<div class="empty">Ҳоло фармоиш нест</div>';
+   return;
+ }
 
+ el.innerHTML=state.orders.map((o,i)=>`
+ <div class="order">
+   <h2>${o.id}</h2>
+   <h3>${o.type}</h3>
+   💰 ${Number(o.price).toFixed(2)} СМ
+   ${o.uid?`<br>🎮 UID: ${o.uid}`:""}
+   ${o.player?`<br>👤 ${o.player}`:""}
+   ${o.receipt?`<br>🧾 Чек: ${o.receipt}`:""}
+   ${o.method?`<br>💳 ${o.method}`:""}
+   <br><small>${o.date}</small><br><br>
+   <span class="status ${o.status==="Қабул шуд"?"ok":o.status==="Рад шуд"?"no":""}">
+   ${o.status}
+   </span>
 
-if(!state.orders.length){
-
-el.innerHTML=
-'<div class="empty">Фармоиш нест</div>';
-
-return;
-
+   ${o.status==="Дар интизорӣ"?`
+   <div class="row" style="margin-top:12px">
+   <button class="btn" onclick="approve(${i})">✅ Қабул шуд</button>
+   <button class="btn red" onclick="reject(${i})">❌ Рад шуд</button>
+   </div>`:""}
+ </div>`).join("");
 }
-
-
-el.innerHTML=
-
-state.orders.map((o,i)=>`
-
-<div class="order">
-
-<b>${o.id}</b>
-
-—
-
-${o.type}
-
-<br>
-
-💰 ${o.price}.00 СМ
-
-<br>
-
-${o.uid?
-`🎮 UID: ${o.uid}<br>`:""}
-
-${o.player?
-`👤 Ном: ${o.player}<br>`:""}
-
-🧾 ${o.receipt||"—"}
-
-<br>
-
-<span class="status
-${o.status==="Рад шуд"?"no":
-o.status==="Дар интизорӣ"?"wait":""}">
-
-${o.status}
-
-</span>
-
-${
-o.status==="Дар интизорӣ"
-
-?
-
-`
-
-<div
-class="row"
-style="margin-top:12px">
-
-<button
-class="btn"
-onclick="approve(${i})">
-
-✅ Қабул шуд
-
-</button>
-
-<button
-class="btn red"
-onclick="reject(${i})">
-
-❌ Рад шуд
-
-</button>
-
-</div>
-
-`
-
-:""
-
-}
-
-</div>
-
-`).join("");
-
-}
-
 
 function approve(i){
-
-let o=state.orders[i];
-
-o.status="Қабул шуд";
-
-
-if(
-o.type==="Пур кардани баланс"
-){
-
-state.balance+=
-Number(o.price);
-
+ const o=state.orders[i];
+ if(!o)return;
+ o.status="Қабул шуд";
+ if(o.type==="Пур кардани баланс")state.balance+=Number(o.price);
+ save();
+ toast(o.id+" қабул шуд ✅");
 }
-
-
-save();
-
-toast(
-o.id+" қабул шуд ✅"
-);
-
-renderAdmin();
-
-}
-
 
 function reject(i){
-
-state.orders[i].status=
-"Рад шуд";
-
-save();
-
-toast(
-"Фармоиш рад шуд ❌"
-);
-
-renderAdmin();
-
+ const o=state.orders[i];
+ if(!o)return;
+ o.status="Рад шуд";
+ save();
+ toast(o.id+" рад шуд ❌");
 }
-
 
 function saveProfile(){
-
-state.name=
-document
-.getElementById("profileName")
-.value.trim()
-||
-"Муштарӣ";
-
-save();
-
-toast(
-"Профил захира шуд ✅"
-);
-
+ state.name=document.getElementById("profileName").value.trim()||"Муштарӣ";
+ save();toast("Профил захира шуд ✅");
 }
 
-
-function clearData(){
-
-if(
-confirm(
-"Ҳамаи маълумоти сайт тоза шавад?"
-)
-){
-
-localStorage.removeItem(
-"tajStore"
-);
-
-location.reload();
-
+function copyText(t){
+ if(navigator.clipboard)navigator.clipboard.writeText(t);
+ toast("Рақам нусха шуд ✅");
 }
 
+function openTelegram(u){
+ window.open("https://t.me/"+u,"_blank");
 }
-
-
-function copyText(text){
-
-if(navigator.clipboard){
-
-navigator.clipboard.writeText(text);
-
-}
-
-toast(
-"Рақам нусха шуд ✅"
-);
-
-}
-
-
-function openTelegram(username){
-
-window.open(
-"https://t.me/"+username,
-"_blank"
-);
-
-}
-
 
 function updateUI(){
-
-document.getElementById(
-"balance"
-).textContent=
-Number(state.balance)
-.toFixed(2);
-
-
-document.getElementById(
-"profileBalance"
-).textContent=
-Number(state.balance)
-.toFixed(2);
-
-
-document.getElementById(
-"hello"
-).textContent=
-state.name||"Муштарӣ";
-
-
-document.getElementById(
-"profileName"
-).value=
-state.name||"";
-
-
-renderOrders();
-
-renderAdmin();
-
+ document.getElementById("balance").textContent=Number(state.balance).toFixed(2);
+ document.getElementById("profileBalance").textContent=Number(state.balance).toFixed(2);
+ document.getElementById("hello").textContent=state.name||"Муштарӣ";
+ document.getElementById("profileName").value=state.name||"";
+ renderOrders();
+ renderAdmin();
 }
 
+/* Барои админ-панел: 5 маротиба ба логотип зер кун */
+let taps=0,timer;
+document.querySelector(".logo").addEventListener("click",()=>{
+ taps++;clearTimeout(timer);
+ timer=setTimeout(()=>taps=0,1800);
+ if(taps>=5){
+   taps=0;
+   const id=prompt("Admin ID:");
+   if(id===ADMIN_ID)go("adminPage");
+   else toast("Дастрасӣ рад шуд ❌");
+ }
+});
 
 renderProducts();
-
 updateUI();
-
 </script>
 
 </body>
-    </html>
+ </html>
