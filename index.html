@@ -2,739 +2,228 @@
 <html lang="tg">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAJ.DONAT.TJ</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garenashop.tj 🇹🇯 PRO MAX</title>
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- background:#050b18;
- color:#fff;
- font-family:Arial,sans-serif
-}
-.wrap{
- max-width:1100px;
- margin:auto;
- padding:16px
-}
-header{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:10px;
- padding:10px 0
-}
-.logo{
- font-size:28px;
- font-weight:900
-}
-.logo span{color:#00aaff}
-.sub{
- color:#9db3d5;
- font-size:12px
-}
-.balance{
- background:#101b35;
- border:1px solid #244b85;
- border-radius:16px;
- padding:10px 14px;
- color:#8fc8ff
-}
-.hero{
- margin:10px 0 20px;
- padding:25px;
- border-radius:22px;
- background:linear-gradient(135deg,#0b1734,#071c3b);
- border:1px solid #1769c8
-}
-.hero h1{
- margin:0 0 8px;
- font-size:30px
-}
-.hero p{
- margin:0;
- color:#b9c9e8
-}
-h2{
- font-size:20px;
- color:#46b9ff;
- margin:22px 0 12px
-}
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
- gap:12px
-}
-.card{
- background:#0c1830;
- border:1px solid #24477d;
- border-radius:18px;
- padding:15px;
- text-align:center;
- box-shadow:0 8px 25px #0005
-}
-.icon{font-size:48px}
-.card h3{margin:8px 0}
-.price{
- color:#71e2a5;
- font-weight:800;
- margin:7px
-}
-.btn{
- border:0;
- border-radius:12px;
- padding:11px 14px;
- background:#087ff5;
- color:white;
- font-weight:800;
- cursor:pointer;
- width:100%
-}
-.btn:hover{filter:brightness(1.15)}
-.purple{background:#7628e8}
-.green{background:#08a65a}
-.orange{background:#ee8300}
-
-.panel{
- display:none;
- background:#0b1730;
- border:1px solid #24528d;
- border-radius:20px;
- padding:18px;
- margin-top:15px
-}
-.panel.active{display:block}
-
-.row{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px
-}
-input,select{
- width:100%;
- padding:12px;
- border-radius:11px;
- border:1px solid #31557f;
- background:#071126;
- color:white;
- margin:6px 0 12px
-}
-.order{
- padding:12px;
- border-radius:12px;
- background:#101f3d;
- margin:8px 0
-}
-.bottom{
- position:sticky;
- bottom:0;
- margin-top:25px;
- padding:10px;
- background:#071126dd;
- backdrop-filter:blur(10px);
- display:grid;
- grid-template-columns:repeat(5,1fr);
- gap:7px;
- border-radius:18px
-}
-.bottom button{
- background:#10203d;
- color:#b9d1f5;
- border:1px solid #23456e;
- border-radius:12px;
- padding:10px 5px
-}
-small{color:#8ca4c8}
-
-@media(max-width:600px){
- .logo{font-size:21px}
- .hero h1{font-size:24px}
- .row{grid-template-columns:1fr}
- .bottom{font-size:11px}
-}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Arial',sans-serif}
+    body{background:#0B1120;color:#fff}
+    .header{background:#0B1120;padding:15px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #FFC107;position:sticky;top:0;z-index:10}
+    .logo{color:#FFC107;font-weight:bold;font-size:18px;display:flex;align-items:center;gap:8px}
+    .balance-box{background:linear-gradient(135deg,#1E3A8A,#3B82F6);padding:15px;border-radius:12px;margin:10px;border:1px solid #FFC107}
+    .balance-top{display:flex;justify-content:space-between;color:#FFC107;font-size:12px}
+    .balance-num{font-size:24px;font-weight:bold;margin-top:5px}
+    .btns{display:flex;gap:10px;margin-top:10px}
+    .btn-yellow{background:#FFC107;color:#000;border:none;padding:10px;border-radius:8px;font-weight:bold;flex:1}
+    .btn-blue{background:#1E3A8A;color:#fff;border:1px solid #FFC107;padding:10px;border-radius:8px;flex:1}
+    .btn-green{background:#16a34a;color:#fff;border:none;padding:10px;border-radius:8px;font-weight:bold;width:100%;margin:5px 0}
+    .tags{display:flex;gap:8px;margin:10px;overflow-x:auto}
+    .tag{background:#1E3A8A;padding:6px 12px;border-radius:20px;font-size:12px;white-space:nowrap;border:1px solid #3B82F6}
+    .tag.flag-tag{background:linear-gradient(90deg,#E60026 33%,#FFFFFF 33% 66%,#009B4D 66%);color:#000;font-weight:bold}
+    .title{padding:15px 10px;font-size:14px;color:#FFC107;font-weight:bold}
+    .card{background:#111827;margin:10px;border-radius:15px;padding:20px;border:1px solid #1E3A8A;position:relative}
+    .btn-buy{position:absolute;right:15px;bottom:15px;background:#FFC107;color:#000;border:none;padding:8px 18px;border-radius:8px;font-weight:bold}
+    .nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#0B1120;padding:10px 0;border-top:2px solid #FFC107}
+    .nav-item{text-align:center;color:#888;font-size:11px}
+    .nav-item.active{color:#FFC107}
+    .page{display:none;padding-bottom:70px}
+    .page.active{display:block}
+    .diamond-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+    .diamond-item{background:#111827;border:1px solid #1E3A8A;padding:15px;border-radius:12px;text-align:center}
+    .diamond-amount{color:#FFC107;font-size:18px;font-weight:bold}
+    input{background:#1E3A8A;border:1px solid #3B82F6;color:#fff;padding:14px;border-radius:10px;width:calc(100% - 20px);margin:10px}
+    .payment{background:#111827;padding:15px;border-radius:10px;margin:10px;border:1px solid #1E3A8A;display:flex;gap:12px;align-items:center}
+    .order-box{background:#111827;margin:10px;padding:15px;border-radius:12px;border:1px solid #1E3A8A}
+    .price{color:#FFC107;font-size:20px;font-weight:bold}
+    .history-item{background:#111827;margin:10px;padding:12px;border-radius:10px;border-left:3px solid #FFC107}
+    .bonus-box{background:linear-gradient(135deg,#FFC107,#FFA000);color:#000;padding:15px;border-radius:12px;margin:10px;text-align:center}
+    .ref-box{background:#111827;padding:15px;border-radius:12px;margin:10px;border:1px dashed #FFC107}
+    .admin-panel{background:#220000;border:2px solid red;padding:10px;margin:10px;border-radius:10px}
+    .order-admin{background:#111827;padding:10px;margin:5px 0;border-radius:8px;border-left:3px solid #FFC107}
 </style>
 </head>
-
 <body>
 
-<div class="wrap">
-
-<header>
-
-<div>
-<div class="logo">
-💎 TAJ.<span>DONAT.TJ</span>
+<!-- АСОСИ -->
+<div id="home" class="page active">
+    <div class="header"><div class="logo">🇹🇯 GARENASHOP.TJ</div><div onclick="showPage('admin')">⚙️</div></div>
+    <div class="balance-box">
+        <div class="balance-top"><span>БАЛАНСИ ШУМО</span><span>💎</span></div>
+        <div class="balance-num" id="balance">0.00 см</div>
+        <div class="btns">
+            <button class="btn-yellow" onclick="showPage('topup')">+ Пур кардан</button>
+            <button class="btn-blue" onclick="showPage('withdraw')">Боровардан</button>
+        </div>
+    </div>
+    <div class="tags">
+        <div class="tag flag-tag">🇹🇯 ТОҶИКИСТОН</div>
+        <div class="tag">⚡ То 1 дақиқа</div>
+        <div class="tag">🎁 Бонус 5%</div>
+        <div class="tag">👥 Реферал 10%</div>
+    </div>
+    <div class="title">ИНТИХОБИ СЕРВЕР</div>
+    <div class="card">
+        <div style="color:#FFC107;font-size:12px">FREE FIRE</div>
+        <div style="font-size:22px;font-weight:bold;margin:5px 0">🇹🇯 СЕРВЕРИ ТОҶИКИСТОН</div>
+        <button class="btn-buy" onclick="showPage('diamonds')">Харидан →</button>
+    </div>
 </div>
 
-<div class="sub">
-АЛМАЗ БО ЭЪТИМОД • БЕ ФИРЕБ • ГАРАНТИЯ 100%
-</div>
-</div>
-
-<div class="balance">
-💎 Баланс:
-<b id="balance">0</b> с
-</div>
-
-</header>
-
-
-<section class="hero">
-
-<h1>💎 Алмаз ва донати бозиҳо</h1>
-
-<p>
-Тез • Осон • Боэътимод 🔥
-Пардохт бо корт ва пуркунии баланс.
-</p>
-
-</section>
-
-
-<h2>🎮 Бозиҳо</h2>
-
-<div class="grid">
-
-<div class="card">
-<div class="icon">💎</div>
-<h3>Free Fire</h3>
-<p>Алмаз</p>
-<button class="btn"
-onclick="openGame('Free Fire')">
-Харидан
-</button>
+<!-- РУЙХАТИ АЛМАЗҲО -->
+<div id="diamonds" class="page">
+    <div class="header"><div class="logo">ИНТИХОБИ АЛМАЗ</div></div>
+    <input type="text" placeholder="ID-и бозӣ 123456789" id="gameid">
+    <div class="title">МАҲСУЛОТҲО</div>
+    <div class="diamond-grid">
+        <div class="diamond-item"><div class="diamond-amount">💎 100</div><div>9.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(100, 9.90)">Харидан</button></div>
+        <div class="diamond-item"><div class="diamond-amount">💎 310</div><div>28.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(310, 28.90)">Харидан</button></div>
+        <div class="diamond-item"><div class="diamond-amount">💎 520</div><div>47.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(520, 47.90)">Харидан</button></div>
+        <div class="diamond-item"><div class="diamond-amount">💎 1060</div><div>94.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(1060, 94.90)">Харидан</button></div>
+        <div class="diamond-item"><div class="diamond-amount">💎 2180</div><div>189.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(2180, 189.90)">Харидан</button></div>
+        <div class="diamond-item"><div class="diamond-amount">💎 5600</div><div>469.90 см</div><button class="btn-buy" style="position:static;width:100%;margin-top:8px" onclick="buy(5600, 469.90)">Харидан</button></div>
+    </div>
 </div>
 
-
-<div class="card">
-<div class="icon">🔫</div>
-<h3>Free Fire MAX</h3>
-<p>Алмаз</p>
-<button class="btn"
-onclick="openGame('Free Fire MAX')">
-Харидан
-</button>
+<!-- ПАРДОХТ -->
+<div id="pay" class="page">
+    <div class="header"><div class="logo">ПАРДОХТ</div></div>
+    <div class="order-box" id="orderInfo"></div>
+    <div style="padding:0 10px;color:#FFC107">ТАРЗИ ПАРДОХТ</div>
+    <div class="payment" onclick="pay('ICB')"><div>🏦</div><div><b>ICB Mobile</b></div></div>
+    <div class="payment" onclick="pay('Eskhata')"><div style="background:#FFC107;color:#000;border-radius:50%;width:30px;height:30px;text-align:center;line-height:30px;font-weight:bold">E</div><div><b>Корти Эсхата</b><br><small>+992 93 571 04 06</small></div></div>
 </div>
 
-
-<div class="card">
-<div class="icon">🎯</div>
-<h3>PUBG Mobile</h3>
-<p>UC</p>
-<button class="btn"
-onclick="openGame('PUBG Mobile')">
-Харидан
-</button>
+<!-- ПУР КАРДАН -->
+<div id="topup" class="page">
+    <div class="header"><div class="logo">ПУР КАРДАНИ БАЛАНС</div></div>
+    <div class="bonus-box"><b>🎁 БОНУС 5%!</b><br>Барои ҳар пуркунӣ 5% бонус мегиред</div>
+    <div class="title">МАБЛАҒРО ИНТИХОБ КН</div>
+    <div class="diamond-grid">
+        <div class="diamond-item" onclick="topup(50)"><div class="diamond-amount">50 см</div><small>+2.5 бонус</small></div>
+        <div class="diamond-item" onclick="topup(100)"><div class="diamond-amount">100 см</div><small>+5 бонус</small></div>
+        <div class="diamond-item" onclick="topup(300)"><div class="diamond-amount">300 см</div><small>+15 бонус</small></div>
+        <div class="diamond-item" onclick="topup(500)"><div class="diamond-amount">500 см</div><small>+25 бонус</small></div>
+        <div class="diamond-item" onclick="topup(700)"><div class="diamond-amount">700 см</div><small>+35 бонус</small></div>
+        <div class="diamond-item" onclick="topup(1000)"><div class="diamond-amount">1000 см</div><small>+50 бонус</small></div>
+    </div>
 </div>
 
+<!-- ПРОФИЛ + РЕФЕРАЛ -->
+<div id="profile" class="page">
+    <div class="header"><div class="logo">ПРОФИЛИ МАН</div></div>
+    <div class="balance-box">
+        <div>Сатҳ: <b style="color:#FFC107">Харидори Фаъол</b></div>
+        <div>Ҳамаи харид: <b id="totalSpent">0 см</b></div>
+        <div>Бонуси реферал: <b id="refBonus">0 см</b></div>
+    </div>
+    
+    <div class="ref-box">
+        <b>👥 СИСТЕМАИ РЕФЕРАЛ</b><br>
+        Дӯстро даъват кн ва 10% аз пуркунии ӯро гир!<br><br>
+        <b>Линки ту:</b><br>
+        <input type="text" value="https://garenashop.tj/?ref=12345" id="reflink" readonly>
+        <button class="btn-green" onclick="copyRef()">📋 Нусха кардан</button>
+    </div>
 
-<div class="card">
-<div class="icon">⚔️</div>
-<h3>Mobile Legends</h3>
-<p>Diamonds</p>
-<button class="btn"
-onclick="openGame('Mobile Legends')">
-Харидан
-</button>
+    <div class="title">ТАЪРИХИ ХАРИД</div>
+    <div id="history"><div class="history-item">Ҳанӯз харид надоред</div></div>
 </div>
 
-
-<div class="card">
-<div class="icon">🪙</div>
-<h3>Дигар бозиҳо</h3>
-<p>Ба зудӣ</p>
-<button class="btn purple"
-onclick="alert('Бозиҳои нав ба наздикӣ илова мешаванд!')">
-Дидан
-</button>
+<!-- АДМИНКА -->
+<div id="admin" class="page">
+    <div class="header"><div class="logo" style="color:red">⚙️ АДМИН ПАНЕЛ</div></div>
+    <div class="admin-panel">
+        <b>ФАРМОИШҲОИ НАВ</b>
+        <div id="adminOrders">
+            <div class="order-admin">Ҳанӯз фармоиш нест</div>
+        </div>
+        <button class="btn-green" onclick="alert('Ҳама фармоишҳо ба Телеграм меоянд')">🔄 Нав кардан</button>
+    </div>
+    <div class="admin-panel">
+        <b>ОМОР</b><br>
+        Фоидаи имрӯз: <span id="todayProfit">0 см</span><br>
+        Шумораи мизоҷон: <span id="users">1</span>
+    </div>
 </div>
 
+<!-- MENU -->
+<div class="nav">
+    <div class="nav-item active" onclick="showPage('home')">🏠<br>Асосӣ</div>
+    <div class="nav-item" onclick="showPage('diamonds')">🛍<br>Харидҳо</div>
+    <div class="nav-item" onclick="alert('Дастгирӣ: @Zokirjon05556439367152')">🎧<br>Дастгирӣ</div>
+    <div class="nav-item" onclick="showPage('profile')">👤<br>Профил</div>
 </div>
-
-
-<h2>💎 Free Fire — нархҳо</h2>
-
-<div class="grid">
-
-
-<div class="card">
-<div class="icon">💎</div>
-<h3>100 алмаз</h3>
-<div class="price">10 с</div>
-<button class="btn"
-onclick="buy('100 алмаз',10)">
-Харидан
-</button>
-</div>
-
-
-<div class="card">
-<div class="icon">💎</div>
-<h3>310 алмаз</h3>
-<div class="price">29 с 🔥</div>
-<button class="btn"
-onclick="buy('310 алмаз',29)">
-Харидан
-</button>
-</div>
-
-
-<div class="card">
-<div class="icon">💎</div>
-<h3>520 алмаз</h3>
-<div class="price">50 с</div>
-<button class="btn"
-onclick="buy('520 алмаз',50)">
-Харидан
-</button>
-</div>
-
-
-<div class="card">
-<div class="icon">💎</div>
-<h3>1060 алмаз</h3>
-<div class="price">100 с</div>
-<button class="btn"
-onclick="buy('1060 алмаз',100)">
-Харидан
-</button>
-</div>
-
-
-<div class="card">
-<div class="icon">💎</div>
-<h3>2180 алмаз</h3>
-<div class="price">200 с</div>
-<button class="btn"
-onclick="buy('2180 алмаз',200)">
-Харидан
-</button>
-</div>
-
-
-<div class="card">
-<div class="icon">💎</div>
-<h3>5600 алмаз</h3>
-<div class="price">550 с</div>
-<button class="btn"
-onclick="buy('5600 алмаз',550)">
-Харидан
-</button>
-</div>
-
-</div>
-
-
-<h2>🎟️ Ваучерҳо ва хизматрасонӣ</h2>
-
-<div class="grid">
-
-
-<div class="card">
-<div class="icon">🎟️</div>
-<h3>Лайт 90</h3>
-<div class="price">7 с</div>
-<button class="btn orange"
-onclick="buy('Лайт 90',7)">
-Харидан
-</button>
-</div>
-
-
-<div class="card">
-<div class="icon">🎟️</div>
-<h3>Ҳафта 450</h3>
-<div class="price">18 с</div>
-<button class="btn orange"
-onclick="buy('Ҳафта 450',18)">
-Харидан
-</button>
-</div>
-
-
-<div class="card">
-<div class="icon">🎟️</div>
-<h3>Моҳона 2600</h3>
-<div class="price">95 с</div>
-<button class="btn orange"
-onclick="buy('Моҳона 2600',95)">
-Харидан
-</button>
-</div>
-
-
-<div class="card">
-<div class="icon">👑</div>
-<h3>Настройка VIP</h3>
-<div class="price">15 с</div>
-<button class="btn purple"
-onclick="buy('Настройка VIP',15)">
-Фармоиш
-</button>
-</div>
-
-</div>
-
-
-<div id="shop" class="panel">
-
-<h2>🛒 Фармоиш</h2>
-
-<div id="selected"></div>
-
-<label>🎮 ID-и бозӣ</label>
-
-<input
-id="gameid"
-placeholder="ID-и худро нависед"
->
-
-
-<label>🌍 Регион</label>
-
-<select id="region">
-
-<option>
-Таджикистан
-</option>
-
-<option>
-Россия
-</option>
-
-<option>
-Узбекистон
-</option>
-
-</select>
-
-
-<button
-class="btn green"
-onclick="checkout()">
-
-💳 Пардохт бо корт
-
-</button>
-
-<p>
-<small>
-Пардохти воқеӣ бояд ба API-и провайдери пардохти шумо пайваст карда шавад.
-</small>
-</p>
-
-</div>
-
-
-<div id="balancePanel" class="panel">
-
-<h2>💰 Пур кардани баланс</h2>
-
-<label>
-Сумма (с)
-</label>
-
-<input
-id="topup"
-type="number"
-min="1"
-placeholder="Масалан: 50"
->
-
-<button
-class="btn green"
-onclick="topup()">
-
-💳 Пур кардан бо корт
-
-</button>
-
-</div>
-
-
-<div id="ordersPanel" class="panel">
-
-<h2>📦 Фармоишҳои ман</h2>
-
-<div id="orders">
-Ҳоло фармоиш нест.
-</div>
-
-</div>
-
-
-<div id="profilePanel" class="panel">
-
-<h2>👤 Профил</h2>
-
-<p>
-🆔 ID:
-<span id="uid">—</span>
-</p>
-
-<p>
-💎 Баланс:
-<b id="profileBalance">0</b> с
-</p>
-
-<button
-class="btn"
-onclick="show('ordersPanel')">
-
-📦 Таърихи харид
-
-</button>
-
-</div>
-
-
-<div class="bottom">
-
-<button onclick="scrollTo(0,0)">
-🏠<br>Асосӣ
-</button>
-
-<button onclick="show('shop')">
-🛒<br>Магазин
-</button>
-
-<button onclick="show('ordersPanel')">
-📦<br>Фармоиш
-</button>
-
-<button onclick="show('balancePanel')">
-💰<br>Баланс
-</button>
-
-<button onclick="show('profilePanel')">
-👤<br>Профил
-</button>
-
-</div>
-
-</div>
-
 
 <script>
+let balance = 0;
+let totalSpent = 0;
+let refBonus = 0;
+let history = [];
+let adminOrders = [];
+let currentBuy = {};
 
-let selected={
- name:'',
- price:0
-};
-
-
-let orders=
-JSON.parse(
-localStorage.getItem('orders')||'[]'
-);
-
-
-let bal=
-Number(
-localStorage.getItem('balance')||0
-);
-
-
-document.getElementById('balance')
-.textContent=bal;
-
-
-document.getElementById('profileBalance')
-.textContent=bal;
-
-
-document.getElementById('orders')
-.innerHTML=
-orders.length
-?
-orders.map(x=>`
-<div class="order">
-
-📦 ${x.name}
-—
-<b>${x.price} с</b>
-
-<br>
-
-<small>
-${x.id}
-</small>
-
-</div>
-`).join('')
-:
-'Ҳоло фармоиш нест.';
-
-
-document.getElementById('uid')
-.textContent=
-new URLSearchParams(location.search)
-.get('uid')||'—';
-
-
-function show(id){
-
-document
-.querySelectorAll('.panel')
-.forEach(x=>
-x.classList.remove('active')
-);
-
-document
-.getElementById(id)
-.classList.add('active');
-
-document
-.getElementById(id)
-.scrollIntoView({
-behavior:'smooth'
-});
-
+function showPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    if(event && event.target.closest('.nav-item')) event.target.closest('.nav-item').classList.add('active');
+    if(id=='profile') updateHistory();
+    if(id=='admin') updateAdmin();
 }
 
-
-function openGame(game){
-
-alert(
-game+
-' интихоб шуд. Барои ин бозӣ маҳсулотро аз рӯйхат интихоб кунед.'
-);
-
+function buy(amount, price){
+    let id = document.getElementById('gameid').value;
+    if(id == ''){alert('Авал ID-и бозиро нависта'); return;}
+    if(balance < price){alert('Баланс кам. Аввал пур кн'); showPage('topup'); return;}
+    currentBuy = {id, amount, price, time: new Date().toLocaleTimeString()};
+    document.getElementById('orderInfo').innerHTML = `
+        <div style="display:flex;gap:10px;align-items:center">
+            <div style="font-size:30px">💎</div>
+            <div><div>${amount} Алмаз</div><div>ID: ${id}</div><div class="price">${price} см</div></div>
+        </div>`;
+    showPage('pay');
 }
 
-
-function buy(name,price){
-
-selected={
-name:name,
-price:price
-};
-
-document.getElementById('selected')
-.innerHTML=`
-
-<div class="order">
-
-💎 <b>${name}</b>
-—
-<b>${price} с</b>
-
-</div>
-
-`;
-
-show('shop');
-
+function pay(method){
+    balance -= currentBuy.price;
+    totalSpent += currentBuy.price;
+    history.unshift(`${currentBuy.amount} Алмаз - ${currentBuy.price}см - ID:${currentBuy.id}`);
+    adminOrders.unshift(`💎 ${currentBuy.amount} | ${currentBuy.price}см | ID:${currentBuy.id} | ${currentBuy.time}`);
+    document.getElementById('balance').innerText = balance.toFixed(2) + ' см';
+    let text = `ФАРМОИШИ НАВ 🇹🇯%0AID: ${currentBuy.id}%0A${currentBuy.amount} Алмаз - ${currentBuy.price}см%0AПардохт: ${method}`;
+    window.open(`https://t.me/Zokirjon05556439367152?text=${text}`);
+    alert('Фармоиш қабул шуд! 1 дақиқа мефиристем');
+    showPage('home');
 }
 
-
-function checkout(){
-
-let gid=
-document
-.getElementById('gameid')
-.value
-.trim();
-
-
-if(!gid){
-
-alert(
-'Аввал ID-и бозиро ворид кунед.'
-);
-
-return;
-
+function topup(amount){
+    let bonus = amount * 0.05;
+    balance += amount + bonus;
+    document.getElementById('balance').innerText = balance.toFixed(2) + ' см';
+    alert(`Баланс пур шуд! ${amount}см + ${bonus}см бонус = ${amount+bonus}см`);
+    showPage('home');
 }
 
-
-let oid=
-'TAJ-'+
-Date.now()
-.toString()
-.slice(-8);
-
-
-orders.unshift({
-
-name:selected.name,
-
-price:selected.price,
-
-id:oid
-
-});
-
-
-localStorage.setItem(
-'orders',
-JSON.stringify(orders)
-);
-
-
-document.getElementById('orders')
-.innerHTML=
-orders.map(x=>`
-
-<div class="order">
-
-📦 ${x.name}
-—
-<b>${x.price} с</b>
-
-<br>
-
-<small>
-${x.id}
-</small>
-
-</div>
-
-`).join('');
-
-
-alert(
-'Фармоиш '+
-oid+
-' сохта шуд.'
-);
-
-
-show('ordersPanel');
-
+function updateHistory(){
+    document.getElementById('totalSpent').innerText = totalSpent.toFixed(2) + ' см';
+    document.getElementById('refBonus').innerText = refBonus.toFixed(2) + ' см';
+    if(history.length > 0){
+        document.getElementById('history').innerHTML = history.map(h=>`<div class="history-item">${h}</div>`).join('');
+    }
 }
 
-
-function topup(){
-
-let n=
-Number(
-document.getElementById('topup')
-.value
-);
-
-
-if(!n||n<1){
-
-alert(
-'Суммаро дуруст ворид кунед.'
-);
-
-return;
-
+function updateAdmin(){
+    document.getElementById('todayProfit').innerText = totalSpent.toFixed(2) + ' см';
+    if(adminOrders.length > 0){
+        document.getElementById('adminOrders').innerHTML = adminOrders.map(o=>`<div class="order-admin">${o}</div>`).join('');
+    }
 }
 
-
-alert(
-'Фармоиши пуркунии баланс барои '+
-n+
-' с сохта шуд.'
-);
-
+function copyRef(){
+    document.getElementById('reflink').select();
+    document.execCommand('copy');
+    alert('Линки реферал нусха шуд!');
 }
-
 </script>
 
 </body>
-   </html>
+ </html>
