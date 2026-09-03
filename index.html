@@ -2,368 +2,155 @@
 <html lang="tg">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>TAJ.DONAT.TJ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAJ.DONAT.TJ 💎</title>
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:linear-gradient(135deg,#080b18,#111a35);
- color:white
-}
-.wrap{max-width:520px;margin:auto;padding:18px}
-.hero{text-align:center;padding:25px 10px}
-.logo{font-size:32px;font-weight:900}
-.logo span{color:#65e6ff}
-.sub{color:#b9c5df;margin-top:8px}
-.card{
- background:rgba(255,255,255,.07);
- border:1px solid rgba(255,255,255,.12);
- border-radius:22px;
- padding:18px;
- margin:14px 0
-}
-h2{margin-top:0}
-.grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px
-}
-button{
- width:100%;
- border:0;
- border-radius:15px;
- padding:15px 8px;
- background:#172544;
- color:white;
- font-size:15px;
- font-weight:800
-}
-.price{
- display:block;
- color:#65e6ff;
- margin-top:6px
-}
-.wide{
- margin-top:15px;
- background:linear-gradient(90deg,#11b8ff,#7b5cff)
-}
-input,select{
- width:100%;
- padding:15px;
- border-radius:14px;
- border:1px solid #344467;
- background:#0d1428;
- color:white;
- font-size:15px;
- margin:7px 0 12px
-}
-label{
- display:block;
- color:#c9d4ed;
- margin-top:8px
-}
-.total{
- font-size:20px;
- font-weight:900;
- color:#65e6ff;
- margin-top:10px
-}
-.pay{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px
-}
-.pay button.active{
- outline:2px solid #65e6ff;
- background:#20365c
-}
-.notice{
- font-size:13px;
- color:#aebbd5;
- line-height:1.5
-}
-.success{
- display:none;
- text-align:center;
- padding:20px
-}
-.footer{
- text-align:center;
- color:#8290ad;
- font-size:12px;
- padding:20px
-}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+    body{background:#0a0a0a;color:#fff}
+    .header{display:flex;justify-content:space-between;padding:15px;background:#111;position:sticky;top:0}
+    .balance{background:#ff6b00;padding:12px;border-radius:12px;margin:10px;display:flex;justify-content:space-between}
+    .btn-orange{background:#ff6b00;color:#000;border:none;padding:10px 15px;border-radius:10px;font-weight:bold}
+    .btn-gray{background:#222;color:#fff;border:none;padding:10px 15px;border-radius:10px}
+    .category{margin:10px;padding:15px;background:linear-gradient(135deg,#4a148c,#7b1fa2);border-radius:15px}
+    .category h2{font-size:24px;margin-bottom:5px}
+    .btn-buy{background:#ff6b00;color:#000;padding:8px 15px;border-radius:20px;border:none;float:right}
+    .nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#111;padding:10px 0}
+    .nav-item{text-align:center;color:#888;font-size:12px}
+    .nav-item.active{color:#ff6b00}
+    .page{display:none;padding:10px;padding-bottom:80px}
+    .page.active{display:block}
+    .amount-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+    .amount{background:#1a1a1a;padding:15px;border-radius:10px;text-align:center;border:1px solid #333}
+    .payment{background:#1a1a1a;padding:15px;border-radius:10px;margin:10px 0;display:flex;align-items:center;gap:10px}
+    input{background:#222;border:1px solid #333;color:#fff;padding:12px;border-radius:10px;width:100%;margin:10px 0}
 </style>
 </head>
-
 <body>
 
-<div class="wrap">
-
-<div class="hero">
-<div class="logo">💎 <span>TAJ.DONAT.TJ</span></div>
-<div class="sub">
-АЛМАЗ БО ЭЪТИМОД • ТЕЗ • ОСОН • БОЭЪТИМОД
-</div>
+<div class="header">
+    <b>Шом ба хайр!</b>
+    <b>🔔</b>
 </div>
 
-<div class="card">
-<h2>💎 Хариди алмаз</h2>
+<!-- САХИФАИ АСОСИ -->
+<div id="home" class="page active">
+    <div class="balance">
+        <div>
+            <div style="font-size:12px;color:#ccc">БАЛАНС</div>
+            <div style="font-size:20px;font-weight:bold">0.00 см</div>
+        </div>
+        <div>
+            <button class="btn-orange">+ Пур кардан</button>
+            <button class="btn-gray">Боровардан</button>
+        </div>
+    </div>
 
-<div class="grid">
+    <div style="display:flex;gap:5px;margin:10px">
+        <span style="background:#222;padding:5px 10px;border-radius:15px;font-size:12px">⚡ То 1 дақиқа</span>
+        <span style="background:#222;padding:5px 10px;border-radius:15px;font-size:12px">🔒 Бехатар</span>
+        <span style="background:#222;padding:5px 10px;border-radius:15px;font-size:12px">⏰ 24/7</span>
+    </div>
 
-<button onclick="selectProduct('100',10,this)">
-💎 100
-<span class="price">10с</span>
-</button>
+    <div style="padding:10px">КАТЕГОРИЯҲО</div>
 
-<button onclick="selectProduct('310',29,this)">
-💎 310
-<span class="price">29с 🔥</span>
-</button>
+    <div class="category">
+        <div style="color:#ff00ff">FREE FIRE</div>
+        <h2>СНГ</h2>
+        <button class="btn-buy" onclick="showPage('buy')">Харидан →</button>
+    </div>
 
-<button onclick="selectProduct('520',50,this)">
-💎 520
-<span class="price">50с</span>
-</button>
+    <div class="category" style="background:linear-gradient(135deg,#e65100,#ff6f00)">
+        <div style="color:#ffcc00">FREE FIRE</div>
+        <h2>ИНДОНЕЗИЯ</h2>
+        <button class="btn-buy" onclick="showPage('buy')">Харидан →</button>
+    </div>
 
-<button onclick="selectProduct('1060',100,this)">
-💎 1060
-<span class="price">100с</span>
-</button>
-
-<button onclick="selectProduct('2180',200,this)">
-💎 2180
-<span class="price">200с</span>
-</button>
-
-<button onclick="selectProduct('5600',550,this)">
-💎 5600
-<span class="price">550с</span>
-</button>
-
-</div>
-</div>
-
-<div class="card">
-
-<h2>🎟️ Ваучерҳо</h2>
-
-<div class="grid">
-
-<button onclick="selectProduct('Лайт 90',7,this)">
-🎟️ Лайт 90
-<span class="price">7с</span>
-</button>
-
-<button onclick="selectProduct('Ҳафта 450',18,this)">
-🎟️ Ҳафта 450
-<span class="price">18с</span>
-</button>
-
-<button onclick="selectProduct('Моҳона 2600',95,this)">
-🎟️ Моҳона 2600
-<span class="price">95с</span>
-</button>
-
-<button onclick="selectProduct('Настройка VIP',15,this)">
-🔥 VIP
-<span class="price">15с</span>
-</button>
-
-</div>
+    <div class="category" style="background:linear-gradient(135deg,#1a237e,#3949ab)">
+        <div style="color:#ffcc00">PUBG MOBILE</div>
+        <h2>UC</h2>
+        <button class="btn-buy" onclick="showPage('buy')">Харидан →</button>
+    </div>
 </div>
 
-<div class="card">
-
-<h2>🛒 Маълумоти фармоиш</h2>
-
-<label>🌍 Регион</label>
-
-<select id="region">
-<option value="TJ">🇹🇯 Тоҷикистон</option>
-<option value="RU">🇷🇺 Россия</option>
-<option value="UZ">🇺🇿 Ӯзбекистон</option>
-<option value="KZ">🇰🇿 Қазоқистон</option>
-<option value="OTHER">🌍 Дигар</option>
-</select>
-
-<label>🆔 UID-и Free Fire</label>
-
-<input
-id="uid"
-inputmode="numeric"
-placeholder="UID-и худро ворид кунед">
-
-<div class="total">
-💰 Суммаи дақиқ:
-<span id="total">—</span>
+<!-- САХИФАИ ХАРИД -->
+<div id="buy" class="page">
+    <div style="padding:10px"><b>Расмиётсозии фармоиш</b></div>
+    <div class="payment">
+        <div>💎</div>
+        <div>
+            <div>2398 Алмазхо</div>
+            <div style="color:#ff6b00;font-size:18px">178.00 см</div>
+        </div>
+    </div>
+    <div>ID-и бозӣ</div>
+    <input type="text" placeholder="Мисол: 123456789" id="gameid">
+    
+    <div>ТАРЗИ ПАРДОХТ</div>
+    <div class="payment" onclick="pay('ICB')">
+        <img src="https://icb.tj/favicon.ico" width="30">
+        <div><b>ICB Mobile</b><br><small>Аз замимаи ICB</small></div>
+    </div>
+    <div class="payment" onclick="pay('Eskhata')">
+        <img src="https://eskhata.com/favicon.ico" width="30">
+        <div><b>Корти Эсхата</b><br><small>+992 93 571 04 06</small></div>
+    </div>
 </div>
 
+<!-- САХИФАИ ПРОФИЛ -->
+<div id="profile" class="page">
+    <div style="text-align:center;padding:20px">
+        <div style="width:60px;height:60px;background:#ff6b00;border-radius:50%;margin:auto;line-height:60px;font-size:24px">MM</div>
+        <h3>Mm Mm</h3>
+        <div style="color:#888">ID: 7345128141</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px">
+        <div class="payment"><div>💰<br>БАЛАНС<br><b>0.00 см</b></div></div>
+        <div class="payment"><div>📦<br>ХАРИДҲО<br><b>2</b></div></div>
+        <div class="payment"><div>👥<br>ҲАМКОРОН<br><b>0</b></div></div>
+        <div class="payment"><div>📈<br>ДАРОМАД<br><b>0.00 см</b></div></div>
+    </div>
 </div>
 
-<div class="card">
-
-<h2>💳 Пардохт</h2>
-
-<div class="pay">
-
-<button onclick="payment('Эсхата',this)">
-🏦 Эсхата
-</button>
-
-<button onclick="payment('ICB Mobile',this)">
-🏦 ICB Mobile
-</button>
-
+<!-- САХИФАИ ПУР КАРДАН -->
+<div id="topup" class="page">
+    <div style="padding:10px"><b>Пур кардани баланс</b></div>
+    <div>МАБЛАҒ</div>
+    <div class="amount-grid">
+        <div class="amount">50<br><small>см</small></div>
+        <div class="amount">100<br><small>см</small></div>
+        <div class="amount">300<br><small>см</small></div>
+        <div class="amount">500<br><small>см</small></div>
+        <div class="amount">700<br><small>см</small></div>
+        <div class="amount">1000<br><small>см</small></div>
+    </div>
+    <div>ТАРЗИ ПАРДОХТ</div>
+    <div class="payment"><img src="https://icb.tj/favicon.ico" width="30"> ICB Mobile</div>
+    <div class="payment"><img src="https://eskhata.com/favicon.ico" width="30"> Корти Миллӣ</div>
+    <button class="btn-orange" style="width:100%;margin-top:20px">Пур кардан</button>
 </div>
 
-<p class="notice">
-Пас аз интихоб кардани банк, рақами пардохт нишон дода мешавад.
-Баъд аз пардохт 🧾 чеки равшанро фиристед.
-</p>
-
-<button class="wide" onclick="submitOrder()">
-🚀 ФИРИСТОДАНИ ФАРМОИШ
-</button>
-
-</div>
-
-<div class="card success" id="success">
-
-<div style="font-size:48px">🧾</div>
-
-<h2>Фармоиш қабул шуд!</h2>
-
-<div id="orderText"></div>
-
-<p class="notice">
-Чек ва маълумоти фармоиш барои санҷиш ба администратор фиристода мешавад.
-</p>
-
-</div>
-
-<div class="footer">
-💎 TAJ.DONAT.TJ
-<br>
-Ташаккур барои интихоби шумо ❤️
-</div>
-
+<!-- MENU-И ПОЁН -->
+<div class="nav">
+    <div class="nav-item active" onclick="showPage('home')">🏠<br>Асосӣ</div>
+    <div class="nav-item" onclick="showPage('buy')">🛍<br>Харидҳо</div>
+    <div class="nav-item" onclick="alert('Дастгирӣ: @Zokirjon05556439367152')">🎧<br>Дастгирӣ</div>
+    <div class="nav-item" onclick="showPage('profile')">👤<br>Профил</div>
 </div>
 
 <script>
-
-let selected={
-product:null,
-price:null,
-payment:null
-};
-
-function selectProduct(product,price,btn){
-
-selected.product=product;
-selected.price=price;
-
-document.getElementById("total").textContent=price+"с";
-
-document.querySelectorAll(".grid button")
-.forEach(b=>b.style.outline="");
-
-btn.style.outline="2px solid #65e6ff";
+function showPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
 }
-
-function payment(name,btn){
-
-selected.payment=name;
-
-document.querySelectorAll(".pay button")
-.forEach(b=>b.classList.remove("active"));
-
-btn.classList.add("active");
-
-alert(
-name+
-" интихоб шуд.\n\n" +
-"Рақами пардохтро баъд аз пайваст кардани бот нишон медиҳем."
-);
+function pay(method){
+    let id = document.getElementById('gameid').value;
+    if(id == ''){alert('Авал ID-ро нависта'); return;}
+    let text = `ФАРМОИШИ НАВ%0AID: ${id}%0AМахсулот: 2398 Алмаз%0AНарх: 178см%0AПардохт: ${method}`;
+    window.open(`https://t.me/Zokirjon05556439367152?text=${text}`);
+    alert('Ба Админ фиристода шуд. Пас аз пардохт алмазро мефиристем');
 }
-
-function submitOrder(){
-
-const uid=document
-.getElementById("uid")
-.value.trim();
-
-const region=document
-.getElementById("region")
-.value;
-
-if(!selected.product){
-
-alert("❌ Аввал маҳсулотро интихоб кунед.");
-
-return;
-}
-
-if(!uid || !/^[0-9]+$/.test(uid)){
-
-alert("❌ UID-и дурустро ворид кунед.");
-
-return;
-}
-
-if(!selected.payment){
-
-alert("❌ Аввал усули пардохтро интихоб кунед.");
-
-return;
-}
-
-const order=
-"TJ-"+Math.floor(
-100000+
-Math.random()*900000
-);
-
-document.getElementById("orderText").innerHTML=
-
-"📦 Рақами фармоиш: <b>#"+
-order+
-"</b><br><br>"+
-
-"💎 Маҳсулот: <b>"+
-selected.product+
-"</b><br>"+
-
-"💰 Сумма: <b>"+
-selected.price+
-"с</b><br>"+
-
-"🆔 UID: <b>"+
-uid+
-"</b><br>"+
-
-"🌍 Регион: <b>"+
-region+
-"</b><br>"+
-
-"💳 Пардохт: <b>"+
-selected.payment+
-"</b>";
-
-document.getElementById("success")
-.style.display="block";
-
-document.getElementById("success")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
 </script>
 
 </body>
-</html>
+ </html>
