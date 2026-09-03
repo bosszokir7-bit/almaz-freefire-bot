@@ -3,154 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAJ.DONAT.TJ 💎</title>
+<title>Taj.donat.tj_bot</title>
 <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-    body{background:#0a0a0a;color:#fff}
-    .header{display:flex;justify-content:space-between;padding:15px;background:#111;position:sticky;top:0}
-    .balance{background:#ff6b00;padding:12px;border-radius:12px;margin:10px;display:flex;justify-content:space-between}
-    .btn-orange{background:#ff6b00;color:#000;border:none;padding:10px 15px;border-radius:10px;font-weight:bold}
-    .btn-gray{background:#222;color:#fff;border:none;padding:10px 15px;border-radius:10px}
-    .category{margin:10px;padding:15px;background:linear-gradient(135deg,#4a148c,#7b1fa2);border-radius:15px}
-    .category h2{font-size:24px;margin-bottom:5px}
-    .btn-buy{background:#ff6b00;color:#000;padding:8px 15px;border-radius:20px;border:none;float:right}
-    .nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#111;padding:10px 0}
-    .nav-item{text-align:center;color:#888;font-size:12px}
-    .nav-item.active{color:#ff6b00}
-    .page{display:none;padding:10px;padding-bottom:80px}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+    body{background:#000;color:#fff}
+    .header{padding:15px;display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:600}
+    .balance-box{background:#ff6a00;padding:15px;border-radius:15px;margin:10px;display:flex;justify-content:space-between;align-items:center}
+    .balance-left div:first-child{color:#000;font-size:12px}
+    .balance-left div:last-child{color:#000;font-size:22px;font-weight:bold}
+    .btn-topup{color:#000;font-weight:bold;background:none;border:none}
+    .btn-withdraw{background:#111;color:#fff;border:none;padding:10px 15px;border-radius:10px}
+    .tags{display:flex;gap:8px;margin:10px;padding:0 10px}
+    .tag{background:#1a1a1a;padding:6px 12px;border-radius:20px;font-size:12px;display:flex;align-items:center;gap:5px}
+    .title{padding:15px 10px;font-size:14px;color:#888}
+    .card{margin:10px;border-radius:20px;padding:20px;position:relative;min-height:120px}
+    .card-purple{background:linear-gradient(135deg,#6a1b9a,#8e24aa)}
+    .card-orange{background:linear-gradient(135deg,#ff6f00,#ff8f00)}
+    .card-blue{background:linear-gradient(135deg,#1565c0,#1976d2)}
+    .card .game{font-size:12px;margin-bottom:5px}
+    .card .title-big{font-size:28px;font-weight:bold}
+    .btn-buy{position:absolute;right:15px;bottom:15px;background:#ff6a00;color:#000;border:none;padding:8px 16px;border-radius:20px;font-weight:bold}
+    .nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#0a0a0a;padding:10px 0;border-top:1px solid #222}
+    .nav-item{text-align:center;color:#666;font-size:11px}
+    .nav-item.active{color:#ff6a00}
+    .page{display:none;padding-bottom:70px}
     .page.active{display:block}
-    .amount-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
-    .amount{background:#1a1a1a;padding:15px;border-radius:10px;text-align:center;border:1px solid #333}
-    .payment{background:#1a1a1a;padding:15px;border-radius:10px;margin:10px 0;display:flex;align-items:center;gap:10px}
-    input{background:#222;border:1px solid #333;color:#fff;padding:12px;border-radius:10px;width:100%;margin:10px 0}
+    .order-box{background:#111;margin:10px;padding:15px;border-radius:15px;display:flex;align-items:center;gap:10px}
+    .order-price{color:#ff6a00;font-size:18px;font-weight:bold}
+    input{background:#1a1a1a;border:none;color:#fff;padding:14px;border-radius:12px;width:100%;margin:10px 0}
+    .payment{background:#111;padding:15px;border-radius:12px;margin:10px 0;display:flex;align-items:center;gap:12px}
+    .popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#222;padding:20px;border-radius:15px;z-index:999;display:none}
+    .popup button{background:#ff6a00;border:none;padding:8px 20px;border-radius:10px;color:#000;margin-top:10px;float:right}
 </style>
 </head>
 <body>
 
-<div class="header">
-    <b>Шом ба хайр!</b>
-    <b>🔔</b>
-</div>
-
-<!-- САХИФАИ АСОСИ -->
+<!-- АСОСИ -->
 <div id="home" class="page active">
-    <div class="balance">
-        <div>
-            <div style="font-size:12px;color:#ccc">БАЛАНС</div>
-            <div style="font-size:20px;font-weight:bold">0.00 см</div>
+    <div class="header">
+        <div>Шом ба хайр!</div>
+        <div>🔔</div>
+    </div>
+
+    <div class="balance-box">
+        <div class="balance-left">
+            <div>БАЛАНС</div>
+            <div id="balance">0.00 см</div>
         </div>
         <div>
-            <button class="btn-orange">+ Пур кардан</button>
-            <button class="btn-gray">Боровардан</button>
+            <button class="btn-topup" onclick="showPage('topup')">+ Пур кардан</button>
+            <button class="btn-withdraw">Боровардан</button>
         </div>
     </div>
 
-    <div style="display:flex;gap:5px;margin:10px">
-        <span style="background:#222;padding:5px 10px;border-radius:15px;font-size:12px">⚡ То 1 дақиқа</span>
-        <span style="background:#222;padding:5px 10px;border-radius:15px;font-size:12px">🔒 Бехатар</span>
-        <span style="background:#222;padding:5px 10px;border-radius:15px;font-size:12px">⏰ 24/7</span>
+    <div class="tags">
+        <div class="tag">⚡ То 1 дақиқа</div>
+        <div class="tag">🔒 Бехатар</div>
+        <div class="tag">⏰ 24/7</div>
     </div>
 
-    <div style="padding:10px">КАТЕГОРИЯҲО</div>
+    <div class="title">КАТЕГОРИЯҲО</div>
 
-    <div class="category">
-        <div style="color:#ff00ff">FREE FIRE</div>
-        <h2>СНГ</h2>
+    <div class="card card-purple">
+        <div class="game" style="color:#d500f9">FREE FIRE</div>
+        <div class="title-big">СНГ</div>
         <button class="btn-buy" onclick="showPage('buy')">Харидан →</button>
     </div>
 
-    <div class="category" style="background:linear-gradient(135deg,#e65100,#ff6f00)">
-        <div style="color:#ffcc00">FREE FIRE</div>
-        <h2>ИНДОНЕЗИЯ</h2>
+    <div class="card card-orange">
+        <div class="game" style="color:#ffea00">FREE FIRE</div>
+        <div class="title-big">ИНДОНЕЗИЯ</div>
         <button class="btn-buy" onclick="showPage('buy')">Харидан →</button>
     </div>
 
-    <div class="category" style="background:linear-gradient(135deg,#1a237e,#3949ab)">
-        <div style="color:#ffcc00">PUBG MOBILE</div>
-        <h2>UC</h2>
+    <div class="card card-blue">
+        <div class="game" style="color:#ffea00">PUBG MOBILE</div>
+        <div class="title-big">UC</div>
         <button class="btn-buy" onclick="showPage('buy')">Харидан →</button>
     </div>
 </div>
 
-<!-- САХИФАИ ХАРИД -->
+<!-- ХАРИД -->
 <div id="buy" class="page">
-    <div style="padding:10px"><b>Расмиётсозии фармоиш</b></div>
-    <div class="payment">
+    <div class="header"><div>Расмиётсозии фармоиш</div></div>
+    <div class="order-box">
         <div>💎</div>
         <div>
             <div>2398 Алмазхо</div>
-            <div style="color:#ff6b00;font-size:18px">178.00 см</div>
+            <div class="order-price">178.00 см</div>
         </div>
     </div>
-    <div>ID-и бозӣ</div>
-    <input type="text" placeholder="Мисол: 123456789" id="gameid">
+    <div style="padding:0 10px">ID-и бозӣ</div>
+    <input type="text" placeholder="123456789" id="gameid" style="margin:10px">
     
-    <div>ТАРЗИ ПАРДОХТ</div>
-    <div class="payment" onclick="pay('ICB')">
-        <img src="https://icb.tj/favicon.ico" width="30">
-        <div><b>ICB Mobile</b><br><small>Аз замимаи ICB</small></div>
+    <div style="padding:0 10px;margin-top:10px">ТАРЗИ ПАРДОХТ</div>
+    <div class="payment" onclick="pay('ICB Mobile')">
+        <div>🏦</div>
+        <div><b>ICB Mobile</b><br><small style="color:#888">Аз замимаи ICB</small></div>
     </div>
     <div class="payment" onclick="pay('Eskhata')">
-        <img src="https://eskhata.com/favicon.ico" width="30">
-        <div><b>Корти Эсхата</b><br><small>+992 93 571 04 06</small></div>
+        <div style="background:#0057b8;border-radius:50%;width:30px;height:30px;text-align:center;line-height:30px">E</div>
+        <div><b>Корти Эсхата</b><br><small style="color:#888">+992 93 571 04 06</small></div>
     </div>
+    <div class="payment" onclick="showPopup()">🎧 Дастгирӣ</div>
 </div>
 
-<!-- САХИФАИ ПРОФИЛ -->
-<div id="profile" class="page">
-    <div style="text-align:center;padding:20px">
-        <div style="width:60px;height:60px;background:#ff6b00;border-radius:50%;margin:auto;line-height:60px;font-size:24px">MM</div>
-        <h3>Mm Mm</h3>
-        <div style="color:#888">ID: 7345128141</div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px">
-        <div class="payment"><div>💰<br>БАЛАНС<br><b>0.00 см</b></div></div>
-        <div class="payment"><div>📦<br>ХАРИДҲО<br><b>2</b></div></div>
-        <div class="payment"><div>👥<br>ҲАМКОРОН<br><b>0</b></div></div>
-        <div class="payment"><div>📈<br>ДАРОМАД<br><b>0.00 см</b></div></div>
-    </div>
-</div>
-
-<!-- САХИФАИ ПУР КАРДАН -->
+<!-- ПУР КАРДАН -->
 <div id="topup" class="page">
-    <div style="padding:10px"><b>Пур кардани баланс</b></div>
-    <div>МАБЛАҒ</div>
-    <div class="amount-grid">
-        <div class="amount">50<br><small>см</small></div>
-        <div class="amount">100<br><small>см</small></div>
-        <div class="amount">300<br><small>см</small></div>
-        <div class="amount">500<br><small>см</small></div>
-        <div class="amount">700<br><small>см</small></div>
-        <div class="amount">1000<br><small>см</small></div>
+    <div class="header"><div>Пур кардани баланс</div></div>
+    <div style="padding:10px">МАБЛАҒ</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px">
+        <div class="payment" style="justify-content:center">50 см</div>
+        <div class="payment" style="justify-content:center">100 см</div>
+        <div class="payment" style="justify-content:center">300 см</div>
+        <div class="payment" style="justify-content:center">500 см</div>
+        <div class="payment" style="justify-content:center">700 см</div>
+        <div class="payment" style="justify-content:center">1000 см</div>
     </div>
-    <div>ТАРЗИ ПАРДОХТ</div>
-    <div class="payment"><img src="https://icb.tj/favicon.ico" width="30"> ICB Mobile</div>
-    <div class="payment"><img src="https://eskhata.com/favicon.ico" width="30"> Корти Миллӣ</div>
-    <button class="btn-orange" style="width:100%;margin-top:20px">Пур кардан</button>
 </div>
 
-<!-- MENU-И ПОЁН -->
+<!-- MENU -->
 <div class="nav">
     <div class="nav-item active" onclick="showPage('home')">🏠<br>Асосӣ</div>
-    <div class="nav-item" onclick="showPage('buy')">🛍<br>Харидҳо</div>
-    <div class="nav-item" onclick="alert('Дастгирӣ: @Zokirjon05556439367152')">🎧<br>Дастгирӣ</div>
-    <div class="nav-item" onclick="showPage('profile')">👤<br>Профил</div>
+    <div class="nav-item">🛍<br>Харидҳо</div>
+    <div class="nav-item" onclick="showPopup()">🎧<br>Дастгирӣ</div>
+    <div class="nav-item">👤<br>Профил</div>
+</div>
+
+<!-- POPUP ДАСТГИРИ -->
+<div class="popup" id="popup">
+    <b>Taj.donat.tj_bot</b><br><br>
+    Дастгирӣ:<br>
+    @Zokirjon05556439367152
+    <button onclick="hidePopup()">OK</button>
 </div>
 
 <script>
 function showPage(id){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
 }
+function showPopup(){document.getElementById('popup').style.display='block'}
+function hidePopup(){document.getElementById('popup').style.display='none'}
 function pay(method){
     let id = document.getElementById('gameid').value;
     if(id == ''){alert('Авал ID-ро нависта'); return;}
-    let text = `ФАРМОИШИ НАВ%0AID: ${id}%0AМахсулот: 2398 Алмаз%0AНарх: 178см%0AПардохт: ${method}`;
+    let text = `ФАРМОИШИ НАВ%0AID: ${id}%0A2398 Алмаз - 178см%0AПардохт: ${method}`;
     window.open(`https://t.me/Zokirjon05556439367152?text=${text}`);
-    alert('Ба Админ фиристода шуд. Пас аз пардохт алмазро мефиристем');
+    alert('Фармоиш ба Админ фиристода шуд!');
 }
 </script>
 
 </body>
- </html>
+</html>
