@@ -2,88 +2,371 @@
 <html lang="tg">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAJ.DONAT.TJ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TAJ.DONAT.TJ — Алмаз бо эътимод</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#080808;color:#fff}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#070b10;
+    color:#fff;
+    min-height:100vh;
+}
+
+button,input,textarea{
+    font:inherit;
+}
+
+:root{
+    --card:#111923;
+    --card2:#151f2c;
+    --border:#263547;
+    --green:#35e27a;
+    --blue:#22b8ff;
+    --text:#fff;
+    --muted:#9caabd;
+}
+
 header{
-background:#111;border-bottom:2px solid #ffb900;
-padding:16px 20px;display:flex;
-justify-content:space-between;align-items:center
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(8,12,18,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
 }
-.logo{font-size:23px;font-weight:900;color:#ffb900}
-.logo span{color:#fff}
-.online{
-color:#55e878;border:1px solid #246b34;
-background:#112015;padding:7px 12px;
-border-radius:20px;font-size:12px
+
+.nav{
+    max-width:1100px;
+    margin:auto;
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
-.container{width:94%;max-width:850px;margin:22px auto}
+
+.logo{
+    font-size:20px;
+    font-weight:900;
+}
+
+.logo span{
+    color:var(--green);
+}
+
+.nav-btn{
+    border:1px solid var(--border);
+    background:#17212d;
+    color:#fff;
+    border-radius:12px;
+    padding:10px 13px;
+    cursor:pointer;
+}
+
+main{
+    max-width:1100px;
+    margin:auto;
+    padding:20px 16px 100px;
+}
+
 .hero{
-background:linear-gradient(135deg,#281f00,#111,#211900);
-border:1px solid #4a3a00;border-radius:20px;
-padding:28px 20px;text-align:center;margin-bottom:18px
+    position:relative;
+    overflow:hidden;
+    padding:30px;
+    border-radius:25px;
+    border:1px solid #233547;
+    background:
+        radial-gradient(circle at right,#153d2b 0,transparent 35%),
+        linear-gradient(135deg,#111c28,#0b121a);
+    margin-bottom:28px;
 }
-.hero h1{color:#ffbf00;font-size:30px;margin-bottom:8px}
-.hero p{color:#aaa}
+
+.hero:after{
+    content:"💎";
+    position:absolute;
+    right:25px;
+    top:15px;
+    font-size:100px;
+    opacity:.12;
+}
+
+.hero h1{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+.btn{
+    border:0;
+    border-radius:13px;
+    padding:12px 17px;
+    background:var(--green);
+    color:#041108;
+    font-weight:900;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn.blue{
+    background:var(--blue);
+    color:#031018;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:25px 0 14px;
+}
+
+.section-title h2{
+    font-size:22px;
+}
+
+.muted{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:13px;
+}
+
 .card{
-background:#111;border:1px solid #292929;
-border-radius:18px;padding:20px;margin-bottom:18px
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:16px;
 }
-.title{font-size:19px;font-weight:900;margin-bottom:15px}
-label{display:block;color:#aaa;font-size:13px;margin-bottom:8px}
-input{
-width:100%;padding:15px;background:#080808;
-border:1px solid #3a3a3a;border-radius:12px;
-color:white;font-size:16px;outline:none
+
+.product{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
-input:focus{border-color:#ffb900}
-.products,.payments{
-display:grid;grid-template-columns:repeat(2,1fr);gap:12px
+
+.gem{
+    font-size:35px;
 }
-.product,.payment{
-background:#181818;border:2px solid #292929;
-border-radius:15px;padding:16px;cursor:pointer
+
+.product-name{
+    font-weight:800;
 }
-.product.active,.payment.active{
-border-color:#ffb900;background:#211b00
+
+.price{
+    font-size:20px;
+    font-weight:900;
 }
-.diamond{font-size:30px}
-.amount{font-size:20px;font-weight:900;margin-top:5px}
-.small{color:#62df75;font-size:12px;margin-top:4px}
-.price{color:#ffbf00;font-size:18px;font-weight:900;margin-top:10px}
-.payicon{font-size:28px;margin-bottom:7px}
-.payname{font-weight:900}
-.paydesc{font-size:11px;color:#888;margin-top:4px}
-.check{
-background:#080808;border:1px solid #292929;
-border-radius:15px;padding:15px
+
+.product .btn{
+    width:100%;
 }
-.line{
-display:flex;justify-content:space-between;
-padding:9px 0;color:#aaa
+
+.panel{
+    display:none;
+    background:#0e151e;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+    margin-top:20px;
 }
-.line strong{color:white}
-.total{
-border-top:1px solid #333;margin-top:7px;
-padding-top:15px;font-size:20px;font-weight:900
+
+.panel.active{
+    display:block;
 }
-.total span:last-child{color:#ffbf00}
-.buy{
-width:100%;margin-top:16px;padding:17px;
-border:0;border-radius:14px;
-background:#ffb900;color:#111;
-font-size:17px;font-weight:900;cursor:pointer
+
+input,textarea{
+    width:100%;
+    background:#080f17;
+    border:1px solid #2a3b4e;
+    color:#fff;
+    border-radius:12px;
+    padding:13px;
+    outline:none;
 }
-.buy:hover{background:#ffd000}
-.note{text-align:center;color:#777;font-size:11px;margin-top:14px;line-height:1.6}
-footer{text-align:center;color:#666;padding:25px;font-size:12px}
+
+input:focus,textarea:focus{
+    border-color:var(--green);
+}
+
+.row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.row>*{
+    flex:1;
+}
+
+.order{
+    background:#101a24;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
+    margin:9px 0;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#173827;
+    color:#6cffad;
+    font-size:12px;
+    font-weight:800;
+}
+
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:200;
+    background:rgba(9,14,21,.96);
+    backdrop-filter:blur(15px);
+    border-top:1px solid var(--border);
+}
+
+.bottomnav{
+    max-width:700px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    padding:6px;
+}
+
+.bottom button{
+    border:0;
+    background:none;
+    color:#aeb9c8;
+    cursor:pointer;
+    padding:7px 2px;
+    font-size:11px;
+}
+
+.bottom button b{
+    display:block;
+    font-size:19px;
+    margin-bottom:3px;
+}
+
+.toast{
+    display:none;
+    position:fixed;
+    left:50%;
+    bottom:85px;
+    transform:translateX(-50%);
+    background:#172330;
+    border:1px solid #304155;
+    border-radius:13px;
+    padding:12px 17px;
+    z-index:500;
+    width:max-content;
+    max-width:90%;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:400;
+    background:rgba(0,0,0,.75);
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modalbox{
+    width:100%;
+    max-width:440px;
+    background:#101822;
+    border:1px solid #2b3b4d;
+    border-radius:20px;
+    padding:20px;
+}
+
+.close{
+    float:right;
+    background:none;
+    border:0;
+    color:#fff;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.modalbox h2{
+    margin-bottom:15px;
+}
+
+.success{
+    text-align:center;
+}
+
+.level{
+    font-size:22px;
+    font-weight:900;
+    margin:10px 0;
+}
+
+.progress{
+    height:10px;
+    background:#202c39;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px 0;
+}
+
+.progress div{
+    height:100%;
+    width:0;
+    background:var(--green);
+    transition:.3s;
+}
 
 @media(max-width:600px){
-.products,.payments{grid-template-columns:1fr 1fr}
-.hero h1{font-size:25px}
+
+    .hero{
+        padding:23px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .hero .btn{
+        width:100%;
+        margin-top:7px;
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .price{
+        font-size:18px;
+    }
 }
 </style>
 </head>
@@ -91,234 +374,1087 @@ footer{text-align:center;color:#666;padding:25px;font-size:12px}
 <body>
 
 <header>
-<div class="logo">TAJ.<span>DONAT</span>.TJ</div>
-<div class="online">● ОНЛАЙН</div>
-</header>
 
-<div class="container">
+<div class="nav">
 
-<div class="hero">
-<h1>💎 FREE FIRE</h1>
-<p>Алмазҳоро зуд ва осон фармоиш диҳед</p>
+<div class="logo">
+💎 <span>TAJ.DONAT.TJ</span>
 </div>
 
-<div class="card">
-<div class="title">1️⃣ ID-и бозингар</div>
-<label>ID-и Free Fire</label>
-<input id="playerId" type="text" placeholder="Масалан: 123456789">
-</div>
-
-<div class="card">
-<div class="title">2️⃣ Алмазро интихоб кунед 💎</div>
-
-<div class="products">
-
-<div class="product active" onclick="product(this,'110 💎',10)">
-<div class="diamond">💎</div>
-<div class="amount">110</div>
-<div class="small">Алмаз</div>
-<div class="price">10 сомонӣ</div>
-</div>
-
-<div class="product" onclick="product(this,'310 💎',29)">
-<div class="diamond">💎</div>
-<div class="amount">310</div>
-<div class="small">Алмаз</div>
-<div class="price">29 сомонӣ</div>
-</div>
-
-<div class="product" onclick="product(this,'520 💎',50)">
-<div class="diamond">💎</div>
-<div class="amount">520</div>
-<div class="small">Алмаз</div>
-<div class="price">50 сомонӣ</div>
-</div>
-
-<div class="product" onclick="product(this,'1060 💎',100)">
-<div class="diamond">💎</div>
-<div class="amount">1060</div>
-<div class="small">Алмаз</div>
-<div class="price">100 сомонӣ</div>
-</div>
-
-<div class="product" onclick="product(this,'2180 💎',200)">
-<div class="diamond">💎</div>
-<div class="amount">2180</div>
-<div class="small">Алмаз</div>
-<div class="price">200 сомонӣ</div>
-</div>
-
-<div class="product" onclick="product(this,'5600 💎',550)">
-<div class="diamond">💎</div>
-<div class="amount">5600</div>
-<div class="small">Алмаз</div>
-<div class="price">550 сомонӣ</div>
-</div>
-
-</div>
-</div>
-
-<div class="card">
-<div class="title">3️⃣ Усули пардохт 💳</div>
-
-<div class="payments">
-
-<div class="payment active" onclick="payment(this,'Эсхата Банк')">
-<div class="payicon">🏦</div>
-<div class="payname">Эсхата Банк</div>
-<div class="paydesc">Пардохти онлайн</div>
-</div>
-
-<div class="payment" onclick="payment(this,'ICB Mobile')">
-<div class="payicon">📱</div>
-<div class="payname">ICB Mobile</div>
-<div class="paydesc">Пардохти онлайн</div>
-</div>
-
-</div>
-</div>
-
-<div class="card">
-
-<div class="title">🧾 Чеки фармоиш</div>
-
-<div class="check">
-
-<div class="line">
-<span>👤 ID:</span>
-<strong id="showId">—</strong>
-</div>
-
-<div class="line">
-<span>💎 Маҳсулот:</span>
-<strong id="showProduct">110 💎</strong>
-</div>
-
-<div class="line">
-<span>💳 Пардохт:</span>
-<strong id="showPayment">Эсхата Банк</strong>
-</div>
-
-<div class="line total">
-<span>Ҳамагӣ:</span>
-<span id="showPrice">10 сомонӣ</span>
-</div>
-
-</div>
-
-<button class="buy" onclick="sendOrder()">
-🧾 ФИРИСТОДАНИ ФАРМОИШ
+<button class="nav-btn" onclick="showPanel('profile')">
+👤 Профил
 </button>
 
-<div class="note">
-Фармоиш ба админ дар Telegram фиристода мешавад.
 </div>
+
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>💎 Алмаз бо эътимод</h1>
+
+<p>
+🔥 Тез • Осон • Боэътимод • Гарантия 100%
+</p>
+
+<button class="btn" onclick="scrollProducts()">
+💎 Хариди алмаз
+</button>
+
+<button class="btn blue" onclick="showPanel('balance')">
+➕ Пур кардани баланс
+</button>
+
+</section>
+
+
+<!-- DIAMONDS -->
+
+<div id="products">
+
+<div class="section-title">
+
+<h2>💎 Алмаз</h2>
+
+<span class="muted">
+Бастаи худро интихоб кунед
+</span>
+
+</div>
+
+<div class="grid" id="diamondGrid"></div>
+
+</div>
+
+
+<!-- VOUCHERS -->
+
+<div class="section-title">
+
+<h2>🎟️ Ваучерҳо</h2>
+
+</div>
+
+<div class="grid" id="voucherGrid"></div>
+
+
+<!-- VIP -->
+
+<div class="section-title">
+
+<h2>👑 VIP</h2>
+
+</div>
+
+<div class="grid">
+
+<div class="card product">
+
+<div class="gem">👑</div>
+
+<div class="product-name">
+Настройка VIP
+</div>
+
+<div class="price">
+15 сомонӣ
+</div>
+
+<button
+class="btn"
+onclick="buy('Настройка VIP',15,'VIP',0)"
+>
+Харид кардан
+</button>
 
 </div>
 
 </div>
 
-<footer>
-💎 TAJ.DONAT.TJ<br><br>
+
+<!-- BALANCE -->
+
+<section id="balance" class="panel">
+
+<h2>💰 Баланси ман</h2>
+
+<br>
+
+<div class="card">
+
+<div class="muted">
+Баланси ҷорӣ
+</div>
+
+<div class="price" id="balanceValue">
+0 сомонӣ
+</div>
+
+</div>
+
+<br>
+
+<h3>
+➕ Пур кардани баланс
+</h3>
+
+<br>
+
+<div class="row">
+
+<input
+id="topup"
+type="number"
+min="1"
+placeholder="Маблағ, сомонӣ"
+>
+
+<button
+class="btn"
+onclick="topup()"
+>
+Пур кардан
+</button>
+
+</div>
+
+<br>
+
+<p class="muted">
+Пас аз пардохт чекро фиристед. Пардохти воқеӣ баъд аз пайваст кардани Payment API фаъол мешавад.
+</p>
+
+</section>
+
+
+<!-- ORDERS -->
+
+<section id="orders" class="panel">
+
+<h2>
+📦 Фармоишҳои ман
+</h2>
+
+<br>
+
+<div id="ordersList"></div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="panel">
+
+<h2>
+👤 Профили ман
+</h2>
+
+<br>
+
+<div class="card">
+
+<p>
+⭐ Сатҳ:
+</p>
+
+<div
+id="level"
+class="level"
+>
+🥉 Навкор
+</div>
+
+<p>
+📦 Шумораи харидҳо:
+<b id="count">0</b>
+</p>
+
+<br>
+
+<p>
+💰 Маблағи умумии харид:
+<b id="spent">0 сомонӣ</b>
+</p>
+
+<br>
+
+<p>
+💎 Алмоси харидашуда:
+<b id="gems">0</b>
+</p>
+
+<br>
+
+<p
+id="next"
+class="muted"
+>
+</p>
+
+<div class="progress">
+<div id="progressBar"></div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SUPPORT -->
+
+<section id="support" class="panel">
+
+<h2>
+📞 Дастгирӣ
+</h2>
+
+<br>
+
+<p class="muted">
+Савол ё мушкил доред? Паёми худро нависед.
+</p>
+
+<br>
+
+<textarea
+id="supportText"
+rows="4"
+placeholder="Паёми шумо..."
+></textarea>
+
+<br><br>
+
+<button
+class="btn"
+onclick="support()"
+>
+📨 Фиристодан
+</button>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about" class="panel">
+
+<h2>
+ℹ️ Дар бораи TAJ.DONAT.TJ
+</h2>
+
+<br>
+
+<p>
+💎 TAJ.DONAT.TJ — хизматрасонии фурӯши алмаз ва ваучерҳои Free Fire.
+</p>
+
+<br>
+
+<p class="muted">
 Тез • Осон • Боэътимод
-</footer>
+</p>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM MENU -->
+
+<div class="bottom">
+
+<div class="bottomnav">
+
+<button onclick="scrollProducts()">
+<b>💎</b>
+Алмаз
+</button>
+
+<button onclick="showPanel('balance')">
+<b>💰</b>
+Баланс
+</button>
+
+<button onclick="showPanel('orders')">
+<b>📦</b>
+Фармоишҳо
+</button>
+
+<button onclick="showPanel('profile')">
+<b>👤</b>
+Профил
+</button>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+class="toast"
+id="toast"
+></div>
+
+
+<!-- MODAL -->
+
+<div
+class="modal"
+id="modal"
+>
+
+<div class="modalbox">
+
+<button
+class="close"
+onclick="closeModal()"
+>
+×
+</button>
+
+<h2 id="modalTitle">
+Харид
+</h2>
+
+<div id="modalBody"></div>
+
+</div>
+
+</div>
+
 
 <script>
 
-let selectedProduct={
-name:"110 💎",
-price:10
-};
+/* =========================
+   МАҲСУЛОТҲО
+========================= */
 
-let selectedPayment="Эсхата Банк";
+const diamonds = [
 
-document.getElementById("playerId").oninput=function(){
-document.getElementById("showId").innerText=this.value||"—";
-};
+["100 💎",10,100],
 
-function product(el,name,price){
+["310 💎",29,310],
 
-document.querySelectorAll(".product")
-.forEach(x=>x.classList.remove("active"));
+["520 💎",50,520],
 
-el.classList.add("active");
+["1060 💎",100,1060],
 
-selectedProduct.name=name;
-selectedProduct.price=price;
+["2180 💎",200,2180],
 
-document.getElementById("showProduct").innerText=name;
-document.getElementById("showPrice").innerText=price+" сомонӣ";
-}
+["5600 💎",550,5600]
 
-function payment(el,name){
+];
 
-document.querySelectorAll(".payment")
-.forEach(x=>x.classList.remove("active"));
 
-el.classList.add("active");
+const vouchers = [
 
-selectedPayment=name;
+["Лайт 90",7,90],
 
-document.getElementById("showPayment").innerText=name;
-}
+["Ҳафта 450",18,450],
 
-async function sendOrder(){
+["Моҳона 2600",95,2600]
 
-let playerId=document.getElementById("playerId").value.trim();
+];
 
-if(!playerId){
-alert("⚠️ Аввал ID-и бозингарро ворид кунед!");
-return;
-}
 
-let tg=window.Telegram?.WebApp;
+/* =========================
+   DATA
+========================= */
 
-let userId=tg?.initDataUnsafe?.user?.id || 0;
-
-let data={
-player_id:playerId,
-product:selectedProduct.name,
-price:selectedProduct.price,
-payment:selectedPayment,
-user_id:userId
-};
-
-try{
-
-let response=await fetch("/order",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(data)
-});
-
-let result=await response.json();
-
-if(result.ok){
-
-alert(
-"✅ Фармоиш фиристода шуд!\n\n"+
-"📦 № "+result.order
+let state =
+JSON.parse(
+localStorage.getItem("tajdonat")
+||
+'{"balance":0,"orders":[],"spent":0,"gems":0}'
 );
+
+
+/* =========================
+   SAVE
+========================= */
+
+function save(){
+
+localStorage.setItem(
+"tajdonat",
+JSON.stringify(state)
+);
+
+render();
+
+}
+
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
+function productCard(product,type){
+
+return `
+
+<div class="card product">
+
+<div class="gem">
+
+${type === "Diamond" ? "💎" : "🎟️"}
+
+</div>
+
+<div class="product-name">
+
+${product[0]}
+
+</div>
+
+<div class="price">
+
+${product[1]} сомонӣ
+
+</div>
+
+<button
+class="btn"
+onclick="buy(
+'${product[0]}',
+${product[1]},
+'${type}',
+${product[2] || 0}
+)"
+>
+
+Харид кардан
+
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function render(){
+
+document.getElementById(
+"diamondGrid"
+).innerHTML =
+diamonds
+.map(x => productCard(x,"Diamond"))
+.join("");
+
+
+document.getElementById(
+"voucherGrid"
+).innerHTML =
+vouchers
+.map(x => productCard(x,"Voucher"))
+.join("");
+
+
+document.getElementById(
+"balanceValue"
+).textContent =
+state.balance + " сомонӣ";
+
+
+document.getElementById(
+"count"
+).textContent =
+state.orders.length;
+
+
+document.getElementById(
+"spent"
+).textContent =
+state.spent + " сомонӣ";
+
+
+document.getElementById(
+"gems"
+).textContent =
+state.gems;
+
+
+/* LEVEL */
+
+let level;
+
+if(state.orders.length >= 20){
+
+level = "💎 VIP";
+
+}else if(state.orders.length >= 10){
+
+level = "🥇 Харидори доимӣ";
+
+}else if(state.orders.length >= 5){
+
+level = "🥈 Муштарии фаъол";
 
 }else{
 
-alert("❌ Хато: "+result.error);
+level = "🥉 Навкор";
 
 }
 
-}catch(e){
+document.getElementById(
+"level"
+).textContent = level;
 
-alert("❌ Сервер дастрас нест.");
+
+/* PROGRESS */
+
+let target;
+
+if(state.orders.length < 5){
+
+target = 5;
+
+}else if(state.orders.length < 10){
+
+target = 10;
+
+}else if(state.orders.length < 20){
+
+target = 20;
+
+}else{
+
+target = 20;
+
+}
+
+
+let percent =
+Math.min(
+(state.orders.length / target) * 100,
+100
+);
+
+
+document.getElementById(
+"progressBar"
+).style.width =
+percent + "%";
+
+
+if(state.orders.length >= 20){
+
+document.getElementById(
+"next"
+).textContent =
+"🎉 Шумо муштарии VIP ҳастед!";
+
+}else{
+
+document.getElementById(
+"next"
+).textContent =
+"То сатҳи нав: " +
+state.orders.length +
+"/" +
+target +
+" харид";
+
+}
+
+
+/* ORDERS */
+
+if(state.orders.length){
+
+document.getElementById(
+"ordersList"
+).innerHTML =
+
+state.orders
+.slice()
+.reverse()
+.map(o => `
+
+<div class="order">
+
+<b>
+${o.id}
+</b>
+
+<br><br>
+
+💎 ${o.product}
+
+<br>
+
+🆔 ID:
+${o.player}
+
+<br>
+
+💰 ${o.price}
+сомонӣ
+
+<br>
+
+📅 ${o.date}
+
+<br><br>
+
+<span class="badge">
+
+${o.status}
+
+</span>
+
+</div>
+
+`)
+.join("");
+
+}else{
+
+document.getElementById(
+"ordersList"
+).innerHTML =
+
+`
+<p class="muted">
+Ҳоло фармоише нест.
+</p>
+`;
 
 }
 
 }
+
+
+/* =========================
+   TOAST
+========================= */
+
+function toast(text){
+
+const element =
+document.getElementById("toast");
+
+element.textContent = text;
+
+element.style.display = "block";
+
+setTimeout(
+() => {
+element.style.display = "none";
+},
+2500
+);
+
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+function showPanel(id){
+
+document
+.querySelectorAll(".panel")
+.forEach(
+x => x.classList.remove("active")
+);
+
+const element =
+document.getElementById(id);
+
+if(element){
+
+element.classList.add("active");
+
+element.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+function scrollProducts(){
+
+document
+.getElementById("products")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================
+   BUY
+========================= */
+
+function buy(
+product,
+price,
+type,
+gems = 0
+){
+
+document.getElementById(
+"modalTitle"
+).textContent =
+"💎 " + product;
+
+
+document.getElementById(
+"modalBody"
+).innerHTML = `
+
+<p>
+💰 Нарх:
+<b>${price} сомонӣ</b>
+</p>
+
+<br>
+
+<label>
+🎮 ID-и Free Fire-и худро ворид кунед:
+</label>
+
+<input
+id="player"
+inputmode="numeric"
+placeholder="Мисол: 123456789"
+>
+
+<br>
+
+<p class="muted">
+ID-ро бодиққат санҷед.
+Пас аз харид тағйир додани ID метавонад имконнопазир бошад.
+</p>
+
+<br>
+
+<button
+class="btn"
+style="width:100%"
+onclick="confirmBuy(
+'${product}',
+${price},
+'${type}',
+${gems}
+)"
+>
+
+✅ Тасдиқи харид
+
+</button>
+
+`;
+
+document
+.getElementById("modal")
+.classList.add("active");
+
+}
+
+
+/* =========================
+   CONFIRM BUY
+========================= */
+
+function confirmBuy(
+product,
+price,
+type,
+gems
+){
+
+const player =
+document
+.getElementById("player")
+.value
+.trim();
+
+
+if(!player){
+
+toast(
+"❗ Лутфан ID-ро ворид кунед"
+);
+
+return;
+
+}
+
+
+if(state.balance < price){
+
+closeModal();
+
+showPanel("balance");
+
+toast(
+"❌ Баланс кофӣ нест. Аввал балансро пур кунед."
+);
+
+return;
+
+}
+
+
+/* BALANCE */
+
+state.balance -= price;
+
+
+/* STATS */
+
+state.spent += price;
+
+state.gems += gems;
+
+
+/* ORDER ID */
+
+const id =
+"#" +
+(10000 + state.orders.length + 1);
+
+
+/* ORDER */
+
+state.orders.push({
+
+id:id,
+
+product:product,
+
+price:price,
+
+player:player,
+
+status:"🟡 Дар интизорӣ",
+
+date:new Date()
+.toLocaleString("tg-TJ")
+
+});
+
+
+save();
+
+closeModal();
+
+
+/* SUCCESS */
+
+document.getElementById(
+"modalTitle"
+).textContent =
+"🎉 Харид муваффақ шуд!";
+
+
+document.getElementById(
+"modalBody"
+).innerHTML = `
+
+<div class="success">
+
+<p>
+Шумо
+<b>${product}</b>
+-ро бомуваффақият харидед.
+</p>
+
+<br>
+
+<p>
+🆔 ID:
+<b>${player}</b>
+</p>
+
+<p>
+💰 Маблағ:
+<b>${price} сомонӣ</b>
+</p>
+
+<p>
+🧾 Фармоиш:
+<b>${id}</b>
+</p>
+
+<br>
+
+<p class="muted">
+
+📦 Фармоиши шумо қабул шуд
+ва дар ҳолати коркард қарор дорад.
+
+</p>
+
+<br>
+
+<button
+class="btn"
+onclick="closeModal();showPanel('orders')"
+>
+
+📦 Фармоиши ман
+
+</button>
+
+<br><br>
+
+<button
+class="btn blue"
+onclick="closeModal();scrollProducts()"
+>
+
+💎 Хариди дигар
+
+</button>
+
+</div>
+
+`;
+
+document
+.getElementById("modal")
+.classList.add("active");
+
+
+toast(
+"🎉 Фармоиш қабул шуд!"
+);
+
+}
+
+
+/* =========================
+   TOPUP
+========================= */
+
+function topup(){
+
+const amount =
+Number(
+document.getElementById("topup").value
+);
+
+
+if(!amount || amount < 1){
+
+toast(
+"❗ Маблағро дуруст ворид кунед"
+);
+
+return;
+
+}
+
+
+/*
+Дар версияи demo баланс мустақим
+зиёд мешавад.
+
+Барои production ин ҷо Payment API
+пайваст карда мешавад.
+*/
+
+state.balance += amount;
+
+save();
+
+
+document.getElementById(
+"topup"
+).value = "";
+
+
+toast(
+"✅ Баланс бо " +
+amount +
+" сомонӣ пур шуд"
+);
+
+}
+
+
+/* =========================
+   SUPPORT
+========================= */
+
+function support(){
+
+const text =
+document
+.getElementById("supportText")
+.value
+.trim();
+
+
+if(!text){
+
+toast(
+"❗ Паёмро нависед"
+);
+
+return;
+
+}
+
+
+document.getElementById(
+"supportText"
+).value = "";
+
+
+toast(
+"📨 Паёми шумо фиристода шуд"
+);
+
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeModal(){
+
+document
+.getElementById("modal")
+.classList.remove("active");
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+render();
 
 </script>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
 </body>
-</html>
+  </html>
