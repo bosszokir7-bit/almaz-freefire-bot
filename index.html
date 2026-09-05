@@ -2,472 +2,255 @@
 <html lang="tg">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TAJ.DONAT.TJ — Алмаз бо эътимод</title>
-
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#050817;--card:#0b1530;--card2:#101c3d;--line:#244b91;--blue:#28a9ff;--violet:#7137ff;--pink:#b52cff;--gold:#ffd43b;--green:#35e879;--muted:#9eb1d4}
+body{font-family:Arial,sans-serif;background:radial-gradient(circle at 50% -10%,#182d72 0,#050817 42%);color:#fff;min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+.top{position:sticky;top:0;z-index:20;background:rgba(4,8,22,.94);backdrop-filter:blur(15px);border-bottom:1px solid #1c3970}
+.header{max-width:1150px;margin:auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-size:25px;font-weight:1000}
+.logo span{color:var(--gold)}
+.balance{border:1px solid #80631b;border-radius:14px;padding:9px 14px;background:#10142a;color:#ffd83d;font-weight:900}
+.online{font-size:12px;color:var(--green);margin-left:8px}
+.menu{max-width:1150px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:7px 12px 11px}
+.menu button{border:1px solid #18376e;background:#0a1a3b;color:#dbe8ff;border-radius:13px;padding:11px 5px;font-weight:800}
+.menu button.active,.menu button:hover{background:linear-gradient(135deg,#6d24ff,#9c29ff);border-color:#9c57ff;box-shadow:0 0 18px #702dff55}
+main{max-width:1150px;margin:auto;padding:18px 14px 95px}
+.hero{border:1px solid #a535ff;border-radius:22px;padding:25px;min-height:220px;background:linear-gradient(100deg,#11134b,#15176f 50%,#29105d);overflow:hidden;position:relative}
+.hero:after{content:"💎";position:absolute;right:5%;top:8px;font-size:150px;opacity:.13}
+.hero h1{font-size:40px;margin-bottom:8px}
+.hero h1 span{color:var(--gold)}
+.hero p{color:#dce7ff;font-size:17px;max-width:650px;line-height:1.5}
+.cta{margin-top:18px;background:linear-gradient(90deg,#ffc400,#ff8c00);border:0;border-radius:14px;padding:13px 22px;font-weight:1000;color:#10101b}
+.section{margin-top:24px}
+.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+.title h2{font-size:25px}
+.hint{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.card{background:linear-gradient(145deg,#0b1634,#071024);border:1px solid #1b6fe0;border-radius:19px;padding:16px;box-shadow:0 10px 30px #0005}
+.product{text-align:center;position:relative;overflow:hidden}
+.product .pic{height:115px;display:flex;align-items:center;justify-content:center;font-size:76px;text-shadow:0 0 25px #19aaff}
+.product h3{font-size:25px;color:var(--gold)}
+.product .price{font-size:17px;margin:4px 0 12px}
+.buy{width:100%;padding:12px;border:0;border-radius:12px;background:linear-gradient(90deg,#6427ff,#9d24ff);color:#fff;font-weight:1000}
+.tag{position:absolute;right:9px;top:9px;background:#ff9d00;color:#17100a;border-radius:20px;padding:5px 8px;font-size:11px;font-weight:900}
+.info{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.info .card{text-align:center}
+.info b{display:block;font-size:22px;color:var(--gold);margin-bottom:5px}
+.info span{color:var(--muted);font-size:12px}
+.page{display:none}
+.page.active{display:block}
+.panel{background:#09142b;border:1px solid #214986;border-radius:19px;padding:18px;margin-top:18px}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:#0e1b39;border:1px solid #214986;border-radius:14px;padding:14px}
+.stat b{font-size:20px;color:var(--gold)}
+.order{border:1px solid #214986;border-radius:14px;padding:13px;margin:9px 0;background:#0b1731}
+.status{display:inline-block;margin-top:8px;padding:5px 9px;border-radius:20px;background:#153a2a;color:#68ffad;font-size:12px;font-weight:900}
+.empty{text-align:center;color:var(--muted);padding:30px}
+.progress{height:10px;background:#172543;border-radius:20px;overflow:hidden;margin-top:10px}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,#6731ff,#ff32c9);width:0}
+.field{margin:10px 0}
+.field label{display:block;margin-bottom:7px;color:#cbd9f4;font-size:14px}
+.field input{width:100%;padding:12px;border-radius:11px;border:1px solid #2c518c;background:#061027;color:#fff;outline:0}
+.paybox{background:#101d3c;border:1px solid #7152ff;border-radius:15px;padding:14px;margin:12px 0}
+.paynum{font-size:24px;color:var(--gold);font-weight:1000;margin-top:5px}
+.primary{border:0;border-radius:12px;padding:12px 17px;background:var(--green);font-weight:1000;color:#06150b}
+.secondary{border:1px solid #35588f;border-radius:12px;padding:11px 15px;background:#0d1a34;color:#fff}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:50;align-items:center;justify-content:center;padding:14px}
+.modal.show{display:flex}
+.modalbox{width:100%;max-width:460px;background:#09142b;border:1px solid #7546ff;border-radius:20px;padding:19px;max-height:90vh;overflow:auto}
+.close{float:right;border:0;background:none;color:#fff;font-size:27px}
+.success{text-align:center;padding:8px}
+.success .big{font-size:55px}
+.notice{padding:10px;border-radius:11px;background:#171e3a;color:#bcd0f1;font-size:13px;line-height:1.45;margin:10px 0}
+.toast{position:fixed;left:50%;bottom:82px;transform:translateX(-50%);z-index:100;background:#101e38;border:1px solid #42679d;border-radius:12px;padding:11px 16px;display:none;max-width:90%;text-align:center}
+
+@media(max-width:700px){
+.logo{font-size:18px}
+.balance{font-size:12px;padding:8px}
+.hero h1{font-size:29px}
+.hero{padding:20px;min-height:190px}
+.grid{grid-template-columns:repeat(2,1fr)}
+.info{grid-template-columns:repeat(2,1fr)}
+.statgrid{grid-template-columns:1fr 1fr}
+.product .pic{height:85px;font-size:58px}
+.product h3{font-size:21px}
 }
 
-body{
-    font-family:Arial,sans-serif;
-    background:#070b10;
-    color:#fff;
-    min-height:100vh;
-}
-
-button,input,textarea{
-    font:inherit;
-}
-
-:root{
-    --card:#111923;
-    --card2:#151f2c;
-    --border:#263547;
-    --green:#35e27a;
-    --blue:#22b8ff;
-    --text:#fff;
-    --muted:#9caabd;
-}
-
-header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(8,12,18,.94);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid var(--border);
-}
-
-.nav{
-    max-width:1100px;
-    margin:auto;
-    padding:14px 16px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.logo{
-    font-size:20px;
-    font-weight:900;
-}
-
-.logo span{
-    color:var(--green);
-}
-
-.nav-btn{
-    border:1px solid var(--border);
-    background:#17212d;
-    color:#fff;
-    border-radius:12px;
-    padding:10px 13px;
-    cursor:pointer;
-}
-
-main{
-    max-width:1100px;
-    margin:auto;
-    padding:20px 16px 100px;
-}
-
-.hero{
-    position:relative;
-    overflow:hidden;
-    padding:30px;
-    border-radius:25px;
-    border:1px solid #233547;
-    background:
-        radial-gradient(circle at right,#153d2b 0,transparent 35%),
-        linear-gradient(135deg,#111c28,#0b121a);
-    margin-bottom:28px;
-}
-
-.hero:after{
-    content:"💎";
-    position:absolute;
-    right:25px;
-    top:15px;
-    font-size:100px;
-    opacity:.12;
-}
-
-.hero h1{
-    font-size:35px;
-    margin-bottom:10px;
-}
-
-.hero p{
-    color:var(--muted);
-    margin-bottom:20px;
-}
-
-.btn{
-    border:0;
-    border-radius:13px;
-    padding:12px 17px;
-    background:var(--green);
-    color:#041108;
-    font-weight:900;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn.blue{
-    background:var(--blue);
-    color:#031018;
-}
-
-.section-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin:25px 0 14px;
-}
-
-.section-title h2{
-    font-size:22px;
-}
-
-.muted{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:13px;
-}
-
-.card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:16px;
-}
-
-.product{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.gem{
-    font-size:35px;
-}
-
-.product-name{
-    font-weight:800;
-}
-
-.price{
-    font-size:20px;
-    font-weight:900;
-}
-
-.product .btn{
-    width:100%;
-}
-
-.panel{
-    display:none;
-    background:#0e151e;
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:18px;
-    margin-top:20px;
-}
-
-.panel.active{
-    display:block;
-}
-
-input,textarea{
-    width:100%;
-    background:#080f17;
-    border:1px solid #2a3b4e;
-    color:#fff;
-    border-radius:12px;
-    padding:13px;
-    outline:none;
-}
-
-input:focus,textarea:focus{
-    border-color:var(--green);
-}
-
-.row{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.row>*{
-    flex:1;
-}
-
-.order{
-    background:#101a24;
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:14px;
-    margin:9px 0;
-}
-
-.badge{
-    display:inline-block;
-    padding:6px 10px;
-    border-radius:999px;
-    background:#173827;
-    color:#6cffad;
-    font-size:12px;
-    font-weight:800;
-}
-
-.bottom{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:200;
-    background:rgba(9,14,21,.96);
-    backdrop-filter:blur(15px);
-    border-top:1px solid var(--border);
-}
-
-.bottomnav{
-    max-width:700px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    padding:6px;
-}
-
-.bottom button{
-    border:0;
-    background:none;
-    color:#aeb9c8;
-    cursor:pointer;
-    padding:7px 2px;
-    font-size:11px;
-}
-
-.bottom button b{
-    display:block;
-    font-size:19px;
-    margin-bottom:3px;
-}
-
-.toast{
-    display:none;
-    position:fixed;
-    left:50%;
-    bottom:85px;
-    transform:translateX(-50%);
-    background:#172330;
-    border:1px solid #304155;
-    border-radius:13px;
-    padding:12px 17px;
-    z-index:500;
-    width:max-content;
-    max-width:90%;
-}
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:400;
-    background:rgba(0,0,0,.75);
-    align-items:center;
-    justify-content:center;
-    padding:16px;
-}
-
-.modal.active{
-    display:flex;
-}
-
-.modalbox{
-    width:100%;
-    max-width:440px;
-    background:#101822;
-    border:1px solid #2b3b4d;
-    border-radius:20px;
-    padding:20px;
-}
-
-.close{
-    float:right;
-    background:none;
-    border:0;
-    color:#fff;
-    font-size:25px;
-    cursor:pointer;
-}
-
-.modalbox h2{
-    margin-bottom:15px;
-}
-
-.success{
-    text-align:center;
-}
-
-.level{
-    font-size:22px;
-    font-weight:900;
-    margin:10px 0;
-}
-
-.progress{
-    height:10px;
-    background:#202c39;
-    border-radius:20px;
-    overflow:hidden;
-    margin:10px 0;
-}
-
-.progress div{
-    height:100%;
-    width:0;
-    background:var(--green);
-    transition:.3s;
-}
-
-@media(max-width:600px){
-
-    .hero{
-        padding:23px;
-    }
-
-    .hero h1{
-        font-size:28px;
-    }
-
-    .hero .btn{
-        width:100%;
-        margin-top:7px;
-    }
-
-    .grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .price{
-        font-size:18px;
-    }
+@media(max-width:430px){
+.grid{grid-template-columns:1fr 1fr;gap:8px}
+.card{padding:11px}
+.menu button{font-size:11px}
+.hero p{font-size:14px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<header class="top">
 
-<div class="nav">
+<div class="header">
 
 <div class="logo">
-💎 <span>TAJ.DONAT.TJ</span>
+💎 TAJ.<span>DONAT.TJ</span>
 </div>
 
-<button class="nav-btn" onclick="showPanel('profile')">
+<div class="balance">
+💰 <span id="headBalance">0</span> сомонӣ
+<span class="online">● Онлайн</span>
+</div>
+
+</div>
+
+<nav class="menu">
+
+<button id="m-home" onclick="page('home')">
+🏠 Асосӣ
+</button>
+
+<button id="m-buy" onclick="page('buy')">
+🛒 Харидҳо
+</button>
+
+<button id="m-orders" onclick="page('orders')">
+📦 Фармоишҳо
+</button>
+
+<button id="m-profile" onclick="page('profile')">
 👤 Профил
 </button>
 
-</div>
+</nav>
 
 </header>
 
 
 <main>
 
-<!-- HERO -->
 
-<section class="hero">
+<section id="home" class="page">
 
-<h1>💎 Алмаз бо эътимод</h1>
+<div class="hero">
+
+<h1>
+TAJ.<span>DONAT.TJ</span>
+</h1>
 
 <p>
-🔥 Тез • Осон • Боэътимод • Гарантия 100%
+💎 Алмаз, Ваучер ва VIP — тез, осон ва боэътимод.
+Фармоишатонро интихоб кунед ва ID-и Free Fire-ро ворид намоед.
 </p>
 
-<button class="btn" onclick="scrollProducts()">
+<button class="cta" onclick="page('buy')">
 💎 Хариди алмаз
 </button>
 
-<button class="btn blue" onclick="showPanel('balance')">
-➕ Пур кардани баланс
-</button>
+</div>
+
+
+<div class="info">
+
+<div class="card">
+<b>⚡ Тез</b>
+<span>Пардохти осон</span>
+</div>
+
+<div class="card">
+<b>🛡️ 100%</b>
+<span>Боэътимод</span>
+</div>
+
+<div class="card">
+<b>🟢 24/7</b>
+<span>Хизматрасонӣ</span>
+</div>
+
+<div class="card">
+<b>👥 9999+</b>
+<span>Муштарӣ</span>
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="title">
+<h2>💎 Бастаи машҳур</h2>
+<span class="hint">
+Интихоб кунед → ID → пардохт
+</span>
+</div>
+
+<div class="grid" id="homeGrid"></div>
+
+</div>
 
 </section>
 
 
-<!-- DIAMONDS -->
 
-<div id="products">
+<section id="buy" class="page">
 
-<div class="section-title">
+<div class="title">
 
-<h2>💎 Алмаз</h2>
+<h2>
+🛒 Харидҳо
+</h2>
 
-<span class="muted">
-Бастаи худро интихоб кунед
+<span class="hint">
+Алмаз • Ваучер • VIP
 </span>
 
 </div>
 
-<div class="grid" id="diamondGrid"></div>
 
-</div>
+<div class="grid" id="buyGrid"></div>
 
 
-<!-- VOUCHERS -->
+<div class="panel">
 
-<div class="section-title">
+<h3>
+🎟️ Ваучерҳо
+</h3>
 
-<h2>🎟️ Ваучерҳо</h2>
-
-</div>
+<br>
 
 <div class="grid" id="voucherGrid"></div>
 
-
-<!-- VIP -->
-
-<div class="section-title">
-
-<h2>👑 VIP</h2>
-
 </div>
 
-<div class="grid">
+
+<div class="panel">
+
+<h3>
+👑 VIP
+</h3>
+
+<br>
 
 <div class="card product">
 
-<div class="gem">👑</div>
-
-<div class="product-name">
-Настройка VIP
+<div class="pic">
+👑
 </div>
+
+<h3>
+Настройка VIP
+</h3>
 
 <div class="price">
 15 сомонӣ
 </div>
 
 <button
-class="btn"
-onclick="buy('Настройка VIP',15,'VIP',0)"
+class="buy"
+onclick="openCheckout('Настройка VIP',15,0)"
 >
 Харид кардан
 </button>
@@ -476,239 +259,175 @@ onclick="buy('Настройка VIP',15,'VIP',0)"
 
 </div>
 
-
-<!-- BALANCE -->
-
-<section id="balance" class="panel">
-
-<h2>💰 Баланси ман</h2>
-
-<br>
-
-<div class="card">
-
-<div class="muted">
-Баланси ҷорӣ
-</div>
-
-<div class="price" id="balanceValue">
-0 сомонӣ
-</div>
-
-</div>
-
-<br>
-
-<h3>
-➕ Пур кардани баланс
-</h3>
-
-<br>
-
-<div class="row">
-
-<input
-id="topup"
-type="number"
-min="1"
-placeholder="Маблағ, сомонӣ"
->
-
-<button
-class="btn"
-onclick="topup()"
->
-Пур кардан
-</button>
-
-</div>
-
-<br>
-
-<p class="muted">
-Пас аз пардохт чекро фиристед. Пардохти воқеӣ баъд аз пайваст кардани Payment API фаъол мешавад.
-</p>
-
 </section>
 
 
-<!-- ORDERS -->
 
-<section id="orders" class="panel">
+<section id="orders" class="page">
+
+<div class="title">
 
 <h2>
-📦 Фармоишҳои ман
+📦 Фармоишҳо
 </h2>
 
-<br>
+<span class="hint">
+Ҳамаи харидҳои шумо
+</span>
+
+</div>
 
 <div id="ordersList"></div>
 
 </section>
 
 
-<!-- PROFILE -->
 
-<section id="profile" class="panel">
+<section id="profile" class="page">
+
+<div class="title">
 
 <h2>
-👤 Профили ман
+👤 Профил
 </h2>
 
-<br>
+<span class="hint">
+Ҳисоб ва сатҳи шумо
+</span>
 
-<div class="card">
-
-<p>
-⭐ Сатҳ:
-</p>
-
-<div
-id="level"
-class="level"
->
-🥉 Навкор
 </div>
 
-<p>
-📦 Шумораи харидҳо:
-<b id="count">0</b>
-</p>
+
+<div class="panel">
+
+<div class="statgrid">
+
+<div class="stat">
+🛒 Харидҳо
+<br>
+<b id="pCount">0</b>
+</div>
+
+<div class="stat">
+💎 Алмаз
+<br>
+<b id="pGems">0</b>
+</div>
+
+<div class="stat">
+💰 Хароҷот
+<br>
+<b id="pSpent">0</b> с
+</div>
+
+<div class="stat">
+👥 Муштариён
+<br>
+<b>9999+</b>
+</div>
+
+<div class="stat">
+💳 Баланс
+<br>
+<b id="pBalance">0</b> с
+</div>
+
+<div class="stat">
+🏆 Сатҳ
+<br>
+<b id="pLevel">
+🥉 Навкор
+</b>
+</div>
+
+</div>
+
 
 <br>
 
-<p>
-💰 Маблағи умумии харид:
-<b id="spent">0 сомонӣ</b>
-</p>
-
-<br>
-
-<p>
-💎 Алмоси харидашуда:
-<b id="gems">0</b>
-</p>
-
-<br>
-
-<p
-id="next"
-class="muted"
->
-</p>
+<h3 id="levelText">
+🥉 Навкор
+</h3>
 
 <div class="progress">
-<div id="progressBar"></div>
+<i id="bar"></i>
 </div>
 
+<p
+class="hint"
+id="nextText"
+style="margin-top:8px"
+></p>
+
 </div>
 
-</section>
 
 
-<!-- SUPPORT -->
+<div class="panel">
 
-<section id="support" class="panel">
+<h3>
+💰 Пур кардани баланс
+</h3>
 
-<h2>
-📞 Дастгирӣ
-</h2>
 
-<br>
+<div class="paybox">
 
-<p class="muted">
-Савол ё мушкил доред? Паёми худро нависед.
-</p>
+📱 Барои пардохт рақам:
 
-<br>
+<div class="paynum">
++992 93 571 0406
+</div>
 
-<textarea
-id="supportText"
-rows="4"
-placeholder="Паёми шумо..."
-></textarea>
+<small>
+Рақами пардохти мағоза
+</small>
 
-<br><br>
+</div>
+
+
+<div class="field">
+
+<label>
+Маблағ (сомонӣ)
+</label>
+
+<input
+id="topAmount"
+type="number"
+min="1"
+placeholder="Мисол: 50"
+>
+
+</div>
+
 
 <button
-class="btn"
-onclick="support()"
+class="primary"
+onclick="topupRequest()"
 >
-📨 Фиристодан
+🧾 Пардохт кардам / чек мефиристам
 </button>
 
-</section>
 
-
-<!-- ABOUT -->
-
-<section id="about" class="panel">
-
-<h2>
-ℹ️ Дар бораи TAJ.DONAT.TJ
-</h2>
-
-<br>
-
-<p>
-💎 TAJ.DONAT.TJ — хизматрасонии фурӯши алмаз ва ваучерҳои Free Fire.
+<p
+class="hint"
+style="margin-top:10px"
+>
+Пас аз пардохт чекро нигоҳ доред.
+Барои пардохти воқеӣ тасдиқи админ ё Payment API лозим аст.
 </p>
 
-<br>
-
-<p class="muted">
-Тез • Осон • Боэътимод
-</p>
+</div>
 
 </section>
 
 </main>
 
 
-<!-- BOTTOM MENU -->
-
-<div class="bottom">
-
-<div class="bottomnav">
-
-<button onclick="scrollProducts()">
-<b>💎</b>
-Алмаз
-</button>
-
-<button onclick="showPanel('balance')">
-<b>💰</b>
-Баланс
-</button>
-
-<button onclick="showPanel('orders')">
-<b>📦</b>
-Фармоишҳо
-</button>
-
-<button onclick="showPanel('profile')">
-<b>👤</b>
-Профил
-</button>
-
-</div>
-
-</div>
-
-
-<!-- TOAST -->
 
 <div
-class="toast"
-id="toast"
-></div>
-
-
-<!-- MODAL -->
-
-<div
-class="modal"
 id="modal"
+class="modal"
 >
 
 <div class="modalbox">
@@ -720,36 +439,36 @@ onclick="closeModal()"
 ×
 </button>
 
-<h2 id="modalTitle">
-Харид
-</h2>
-
-<div id="modalBody"></div>
+<div id="modalContent"></div>
 
 </div>
 
 </div>
+
+
+<div
+id="toast"
+class="toast"
+></div>
+
 
 
 <script>
 
-/* =========================
-   МАҲСУЛОТҲО
-========================= */
 
 const diamonds = [
 
-["100 💎",10,100],
+["100 💎",10,100,"🔥 Популяр"],
 
-["310 💎",29,310],
+["310 💎",29,310,"⭐ Тавсия"],
 
-["520 💎",50,520],
+["520 💎",50,520,"🔥 Тезтар"],
 
-["1060 💎",100,1060],
+["1060 💎",100,1060,"💎 Беҳтарин"],
 
-["2180 💎",200,2180],
+["2180 💎",200,2180,"⭐ Машҳур"],
 
-["5600 💎",550,5600]
+["5600 💎",550,5600,"🔥 Супер"]
 
 ];
 
@@ -765,27 +484,26 @@ const vouchers = [
 ];
 
 
-/* =========================
-   DATA
-========================= */
+let state = JSON.parse(
 
-let state =
-JSON.parse(
-localStorage.getItem("tajdonat")
+localStorage.getItem("taj_donat_state")
+
 ||
-'{"balance":0,"orders":[],"spent":0,"gems":0}'
+
+'{"balance":0,"orders":[],"spent":0,"gems":0,"topups":[]}'
+
 );
 
 
-/* =========================
-   SAVE
-========================= */
 
 function save(){
 
 localStorage.setItem(
-"tajdonat",
+
+"taj_donat_state",
+
 JSON.stringify(state)
+
 );
 
 render();
@@ -793,46 +511,108 @@ render();
 }
 
 
-/* =========================
-   PRODUCT CARD
-========================= */
 
-function productCard(product,type){
+function page(id){
+
+document
+.querySelectorAll(".page")
+.forEach(
+x => x.classList.remove("active")
+);
+
+
+document
+.getElementById(id)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".menu button")
+.forEach(
+x => x.classList.remove("active")
+);
+
+
+document
+.getElementById(
+"m-" +
+(
+id==="home"
+?
+"home"
+:
+id==="buy"
+?
+"buy"
+:
+id==="orders"
+?
+"orders"
+:
+"profile"
+)
+)
+.classList.add("active");
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+
+render();
+
+}
+
+
+
+function card(p,type="diamond"){
+
+const icon =
+type==="voucher"
+?
+"🎟️"
+:
+"💎";
+
 
 return `
 
 <div class="card product">
 
-<div class="gem">
+${
+p[3]
+?
+`<span class="tag">${p[3]}</span>`
+:
+""
+}
 
-${type === "Diamond" ? "💎" : "🎟️"}
-
+<div class="pic">
+${icon}
 </div>
 
-<div class="product-name">
-
-${product[0]}
-
-</div>
+<h3>
+${p[0]}
+</h3>
 
 <div class="price">
-
-${product[1]} сомонӣ
-
+${p[1]} сомонӣ
 </div>
 
 <button
-class="btn"
-onclick="buy(
-'${product[0]}',
-${product[1]},
-'${type}',
-${product[2] || 0}
+class="buy"
+onclick="openCheckout(
+'${p[0]}',
+${p[1]},
+${p[2]||0}
 )"
 >
-
-Харид кардан
-
+🛒 Харид кардан
 </button>
 
 </div>
@@ -842,148 +622,568 @@ ${product[2] || 0}
 }
 
 
-/* =========================
-   RENDER
-========================= */
 
-function render(){
+function openCheckout(
+product,
+price,
+gems
+){
 
-document.getElementById(
-"diamondGrid"
-).innerHTML =
-diamonds
-.map(x => productCard(x,"Diamond"))
-.join("");
+document
+.getElementById("modalContent")
+.innerHTML = `
 
+<h2>
+🛒 ${product}
+</h2>
 
-document.getElementById(
-"voucherGrid"
-).innerHTML =
-vouchers
-.map(x => productCard(x,"Voucher"))
-.join("");
+<div class="notice">
 
+💰 Нарх:
 
-document.getElementById(
-"balanceValue"
-).textContent =
-state.balance + " сомонӣ";
+<b>
+${price} сомонӣ
+</b>
 
+<br>
 
-document.getElementById(
-"count"
-).textContent =
-state.orders.length;
+💎 Бонус/миқдор:
 
+<b>
+${gems||"VIP"}
+</b>
 
-document.getElementById(
-"spent"
-).textContent =
-state.spent + " сомонӣ";
+</div>
 
 
-document.getElementById(
-"gems"
-).textContent =
-state.gems;
+<div class="field">
+
+<label>
+🆔 ID-и Free Fire
+</label>
+
+<input
+id="playerId"
+inputmode="numeric"
+placeholder="Мисол: 123456789"
+>
+
+</div>
 
 
-/* LEVEL */
+<div class="paybox">
 
-let level;
+💳 Пардохт ба рақам:
 
-if(state.orders.length >= 20){
+<div class="paynum">
++992 93 571 0406
+</div>
 
-level = "💎 VIP";
+<small>
+Маблағро мувофиқи фармоиш фиристед.
+</small>
 
-}else if(state.orders.length >= 10){
+</div>
 
-level = "🥇 Харидори доимӣ";
 
-}else if(state.orders.length >= 5){
+<div class="notice">
 
-level = "🥈 Муштарии фаъол";
+1️⃣ ID-ро санҷед
 
-}else{
+→
 
-level = "🥉 Навкор";
+2️⃣ маблағро пардохт кунед
+
+→
+
+3️⃣ «Пардохт кардам»-ро пахш кунед
+
+→
+
+4️⃣ фармоиш ба рӯйхат меафтад.
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%"
+onclick="confirmOrder(
+'${product}',
+${price},
+${gems}
+)"
+>
+
+✅ Пардохт кардам / Фармоиш фирист
+
+</button>
+
+`;
+
+
+document
+.getElementById("modal")
+.classList.add("show");
 
 }
 
-document.getElementById(
-"level"
-).textContent = level;
 
 
-/* PROGRESS */
+function confirmOrder(
+product,
+price,
+gems
+){
 
-let target;
+const player =
+document
+.getElementById("playerId")
+.value
+.trim();
 
-if(state.orders.length < 5){
 
-target = 5;
+if(!player){
 
-}else if(state.orders.length < 10){
+toast(
+"❗ ID-и Free Fire-ро ворид кунед"
+);
 
-target = 10;
-
-}else if(state.orders.length < 20){
-
-target = 20;
-
-}else{
-
-target = 20;
+return;
 
 }
 
 
-let percent =
-Math.min(
-(state.orders.length / target) * 100,
-100
+const id =
+"#" +
+(
+10000 +
+state.orders.length +
+1
 );
 
 
-document.getElementById(
-"progressBar"
-).style.width =
-percent + "%";
+state.orders.push({
+
+id:id,
+
+product:product,
+
+price:price,
+
+gems:gems,
+
+player:player,
+
+status:"🟡 Интизори тасдиқ",
+
+date:
+new Date()
+.toLocaleString("tg-TJ")
+
+});
 
 
-if(state.orders.length >= 20){
+save();
 
-document.getElementById(
-"next"
-).textContent =
-"🎉 Шумо муштарии VIP ҳастед!";
+closeModal();
 
-}else{
 
-document.getElementById(
-"next"
-).textContent =
-"То сатҳи нав: " +
-state.orders.length +
-"/" +
-target +
-" харид";
+document
+.getElementById("modalContent")
+.innerHTML = `
+
+<div class="success">
+
+<div class="big">
+🎉
+</div>
+
+<h2>
+Фармоиш қабул шуд!
+</h2>
+
+<br>
+
+<p>
+Шумо
+<b>
+${product}
+</b>
+интихоб кардед.
+</p>
+
+<p>
+🧾 Фармоиш:
+
+<b>
+${id}
+</b>
+</p>
+
+<p>
+🆔 ID:
+
+<b>
+${player}
+</b>
+</p>
+
+<br>
+
+<button
+class="primary"
+onclick="closeModal();page('orders')"
+>
+📦 Фармоишҳои ман
+</button>
+
+<br>
+<br>
+
+<button
+class="secondary"
+onclick="closeModal();page('buy')"
+>
+💎 Боз алмос харед
+</button>
+
+</div>
+
+`;
+
+
+document
+.getElementById("modal")
+.classList.add("show");
+
+
+toast(
+"✅ Фармоиш фиристода шуд"
+);
 
 }
 
 
-/* ORDERS */
 
-if(state.orders.length){
+function closeModal(){
 
-document.getElementById(
-"ordersList"
-).innerHTML =
+document
+.getElementById("modal")
+.classList
+.remove("show");
+
+}
+
+
+
+function topupRequest(){
+
+const amount =
+Number(
+document
+.getElementById("topAmount")
+.value
+);
+
+
+if(
+!amount ||
+amount < 1
+){
+
+toast(
+"❗ Маблағро дуруст ворид кунед"
+);
+
+return;
+
+}
+
+
+const id =
+"#T" +
+(
+10000 +
+state.topups.length +
+1
+);
+
+
+state.topups.push({
+
+id:id,
+
+amount:amount,
+
+status:"🟡 Интизори тасдиқ",
+
+date:
+new Date()
+.toLocaleString("tg-TJ")
+
+});
+
+
+save();
+
+
+document
+.getElementById("topAmount")
+.value = "";
+
+
+document
+.getElementById("modalContent")
+.innerHTML = `
+
+<div class="success">
+
+<div class="big">
+🧾
+</div>
+
+<h2>
+Дархости пардохт фиристода шуд
+</h2>
+
+<br>
+
+<p>
+💰 Маблағ:
+
+<b>
+${amount} сомонӣ
+</b>
+</p>
+
+<p>
+🧾 Рақам:
+
+<b>
+${id}
+</b>
+</p>
+
+<p class="hint">
+
+Баланс баъд аз тасдиқи пардохт зиёд карда мешавад.
+
+</p>
+
+<br>
+
+<button
+class="primary"
+onclick="closeModal();page('profile')"
+>
+👤 Ба профил
+</button>
+
+</div>
+
+`;
+
+
+document
+.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+
+function render(){
+
+document
+.getElementById("headBalance")
+.textContent =
+state.balance;
+
+
+document
+.getElementById("homeGrid")
+.innerHTML =
+diamonds
+.slice(0,3)
+.map(x => card(x))
+.join("");
+
+
+document
+.getElementById("buyGrid")
+.innerHTML =
+diamonds
+.map(x => card(x))
+.join("");
+
+
+document
+.getElementById("voucherGrid")
+.innerHTML =
+vouchers
+.map(x => card(x,"voucher"))
+.join("");
+
+
+document
+.getElementById("pCount")
+.textContent =
+state.orders.length;
+
+
+document
+.getElementById("pGems")
+.textContent =
+state.gems;
+
+
+document
+.getElementById("pSpent")
+.textContent =
+state.spent;
+
+
+document
+.getElementById("pBalance")
+.textContent =
+state.balance;
+
+
+let n =
+state.orders.length;
+
+
+let level =
+
+n >= 20
+?
+"💎 VIP"
+
+:
+
+n >= 10
+?
+"🥇 Харидори доимӣ"
+
+:
+
+n >= 5
+?
+"🥈 Муштарии фаъол"
+
+:
+
+"🥉 Навкор";
+
+
+document
+.getElementById("pLevel")
+.textContent =
+level;
+
+
+document
+.getElementById("levelText")
+.textContent =
+level;
+
+
+let target =
+
+n < 5
+?
+5
+
+:
+
+n < 10
+?
+10
+
+:
+
+n < 20
+?
+20
+
+:
+20;
+
+
+document
+.getElementById("bar")
+.style
+.width =
+
+Math.min(
+n / target * 100,
+100
+)
+
++
+
+"%";
+
+
+document
+.getElementById("nextText")
+.textContent =
+
+n >= 20
+
+?
+
+"🎉 Шумо VIP ҳастед!"
+
+:
+
+`То сатҳи нав:
+${n}/${target}
+харид`;
+
+
+const list =
+document
+.getElementById("ordersList");
+
+
+if(
+!state.orders.length
+){
+
+list.innerHTML = `
+
+<div class="panel empty">
+
+📦 Ҳоло фармоише нест.
+
+<br>
+<br>
+
+<button
+class="primary"
+onclick="page('buy')"
+>
+🛒 Харид кардан
+</button>
+
+</div>
+
+`;
+
+}
+
+else{
+
+list.innerHTML =
 
 state.orders
 .slice()
 .reverse()
-.map(o => `
+.map(
+
+o => `
 
 <div class="order">
 
@@ -991,7 +1191,8 @@ state.orders
 ${o.id}
 </b>
 
-<br><br>
+<br>
+<br>
 
 💎 ${o.product}
 
@@ -1009,452 +1210,62 @@ ${o.player}
 
 📅 ${o.date}
 
-<br><br>
+<br>
 
-<span class="badge">
-
+<span class="status">
 ${o.status}
-
 </span>
 
 </div>
 
-`)
+`
+
+)
 .join("");
 
-}else{
-
-document.getElementById(
-"ordersList"
-).innerHTML =
-
-`
-<p class="muted">
-Ҳоло фармоише нест.
-</p>
-`;
-
 }
 
 }
 
 
-/* =========================
-   TOAST
-========================= */
 
-function toast(text){
+function toast(t){
 
-const element =
-document.getElementById("toast");
+let x =
+document
+.getElementById("toast");
 
-element.textContent = text;
 
-element.style.display = "block";
+x.textContent =
+t;
 
+
+x.style.display =
+"block";
+
+
+clearTimeout(
+window.tt
+);
+
+
+window.tt =
 setTimeout(
-() => {
-element.style.display = "none";
-},
+
+() =>
+x.style.display =
+"none",
+
 2500
+
 );
 
 }
 
 
-/* =========================
-   PANEL
-========================= */
-
-function showPanel(id){
-
-document
-.querySelectorAll(".panel")
-.forEach(
-x => x.classList.remove("active")
-);
-
-const element =
-document.getElementById(id);
-
-if(element){
-
-element.classList.add("active");
-
-element.scrollIntoView({
-behavior:"smooth",
-block:"center"
-});
-
-}
-
-}
-
-
-/* =========================
-   PRODUCTS
-========================= */
-
-function scrollProducts(){
-
-document
-.getElementById("products")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
-
-/* =========================
-   BUY
-========================= */
-
-function buy(
-product,
-price,
-type,
-gems = 0
-){
-
-document.getElementById(
-"modalTitle"
-).textContent =
-"💎 " + product;
-
-
-document.getElementById(
-"modalBody"
-).innerHTML = `
-
-<p>
-💰 Нарх:
-<b>${price} сомонӣ</b>
-</p>
-
-<br>
-
-<label>
-🎮 ID-и Free Fire-и худро ворид кунед:
-</label>
-
-<input
-id="player"
-inputmode="numeric"
-placeholder="Мисол: 123456789"
->
-
-<br>
-
-<p class="muted">
-ID-ро бодиққат санҷед.
-Пас аз харид тағйир додани ID метавонад имконнопазир бошад.
-</p>
-
-<br>
-
-<button
-class="btn"
-style="width:100%"
-onclick="confirmBuy(
-'${product}',
-${price},
-'${type}',
-${gems}
-)"
->
-
-✅ Тасдиқи харид
-
-</button>
-
-`;
-
-document
-.getElementById("modal")
-.classList.add("active");
-
-}
-
-
-/* =========================
-   CONFIRM BUY
-========================= */
-
-function confirmBuy(
-product,
-price,
-type,
-gems
-){
-
-const player =
-document
-.getElementById("player")
-.value
-.trim();
-
-
-if(!player){
-
-toast(
-"❗ Лутфан ID-ро ворид кунед"
-);
-
-return;
-
-}
-
-
-if(state.balance < price){
-
-closeModal();
-
-showPanel("balance");
-
-toast(
-"❌ Баланс кофӣ нест. Аввал балансро пур кунед."
-);
-
-return;
-
-}
-
-
-/* BALANCE */
-
-state.balance -= price;
-
-
-/* STATS */
-
-state.spent += price;
-
-state.gems += gems;
-
-
-/* ORDER ID */
-
-const id =
-"#" +
-(10000 + state.orders.length + 1);
-
-
-/* ORDER */
-
-state.orders.push({
-
-id:id,
-
-product:product,
-
-price:price,
-
-player:player,
-
-status:"🟡 Дар интизорӣ",
-
-date:new Date()
-.toLocaleString("tg-TJ")
-
-});
-
-
-save();
-
-closeModal();
-
-
-/* SUCCESS */
-
-document.getElementById(
-"modalTitle"
-).textContent =
-"🎉 Харид муваффақ шуд!";
-
-
-document.getElementById(
-"modalBody"
-).innerHTML = `
-
-<div class="success">
-
-<p>
-Шумо
-<b>${product}</b>
--ро бомуваффақият харидед.
-</p>
-
-<br>
-
-<p>
-🆔 ID:
-<b>${player}</b>
-</p>
-
-<p>
-💰 Маблағ:
-<b>${price} сомонӣ</b>
-</p>
-
-<p>
-🧾 Фармоиш:
-<b>${id}</b>
-</p>
-
-<br>
-
-<p class="muted">
-
-📦 Фармоиши шумо қабул шуд
-ва дар ҳолати коркард қарор дорад.
-
-</p>
-
-<br>
-
-<button
-class="btn"
-onclick="closeModal();showPanel('orders')"
->
-
-📦 Фармоиши ман
-
-</button>
-
-<br><br>
-
-<button
-class="btn blue"
-onclick="closeModal();scrollProducts()"
->
-
-💎 Хариди дигар
-
-</button>
-
-</div>
-
-`;
-
-document
-.getElementById("modal")
-.classList.add("active");
-
-
-toast(
-"🎉 Фармоиш қабул шуд!"
-);
-
-}
-
-
-/* =========================
-   TOPUP
-========================= */
-
-function topup(){
-
-const amount =
-Number(
-document.getElementById("topup").value
-);
-
-
-if(!amount || amount < 1){
-
-toast(
-"❗ Маблағро дуруст ворид кунед"
-);
-
-return;
-
-}
-
-
-/*
-Дар версияи demo баланс мустақим
-зиёд мешавад.
-
-Барои production ин ҷо Payment API
-пайваст карда мешавад.
-*/
-
-state.balance += amount;
-
-save();
-
-
-document.getElementById(
-"topup"
-).value = "";
-
-
-toast(
-"✅ Баланс бо " +
-amount +
-" сомонӣ пур шуд"
-);
-
-}
-
-
-/* =========================
-   SUPPORT
-========================= */
-
-function support(){
-
-const text =
-document
-.getElementById("supportText")
-.value
-.trim();
-
-
-if(!text){
-
-toast(
-"❗ Паёмро нависед"
-);
-
-return;
-
-}
-
-
-document.getElementById(
-"supportText"
-).value = "";
-
-
-toast(
-"📨 Паёми шумо фиристода шуд"
-);
-
-}
-
-
-/* =========================
-   CLOSE MODAL
-========================= */
-
-function closeModal(){
-
-document
-.getElementById("modal")
-.classList.remove("active");
-
-}
-
-
-/* =========================
-   START
-========================= */
-
-render();
+page("home");
 
 </script>
 
 </body>
-  </html>
+    </html>
