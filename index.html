@@ -1,118 +1,81 @@
 <!DOCTYPE html>
 <html lang="tg">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Магазин Алмаз - Авто ID</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      margin: 0;
-      padding: 20px;
-      color: #fff;
-    }
-    .container {
-      max-width: 500px;
-      margin: auto;
-      background: rgba(0,0,0,0.6);
-      padding: 25px;
-      border-radius: 15px;
-    }
-    h1 { text-align: center; color: #FFD700; }
-    label { display: block; margin-top: 15px; font-weight: bold; }
-    input, select, button {
-      width: 100%; padding: 12px; margin-top: 8px; border: none;
-      border-radius: 8px; font-size: 16px; box-sizing: border-box;
-    }
-    input, select { background: #fff; color: #333; }
-    button {
-      background: #FF4500; color: white; font-weight: bold; cursor: pointer;
-      margin-top: 20px; transition: 0.3s;
-    }
-    button:hover { background: #ff6500; }
-    .card { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-top: 10px; }
-    #playerName {
-      color: #00FF00; font-weight: bold; margin-top: 5px; display: none;
-    }
-    .admin { text-align: center; margin-top: 25px; font-size: 14px; }
-    .admin a { color: #25D366; text-decoration: none; font-weight: bold; }
-  </style>
+<meta charset="UTF-8">
+<title>TAJ.DONAT.TJ 💎</title>
+<style>
+body { background:#0a0a0a; color:white; font-family:sans-serif; text-align:center; padding:20px; }
+h1 { color:#00aaff; text-shadow:0 0 10px #00aaff; }
+.card { background:#111; border:2px solid #00aaff; border-radius:15px; padding:20px; margin:15px auto; max-width:420px; }
+.btn { background:#00aaff; color:black; padding:12px 25px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; margin:5px; }
+input { padding:10px; border-radius:8px; border:1px solid #00aaff; background:#222; color:white; width:90%; margin:10px 0; }
+.wallet { background:#222; padding:10px; border-radius:8px; word-break:break-all; color:#00ff88; }
+#nick { color:#00ff88; font-weight:bold; }
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>💎 МАГАЗИН АЛМАЗ 💎</h1>
-    
-    <div class="card">
-      <label for="appkey">APP KEY / ID игрока Free Fire</label>
-      <input type="text" id="appkey" placeholder="ID - ро инҷо нависед" onkeyup="getPlayerName()">
-      <div id="playerName"></div>
-      
-      <label for="server">Серверро интихоб кн</label>
-      <select id="server">
-        <option value="RU">RU - Россия</option>
-        <option value="IND">IND - Индия</option>
-        <option value="ME">ME - Шарқи Наздик</option>
-      </select>
-    </div>
+<h1>TAJ.DONAT.TJ 💎</h1>
+<p>ТОҶИКИСТОН 🇹🇯 | АЛМАЗ БО ЭЪТИМОД 💎</p>
 
-    <div class="card">
-      <label>Тугмаи харидани Алмаз</label>
-      <select id="diamond">
-        <option value="100">100 Алмаз - 1 USDT</option>
-        <option value="310">310 Алмаз - 3 USDT</option>
-        <option value="520">520 Алмаз - 5 USDT</option>
-        <option value="1060">1060 Алмаз - 10 USDT</option>
-      </select>
-    </div>
+<div class="card">
+<h2>1. ID Free Fire - ат нависта парто</h2>
+<input type="text" id="ffid" placeholder="Масалан: 123456789" onblur="getNick()">
+<p>Ник: <span id="nick">...интизор...</span></p>
+</div>
 
-    <button onclick="buyDiamond()">ХАРИДАН 💎</button>
+<div class="card">
+<h2>2. Нархнома 💎</h2>
+<button class="btn" onclick="select(50,5)">50 💎 - 5 USDT</button>
+<button class="btn" onclick="select(100,10)">100 💎 - 10 USDT</button>
+<button class="btn" onclick="select(310,30)">310 💎 - 30 USDT</button>
+<button class="btn" onclick="select(520,50)">520 💎 - 50 USDT</button>
+<button class="btn" onclick="select(1060,100)">1060 💎 - 100 USDT</button>
+</div>
 
-    <div class="admin">
-      <p>Проблема доштӣ? Ба Админ навиш:</p>
-      <a href="https://wa.me/992935710406" target="_blank">📱 +992 93 571 04 06</a>
-    </div>
-  </div>
+<div class="card" id="payment" style="display:none;">
+<h2>3. Пардохт кн</h2>
+<p id="sum"></p>
+<h3>USDT TRC20</h3>
+<div class="wallet">TA8Wfx9JY4iCFqoRJ9jcgiAUFYneA21yYN</div>
+<h3>ICB Mobile</h3>
+<p><b>+992 935 710 406</b></p>
+<input type="text" id="txid" placeholder="TXID - ат инҷо">
+<button class="btn" onclick="order()">Ман пардохт кардам ✅</button>
+</div>
 
-  <script>
-    // ВАҚТЕ ID НАВИШТА МЕШАВАД, НОМ АВТОМАТ МЕОЯД
-    function getPlayerName() {
-      let id = document.getElementById('appkey').value;
-      let nameDiv = document.getElementById('playerName');
-      
-      if(id.length >= 6){ // Агар ID 6 рақам зиёд бошад
-        // ИН ҶО API МЕЗАНАД. ҲОЗИР ФАҚАТ МИСОЛ АСТ
-        // Ту бояд API - и FazerCards - ро ин ҷо гузорӣ
-        
-        // МИСОЛ:
-        nameDiv.style.display = 'block';
-        nameDiv.innerHTML = '✅ Ном ёфт шуд: ProGamer_TJ'; 
-        
-        // АГАР API МЕДОШТӢ:
-        // fetch('https://api.fazercards.com/getname?id='+id+'&server='+server)
-        // .then(res => res.json())
-        // .then(data => {
-        //   nameDiv.style.display = 'block';
-        //   nameDiv.innerHTML = '✅ Ном: ' + data.nickname;
-        // })
-      } else {
-        nameDiv.style.display = 'none';
-      }
-    }
+<script>
+const APP_KEY = "fc_21f5712e9156572137bdf68d"; // Калиди ту
+let selected = {};
 
-    function buyDiamond() {
-      let id = document.getElementById('appkey').value;
-      let server = document.getElementById('server').value;
-      let diamond = document.getElementById('diamond').value;
+async function getNick(){
+  let id = document.getElementById('ffid').value;
+  if(id.length < 8) return;
+  document.getElementById('nick').innerText = "Месанҷам...";
+  // Ин ҷо ба API-и ту занг мезанем
+  let res = await fetch(`https://api.fazercards.com/check?appkey=${APP_KEY}&id=${id}`);
+  let data = await res.json();
+  document.getElementById('nick').innerText = data.nickname || "ID ёфт нашуд";
+}
 
-      if(id === "") {
-        alert("Аввал ID - и худро дуруст ворид кн!");
-        return;
-      }
-      alert("Тасдиқ мекунӣ?\nID: " + id + "\nНом: ProGamer_TJ\nСервер: " + server + "\nАлмаз: " + diamond);
-    }
-  </script>
+function select(diamond, usd){
+  selected = {diamond, usd};
+  document.getElementById('payment').style.display='block';
+  document.getElementById('sum').innerText = `Шумо интихоб кардед: ${diamond} 💎 = ${usd} USDT`;
+}
+
+async function order(){
+  let id = document.getElementById('ffid').value;
+  let txid = document.getElementById('txid').value;
+  if(!id || !txid){ alert('ID ва TXID - ро пур кн'); return; }
+  
+  // Баъди пардохт, мо бо App.key заказ медиҳем
+  alert(`Заказ қабул шуд!\nID: ${id}\n${selected.diamond} 💎\nTXID: ${txid}\n\n5 дақ дигар алмаз меравад.`);
+  
+  // Ин ҷо кодаи фиристодан ба API:
+  // fetch(`https://api.fazercards.com/order?appkey=${APP_KEY}&id=${id}&product=${selected.diamond}`)
+}
+</script>
 
 </body>
 </html>
