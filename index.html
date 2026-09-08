@@ -1,49 +1,3 @@
-<!DOCTYPE html>
-<html lang="tg">
-<head>
-<meta charset="UTF-8">
-<title>TAJ.DONAT.TJ 💎</title>
-<style>
-body { background:#0a0a0a; color:white; font-family:sans-serif; text-align:center; padding:20px; }
-h1 { color:#00aaff; text-shadow:0 0 10px #00aaff; }
-.card { background:#111; border:2px solid #00aaff; border-radius:15px; padding:20px; margin:15px auto; max-width:420px; }
-.btn { background:#00aaff; color:black; padding:12px 25px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; margin:5px; }
-input { padding:10px; border-radius:8px; border:1px solid #00aaff; background:#222; color:white; width:90%; margin:10px 0; }
-.wallet { background:#222; padding:10px; border-radius:8px; word-break:break-all; color:#00ff88; }
-#nick { color:#00ff88; font-weight:bold; }
-</style>
-</head>
-<body>
-
-<h1>TAJ.DONAT.TJ 💎</h1>
-<p>ТОҶИКИСТОН 🇹🇯 | АЛМАЗ БО ЭЪТИМОД 💎</p>
-
-<div class="card">
-<h2>1. ID Free Fire - ат нависта парто</h2>
-<input type="text" id="ffid" placeholder="Масалан: 123456789" onblur="getNick()">
-<p>Ник: <span id="nick">...интизор...</span></p>
-</div>
-
-<div class="card">
-<h2>2. Нархнома 💎</h2>
-<button class="btn" onclick="select(50,5)">50 💎 - 5 USDT</button>
-<button class="btn" onclick="select(100,10)">100 💎 - 10 USDT</button>
-<button class="btn" onclick="select(310,30)">310 💎 - 30 USDT</button>
-<button class="btn" onclick="select(520,50)">520 💎 - 50 USDT</button>
-<button class="btn" onclick="select(1060,100)">1060 💎 - 100 USDT</button>
-</div>
-
-<div class="card" id="payment" style="display:none;">
-<h2>3. Пардохт кн</h2>
-<p id="sum"></p>
-<h3>USDT TRC20</h3>
-<div class="wallet">TA8Wfx9JY4iCFqoRJ9jcgiAUFYneA21yYN</div>
-<h3>ICB Mobile</h3>
-<p><b>+992 935 710 406</b></p>
-<input type="text" id="txid" placeholder="TXID - ат инҷо">
-<button class="btn" onclick="order()">Ман пардохт кардам ✅</button>
-</div>
-
 <script>
 const APP_KEY = "fc_21f5712e9156572137bdf68d"; // Калиди ту
 let selected = {};
@@ -52,30 +6,48 @@ async function getNick(){
   let id = document.getElementById('ffid').value;
   if(id.length < 8) return;
   document.getElementById('nick').innerText = "Месанҷам...";
-  // Ин ҷо ба API-и ту занг мезанем
-  let res = await fetch(`https://api.fazercards.com/check?appkey=${APP_KEY}&id=${id}`);
-  let data = await res.json();
-  document.getElementById('nick').innerText = data.nickname || "ID ёфт нашуд";
+  document.getElementById('nick').style.color = "#00aaff";
+  
+  try {
+    // API - и Fazercards
+    let res = await fetch(`https://api.fazercards.com/v1/check?appkey=${APP_KEY}&game=freefire&uid=${id}`);
+    let data = await res.json();
+    
+    if(data.status == "success"){
+      document.getElementById('nick').innerText = data.data.nickname;
+      document.getElementById('nick').style.color = "#00ff88";
+    } else {
+      document.getElementById('nick').innerText = "ID нодуруст";
+      document.getElementById('nick').style.color = "red";
+    }
+  } catch(e){
+    document.getElementById('nick').innerText = "Хатогӣ дар пайваст";
+    document.getElementById('nick').style.color = "red";
+  }
 }
 
 function select(diamond, usd){
   selected = {diamond, usd};
   document.getElementById('payment').style.display='block';
   document.getElementById('sum').innerText = `Шумо интихоб кардед: ${diamond} 💎 = ${usd} USDT`;
+  window.scrollTo(0, document.body.scrollHeight);
 }
 
 async function order(){
   let id = document.getElementById('ffid').value;
   let txid = document.getElementById('txid').value;
-  if(!id || !txid){ alert('ID ва TXID - ро пур кн'); return; }
+  let nick = document.getElementById('nick').innerText;
+  if(!id || nick == "Месанҷам..." || nick == "ID нодуруст"){ alert('Аввал ID - и дурустро нависта парто'); return; }
+  if(!txid){ alert('TXID - ро нависта парто'); return; }
   
-  // Баъди пардохт, мо бо App.key заказ медиҳем
-  alert(`Заказ қабул шуд!\nID: ${id}\n${selected.diamond} 💎\nTXID: ${txid}\n\n5 дақ дигар алмаз меравад.`);
+  // Ба API заказ медиҳем
+  let res = await fetch(`https://api.fazercards.com/v1/order?appkey=${APP_KEY}&game=freefire&uid=${id}&product=${selected.diamond}`);
+  let data = await res.json();
   
-  // Ин ҷо кодаи фиристодан ба API:
-  // fetch(`https://api.fazercards.com/order?appkey=${APP_KEY}&id=${id}&product=${selected.diamond}`)
+  if(data.status == "success"){
+    alert(`✅ Заказ қабул шуд!\nНик: ${nick}\n${selected.diamond} 💎\n5-10 дақ дигар меояд`);
+  } else {
+    alert("❌ Хатогӣ: " + data.message);
+  }
 }
 </script>
-
-</body>
-</html>
