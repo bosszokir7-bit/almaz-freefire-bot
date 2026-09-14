@@ -1,1084 +1,1766 @@
-ЛОИҲАИ ПУРРА: TAJ.DONAT.FF — FREE FIRE DIAMONDS SHOP
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAJ.DONAT.FF — Free Fire</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --bg:#07080a;
+    --card:#121419;
+    --card2:#181b21;
+    --border:#292d35;
+    --orange:#ff9800;
+    --orange2:#ffb52e;
+    --white:#f7f7f7;
+    --gray:#8b909a;
+    --green:#21d66b;
+}
+
+body{
+    background:
+        radial-gradient(circle at 85% 10%,rgba(255,145,0,.12),transparent 25%),
+        radial-gradient(circle at 10% 50%,rgba(255,145,0,.05),transparent 30%),
+        var(--bg);
+    color:var(--white);
+    min-height:100vh;
+}
+
+button{
+    border:0;
+    outline:0;
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* APP */
+
+.app{
+    width:100%;
+    max-width:1180px;
+    margin:auto;
+    padding-bottom:110px;
+}
+
+/* TOP */
+
+.topbar{
+    height:82px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px 22px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(7,8,10,.90);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid #181b20;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.logo{
+    width:52px;
+    height:52px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:900;
+    color:var(--orange);
+    border:1px solid var(--orange);
+    background:linear-gradient(145deg,#2a1b06,#111);
+    box-shadow:0 0 22px rgba(255,152,0,.18);
+}
+
+.brand h1{
+    font-size:24px;
+    letter-spacing:.5px;
+}
+
+.brand h1 span{
+    color:var(--orange);
+}
+
+.brand p{
+    color:#9ba0aa;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.top-actions{
+    display:flex;
+    gap:10px;
+}
+
+.icon-btn{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    color:white;
+    background:#111318;
+    border:1px solid #292d35;
+    font-size:22px;
+}
+
+.icon-btn:hover{
+    border-color:var(--orange);
+    color:var(--orange);
+}
+
+/* HERO */
+
+.hero{
+    margin:24px 22px;
+    min-height:330px;
+    border-radius:28px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid #d78300;
+    background:
+        linear-gradient(90deg,rgba(0,0,0,.95),rgba(0,0,0,.42)),
+        radial-gradient(circle at 80% 50%,#754600,#111 55%);
+    box-shadow:0 0 35px rgba(255,152,0,.12);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    padding:42px;
+    max-width:620px;
+}
+
+.hero-small{
+    color:var(--orange);
+    font-size:14px;
+    font-weight:bold;
+    letter-spacing:2px;
+    margin-bottom:12px;
+}
+
+.hero h2{
+    font-size:48px;
+    line-height:1;
+    margin-bottom:16px;
+}
+
+.hero h2 span{
+    color:var(--orange);
+}
+
+.hero p{
+    color:#c4c7cd;
+    line-height:1.6;
+    font-size:16px;
+}
+
+.hero-btn{
+    margin-top:25px;
+    padding:15px 25px;
+    border-radius:15px;
+    color:#080808;
+    background:linear-gradient(135deg,var(--orange),var(--orange2));
+    font-weight:800;
+    font-size:15px;
+    box-shadow:0 10px 30px rgba(255,152,0,.2);
+}
+
+/* SECTIONS */
+
+.section{
+    padding:10px 22px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:22px 0 15px;
+}
+
+.section-title h2{
+    font-size:22px;
+}
+
+.section-title h2 span{
+    color:var(--orange);
+}
+
+.section-title button{
+    background:none;
+    color:var(--gray);
+}
+
+/* CATEGORIES */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.category{
+    background:linear-gradient(145deg,#15181e,#0e1014);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:22px 10px;
+    text-align:center;
+    transition:.25s;
+}
+
+.category:hover{
+    transform:translateY(-4px);
+    border-color:#a86600;
+    box-shadow:0 12px 30px rgba(255,152,0,.10);
+}
+
+.category-icon{
+    width:65px;
+    height:65px;
+    margin:auto auto 13px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    background:#181c24;
+    border:1px solid #333843;
+}
+
+.category strong{
+    display:block;
+    font-size:15px;
+}
+
+.category small{
+    color:var(--gray);
+    margin-top:5px;
+    display:block;
+}
+
+/* DONATE */
+
+.donate-box{
+    margin-top:18px;
+    padding:25px;
+    border-radius:24px;
+    border:1px solid var(--orange);
+    background:
+        linear-gradient(135deg,rgba(255,152,0,.12),rgba(255,152,0,.02)),
+        #111318;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.donate-left{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.big-diamond{
+    font-size:50px;
+}
+
+.donate-box h2{
+    font-size:25px;
+}
+
+.donate-box h2 span{
+    color:var(--orange);
+}
+
+.donate-box p{
+    color:var(--gray);
+    margin-top:7px;
+}
+
+.main-btn{
+    padding:16px 25px;
+    border-radius:15px;
+    font-weight:800;
+    background:linear-gradient(135deg,var(--orange),#ffb62e);
+    color:#090909;
+    white-space:nowrap;
+}
+
+.badges{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:17px;
+}
+
+.badge{
+    border:1px solid #814e00;
+    color:#ddd;
+    background:#17191d;
+    padding:9px 13px;
+    border-radius:12px;
+    font-size:13px;
+}
+
+/* PAYMENT */
+
+.payments{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.payment{
+    padding:20px;
+    background:linear-gradient(145deg,#17191e,#101216);
+    border:1px solid var(--border);
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition:.2s;
+}
+
+.payment:hover{
+    border-color:var(--orange);
+}
+
+.payment-left{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.payment-logo{
+    width:60px;
+    height:60px;
+    border-radius:16px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#111;
+    font-weight:900;
+    font-size:12px;
+}
+
+.payment h3{
+    font-size:17px;
+}
+
+.payment p{
+    color:var(--gray);
+    margin-top:6px;
+    font-size:13px;
+}
+
+.arrow{
+    color:var(--orange);
+    font-size:25px;
+}
+
+/* SUPPORT */
+
+.support{
+    margin-top:17px;
+    padding:20px;
+    border-radius:20px;
+    border:1px solid #30343c;
+    background:#111318;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.support-info{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.support-icon{
+    width:52px;
+    height:52px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#231b0d;
+    border:1px solid #814e00;
+    font-size:25px;
+}
+
+.support p{
+    color:var(--gray);
+    margin-top:5px;
+    font-size:13px;
+}
+
+.admin{
+    color:var(--orange);
+    font-weight:bold;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.product{
+    padding:13px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    background:#111318;
+    transition:.25s;
+}
+
+.product:hover{
+    transform:translateY(-4px);
+    border-color:#a96700;
+}
+
+.product-image{
+    height:145px;
+    border-radius:15px;
+    background:
+        radial-gradient(circle,#1269dc 0 7%,transparent 8%),
+        radial-gradient(circle at 50% 45%,#147cf2,transparent 13%),
+        #181c24;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
+}
+
+.product h3{
+    margin-top:14px;
+    font-size:17px;
+}
+
+.price{
+    margin-top:10px;
+    font-size:24px;
+    font-weight:900;
+}
+
+.price small{
+    color:#8c919b;
+    font-size:13px;
+    font-weight:normal;
+}
+
+.buy-btn{
+    width:100%;
+    margin-top:13px;
+    padding:12px;
+    border-radius:12px;
+    background:#211a0c;
+    border:1px solid #7e4e00;
+    color:var(--orange);
+    font-weight:bold;
+}
+
+.buy-btn:hover{
+    background:var(--orange);
+    color:#080808;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    left:50%;
+    bottom:15px;
+    transform:translateX(-50%);
+    width:min(680px,calc(100% - 28px));
+    padding:8px;
+    background:rgba(12,14,18,.94);
+    backdrop-filter:blur(20px);
+    border:1px solid #30343b;
+    border-radius:25px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    z-index:100;
+    box-shadow:0 15px 40px rgba(0,0,0,.5);
+}
+
+.nav-item{
+    border-radius:18px;
+    padding:10px 5px;
+    text-align:center;
+    color:#707680;
+    background:transparent;
+}
+
+.nav-item span{
+    display:block;
+    font-size:23px;
+    margin-bottom:4px;
+}
+
+.nav-item small{
+    font-size:12px;
+    font-weight:bold;
+}
+
+.nav-item.active{
+    color:var(--orange);
+    background:#211a0d;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:200;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(600px,100%);
+    background:#14161b;
+    border:1px solid #333740;
+    border-radius:28px 28px 0 0;
+    padding:25px;
+    animation:up .25s ease;
+}
+
+@keyframes up{
+    from{transform:translateY(100%);}
+    to{transform:translateY(0);}
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:#1b1e24;
+    color:white;
+    font-size:22px;
+}
+
+.input{
+    width:100%;
+    padding:16px;
+    background:#0e1014;
+    border:1px solid #30343c;
+    border-radius:14px;
+    color:white;
+    margin-top:10px;
+    outline:none;
+}
+
+.input:focus{
+    border-color:var(--orange);
+}
+
+.pay-option{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px;
+    margin-top:10px;
+    border-radius:15px;
+    border:1px solid #30343c;
+    background:#101216;
+}
+
+.pay-option.selected{
+    border-color:var(--orange);
+    background:#211a0d;
+}
+
+.pay-option-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.pay-small-logo{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:white;
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.check{
+    color:var(--orange);
+    font-size:20px;
+}
+
+.confirm{
+    width:100%;
+    padding:16px;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--orange),#ffb82e);
+    color:#080808;
+    font-size:16px;
+    font-weight:900;
+    margin-top:18px;
+}
+
+/* PAGES */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.empty{
+    padding:70px 20px;
+    text-align:center;
+    color:var(--gray);
+}
+
+.empty-icon{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .app{
+        padding-bottom:100px;
+    }
+
+    .brand h1{
+        font-size:19px;
+    }
+
+    .brand p{
+        font-size:10px;
+    }
+
+    .topbar{
+        padding:12px 16px;
+    }
+
+    .hero{
+        margin:16px;
+        min-height:310px;
+    }
+
+    .hero-content{
+        padding:30px 25px;
+    }
+
+    .hero h2{
+        font-size:37px;
+    }
+
+    .section{
+        padding:8px 16px;
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .payments{
+        grid-template-columns:1fr;
+    }
+
+    .donate-box{
+        display:block;
+    }
+
+    .main-btn{
+        width:100%;
+        margin-top:20px;
+    }
+
+    .support{
+        display:block;
+    }
+
+    .support .main-btn{
+        margin-top:15px;
+    }
+
+    .support-info{
+        margin-bottom:5px;
+    }
+}
+
+@media(max-width:430px){
+
+    .logo{
+        width:45px;
+        height:45px;
+    }
+
+    .brand h1{
+        font-size:17px;
+    }
+
+    .brand p{
+        display:none;
+    }
+
+    .icon-btn{
+        width:42px;
+        height:42px;
+    }
+
+    .hero{
+        min-height:300px;
+    }
+
+    .hero h2{
+        font-size:34px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .category{
+        padding:17px 7px;
+    }
+
+    .product-image{
+        height:120px;
+    }
+
+    .product h3{
+        font-size:14px;
+    }
+
+    .price{
+        font-size:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- HEADER -->
+<header class="topbar">
+
+    <div class="brand">
+        <div class="logo">TD</div>
+
+        <div>
+            <h1>TAJ.<span>DONAT.FF</span></h1>
+            <p>Алмазҳои Free Fire • зуд • бехатар • 24/7</p>
+        </div>
+    </div>
+
+    <div class="top-actions">
+        <button class="icon-btn" onclick="showNotice()">🔔</button>
+        <button class="icon-btn" onclick="showMenu()">☰</button>
+    </div>
+
+</header>
+
+
+<!-- HOME PAGE -->
+<section id="home" class="page active">
+
+    <!-- HERO -->
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-small">FREE FIRE • СНГ 🇹🇯</div>
+
+            <h2>Донати <span>Free Fire</span></h2>
+
+            <p>
+                Алмазҳо ва пакетҳои Free Fire-ро
+                зуд, осон ва бехатар харид кунед.
+                Хизматрасонӣ 24/7.
+            </p>
+
+            <button class="hero-btn" onclick="openProducts()">
+                💎 Харидан →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CATEGORIES -->
+    <div class="section">
+
+        <div class="section-title">
+            <h2>🔥 Категорияҳо</h2>
+            <button onclick="openProducts()">Ҳамааш →</button>
+        </div>
+
+        <div class="categories">
+
+            <div class="category" onclick="openProducts()">
+                <div class="category-icon">💎</div>
+                <strong>Алмазҳо</strong>
+                <small>Free Fire</small>
+            </div>
+
+            <div class="category" onclick="openProducts()">
+                <div class="category-icon">🎟️</div>
+                <strong>Ваучерҳо</strong>
+                <small>Free Fire</small>
+            </div>
+
+            <div class="category" onclick="openProducts()">
+                <div class="category-icon">🏆</div>
+                <strong>Level Up</strong>
+                <small>Пакетҳо</small>
+            </div>
+
+            <div class="category" onclick="openProducts()">
+                <div class="category-icon">⚡</div>
+                <strong>Аксияҳо</strong>
+                <small>Free Fire</small>
+            </div>
+
+        </div>
+
+
+        <!-- DONATE -->
+        <div class="donate-box">
+
+            <div class="donate-left">
+
+                <div class="big-diamond">💎</div>
+
+                <div>
+                    <h2>Донати <span>Free Fire</span></h2>
+                    <p>Фармоишро оғоз кунед</p>
+                </div>
+
+            </div>
+
+            <button class="main-btn" onclick="openProducts()">
+                ➜ Донат кардан
+            </button>
+
+            <div class="badges">
+
+                <div class="badge">⚡ Қабули зуд</div>
+                <div class="badge">🛡 Пардохти бехатар</div>
+                <div class="badge">🕐 24/7 кор мекунад</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PAYMENTS -->
+    <div class="section">
+
+        <div class="section-title">
+            <h2>💳 Усули пардохт</h2>
+            <span style="color:#777;font-size:13px">2 система</span>
+        </div>
+
+        <div class="payments">
+
+            <div class="payment" onclick="openPayment('Эсхата Онлайн')">
+
+                <div class="payment-left">
+
+                    <div class="payment-logo">ЭСХАТА</div>
+
+                    <div>
+                        <h3>Эсхата Онлайн</h3>
+                        <p>Пардохт тавассути Эсхата</p>
+                    </div>
+
+                </div>
+
+                <div class="arrow">›</div>
+
+            </div>
+
+
+            <div class="payment" onclick="openPayment('ICB Mobile')">
+
+                <div class="payment-left">
+
+                    <div class="payment-logo">ICB</div>
+
+                    <div>
+                        <h3>ICB Mobile</h3>
+                        <p>Пардохт тавассути ICB</p>
+                    </div>
+
+                </div>
+
+                <div class="arrow">›</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUPPORT -->
+
+        <div class="support">
+
+            <div class="support-info">
+
+                <div class="support-icon">🎧</div>
+
+                <div>
+                    <h3>Дастгирӣ ва тамос</h3>
+                    <p>Бо мо дар тамос бошед</p>
+                </div>
+
+            </div>
+
+            <a
+                class="main-btn"
+                href="https://t.me/Zokirjon0555"
+                target="_blank"
+            >
+                Telegram @Zokirjon0555 →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS PAGE -->
+<section id="productsPage" class="page">
+
+    <div class="section">
+
+        <div class="section-title">
+            <h2>💎 Алмазҳои <span>Free Fire</span></h2>
+            <button onclick="goHome()">← Бозгашт</button>
+        </div>
+
+        <div class="products">
+
+            <div class="product">
+
+                <div class="product-image">💎</div>
+
+                <h3>110 Алмазҳо</h3>
+
+                <div class="price">
+                    8.50 <small>с.м</small>
+                </div>
+
+                <button class="buy-btn"
+                    onclick="buyProduct('110 Алмазҳо','8.50')">
+                    Харидан
+                </button>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">💎</div>
+
+                <h3>341 Алмазҳо</h3>
+
+                <div class="price">
+                    26.50 <small>с.м</small>
+                </div>
+
+                <button class="buy-btn"
+                    onclick="buyProduct('341 Алмазҳо','26.50')">
+                    Харидан
+                </button>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">💎</div>
+
+                <h3>572 Алмазҳо</h3>
+
+                <div class="price">
+                    44.90 <small>с.м</small>
+                </div>
+
+                <button class="buy-btn"
+                    onclick="buyProduct('572 Алмазҳо','44.90')">
+                    Харидан
+                </button>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">💎</div>
+
+                <h3>1166 Алмазҳо</h3>
+
+                <div class="price">
+                    86.90 <small>с.м</small>
+                </div>
+
+                <button class="buy-btn"
+                    onclick="buyProduct('1166 Алмазҳо','86.90')">
+                    Харидан
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ORDERS -->
+<section id="ordersPage" class="page">
+
+    <div class="section">
+
+        <div class="section-title">
+            <h2>🛍 Харидҳо</h2>
+            <button onclick="goHome()">← Бозгашт</button>
+        </div>
+
+        <div id="ordersList">
+
+            <div class="empty">
+                <div class="empty-icon">📦</div>
+                <h3>Ҳоло харид нест</h3>
+                <p style="margin-top:8px">
+                    Пас аз харид фармоишҳои шумо дар ин ҷо пайдо мешаванд.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SUPPORT PAGE -->
+<section id="supportPage" class="page">
+
+    <div class="section">
+
+        <div class="section-title">
+            <h2>🎧 Дастгирӣ</h2>
+            <button onclick="goHome()">← Бозгашт</button>
+        </div>
+
+        <div class="support">
+
+            <div class="support-info">
+
+                <div class="support-icon">👨‍💼</div>
+
+                <div>
+                    <h3>Админ</h3>
+                    <p class="admin">@Zokirjon0555</p>
+                </div>
+
+            </div>
+
+            <a
+                class="main-btn"
+                href="https://t.me/Zokirjon0555"
+                target="_blank"
+            >
+                Навиштан →
+            </a>
+
+        </div>
+
+        <div class="empty">
+
+            <div class="empty-icon">🕐</div>
+
+            <h3>Дастгирӣ 24/7</h3>
+
+            <p style="margin-top:10px">
+                Агар савол дошта бошед,
+                ба админ нависед.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profilePage" class="page">
+
+    <div class="section">
+
+        <div class="section-title">
+            <h2>👤 Профил</h2>
+        </div>
+
+        <div class="donate-box">
+
+            <div class="donate-left">
+
+                <div class="logo">TD</div>
+
+                <div>
+                    <h2>Меҳмон</h2>
+                    <p>TAJ.DONAT.FF</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="categories" style="margin-top:18px">
+
+            <div class="category">
+                <div class="category-icon">💰</div>
+                <strong>Баланс</strong>
+                <small>0.00 с.м</small>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">📦</div>
+                <strong>Харидҳо</strong>
+                <small id="orderCount">0</small>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🛡</div>
+                <strong>Бехатар</strong>
+                <small>100%</small>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🕐</div>
+                <strong>24/7</strong>
+                <small>Онлайн</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+    <button class="nav-item active" onclick="navigate('home',this)">
+        <span>⌂</span>
+        <small>Асосӣ</small>
+    </button>
+
+    <button class="nav-item" onclick="navigate('ordersPage',this)">
+        <span>🛍</span>
+        <small>Харидҳо</small>
+    </button>
+
+    <button class="nav-item" onclick="navigate('supportPage',this)">
+        <span>♧</span>
+        <small>Дастгирӣ</small>
+    </button>
+
+    <button class="nav-item" onclick="navigate('profilePage',this)">
+        <span>♙</span>
+        <small>Профил</small>
+    </button>
+
+</nav>
+
+</div>
+
+
+<!-- PAYMENT MODAL -->
+
+<div id="paymentModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <div>
+                <h2>Пардохт кардан</h2>
+                <p id="selectedProduct"
+                   style="color:#888;margin-top:5px">
+                </p>
+            </div>
+
+            <button class="close" onclick="closeModal()">×</button>
+
+        </div>
+
+
+        <label style="color:#999;font-size:13px">
+            ID-и бозигари Free Fire
+        </label>
+
+        <input
+            id="playerId"
+            class="input"
+            type="number"
+            placeholder="Мисол: 123456789"
+        >
 
-Барои ман як веб-сайти пурра, замонавӣ, профессионалӣ ва mobile-first бо номи TAJ.DONAT.FF соз. Дизайни сайт бояд аз рӯйи скриншотҳои reference, ки ман фиристодам, гирифта шавад: Dark Premium UI бо background-и қариб сиёҳ, card-ҳои торик, border-ҳои нарм ва accent-и Orange/Gold. Сайт бояд мисли як барномаи мобилии premium намоён шавад.
 
-МУҲИМ:
-- Ҳамаи интерфейсҳо бояд ба забони тоҷикӣ бошанд.
-- Матнҳо бе хатои грамматикӣ бошанд.
-- Номи бренд: TAJ.DONAT.FF
-- Админ: @Zokirjon0555
-- Пардохт танҳо бо:
-  1. Эсхата Онлайн
-  2. ICB Mobile
-- Алиф, Душанбе Сити, Корти Миллӣ ва дигар системаҳои пардохтро НЕГУЗОР.
-- Ҳеҷ гуна payment method-и дигар илова накун.
-- Сайт бояд дар телефон хеле зебо бошад.
-- Desktop ҳам responsive бошад.
-- Интерфейс бояд мисли App/Web App бошад.
-- Ҳамаи button-ҳо воқеан кор кунанд.
-- Ҳамаи саҳифаҳо ба ҳам пайваст бошанд.
-- Ҳеҷ button-и холӣ ё fake нагузор.
-- UI бояд premium, clean ва professional бошад.
-- Orange/Gold ҳамчун ранги асосӣ барои button, icon, active state ва accent истифода шавад.
-- Background: very dark / black.
-- Card: dark gray/black.
-- Text: white/light gray.
-- Border: subtle gray/orange.
-- Border-radius калон ва modern.
-- Shadow ва glow хеле нозук истифода шавад.
-- Аниматсияҳо smooth бошанд, вале аз ҳад зиёд набошанд.
+        <label style="
+            display:block;
+            margin-top:18px;
+            color:#999;
+            font-size:13px;
+        ">
+            Номи бозигар
+        </label>
 
-==================================================
-1. HEADER / TOP BAR
-==================================================
+        <input
+            id="nickname"
+            class="input"
+            type="text"
+            placeholder="Никнейми Free Fire"
+        >
 
-Дар болои сайт header-и зебо соз:
 
-TAJ.DONAT.FF
+        <p style="
+            color:#999;
+            font-size:13px;
+            margin-top:18px;
+        ">
+            Усули пардохтро интихоб кунед
+        </p>
+
+
+        <div
+            id="payEsxata"
+            class="pay-option selected"
+            onclick="selectPay('esxata')"
+        >
 
-Дар тарафи дигар:
-🔔 Огоҳинома
-👤 Профил
+            <div class="pay-option-left">
 
-Header бояд sticky бошад.
+                <div class="pay-small-logo">ЭСХАТА</div>
 
-Дар mobile header compact бошад.
+                <div>
+                    <b>Эсхата Онлайн</b>
+                    <p style="color:#777;margin-top:4px">
+                        Пардохт тавассути Эсхата
+                    </p>
+                </div>
 
-Дар баъзе саҳифаҳо:
-← Бозгашт
+            </div>
 
-нишон дода шавад.
+            <div id="checkEsxata" class="check">✓</div>
 
-==================================================
-2. САҲИФАИ АСОСӢ
-==================================================
+        </div>
 
-Home page бояд мисли скриншоти reference бошад.
 
-Дар боло як hero/profile section соз:
+        <div
+            id="payIcb"
+            class="pay-option"
+            onclick="selectPay('icb')"
+        >
 
-🔥 TAJ.DONAT.FF
-💎 Донати Free Fire
-⚡ Қабули фармоиш зуд
-🔐 Пардохти бехатар
-🕐 Хизматрасонӣ 24/7
+            <div class="pay-option-left">
 
-Як card-и premium соз:
+                <div class="pay-small-logo">ICB</div>
 
-💎 FREE FIRE СНГ
+                <div>
+                    <b>ICB Mobile</b>
+                    <p style="color:#777;margin-top:4px">
+                        Пардохт тавассути ICB
+                    </p>
+                </div>
 
-Матн:
-Алмосҳои Free Fire СНГ-ро зуд ва бехатар харидорӣ кунед.
+            </div>
 
-Button:
-🛒 Харидан
+            <div id="checkIcb" class="check"
+                 style="display:none">
+                ✓
+            </div>
 
-Дар поён:
+        </div>
 
-КАТЕГОРИЯҲО
 
-Card:
-💎 Free Fire СНГ
-Харидани алмазҳо барои Free Fire СНГ
+        <button class="confirm" onclick="confirmOrder()">
+            💳 Идома додан ба пардохт
+        </button>
 
-Button:
-Харидан →
+    </div>
 
-Баъд card-и дигар:
-🎁 Level Up
-Level Up Package-ҳоро харед
+</div>
 
-Button:
-Дидан →
 
-Агар категорияҳои дигар лозим бошанд, UI омода бошад, вале асосӣ Free Fire СНГ бошад.
+<!-- MENU MODAL -->
 
-==================================================
-3. НАРХНОМАИ FREE FIRE СНГ
-==================================================
+<div id="menuModal" class="modal">
 
-Саҳифаи алоҳида соз:
+    <div class="modal-box">
 
-FREE FIRE СНГ
+        <div class="modal-head">
 
-Дар боло tabs:
+            <h2>Меню</h2>
 
-💎 Алмазҳо
-🎁 Level Up
+            <button class="close" onclick="closeMenu()">×</button>
 
-Барои алмазҳо grid/card соз.
+        </div>
 
-Нархҳо:
+        <button class="payment" style="width:100%;margin-top:10px"
+            onclick="openProducts();closeMenu()">
+            💎 Алмазҳои Free Fire
+        </button>
 
-💎 110 Алмазҳо — 8.50 см
-💎 341 Алмазҳо — 26.50 см
-💎 572 Алмазҳо — 44.90 см
-💎 1166 Алмазҳо — 86.90 см
-💎 2398 Алмазҳо — 183 см
-💎 6160 Алмазҳо — 460 см
+        <button class="payment" style="width:100%;margin-top:10px"
+            onclick="navigate('ordersPage');closeMenu()">
+            🛍 Харидҳои ман
+        </button>
 
-Voucher:
+        <button class="payment" style="width:100%;margin-top:10px"
+            onclick="navigate('supportPage');closeMenu()">
+            🎧 Дастгирӣ
+        </button>
 
-🎟 Ваучер Ҳафта — 16 см
-🎟 Ваучер Лайт — 5.50 см
-🎟 Ваучер Моҳона — 57.50 см
+        <a
+            href="https://t.me/Zokirjon0555"
+            target="_blank"
+            class="payment"
+            style="margin-top:10px"
+        >
+            👨‍💼 Админ @Zokirjon0555
+        </a>
 
-Level Up:
+    </div>
 
-🎁 Level Up Package 6 — 5.50 см
-🎁 Level Up Package 10 — 6 см
-🎁 Level Up Package 15 — 7 см
-🎁 Level Up Package 20 — 8 см
-🎁 Level Up Package 25 — 8 см
-🎁 Level Up Package 30 — 9 см
+</div>
 
-Ҳар як product card бояд дошта бошад:
 
-Icon/Image
-Номи маҳсулот
-Миқдор
-Нарх
-Button:
-Харидан
+<script>
 
-Hover/tap effect:
-card каме glow шавад.
+/* GLOBAL */
 
-==================================================
-4. САҲИФАИ ХАРИД
-==================================================
+let selectedPayment = "esxata";
+let selectedProductName = "";
+let selectedProductPrice = "";
+let orders = [];
 
-Вақте корбар ба "Харидан" пахш мекунад, Order page кушода шавад.
 
-Title:
+/* NAVIGATION */
 
-РАСМИЁТ КАРДАНИ ФАРМОИШ
+function navigate(pageId, element){
 
-Product:
+    document.querySelectorAll(".page")
+        .forEach(page => page.classList.remove("active"));
 
-💎 110 Алмазҳо
-8.50 см
+    const page = document.getElementById(pageId);
 
-Баъд:
+    if(page){
+        page.classList.add("active");
+    }
 
-ID-И БОЗӢ
+    document.querySelectorAll(".nav-item")
+        .forEach(item => item.classList.remove("active"));
 
-Input:
-12345678
+    if(element){
+        element.classList.add("active");
+    }
 
-Placeholder:
-ID-и Free Fire-и худро ворид кунед
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
 
-Button:
-🔍 Санҷидани ID
 
-Баъд агар nickname маълум бошад:
+function goHome(){
 
-👤 Никнейм:
-Nickname
+    const nav = document.querySelector(".nav-item");
 
-Нишон диҳед:
+    navigate("home",nav);
+}
 
-🟢 ID дуруст аст
 
-Агар ID холӣ бошад ё нодуруст бошад:
+function openProducts(){
 
-🔴 Лутфан ID-и дурусти бозиро ворид кунед.
+    document.querySelectorAll(".page")
+        .forEach(page => page.classList.remove("active"));
 
-Пеш аз идома додан validation бошад.
+    document.getElementById("productsPage")
+        .classList.add("active");
 
-==================================================
-5. ИНТИХОБИ ПАРДОХТ
-==================================================
+    document.querySelectorAll(".nav-item")
+        .forEach(item => item.classList.remove("active"));
 
-Section:
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
 
-ТАРЗИ ПАРДОХТ
 
-Танҳо ду card:
+/* PRODUCT */
 
-1.
-🟠 Эсхата Онлайн
-Пардохт тавассути Эсхата Онлайн
+function buyProduct(name,price){
 
-2.
-📱 ICB Mobile
-Пардохт тавассути ICB Mobile
+    selectedProductName = name;
+    selectedProductPrice = price;
 
-Ҳангоми интихоб card active шавад:
+    document.getElementById("selectedProduct")
+        .innerText =
+        name + " • " + price + " с.м";
 
-border orange
-orange glow
-check icon
+    document.getElementById("paymentModal")
+        .classList.add("show");
 
-Ҳеҷ payment method-и дигар набошад.
+    document.body.style.overflow = "hidden";
+}
 
-Дар поён:
 
-Ман бо шартҳои истифода розӣ ҳастам.
+/* PAYMENT */
 
-Checkbox.
+function openPayment(name){
 
-Button:
+    selectedProductName = name;
 
-💳 Пардохт кардан
+    document.getElementById("selectedProduct")
+        .innerText = name;
 
-То вақте ки:
-- ID ворид нашудааст
-- payment method интихоб нашудааст
-- checkbox фаъол нашудааст
+    document.getElementById("paymentModal")
+        .classList.add("show");
 
-button disabled бошад.
+    document.body.style.overflow = "hidden";
+}
 
-==================================================
-6. ПАРДОХТ БО ЭСХАТА ОНЛАЙН
-==================================================
 
-Агар Эсхата Онлайн интихоб шавад:
+function selectPay(type){
 
-Саҳифа:
+    selectedPayment = type;
 
-ПАРДОХТ БО ЭСХАТА ОНЛАЙН
+    const esxata =
+        document.getElementById("payEsxata");
 
-Нишон диҳед:
+    const icb =
+        document.getElementById("payIcb");
 
-Маблағ:
-8.50 см
+    const checkE =
+        document.getElementById("checkEsxata");
 
-Усули пардохт:
-Эсхата Онлайн
+    const checkI =
+        document.getElementById("checkIcb");
 
-Дастур:
 
-1. Ба Эсхата Онлайн ворид шавед.
-2. Маълумоти пардохти пешниҳодшударо истифода баред.
-3. Маблағи дақиқро пардохт кунед.
-4. Пас аз пардохт чекро фиристед.
+    if(type === "esxata"){
 
-Button:
+        esxata.classList.add("selected");
+        icb.classList.remove("selected");
 
-📤 Фиристодани чек
+        checkE.style.display = "block";
+        checkI.style.display = "none";
 
-Барои upload чек interface соз.
+    }else{
 
-==================================================
-7. ПАРДОХТ БО ICB MOBILE
-==================================================
+        icb.classList.add("selected");
+        esxata.classList.remove("selected");
 
-Агар ICB Mobile интихоб шавад:
+        checkI.style.display = "block";
+        checkE.style.display = "none";
+    }
+}
 
-ПАРДОХТ БО ICB MOBILE
 
-Маблағ:
-8.50 см
+/* CONFIRM ORDER */
 
-Усули пардохт:
-ICB Mobile
+function confirmOrder(){
 
-Дастурҳои равшан нишон дода шаванд.
+    const playerId =
+        document.getElementById("playerId").value.trim();
 
-Button:
+    const nickname =
+        document.getElementById("nickname").value.trim();
 
-📤 Фиристодани чек
 
-Upload image/file бояд дастгирӣ шавад.
+    if(!playerId){
 
-==================================================
-8. CHECK / RECEIPT
-==================================================
+        alert("Лутфан ID-и Free Fire-ро ворид кунед.");
 
-Корбар метавонад screenshot/чек upload кунад.
+        return;
+    }
 
-Пас аз upload:
 
-✅ Чек қабул шуд
+    if(!nickname){
 
-Нишон диҳед:
+        alert("Лутфан никнейми Free Fire-ро ворид кунед.");
 
-Фармоиш:
-#ORDER-ID
+        return;
+    }
 
-Маҳсулот:
-110 Алмазҳо
 
-ID:
-12345678
+    const payment =
+        selectedPayment === "esxata"
+        ? "Эсхата Онлайн"
+        : "ICB Mobile";
 
-Никнейм:
-Nickname
 
-Маблағ:
-8.50 см
+    const order = {
 
-Пардохт:
-Эсхата Онлайн / ICB Mobile
+        product:
+            selectedProductName || "Фармоиши Free Fire",
 
-Статус:
+        price:
+            selectedProductPrice || "—",
 
-🟡 Дар интизори тасдиқ
+        playerId:playerId,
 
-Матн:
+        nickname:nickname,
 
-Фармоиши шумо қабул шуд.
-Админ пас аз санҷиши пардохт фармоишро тасдиқ мекунад.
+        payment:payment,
 
-==================================================
-9. САҲИФАИ ХАРИДҲО
-==================================================
+        time:new Date().toLocaleString("tg-TJ")
 
-Bottom navigation:
+    };
 
-🏠 Асосӣ
-🛍 Харидҳо
-🎧 Дастгирӣ
-👤 Профил
 
-Дар "Харидҳо":
+    orders.push(order);
 
-ХАРИДҲОИ МАН
+    updateOrders();
 
-Ҳар фармоиш ҳамчун card:
 
-💎 110 Алмазҳо
-ID: 12345678
-8.50 см
-15:10
+    closeModal();
 
-Status:
 
-🟡 Дар интизор
-🟢 Иҷро шуд
-🔴 Бекор шуд
+    alert(
+        "✅ Фармоиш қабул шуд!\n\n" +
+        "Маҳсулот: " + order.product + "\n" +
+        "ID: " + order.playerId + "\n" +
+        "Ник: " + order.nickname + "\n" +
+        "Пардохт: " + order.payment + "\n\n" +
+        "Барои тасдиқи пардохт бо админ тамос гиред."
+    );
 
-Card-ро пахш карда Order Details кушода шавад.
 
-==================================================
-10. ORDER DETAILS
-==================================================
+    document.getElementById("playerId").value="";
+    document.getElementById("nickname").value="";
+}
 
-ФАРМОИШ #1001
 
-Маҳсулот:
-110 Алмазҳо
+/* ORDERS */
 
-ID:
-12345678
+function updateOrders(){
 
-Никнейм:
-Nickname
+    const list =
+        document.getElementById("ordersList");
 
-Маблағ:
-8.50 см
+    document.getElementById("orderCount")
+        .innerText = orders.length;
 
-Усули пардохт:
-Эсхата Онлайн
 
-Сана:
-14.09.2026
+    if(orders.length === 0){
 
-Вақт:
-21:36
+        list.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">📦</div>
+                <h3>Ҳоло харид нест</h3>
+                <p style="margin-top:8px">
+                    Пас аз харид фармоишҳои шумо
+                    дар ин ҷо пайдо мешаванд.
+                </p>
+            </div>
+        `;
 
-Статус:
-🟢 Иҷро шуд
+        return;
+    }
 
-Агар иҷро нашуда бошад:
-🟡 Дар интизор
 
-==================================================
-11. САҲИФАИ ДАСТГИРӢ
-==================================================
+    list.innerHTML = orders.map((order,index)=>`
 
-Title:
+        <div class="payment"
+             style="margin-top:12px;display:block">
 
-Дастгирӣ
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                gap:10px;
+            ">
 
-Дар боло:
+                <div>
 
-🟢 Дастгирии онлайн
-24/7
+                    <h3>
+                        💎 ${order.product}
+                    </h3>
 
-Card:
+                    <p style="
+                        color:#888;
+                        margin-top:7px
+                    ">
+                        ID: ${order.playerId}
+                    </p>
 
-💬 Ба мо нависед
+                    <p style="
+                        color:#888;
+                        margin-top:5px
+                    ">
+                        Ник: ${order.nickname}
+                    </p>
 
-Админ:
-@Zokirjon0555
+                </div>
 
-Button:
-💬 Telegram
+                <strong style="color:var(--orange)">
+                    ${order.price} с.м
+                </strong>
 
-Ҳамчунин FAQ соз:
+            </div>
 
-Чанд вақт мунтазир шавам?
-Оё ID-и ман бехатар аст?
-Оё маблағ баргардонида мешавад?
-Кадом роҳҳои пардохт қабул мешаванд?
+            <div style="
+                margin-top:15px;
+                padding-top:12px;
+                border-top:1px solid #292d35;
+                color:#777;
+                font-size:12px;
+            ">
+                💳 ${order.payment}
+                • ${order.time}
+            </div>
 
-Ҳар савол accordion бошад.
+        </div>
 
-Ҷавобҳо ба забони тоҷикӣ ва равшан бошанд.
+    `).join("");
+}
 
-==================================================
-12. ПРОФИЛ
-==================================================
 
-Саҳифа:
+/* MODAL */
 
-ПРОФИЛ
+function closeModal(){
 
-Avatar:
+    document.getElementById("paymentModal")
+        .classList.remove("show");
 
-TAJ
-ё
-TD
+    document.body.style.overflow = "";
+}
 
-Ном:
 
-Муштарӣ
+/* MENU */
 
-Username:
-@username
+function showMenu(){
 
-Status:
-🟢 Бехатар
+    document.getElementById("menuModal")
+        .classList.add("show");
 
-Stats:
+    document.body.style.overflow = "hidden";
+}
 
-💰 Баланс
-0.00 см
 
-🛍 Харидҳо
-6
+function closeMenu(){
 
-👥 Ҳамкорон
-0
+    document.getElementById("menuModal")
+        .classList.remove("show");
 
-💵 Даромад аз ҳамкорӣ
-0.00 см
+    document.body.style.overflow = "";
+}
 
-Card:
 
-🤝 Барномаи ҳамкорӣ
+/* NOTICE */
 
-То 3% аз ҳар хариди дӯстон
+function showNotice(){
 
-Button:
-Дидан →
+    alert(
+        "🔔 TAJ.DONAT.FF\n\n" +
+        "💎 Донати Free Fire\n" +
+        "⚡ Қабули зуд\n" +
+        "🛡 Пардохти бехатар\n" +
+        "🕐 24/7 кор мекунад"
+    );
+}
 
-==================================================
-13. ТАЪРИХ
-==================================================
 
-Саҳифаи:
+/* CLICK OUTSIDE */
 
-ТАЪРИХ
+document.getElementById("paymentModal")
+.addEventListener("click",function(e){
 
-Top statistics:
+    if(e.target === this){
+        closeModal();
+    }
 
-ҲАМАГӢ
-6 фармоиш
+});
 
-ХАРОҶОТ
-22.05 см
 
-Tabs:
+document.getElementById("menuModal")
+.addEventListener("click",function(e){
 
-Ҳама
-Интизор
-Иҷро шуда
-Бекор
+    if(e.target === this){
+        closeMenu();
+    }
 
-Order history list:
+});
 
-11 СЕН 2026
 
-110
-15:10 • Эсхата
-8.50 см
-🔴 Бекор
+/* START */
 
-10 СЕН 2026
+updateOrders();
 
-110
-03:45 • Эсхата
-8.50 см
-🔴 Бекор
+</script>
 
-8 СЕН 2026
-
-110 ×2
-19:29 • Эсхата
-17.00 см
-🟢 Иҷро шуд
-
-7 СЕН 2026
-
-Level Up Package 6
-11:48 • Эсхата
-5.50 см
-🟢 Иҷро шуд
-
-==================================================
-14. BOTTOM NAVIGATION
-==================================================
-
-Дар mobile bottom navigation доим намоён бошад.
-
-4 button:
-
-🏠
-Асосӣ
-
-🛍
-Харидҳо
-
-🎧
-Дастгирӣ
-
-👤
-Профил
-
-Active page:
-Orange/Gold
-
-Inactive:
-Gray
-
-Active icon glow дошта бошад.
-
-Navigation бояд fixed бошад ва content зери он пинҳон нашавад.
-
-==================================================
-15. DESIGN SYSTEM
-==================================================
-
-Design бояд чунин бошад:
-
-Background:
-#08090B ё наздик ба black
-
-Cards:
-#14161B
-
-Secondary:
-#1A1D23
-
-Text:
-#FFFFFF
-
-Secondary text:
-#8B8F98
-
-Primary:
-Orange/Gold
-
-Border:
-rgba(255,255,255,0.08)
-
-Orange:
-#FF9500
-
-Border-radius:
-18px – 26px
-
-Buttons:
-rounded
-
-Font:
-Inter ё system font
-
-UI:
-premium
-minimal
-clean
-modern
-
-Ҳеҷ gradient-и хеле сахт истифода накун.
-
-Glow хеле subtle бошад.
-
-==================================================
-16. RESPONSIVE DESIGN
-==================================================
-
-Mobile аввал тарҳрезӣ шавад.
-
-Screen sizes:
-360px
-375px
-390px
-412px
-430px
-768px
-1024px
-1440px
-
-Дар mobile:
-2-column product grid истифода бар.
-
-Дар desktop:
-3 ё 4-column product grid.
-
-Bottom navigation танҳо дар mobile бошад.
-
-Desktop метавонад sidebar/top navigation дошта бошад.
-
-==================================================
-17. PRODUCT IMAGES
-==================================================
-
-Барои маҳсулот image placeholder-и зебо соз.
-
-Агар image вуҷуд надошта бошад:
-
-💎
-
-бо neon blue/orange diamond icon истифода шавад.
-
-Аммо product card холӣ набошад.
-
-Ҳар image aspect ratio дуруст дошта бошад.
-
-==================================================
-18. ADMIN
-==================================================
-
-Admin:
-
-@Zokirjon0555
-
-Admin interface сохта шавад.
-
-Admin бояд тавонад:
-
-- ҳамаи фармоишҳоро бинад
-- фармоишро кушояд
-- ID ва nickname-ро бинад
-- чекро бинад
-- payment method-ро бинад
-- фармоишро тасдиқ кунад
-- фармоишро бекор кунад
-- статусро тағйир диҳад
-- маҳсулот илова кунад
-- маҳсулотро таҳрир кунад
-- нархро тағйир диҳад
-- маҳсулотро фаъол/ғайрифаъол кунад
-- маълумоти Эсхата Онлайн-ро тағйир диҳад
-- маълумоти ICB Mobile-ро тағйир диҳад
-
-Admin page бояд танҳо барои admin дастрас бошад.
-
-==================================================
-19. DATABASE
-==================================================
-
-Database истифода шавад.
-
-Tables:
-
-users
-products
-orders
-payments
-admins
-settings
-
-User:
-
-id
-telegram_id / user_id
-username
-name
-created_at
-
-Product:
-
-id
-name
-category
-amount
-price
-currency
-image
-active
-created_at
-
-Order:
-
-id
-user_id
-product_id
-game_id
-nickname
-amount
-price
-payment_method
-receipt
-status
-created_at
-updated_at
-
-Payment:
-
-id
-order_id
-method
-amount
-status
-receipt
-created_at
-
-Settings:
-
-payment information
-support username
-admin username
-site name
-
-==================================================
-20. SECURITY
-==================================================
-
-Security муҳим аст.
-
-- Admin routes protected бошанд.
-- User маълумоти ҳассос дар frontend hardcode нашавад.
-- Payment credentials дар frontend нигоҳ дошта нашавад.
-- Environment variables истифода шавад.
-- Validation дар frontend ва backend бошад.
-- File upload validation бошад.
-- Ҳама request-ҳо error handling дошта бошанд.
-- API secrets ба GitHub commit карда нашаванд.
-- .env ба .gitignore дохил шавад.
-
-==================================================
-21. ERROR STATES
-==================================================
-
-Барои ҳамаи ҳолатҳо UI соз:
-
-Loading:
-⏳ Бор шуда истодааст...
-
-Error:
-❌ Хато рӯй дод.
-Лутфан дубора кӯшиш кунед.
-
-Success:
-✅ Амалиёт бомуваффақият иҷро шуд.
-
-Empty:
-📦 Ҳоло фармоише нест.
-
-Invalid ID:
-❌ ID нодуруст аст.
-
-Payment not selected:
-⚠️ Лутфан усули пардохтро интихоб кунед.
-
-Receipt missing:
-⚠️ Лутфан чекро бор кунед.
-
-==================================================
-22. ANIMATIONS
-==================================================
-
-Smooth animations:
-
-fade in
-slide up
-button press
-card hover
-modal slide
-bottom sheet
-
-Duration:
-150–300ms
-
-Ҳеҷ animation-и вазнин истифода накун.
-
-==================================================
-23. MODALS
-==================================================
-
-Payment method selection modal:
-
-"БАНКРО ИНТИХОБ КУНЕД"
-
-Аммо дар ин modal танҳо:
-
-🟠 Эсхата Онлайн
-📱 ICB Mobile
-
-нишон дода шавад.
-
-Ҳангоми интихоб check mark пайдо шавад.
-
-Modal бояд mobile bottom-sheet style бошад, мисли reference screenshot.
-
-==================================================
-24. USER EXPERIENCE
-==================================================
-
-Flow:
-
-Home
-↓
-Free Fire СНГ
-↓
-Select product
-↓
-Enter Game ID
-↓
-Check ID
-↓
-Nickname
-↓
-Select payment
-↓
-Accept terms
-↓
-Payment
-↓
-Upload receipt
-↓
-Order created
-↓
-Waiting for admin
-↓
-Admin approves
-↓
-Order completed
-↓
-History updated
-
-Ин flow пурра кор кунад.
-
-==================================================
-25. BRANDING
-==================================================
-
-Дар тамоми сайт:
-
-TAJ.DONAT.FF
-
-истифода шавад.
-
-Footer:
-
-© 2026 TAJ.DONAT.FF
-
-💎 Донати Free Fire
-⚡ Зуд
-🔐 Бехатар
-🕐 24/7
-
-Support:
-@Zokirjon0555
-
-==================================================
-26. LANGUAGE
-==================================================
-
-Ҳамаи UI ба тоҷикӣ:
-
-Асосӣ
-Харидҳо
-Дастгирӣ
-Профил
-Алмазҳо
-Level Up
-Фармоиш
-Пардохт
-Таърих
-Тасдиқ шуд
-Дар интизор
-Бекор шуд
-Пардохт кардан
-Харидан
-Бозгашт
-Дастгирӣ
-ID-и бозӣ
-Никнейм
-Маблағ
-Усули пардохт
-Чек
-Бор кардани чек
-Тасдиқи фармоиш
-
-Грамматикаи тоҷикӣ дуруст бошад.
-
-==================================================
-27. TECH STACK
-==================================================
-
-Лоиҳа бояд production-ready бошад.
-
-Frontend:
-React + Vite
-
-Styling:
-CSS ё Tailwind CSS
-
-Backend:
-Node.js + Express
-
-Database:
-SQLite
-
-API:
-REST API
-
-Authentication:
-secure session/JWT ё механизми бехатар
-
-Environment variables:
-.env
-
-Structure:
-
-/client
-/server
-/database
-/public
-README.md
-.gitignore
-.env.example
-package.json
-
-Кодро modular навис.
-
-==================================================
-28. FILES
-==================================================
-
-Файлҳои асосӣ:
-
-client/
-  src/
-    components/
-    pages/
-    layouts/
-    hooks/
-    services/
-    data/
-    App.jsx
-    main.jsx
-    styles.css
-
-server/
-  index.js
-  routes/
-  controllers/
-  middleware/
-  database/
-
-public/
-  images/
-
-.env.example
-.gitignore
-README.md
-package.json
-
-==================================================
-29. IMPORTANT PAYMENT RULE
-==================================================
-
-ТАНҲО:
-
-1. Эсхата Онлайн
-2. ICB Mobile
-
-Ин ду payment method бояд дар тамоми сайт истифода шаванд.
-
-Ҳеҷ:
-Алиф
-Душанбе Сити
-Корти Миллӣ
-Бонки дигар
-ё payment method-и дигар
-
-илова нашавад.
-
-==================================================
-30. FINAL REQUIREMENTS
-==================================================
-
-Ман мехоҳам натиҷа мисли як real premium Free Fire donation website бошад, на як demo-и оддӣ.
-
-UI бояд аз reference screenshots илҳом гирифта шавад:
-
-- dark background
-- orange/gold active buttons
-- rounded cards
-- bottom navigation
-- profile page
-- purchase history
-- support page
-- payment bottom sheet
-- product cards
-- order page
-- premium mobile-app feeling
-
-Ҳамаи саҳифаҳо бояд ба ҳам пайваст бошанд.
-
-Ҳама button-ҳо кор кунанд.
-
-Ҳамаи form-ҳо validation дошта бошанд.
-
-Ҳамаи product prices аз як database/config гирифта шаванд, то admin онҳоро тағйир дода тавонад.
-
-Нархҳои ибтидоӣ:
-
-110 Алмазҳо = 8.50 см
-341 Алмазҳо = 26.50 см
-572 Алмазҳо = 44.90 см
-1166 Алмазҳо = 86.90 см
-2398 Алмазҳо = 183 см
-6160 Алмазҳо = 460 см
-
-Ваучер Ҳафта = 16 см
-Ваучер Лайт = 5.50 см
-Ваучер Моҳона = 57.50 см
-
-Level Up Package 6 = 5.50 см
-Level Up Package 10 = 6 см
-Level Up Package 15 = 7 см
-Level Up Package 20 = 8 см
-Level Up Package 25 = 8 см
-Level Up Package 30 = 9 см
-
-Admin:
-@Zokirjon0555
-
-Payment:
-Эсхата Онлайн
-ICB Mobile
-
-Brand:
-TAJ.DONAT.FF
-
-Support:
-@Zokirjon0555
-
-Сайтро пурра омода кун, то баъд аз npm install ва гузоштани .env он бе хатои build кор кунад.
-
-Пеш аз анҷом:
-1. Ҳама import-ҳоро санҷ.
-2. Ҳама route-ҳоро санҷ.
-3. Ҳама button-ҳоро санҷ.
-4. Responsive design-ро санҷ.
-5. Database initialization-ро санҷ.
-6. API connection-ро санҷ.
-7. Payment selection-ро санҷ.
-8. Order creation-ро санҷ.
-9. Receipt upload-ро санҷ.
-10. Admin protection-ро санҷ.
-11. Ҳеҷ secret дар frontend ё GitHub набошад.
-12. npm build бе error анҷом ёбад.
-
-Натиҷа бояд як веб-сайти пурраи:
-TAJ.DONAT.FF
-бошад — Dark Premium, Orange/Gold, Free Fire СНГ, 24/7, бо хариди алмазҳо, ID, nickname, пардохти Эсхата Онлайн ва ICB Mobile, чек, фармоиш, таърих, профил, дастгирӣ ва Admin Panel.
+</body>
+  </html>
