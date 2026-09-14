@@ -1,53 +1,1084 @@
-<script>
-const APP_KEY = "fc_21f5712e9156572137bdf68d"; // Калиди ту
-let selected = {};
+ЛОИҲАИ ПУРРА: TAJ.DONAT.FF — FREE FIRE DIAMONDS SHOP
 
-async function getNick(){
-  let id = document.getElementById('ffid').value;
-  if(id.length < 8) return;
-  document.getElementById('nick').innerText = "Месанҷам...";
-  document.getElementById('nick').style.color = "#00aaff";
-  
-  try {
-    // API - и Fazercards
-    let res = await fetch(`https://api.fazercards.com/v1/check?appkey=${APP_KEY}&game=freefire&uid=${id}`);
-    let data = await res.json();
-    
-    if(data.status == "success"){
-      document.getElementById('nick').innerText = data.data.nickname;
-      document.getElementById('nick').style.color = "#00ff88";
-    } else {
-      document.getElementById('nick').innerText = "ID нодуруст";
-      document.getElementById('nick').style.color = "red";
-    }
-  } catch(e){
-    document.getElementById('nick').innerText = "Хатогӣ дар пайваст";
-    document.getElementById('nick').style.color = "red";
-  }
-}
+Барои ман як веб-сайти пурра, замонавӣ, профессионалӣ ва mobile-first бо номи TAJ.DONAT.FF соз. Дизайни сайт бояд аз рӯйи скриншотҳои reference, ки ман фиристодам, гирифта шавад: Dark Premium UI бо background-и қариб сиёҳ, card-ҳои торик, border-ҳои нарм ва accent-и Orange/Gold. Сайт бояд мисли як барномаи мобилии premium намоён шавад.
 
-function select(diamond, usd){
-  selected = {diamond, usd};
-  document.getElementById('payment').style.display='block';
-  document.getElementById('sum').innerText = `Шумо интихоб кардед: ${diamond} 💎 = ${usd} USDT`;
-  window.scrollTo(0, document.body.scrollHeight);
-}
+МУҲИМ:
+- Ҳамаи интерфейсҳо бояд ба забони тоҷикӣ бошанд.
+- Матнҳо бе хатои грамматикӣ бошанд.
+- Номи бренд: TAJ.DONAT.FF
+- Админ: @Zokirjon0555
+- Пардохт танҳо бо:
+  1. Эсхата Онлайн
+  2. ICB Mobile
+- Алиф, Душанбе Сити, Корти Миллӣ ва дигар системаҳои пардохтро НЕГУЗОР.
+- Ҳеҷ гуна payment method-и дигар илова накун.
+- Сайт бояд дар телефон хеле зебо бошад.
+- Desktop ҳам responsive бошад.
+- Интерфейс бояд мисли App/Web App бошад.
+- Ҳамаи button-ҳо воқеан кор кунанд.
+- Ҳамаи саҳифаҳо ба ҳам пайваст бошанд.
+- Ҳеҷ button-и холӣ ё fake нагузор.
+- UI бояд premium, clean ва professional бошад.
+- Orange/Gold ҳамчун ранги асосӣ барои button, icon, active state ва accent истифода шавад.
+- Background: very dark / black.
+- Card: dark gray/black.
+- Text: white/light gray.
+- Border: subtle gray/orange.
+- Border-radius калон ва modern.
+- Shadow ва glow хеле нозук истифода шавад.
+- Аниматсияҳо smooth бошанд, вале аз ҳад зиёд набошанд.
 
-async function order(){
-  let id = document.getElementById('ffid').value;
-  let txid = document.getElementById('txid').value;
-  let nick = document.getElementById('nick').innerText;
-  if(!id || nick == "Месанҷам..." || nick == "ID нодуруст"){ alert('Аввал ID - и дурустро нависта парто'); return; }
-  if(!txid){ alert('TXID - ро нависта парто'); return; }
-  
-  // Ба API заказ медиҳем
-  let res = await fetch(`https://api.fazercards.com/v1/order?appkey=${APP_KEY}&game=freefire&uid=${id}&product=${selected.diamond}`);
-  let data = await res.json();
-  
-  if(data.status == "success"){
-    alert(`✅ Заказ қабул шуд!\nНик: ${nick}\n${selected.diamond} 💎\n5-10 дақ дигар меояд`);
-  } else {
-    alert("❌ Хатогӣ: " + data.message);
-  }
-}
-</script>
+==================================================
+1. HEADER / TOP BAR
+==================================================
+
+Дар болои сайт header-и зебо соз:
+
+TAJ.DONAT.FF
+
+Дар тарафи дигар:
+🔔 Огоҳинома
+👤 Профил
+
+Header бояд sticky бошад.
+
+Дар mobile header compact бошад.
+
+Дар баъзе саҳифаҳо:
+← Бозгашт
+
+нишон дода шавад.
+
+==================================================
+2. САҲИФАИ АСОСӢ
+==================================================
+
+Home page бояд мисли скриншоти reference бошад.
+
+Дар боло як hero/profile section соз:
+
+🔥 TAJ.DONAT.FF
+💎 Донати Free Fire
+⚡ Қабули фармоиш зуд
+🔐 Пардохти бехатар
+🕐 Хизматрасонӣ 24/7
+
+Як card-и premium соз:
+
+💎 FREE FIRE СНГ
+
+Матн:
+Алмосҳои Free Fire СНГ-ро зуд ва бехатар харидорӣ кунед.
+
+Button:
+🛒 Харидан
+
+Дар поён:
+
+КАТЕГОРИЯҲО
+
+Card:
+💎 Free Fire СНГ
+Харидани алмазҳо барои Free Fire СНГ
+
+Button:
+Харидан →
+
+Баъд card-и дигар:
+🎁 Level Up
+Level Up Package-ҳоро харед
+
+Button:
+Дидан →
+
+Агар категорияҳои дигар лозим бошанд, UI омода бошад, вале асосӣ Free Fire СНГ бошад.
+
+==================================================
+3. НАРХНОМАИ FREE FIRE СНГ
+==================================================
+
+Саҳифаи алоҳида соз:
+
+FREE FIRE СНГ
+
+Дар боло tabs:
+
+💎 Алмазҳо
+🎁 Level Up
+
+Барои алмазҳо grid/card соз.
+
+Нархҳо:
+
+💎 110 Алмазҳо — 8.50 см
+💎 341 Алмазҳо — 26.50 см
+💎 572 Алмазҳо — 44.90 см
+💎 1166 Алмазҳо — 86.90 см
+💎 2398 Алмазҳо — 183 см
+💎 6160 Алмазҳо — 460 см
+
+Voucher:
+
+🎟 Ваучер Ҳафта — 16 см
+🎟 Ваучер Лайт — 5.50 см
+🎟 Ваучер Моҳона — 57.50 см
+
+Level Up:
+
+🎁 Level Up Package 6 — 5.50 см
+🎁 Level Up Package 10 — 6 см
+🎁 Level Up Package 15 — 7 см
+🎁 Level Up Package 20 — 8 см
+🎁 Level Up Package 25 — 8 см
+🎁 Level Up Package 30 — 9 см
+
+Ҳар як product card бояд дошта бошад:
+
+Icon/Image
+Номи маҳсулот
+Миқдор
+Нарх
+Button:
+Харидан
+
+Hover/tap effect:
+card каме glow шавад.
+
+==================================================
+4. САҲИФАИ ХАРИД
+==================================================
+
+Вақте корбар ба "Харидан" пахш мекунад, Order page кушода шавад.
+
+Title:
+
+РАСМИЁТ КАРДАНИ ФАРМОИШ
+
+Product:
+
+💎 110 Алмазҳо
+8.50 см
+
+Баъд:
+
+ID-И БОЗӢ
+
+Input:
+12345678
+
+Placeholder:
+ID-и Free Fire-и худро ворид кунед
+
+Button:
+🔍 Санҷидани ID
+
+Баъд агар nickname маълум бошад:
+
+👤 Никнейм:
+Nickname
+
+Нишон диҳед:
+
+🟢 ID дуруст аст
+
+Агар ID холӣ бошад ё нодуруст бошад:
+
+🔴 Лутфан ID-и дурусти бозиро ворид кунед.
+
+Пеш аз идома додан validation бошад.
+
+==================================================
+5. ИНТИХОБИ ПАРДОХТ
+==================================================
+
+Section:
+
+ТАРЗИ ПАРДОХТ
+
+Танҳо ду card:
+
+1.
+🟠 Эсхата Онлайн
+Пардохт тавассути Эсхата Онлайн
+
+2.
+📱 ICB Mobile
+Пардохт тавассути ICB Mobile
+
+Ҳангоми интихоб card active шавад:
+
+border orange
+orange glow
+check icon
+
+Ҳеҷ payment method-и дигар набошад.
+
+Дар поён:
+
+Ман бо шартҳои истифода розӣ ҳастам.
+
+Checkbox.
+
+Button:
+
+💳 Пардохт кардан
+
+То вақте ки:
+- ID ворид нашудааст
+- payment method интихоб нашудааст
+- checkbox фаъол нашудааст
+
+button disabled бошад.
+
+==================================================
+6. ПАРДОХТ БО ЭСХАТА ОНЛАЙН
+==================================================
+
+Агар Эсхата Онлайн интихоб шавад:
+
+Саҳифа:
+
+ПАРДОХТ БО ЭСХАТА ОНЛАЙН
+
+Нишон диҳед:
+
+Маблағ:
+8.50 см
+
+Усули пардохт:
+Эсхата Онлайн
+
+Дастур:
+
+1. Ба Эсхата Онлайн ворид шавед.
+2. Маълумоти пардохти пешниҳодшударо истифода баред.
+3. Маблағи дақиқро пардохт кунед.
+4. Пас аз пардохт чекро фиристед.
+
+Button:
+
+📤 Фиристодани чек
+
+Барои upload чек interface соз.
+
+==================================================
+7. ПАРДОХТ БО ICB MOBILE
+==================================================
+
+Агар ICB Mobile интихоб шавад:
+
+ПАРДОХТ БО ICB MOBILE
+
+Маблағ:
+8.50 см
+
+Усули пардохт:
+ICB Mobile
+
+Дастурҳои равшан нишон дода шаванд.
+
+Button:
+
+📤 Фиристодани чек
+
+Upload image/file бояд дастгирӣ шавад.
+
+==================================================
+8. CHECK / RECEIPT
+==================================================
+
+Корбар метавонад screenshot/чек upload кунад.
+
+Пас аз upload:
+
+✅ Чек қабул шуд
+
+Нишон диҳед:
+
+Фармоиш:
+#ORDER-ID
+
+Маҳсулот:
+110 Алмазҳо
+
+ID:
+12345678
+
+Никнейм:
+Nickname
+
+Маблағ:
+8.50 см
+
+Пардохт:
+Эсхата Онлайн / ICB Mobile
+
+Статус:
+
+🟡 Дар интизори тасдиқ
+
+Матн:
+
+Фармоиши шумо қабул шуд.
+Админ пас аз санҷиши пардохт фармоишро тасдиқ мекунад.
+
+==================================================
+9. САҲИФАИ ХАРИДҲО
+==================================================
+
+Bottom navigation:
+
+🏠 Асосӣ
+🛍 Харидҳо
+🎧 Дастгирӣ
+👤 Профил
+
+Дар "Харидҳо":
+
+ХАРИДҲОИ МАН
+
+Ҳар фармоиш ҳамчун card:
+
+💎 110 Алмазҳо
+ID: 12345678
+8.50 см
+15:10
+
+Status:
+
+🟡 Дар интизор
+🟢 Иҷро шуд
+🔴 Бекор шуд
+
+Card-ро пахш карда Order Details кушода шавад.
+
+==================================================
+10. ORDER DETAILS
+==================================================
+
+ФАРМОИШ #1001
+
+Маҳсулот:
+110 Алмазҳо
+
+ID:
+12345678
+
+Никнейм:
+Nickname
+
+Маблағ:
+8.50 см
+
+Усули пардохт:
+Эсхата Онлайн
+
+Сана:
+14.09.2026
+
+Вақт:
+21:36
+
+Статус:
+🟢 Иҷро шуд
+
+Агар иҷро нашуда бошад:
+🟡 Дар интизор
+
+==================================================
+11. САҲИФАИ ДАСТГИРӢ
+==================================================
+
+Title:
+
+Дастгирӣ
+
+Дар боло:
+
+🟢 Дастгирии онлайн
+24/7
+
+Card:
+
+💬 Ба мо нависед
+
+Админ:
+@Zokirjon0555
+
+Button:
+💬 Telegram
+
+Ҳамчунин FAQ соз:
+
+Чанд вақт мунтазир шавам?
+Оё ID-и ман бехатар аст?
+Оё маблағ баргардонида мешавад?
+Кадом роҳҳои пардохт қабул мешаванд?
+
+Ҳар савол accordion бошад.
+
+Ҷавобҳо ба забони тоҷикӣ ва равшан бошанд.
+
+==================================================
+12. ПРОФИЛ
+==================================================
+
+Саҳифа:
+
+ПРОФИЛ
+
+Avatar:
+
+TAJ
+ё
+TD
+
+Ном:
+
+Муштарӣ
+
+Username:
+@username
+
+Status:
+🟢 Бехатар
+
+Stats:
+
+💰 Баланс
+0.00 см
+
+🛍 Харидҳо
+6
+
+👥 Ҳамкорон
+0
+
+💵 Даромад аз ҳамкорӣ
+0.00 см
+
+Card:
+
+🤝 Барномаи ҳамкорӣ
+
+То 3% аз ҳар хариди дӯстон
+
+Button:
+Дидан →
+
+==================================================
+13. ТАЪРИХ
+==================================================
+
+Саҳифаи:
+
+ТАЪРИХ
+
+Top statistics:
+
+ҲАМАГӢ
+6 фармоиш
+
+ХАРОҶОТ
+22.05 см
+
+Tabs:
+
+Ҳама
+Интизор
+Иҷро шуда
+Бекор
+
+Order history list:
+
+11 СЕН 2026
+
+110
+15:10 • Эсхата
+8.50 см
+🔴 Бекор
+
+10 СЕН 2026
+
+110
+03:45 • Эсхата
+8.50 см
+🔴 Бекор
+
+8 СЕН 2026
+
+110 ×2
+19:29 • Эсхата
+17.00 см
+🟢 Иҷро шуд
+
+7 СЕН 2026
+
+Level Up Package 6
+11:48 • Эсхата
+5.50 см
+🟢 Иҷро шуд
+
+==================================================
+14. BOTTOM NAVIGATION
+==================================================
+
+Дар mobile bottom navigation доим намоён бошад.
+
+4 button:
+
+🏠
+Асосӣ
+
+🛍
+Харидҳо
+
+🎧
+Дастгирӣ
+
+👤
+Профил
+
+Active page:
+Orange/Gold
+
+Inactive:
+Gray
+
+Active icon glow дошта бошад.
+
+Navigation бояд fixed бошад ва content зери он пинҳон нашавад.
+
+==================================================
+15. DESIGN SYSTEM
+==================================================
+
+Design бояд чунин бошад:
+
+Background:
+#08090B ё наздик ба black
+
+Cards:
+#14161B
+
+Secondary:
+#1A1D23
+
+Text:
+#FFFFFF
+
+Secondary text:
+#8B8F98
+
+Primary:
+Orange/Gold
+
+Border:
+rgba(255,255,255,0.08)
+
+Orange:
+#FF9500
+
+Border-radius:
+18px – 26px
+
+Buttons:
+rounded
+
+Font:
+Inter ё system font
+
+UI:
+premium
+minimal
+clean
+modern
+
+Ҳеҷ gradient-и хеле сахт истифода накун.
+
+Glow хеле subtle бошад.
+
+==================================================
+16. RESPONSIVE DESIGN
+==================================================
+
+Mobile аввал тарҳрезӣ шавад.
+
+Screen sizes:
+360px
+375px
+390px
+412px
+430px
+768px
+1024px
+1440px
+
+Дар mobile:
+2-column product grid истифода бар.
+
+Дар desktop:
+3 ё 4-column product grid.
+
+Bottom navigation танҳо дар mobile бошад.
+
+Desktop метавонад sidebar/top navigation дошта бошад.
+
+==================================================
+17. PRODUCT IMAGES
+==================================================
+
+Барои маҳсулот image placeholder-и зебо соз.
+
+Агар image вуҷуд надошта бошад:
+
+💎
+
+бо neon blue/orange diamond icon истифода шавад.
+
+Аммо product card холӣ набошад.
+
+Ҳар image aspect ratio дуруст дошта бошад.
+
+==================================================
+18. ADMIN
+==================================================
+
+Admin:
+
+@Zokirjon0555
+
+Admin interface сохта шавад.
+
+Admin бояд тавонад:
+
+- ҳамаи фармоишҳоро бинад
+- фармоишро кушояд
+- ID ва nickname-ро бинад
+- чекро бинад
+- payment method-ро бинад
+- фармоишро тасдиқ кунад
+- фармоишро бекор кунад
+- статусро тағйир диҳад
+- маҳсулот илова кунад
+- маҳсулотро таҳрир кунад
+- нархро тағйир диҳад
+- маҳсулотро фаъол/ғайрифаъол кунад
+- маълумоти Эсхата Онлайн-ро тағйир диҳад
+- маълумоти ICB Mobile-ро тағйир диҳад
+
+Admin page бояд танҳо барои admin дастрас бошад.
+
+==================================================
+19. DATABASE
+==================================================
+
+Database истифода шавад.
+
+Tables:
+
+users
+products
+orders
+payments
+admins
+settings
+
+User:
+
+id
+telegram_id / user_id
+username
+name
+created_at
+
+Product:
+
+id
+name
+category
+amount
+price
+currency
+image
+active
+created_at
+
+Order:
+
+id
+user_id
+product_id
+game_id
+nickname
+amount
+price
+payment_method
+receipt
+status
+created_at
+updated_at
+
+Payment:
+
+id
+order_id
+method
+amount
+status
+receipt
+created_at
+
+Settings:
+
+payment information
+support username
+admin username
+site name
+
+==================================================
+20. SECURITY
+==================================================
+
+Security муҳим аст.
+
+- Admin routes protected бошанд.
+- User маълумоти ҳассос дар frontend hardcode нашавад.
+- Payment credentials дар frontend нигоҳ дошта нашавад.
+- Environment variables истифода шавад.
+- Validation дар frontend ва backend бошад.
+- File upload validation бошад.
+- Ҳама request-ҳо error handling дошта бошанд.
+- API secrets ба GitHub commit карда нашаванд.
+- .env ба .gitignore дохил шавад.
+
+==================================================
+21. ERROR STATES
+==================================================
+
+Барои ҳамаи ҳолатҳо UI соз:
+
+Loading:
+⏳ Бор шуда истодааст...
+
+Error:
+❌ Хато рӯй дод.
+Лутфан дубора кӯшиш кунед.
+
+Success:
+✅ Амалиёт бомуваффақият иҷро шуд.
+
+Empty:
+📦 Ҳоло фармоише нест.
+
+Invalid ID:
+❌ ID нодуруст аст.
+
+Payment not selected:
+⚠️ Лутфан усули пардохтро интихоб кунед.
+
+Receipt missing:
+⚠️ Лутфан чекро бор кунед.
+
+==================================================
+22. ANIMATIONS
+==================================================
+
+Smooth animations:
+
+fade in
+slide up
+button press
+card hover
+modal slide
+bottom sheet
+
+Duration:
+150–300ms
+
+Ҳеҷ animation-и вазнин истифода накун.
+
+==================================================
+23. MODALS
+==================================================
+
+Payment method selection modal:
+
+"БАНКРО ИНТИХОБ КУНЕД"
+
+Аммо дар ин modal танҳо:
+
+🟠 Эсхата Онлайн
+📱 ICB Mobile
+
+нишон дода шавад.
+
+Ҳангоми интихоб check mark пайдо шавад.
+
+Modal бояд mobile bottom-sheet style бошад, мисли reference screenshot.
+
+==================================================
+24. USER EXPERIENCE
+==================================================
+
+Flow:
+
+Home
+↓
+Free Fire СНГ
+↓
+Select product
+↓
+Enter Game ID
+↓
+Check ID
+↓
+Nickname
+↓
+Select payment
+↓
+Accept terms
+↓
+Payment
+↓
+Upload receipt
+↓
+Order created
+↓
+Waiting for admin
+↓
+Admin approves
+↓
+Order completed
+↓
+History updated
+
+Ин flow пурра кор кунад.
+
+==================================================
+25. BRANDING
+==================================================
+
+Дар тамоми сайт:
+
+TAJ.DONAT.FF
+
+истифода шавад.
+
+Footer:
+
+© 2026 TAJ.DONAT.FF
+
+💎 Донати Free Fire
+⚡ Зуд
+🔐 Бехатар
+🕐 24/7
+
+Support:
+@Zokirjon0555
+
+==================================================
+26. LANGUAGE
+==================================================
+
+Ҳамаи UI ба тоҷикӣ:
+
+Асосӣ
+Харидҳо
+Дастгирӣ
+Профил
+Алмазҳо
+Level Up
+Фармоиш
+Пардохт
+Таърих
+Тасдиқ шуд
+Дар интизор
+Бекор шуд
+Пардохт кардан
+Харидан
+Бозгашт
+Дастгирӣ
+ID-и бозӣ
+Никнейм
+Маблағ
+Усули пардохт
+Чек
+Бор кардани чек
+Тасдиқи фармоиш
+
+Грамматикаи тоҷикӣ дуруст бошад.
+
+==================================================
+27. TECH STACK
+==================================================
+
+Лоиҳа бояд production-ready бошад.
+
+Frontend:
+React + Vite
+
+Styling:
+CSS ё Tailwind CSS
+
+Backend:
+Node.js + Express
+
+Database:
+SQLite
+
+API:
+REST API
+
+Authentication:
+secure session/JWT ё механизми бехатар
+
+Environment variables:
+.env
+
+Structure:
+
+/client
+/server
+/database
+/public
+README.md
+.gitignore
+.env.example
+package.json
+
+Кодро modular навис.
+
+==================================================
+28. FILES
+==================================================
+
+Файлҳои асосӣ:
+
+client/
+  src/
+    components/
+    pages/
+    layouts/
+    hooks/
+    services/
+    data/
+    App.jsx
+    main.jsx
+    styles.css
+
+server/
+  index.js
+  routes/
+  controllers/
+  middleware/
+  database/
+
+public/
+  images/
+
+.env.example
+.gitignore
+README.md
+package.json
+
+==================================================
+29. IMPORTANT PAYMENT RULE
+==================================================
+
+ТАНҲО:
+
+1. Эсхата Онлайн
+2. ICB Mobile
+
+Ин ду payment method бояд дар тамоми сайт истифода шаванд.
+
+Ҳеҷ:
+Алиф
+Душанбе Сити
+Корти Миллӣ
+Бонки дигар
+ё payment method-и дигар
+
+илова нашавад.
+
+==================================================
+30. FINAL REQUIREMENTS
+==================================================
+
+Ман мехоҳам натиҷа мисли як real premium Free Fire donation website бошад, на як demo-и оддӣ.
+
+UI бояд аз reference screenshots илҳом гирифта шавад:
+
+- dark background
+- orange/gold active buttons
+- rounded cards
+- bottom navigation
+- profile page
+- purchase history
+- support page
+- payment bottom sheet
+- product cards
+- order page
+- premium mobile-app feeling
+
+Ҳамаи саҳифаҳо бояд ба ҳам пайваст бошанд.
+
+Ҳама button-ҳо кор кунанд.
+
+Ҳамаи form-ҳо validation дошта бошанд.
+
+Ҳамаи product prices аз як database/config гирифта шаванд, то admin онҳоро тағйир дода тавонад.
+
+Нархҳои ибтидоӣ:
+
+110 Алмазҳо = 8.50 см
+341 Алмазҳо = 26.50 см
+572 Алмазҳо = 44.90 см
+1166 Алмазҳо = 86.90 см
+2398 Алмазҳо = 183 см
+6160 Алмазҳо = 460 см
+
+Ваучер Ҳафта = 16 см
+Ваучер Лайт = 5.50 см
+Ваучер Моҳона = 57.50 см
+
+Level Up Package 6 = 5.50 см
+Level Up Package 10 = 6 см
+Level Up Package 15 = 7 см
+Level Up Package 20 = 8 см
+Level Up Package 25 = 8 см
+Level Up Package 30 = 9 см
+
+Admin:
+@Zokirjon0555
+
+Payment:
+Эсхата Онлайн
+ICB Mobile
+
+Brand:
+TAJ.DONAT.FF
+
+Support:
+@Zokirjon0555
+
+Сайтро пурра омода кун, то баъд аз npm install ва гузоштани .env он бе хатои build кор кунад.
+
+Пеш аз анҷом:
+1. Ҳама import-ҳоро санҷ.
+2. Ҳама route-ҳоро санҷ.
+3. Ҳама button-ҳоро санҷ.
+4. Responsive design-ро санҷ.
+5. Database initialization-ро санҷ.
+6. API connection-ро санҷ.
+7. Payment selection-ро санҷ.
+8. Order creation-ро санҷ.
+9. Receipt upload-ро санҷ.
+10. Admin protection-ро санҷ.
+11. Ҳеҷ secret дар frontend ё GitHub набошад.
+12. npm build бе error анҷом ёбад.
+
+Натиҷа бояд як веб-сайти пурраи:
+TAJ.DONAT.FF
+бошад — Dark Premium, Orange/Gold, Free Fire СНГ, 24/7, бо хариди алмазҳо, ID, nickname, пардохти Эсхата Онлайн ва ICB Mobile, чек, фармоиш, таърих, профил, дастгирӣ ва Admin Panel.
