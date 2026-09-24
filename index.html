@@ -1,280 +1,42 @@
-Барои ман як веб-сайти пурра ва professional бо номи TAJ.DONAT.TJ соз.
-
-Мақсади сайт:
-Фурӯши Free Fire Diamonds барои бозигарони Тоҷикистон.
-
-Сайт бояд premium, зебо, зуд ва боваринок бошад. Дизайн чунон хуб бошад, ки корбар аз дидани аввал ба сайт бовар кунад ва фармоиш доданаш осон бошад.
-
-ҚОИДАИ МУҲИМ:
-Ҳамаи матнҳои сайт бо ҳарфҳои тоҷикӣ ва забони тоҷикӣ бошанд. Матни русӣ истифода накун. Номи бренд, payment method ва Telegram метавонанд бо шакли аслиашон монанд.
-
-1. DESIGN
-
-- Dark gaming premium style
-- Background-и торик бо рангҳои #0d1020 ва #111629
-- Neon cyan glow
-- Glassmorphism cards
-- Smooth animation
-- Diamond glow effect
-- Rounded corners
-- Typography-и modern
-- Responsive барои mobile, tablet ва desktop
-- Барои mobile bottom navigation соз
-- Ҳар button равшан ва осонфаъол бошад
-- Сайт бояд professional ва trustworthy намоён шавад
-- Design аз ҳад зиёд серодам набошад
-
-2. EDITABLE CONFIG
-
-Дар аввали JavaScript як объекти CONFIG соз, то соҳиби сайт ҳамаи маълумотро аз як ҷой иваз карда тавонад:
-
-const CONFIG = {
-  siteName: "TAJ.DONAT.TJ",
-  supportTelegram: "https://t.me/Zokirjon0555",
-  supportUsername: "@Zokirjon0555",
-  paymentNumber: "+992935710406",
-  paymentMethods: [
-    "Эсхата Онлайн",
-    "ICB Mobile",
-    "Банко"
-  ],
-  apiBaseUrl: "/api",
-  currency: "с.",
-  footerText: "TAJ.DONAT.TJ • Free Fire Diamonds • 24/7"
-};
-
-Ҳамаи package, price, title, text, рақами payment ва Telegram аз CONFIG идора шаванд.
-
-3. HOMEPAGE
-
-Hero section соз бо чунин матн:
-
-«Бозии худро баланд бардор.»
-
-Subtitle:
-
-«Алмосҳои Free Fire-ро зуд, равшан ва бе ташвиш гиред. Барои бозигарони Тоҷикистон.»
-
-Button-ҳо:
-
-- «Дидани алмосҳо»
-- «Чӣ тавр кор мекунад?»
-
-Дар homepage ин қисмҳо бошанд:
-
-- Hero section
-- Package catalog
-- Қисми «Чӣ тавр кор мекунад»
-- Бартариҳои сайт
-- Қисми support
-- Footer
-
-4. PACKAGE CATALOG
-
-Барои package card-ҳои зебо соз:
-
-- 110 Diamonds
-- 341 Diamonds
-- 572 Diamonds
-- 1166 Diamonds
-- 2398 Diamonds
-- 6160 Diamonds
-- Weekly Membership
-- Lite Membership
-- Monthly Membership
-- Level Up Membership
-
-Ҳар card дошта бошад:
-
-- Номи package
-- Шумораи diamonds
-- Нарх
-- Badge-и «Машҳур» барои package-и интихобшуда
-- Button-и «Интихоб кардан»
-
-Ҳамаи package ва price аз CONFIG гирифта шаванд, то баъд онҳоро осон иваз кардан мумкин бошад.
-
-5. ORDER FORM
-
-Пас аз пахши «Интихоб кардан» саҳифаи order кушода шавад.
-
-Form чунин field-ҳо дошта бошад:
-
-- Player ID
-- Nickname
-- Package-и интихобшуда
-- Нарх
-- Button-и «Давом додан»
-
-Қоидаҳо:
-
-- Player ID ҳатмӣ бошад
-- Nickname ҳатмӣ бошад
-- Пароли Free Fire талаб нашавад
-- Агар field холӣ бошад, error бо забони тоҷикӣ нишон деҳ
-- Player ID танҳо рақам қабул кунад
-- Nickname аз 2 то 30 character қабул кунад
-- Order ID автоматӣ сохта шавад, мисол: TAJ-123456
-
-6. PAYMENT PAGE
-
-Payment method-ҳо:
-
-- Эсхата Онлайн
-- ICB Mobile
-- Банко
-
-Рақами payment:
-
-+992935710406
-
-Дар payment page нишон деҳ:
-
-- Номи package
-- Player ID
-- Nickname
-- Нарх
-- Payment method
-- Рақами payment
-- Button-и «Copy»
-- Қадамҳои пардохт
-- Upload receipt
-
-Матни тоҷикӣ:
-
-«Аввал маблағро пардохт кунед, баъд screenshot ё PDF-и чекро upload намоед.»
-
-7. RECEIPT UPLOAD
-
-- Image ва PDF қабул кунад
-- Preview нишон диҳад
-- Номи файл нишон дода шавад
-- Button-и «Фиристодани фармоиш»
-- Loading state бошад
-- Success message бо тоҷикӣ бошад
-- Пас аз фиристодан ба Order Status гузарад
-
-8. ORDER STATUS
-
-Саҳифаи order status соз:
-
-- Order ID
-- Player ID
-- Nickname
-- Package
-- Нарх
-- Payment method
-- Receipt status
-- Order status
-
-Status-ҳо:
-
-- «Фармоиш қабул шуд»
-- «Пардохт санҷида мешавад»
-- «Қабулшуда»
-- «Радшуда»
-- «Алмосҳо фиристода шуданд»
-
-9. ADMIN PANEL
-
-Route-и /admin соз.
-
-Admin Panel дошта бошад:
-
-- Login бо Admin ID ва Password
-- Dashboard
-- Statistics
-- Ҳамаи фармоишҳо
-- Фармоишҳои интизорӣ
-- Фармоишҳои қабулшуда
-- Фармоишҳои радшуда
-- Даромад
-- Search аз рӯи Player ID ва Order ID
-- Filter аз рӯи status
-- Дидани receipt
-- Button-и калон:
-  - «ҚАБУЛ»
-  - «РАД КАРДАН»
-
-Дар Admin Panel тугмаи:
-
-«Настройка»
-
-илова кун.
-
-10. TELEGRAM SETTINGS
-
-Дар Admin Settings чунин field-ҳо бошанд:
-
-- Telegram Bot Token
-- Admin Chat ID
-- Фаъол кардани Telegram bot
-- Хомӯш кардани Telegram bot
-- Status-и Telegram bot
-
-Status-ҳо:
-
-- «Пайваст нест»
-- «Хомӯш»
-- «Фаъол»
-
-Token-ро дар localStorage нигоҳ надор. Барои production онро танҳо тавассути backend нигоҳ дор.
-
-11. SUPPORT
-
-Ҳамаи support link-ҳо ба ин Telegram раванд:
-
-https://t.me/Zokirjon0555
-
-Дар сайт нишон деҳ:
-
-@Zokirjon0555
-
-Матни support:
-
-«Савол доред? Ба мо нависед — мо 24/7 ҷавоб медиҳем.»
-
-12. FOOTER
-
-Footer ҳатман чунин матн дошта бошад:
-
-TAJ.DONAT.TJ • Free Fire Diamonds • 24/7
-
-Ин маълумотро ҳам нишон деҳ:
-
-- +992935710406
-- Эсхата Онлайн
-- ICB Mobile
-- Банко
-- @Zokirjon0555
-
-13. TECHNICAL REQUIREMENTS
-
-- Фақат HTML, CSS ва JavaScript истифода бар
-- Ҳамаи кодро дар index.html навис
-- CSS ва JavaScript-ро дар дохили ҳамин файл ҷойгир кун
-- Код copy-paste карда бевосита кор кунад
-- API-ready бошад
-- Барои API инро истифода бар:
-
-const API_BASE_URL = "/api";
-
-- Fake data-ро ҳамчун маълумоти асосӣ истифода накун
-- Агар API дастрас набошад, error-и равшан нишон деҳ
-- Loading, empty, error ва success state соз
-- Keyboard navigation ва accessibility риоя шавад
-- Ҳамаи button-ҳо кор кунанд
-- Meta title ва description илова кун
-- Open Graph tags илова кун
-- Сайт барои Google ва social sharing омода бошад
-- Ҳамаи матнҳо тоҷикӣ бошанд
-
-14. НАТИҶАИ ҶАВОБ
-
-Дар ҷавоб чунин тартибро риоя кун:
-
-1. Аввал пурра index.html-ро диҳ
-2. Баъд фаҳмон, ки кадом маълумот дар CONFIG иваз мешавад
-3. Баъд API endpoint-ҳоро нишон деҳ
-4. Баъд фаҳмон, ки чӣ тавр сайтро deploy кардан мумкин аст
-5. Ягон қисми муҳимро бо placeholder-и номуайян нагузор
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAJ DONAT.FF - Беҳтарин Дӯкони Free Fire 🇹🇯</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0a0a0a;color:#fff}
+.hero{background:linear-gradient(135deg,#ffcc00 0%,#ff6600 100%);padding:40px 20px;text-align:center;color:#000}
+.hero h1{font-size:32px;font-weight:900}
+.btn{display:inline-block;background:#000;color:#ffcc00;padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:900;margin-top:15px}
+.section{padding:25px 15px;max-width:500px;margin:auto}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:16px;padding:16px;margin:12px 0;display:flex;justify-content:space-between}
+.price{color:#ffcc00;font-weight:900}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>🔥 TAJ DONAT.FF 🇹🇯</h1>
+<p>💎 Арзонтарин Алмазҳо · ⚡ 1-5 дақиқа · 24/7</p>
+<a class="btn" href="https://t.me/Tajdonat26_bot">🛒 Заказ дар Бот</a>
+</div>
+<div class="section">
+<h2>💎 Алмазҳои СНГ</h2>
+<div class="card"><span>💎 110 Алмаз</span><span class="price">7.80с</span></div>
+<div class="card"><span>💎 341 Алмаз ХИТ</span><span class="price">24.6с</span></div>
+<div class="card"><span>💎 572 Алмаз</span><span class="price">43.5с</span></div>
+<div class="card"><span>💎 1166 Алмаз</span><span class="price">80с</span></div>
+<div class="card"><span>💎 2398 Алмаз</span><span class="price">183с</span></div>
+<div class="card"><span>💎 6160 Алмаз</span><span class="price">460с</span></div>
+<h2 style="margin-top:20px">🎟️ Ваучер + Evo + Level Up</h2>
+<div class="card"><span>🎟️ Ваучер Лайт</span><span class="price">5.5с</span></div>
+<div class="card"><span>🎟️ Ваучер Ҳафта</span><span class="price">16с</span></div>
+<div class="card"><span>⚡ Evo 30 Рӯз</span><span class="price">32с</span></div>
+<div style="text-align:center;margin:30px 0">
+<a class="btn" href="https://t.me/Tajdonat26_bot">🚀 БОТ - @Tajdonat26_bot</a><br><br>
+<a href="https://t.me/Zokirjon0555" style="color:#ffcc00">Админ: @Zokirjon0555</a>
+</div>
+</div>
+</body>
+</html>
